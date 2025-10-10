@@ -1,5 +1,7 @@
 # PLauncher - Live2D 虚拟桌面助手
 
+[![star](https://gitee.com/Pfolg/plauncher/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/stargazers) [![fork](https://gitee.com/Pfolg/plauncher/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/members)
+
 ![LICENSE](https://img.shields.io/badge/LICENSE-MIT-lightgreen.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg) 
 
 
