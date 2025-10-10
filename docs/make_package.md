@@ -19,10 +19,10 @@
 ```txt
 # ------------------
 # 设置是否为debug模式
-set(D_OR_R ON)#ON for Debug, OFF for Release
+set(D_OR_R OFF)#ON for Debug, OFF for Release
 
 # 是否开启控制台调试输出
-set(CONSOLE ON)
+set(CONSOLE OFF)
 # ------------------
 ```
 
