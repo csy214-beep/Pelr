@@ -176,11 +176,12 @@ mingw32-make
 
 我们欢迎各种形式的贡献！
 
-- [报告 Bug](https://gitee.com/Pfolg/plauncher/issues)
-- [提出新特性](https://gitee.com/Pfolg/plauncher/issues)
+- [报告 Bug](https://gitee.com/Pfolg/plauncher/issues/new?template=bug.yml)
+- [提出新特性](https://gitee.com/Pfolg/plauncher/issues/new?template=feature.yml)
 - [编写代码](https://gitee.com/Pfolg/plauncher/pulls)
 - [提供反馈](https://gitee.com/Pfolg/plauncher/issues)
 - [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
+- [帮助中心](https://help.gitee.com/)
 
 ## 📄 许可证
 >**NOTE**
