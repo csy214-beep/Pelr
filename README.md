@@ -1,17 +1,13 @@
 # PLauncher - Live2D 虚拟桌面助手
 
-![GitHub Release](https://img.shields.io/github/v/release/Pfolg/PLauncher)
-
-![GitHub License](https://img.shields.io/github/license/Pfolg/PLauncher)   ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Pfolg/PLauncher) ![GitHub last commit](https://img.shields.io/github/last-commit/Pfolg/PLauncher)
-
-![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg) ![GitHub repo size](https://img.shields.io/github/repo-size/Pfolg/PLauncher) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Pfolg/PLauncher)
+![LICENSE](https://img.shields.io/badge/LICENSE-MIT-lightgreen.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg) 
 
 
 **PLauncher** 是一款基于 Live2D 技术的智能桌面虚拟助手，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
 ![](repo_assets/preview.png)
 
->[!NOTE]
+>**NOTE**
 >本项目仍处于开发阶段，功能和稳定性可能有所不足，请谨慎使用。
 >
 >This project is still in the development phase, and its functionality and stability may not be fully optimized. Please use with caution.
@@ -47,7 +43,7 @@
 
 ## 🖥️ 系统要求
 
->[!NOTE]
+>**NOTE**
 >仅供参考
 
 - **操作系统**: Windows 10/11 (仅支持 Windows 平台)
@@ -155,11 +151,11 @@ mingw32-make
 ```
 
 ## 📖 使用指南
->[!CAUTION]
+>**CAUTION**
 >**请不要上传 `user`文件夹中的任何内容**
 
->[!NOTE]
->详细功能说明请参阅 [Wiki](https://github.com/Pfolg/PLauncher/wiki)
+>**NOTE**
+>详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/plauncher/wikis)
 
 ### 基本操作
 
@@ -171,24 +167,24 @@ mingw32-make
 
 我们欢迎各种形式的贡献！
 
-- [报告 Bug](https://github.com/Pfolg/PLauncher/issues)
-- [提出新特性](https://github.com/Pfolg/PLauncher/issues)
-- [编写代码](https://github.com/Pfolg/PLauncher/pulls)
-- [提供反馈](https://github.com/Pfolg/PLauncher/discussions)
-- [问题反馈](https://github.com/Pfolg/PLauncher/issues)
+- [报告 Bug](https://gitee.com/Pfolg/plauncher/issues)
+- [提出新特性](https://gitee.com/Pfolg/plauncher/issues)
+- [编写代码](https://gitee.com/Pfolg/plauncher/pulls)
+- [提供反馈](https://gitee.com/Pfolg/plauncher/issues)
+- [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
 
 ## 📄 许可证
->[!NOTE]
->本项目采用 MIT 许可证 - 详见 [LICENSE](https://github.com/Pfolg/PLauncher/blob/main/LICENSE) 文件。
+>**NOTE**
+>本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
 
 **注意**: 部分组件使用不同许可证：
 - Live2D Cubism SDK 使用专有许可证
 - Qt 框架使用 LGPL/GPL 许可证
-- 其他第三方库详见 [第三方库清单](https://github.com/Pfolg/PLauncher/wiki)
+- 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/plauncher/wikis)
 
 ## 🙏 致谢
 
-https://github.com/Pfolg/PLauncher/wiki/IMPORTANT
+https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT
 
 感谢以下项目和社区的支持：
 
@@ -200,8 +196,7 @@ https://github.com/Pfolg/PLauncher/wiki/IMPORTANT
 
 ## 📞 技术支持
 
-- 🐛 [问题反馈](https://github.com/Pfolg/PLauncher/issues)
-- 📖 [Wiki 文档](https://github.com/Pfolg/PLauncher/wiki)
-- 💬 [讨论区](https://github.com/Pfolg/PLauncher/discussions)
+- 🐛 [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
+- 📖 [Wiki 文档](https://gitee.com/Pfolg/plauncher/wikis)
 - 🤝 [SUPPORT](SUPPORT.md)
 - 🛡️ [Security Policy](SECURITY.md)
