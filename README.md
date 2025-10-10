@@ -59,7 +59,7 @@
 
 ### 下载安装
 
-1. 前往 [Release 页面](https://github.com/Pfolg/PLauncher/releases) 下载最新版本
+1. 前往 [Release 页面](https://gitee.com/Pfolg/plauncher/releases) 下载最新版本
 2. 解压压缩包到任意目录
 3. 运行 `PLauncher.exe` 即可启动应用
 
@@ -100,6 +100,8 @@ PLauncher/
 ├── mediaservice/           # Qt媒体服务
 ├── thirdParty/             # 第三方库
 ├── user/                   # 用户配置文件
+├── logs/                   # 日志文件
+├── docs/                   # 文档文件
 ├── LICENSE                 # 许可证文件
 ├── README.md               # 项目说明文件
 ├── SUPPORT.md              # 参与贡献指南
@@ -135,11 +137,13 @@ PLauncher/
 
 ### 编译步骤
 
+>可参考[构建流程](docs\构建流程.md)
+
 **使用CLion开发，不保证以下命令有效性**
 
 ```bash
 # 克隆仓库
-git clone https://github.com/Pfolg/PLauncher.git
+git clone https://gitee.com/Pfolg/plauncher.git
 cd PLauncher
 
 # 创建构建目录
@@ -151,6 +155,7 @@ cmake -G "MinGW Makefiles" ..
 # 编译项目
 mingw32-make
 ```
+
 
 ## 📖 使用指南
 >**CAUTION**
