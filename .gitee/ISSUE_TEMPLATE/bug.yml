@@ -7,7 +7,8 @@ body:
     attributes:
       value: |
         感谢对项目的支持与关注。在提出问题之前，请确保你已查看相关开发或使用文档：
-        - https://...
+        - https://gitee.com/Pfolg/plauncher/blob/master/README.md
+        - https://gitee.com/Pfolg/plauncher/wikis/Home
   - type: checkboxes
     attributes:
       label: 这个问题是否已经存在？
@@ -48,7 +49,6 @@ body:
       label: 版本
       description: 你当前正在使用我们软件的哪个版本/分支？
       options:
-        - 1.0.2 (默认)
-        - 1.0.3 (最新)
+        - ver0.0.4b (最新)
     validations:
       required: true
