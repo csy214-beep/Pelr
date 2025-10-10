@@ -1,0 +1,111 @@
+#pragma once
+#include <QString>
+#include <QCryptographicHash>
+#include <QDebug>
+#include <QFile>
+#include <QTextCodec>
+#include <QDir>
+#include <QCoreApplication>
+#include <QRegularExpression>
+#include <QProcess>
+#include <QObject>
+#include <QUrl>
+
+// 使用平台特定的路径分隔符
+#ifdef Q_OS_WIN
+#define SAVE_ROOT "user\\voice\\"
+#else
+#define SAVE_ROOT "user/voice/"
+#endif
+
+class VoiceGenerator : public QObject {
+    Q_OBJECT
+
+public:
+    VoiceGenerator(QObject *parent = nullptr) : QObject(parent) {
+    }
+
+public slots:
+    void generateVoice(const QString &APPID, const QString &APIKey, const QString &APISecret,
+                       const QString &role_text) {
+        QString voice = generateWav(APPID, APIKey, APISecret, role_text);
+        emit voiceGenerated(QUrl::fromLocalFile(voice));
+    }
+
+signals:
+    void voiceGenerated(const QUrl &voiceUrl);
+
+private:
+    QString generateWav(const QString &appid, const QString &api_key, const QString &api_secret, const QString &text) {
+        // return QString();
+        // 获取应用程序目录
+        QString appDir = QCoreApplication::applicationDirPath();
+
+        // 构建可执行文件路径
+        QString exe = appDir + "/bin/SparkTTS.exe";
+
+        // 构建发音人
+        QString speaker = "";
+
+        if (appid.isEmpty() || api_key.isEmpty() || api_secret.isEmpty() || text.isEmpty()) {
+            qDebug() << "Generate wav failed, args are empty!";
+            return QString();
+        }
+
+        // 清理文本并创建哈希文件名
+        QString temp = text;
+        QString striped_text = temp.remove(QRegularExpression("[\\n\\t\\a\\r\\b\\f\\v]"));
+        QString output_name = QString(
+            (QCryptographicHash::hash(striped_text.toUtf8(), QCryptographicHash::Sha256)).toHex());
+
+        // 确保输出目录存在
+        QString savePath = appDir + "/user/voice/";
+        QDir().mkpath(savePath);
+
+        // 构建输出路径
+        QString out = savePath + output_name + ".wav";
+
+        // 检查文件是否已存在
+        if (QFile::exists(out)) {
+            qDebug() << "wav already exists!" << out;
+            return out;
+        }
+
+        // 使用 QProcess 而不是 system() 调用
+        QProcess process;
+        process.setProgram(exe);
+
+        QStringList arguments;
+        arguments << "--appid" << appid;
+        arguments << "--api_key" << api_key;
+        arguments << "--api_secret" << api_secret;
+        arguments << "--text" << text;
+        arguments << "--output" << out;
+
+        if (!speaker.isEmpty()) {
+            arguments << "--voice" << speaker;
+        }
+
+        process.setArguments(arguments);
+
+        // qDebug() << "Executing command:" << process.program() << arguments.join(" ");
+        // 启动进程并等待完成
+        process.start();
+        if (!process.waitForFinished(30000)) {
+            // 30秒超时
+            qDebug() << "Process timeout or failed to start";
+            return QString();
+        }
+
+        // 检查退出代码
+        int exitCode = process.exitCode();
+        if ((exitCode == 0 || exitCode == 1) && QFile::exists(out)) {
+            qDebug() << "Generate wav successfully!" << out;
+            return out;
+        }
+
+        qDebug() << "Generate wav failed! Exit code:" << exitCode;
+        qDebug() << "Error output:" << process.readAllStandardError();
+        return QString();
+    }
+};

@@ -1,0 +1,331 @@
+#
+# MIT License
+#
+# Copyright (c) 2025 SY Cheng
+
+
+import sys
+import os
+import json
+import base64
+import hashlib
+import hmac
+import struct
+import threading
+from datetime import datetime
+from time import mktime
+from wsgiref.handlers import format_date_time
+from urllib.parse import urlencode
+import websocket
+import ssl
+from http.server import HTTPServer, BaseHTTPRequestHandler
+from urllib.parse import parse_qs, urlparse
+import pystray
+from pystray import MenuItem, Menu
+import threading
+from PIL import Image
+import logging
+import tempfile
+
+
+# 配置日志
+def setup_logging():
+    # 获取临时目录
+    # temp_dir = tempfile.gettempdir()
+    base_dir = "log"
+    # 创建日志目录
+    if not os.path.exists(base_dir):
+        os.makedirs(base_dir)
+    log_file = os.path.join(base_dir, "tts_server.log")
+    # 如果日志文件已存在，先删除
+    if os.path.exists(log_file):
+        os.remove(log_file)
+
+    # 创建日志记录器
+    logger = logging.getLogger("TTS_Server")
+    logger.setLevel(logging.INFO)
+
+    # 创建文件处理器
+    file_handler = logging.FileHandler(log_file, encoding='utf-8')
+    file_handler.setLevel(logging.INFO)
+
+    # 创建控制台处理器（如果有终端）
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+
+    # 创建格式化器
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    # 添加处理器到日志记录器
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+    return logger
+
+
+# 初始化日志
+logger = setup_logging()
+
+
+# 单例装饰器
+def singleton(cls):
+    instances = {}
+
+    def get_instance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+
+    return get_instance
+
+
+@singleton
+class TTSService:
+    def __init__(self):
+        self.connected = False
+        # 创建保存语音文件的目录
+        self.output_dir = "voice_files"
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
+        logger.info(f"TTS服务初始化完成，语音文件目录: {self.output_dir}")
+
+    def generate_voice(self, appid, api_key, api_secret, text, voice="x4_yezi"):
+        try:
+            # 生成文件名
+            text_hash = hashlib.sha256(text.encode()).hexdigest()
+            output_file = os.path.abspath(os.path.join(self.output_dir, f"{text_hash}.wav"))
+
+            # 如果文件已存在，直接返回路径
+            if os.path.exists(output_file):
+                logger.info(f"使用缓存语音文件: {output_file}")
+                return output_file
+
+            logger.info(f"开始生成语音: {text[:50]}...")
+            wsParam = Ws_Param(appid, api_key, api_secret, text, output_file, voice)
+            websocket.enableTrace(False)
+            wsUrl = wsParam.create_url()
+
+            ws = websocket.WebSocketApp(wsUrl,
+                                        on_message=self.on_message,
+                                        on_error=self.on_error,
+                                        on_close=self.on_close)
+            ws.output_file = output_file
+            ws.wsParam = wsParam
+            ws.audio_data = []
+
+            ws.on_open = self.on_open
+            ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
+
+            # 返回文件路径（无论成功与否）
+            if os.path.exists(output_file):
+                logger.info(f"TTS生成成功，文件路径: {output_file}")
+                return output_file
+            else:
+                logger.error("TTS生成失败，未创建输出文件")
+                return None
+        except Exception as e:
+            logger.error(f"生成语音时发生异常: {str(e)}")
+            return None
+
+    def on_message(self, ws, message):
+        try:
+            message = json.loads(message)
+            code = message["code"]
+            sid = message["sid"]
+            audio = message["data"]["audio"]
+            audio = base64.b64decode(audio)
+            status = message["data"]["status"]
+
+            if status == 2:
+                ws.close()
+            if code != 0:
+                errMsg = message["message"]
+                logger.error(f"Error: sid:{sid} call error:{errMsg} code is:{code}")
+            else:
+                ws.audio_data.append(audio)
+                if status == 2:
+                    total_audio_size = sum(len(data) for data in ws.audio_data)
+                    with open(ws.output_file, 'wb') as f:
+                        self.write_wav_header(f, total_audio_size)
+                        for data in ws.audio_data:
+                            f.write(data)
+                    logger.info(f"TTS completed. Output file: {ws.output_file}")
+        except Exception as e:
+            logger.error(f"解析消息时出错: {str(e)}")
+
+    def write_wav_header(self, file, audio_data_size, sample_rate=16000, num_channels=1, bits_per_sample=16):
+        file.write(b'RIFF')
+        file.write(struct.pack('<I', 36 + audio_data_size))
+        file.write(b'WAVE')
+        file.write(b'fmt ')
+        file.write(struct.pack('<I', 16))
+        file.write(struct.pack('<H', 1))
+        file.write(struct.pack('<H', num_channels))
+        file.write(struct.pack('<I', sample_rate))
+        file.write(struct.pack('<I', sample_rate * num_channels * bits_per_sample // 8))
+        file.write(struct.pack('<H', num_channels * bits_per_sample // 8))
+        file.write(struct.pack('<H', bits_per_sample))
+        file.write(b'data')
+        file.write(struct.pack('<I', audio_data_size))
+
+    def on_error(self, ws, error):
+        logger.error(f"WebSocket error: {error}")
+
+    def on_close(self, ws):
+        logger.info("WebSocket connection closed")
+
+    def on_open(self, ws):
+        def run(*args):
+            d = {"common": ws.wsParam.CommonArgs,
+                 "business": ws.wsParam.BusinessArgs,
+                 "data": ws.wsParam.Data}
+            ws.send(json.dumps(d))
+            logger.info("WebSocket连接已打开，发送数据")
+
+        threading.Thread(target=run).start()
+
+
+class Ws_Param:
+    def __init__(self, APPID, APIKey, APISecret, Text, output_file, voice="x4_yezi"):
+        self.APPID = APPID
+        self.APIKey = APIKey
+        self.APISecret = APISecret
+        self.Text = Text
+        self.output_file = output_file
+        self.CommonArgs = {"app_id": self.APPID}
+        self.BusinessArgs = {"aue": "raw", "auf": "audio/L16;rate=16000", "vcn": voice, "tte": "utf8"}
+        self.Data = {"status": 2, "text": str(base64.b64encode(self.Text.encode('utf-8')), "UTF8")}
+        logger.debug(f"Ws_Param初始化: APPID={APPID}, voice={voice}")
+
+    def create_url(self):
+        url = 'wss://tts-api.xfyun.cn/v2/tts'
+        now = datetime.now()
+        date = format_date_time(mktime(now.timetuple()))
+
+        signature_origin = "host: ws-api.xfyun.cn\ndate: " + date + "\nGET /v2/tts HTTP/1.1"
+        signature_sha = hmac.new(self.APISecret.encode('utf-8'), signature_origin.encode('utf-8'),
+                                 digestmod=hashlib.sha256).digest()
+        signature_sha = base64.b64encode(signature_sha).decode(encoding='utf-8')
+
+        authorization_origin = f'api_key="{self.APIKey}", algorithm="hmac-sha256", headers="host date request-line", signature="{signature_sha}"'
+        authorization = base64.b64encode(authorization_origin.encode('utf-8')).decode(encoding='utf-8')
+
+        v = {"authorization": authorization, "date": date, "host": "ws-api.xfyun.cn"}
+        final_url = url + '?' + urlencode(v)
+        logger.debug(f"创建的WebSocket URL: {final_url}")
+        return final_url
+
+
+class TTSRequestHandler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        logger.info("%s - - [%s] %s\n" % (
+            self.client_address[0],
+            self.log_date_time_string(),
+            format % args))
+
+    def do_POST(self):
+        if self.path == '/generate':
+            try:
+                content_length = int(self.headers['Content-Length'])
+                post_data = self.rfile.read(content_length)
+                data = json.loads(post_data.decode('utf-8'))
+
+                appid = data.get('appid', '')
+                api_key = data.get('api_key', '')
+                api_secret = data.get('api_secret', '')
+                text = data.get('text', '')
+                voice = data.get('voice', 'x4_yezi')
+
+                logger.info(f"收到TTS请求: text={text[:50]}..., voice={voice}")
+
+                if not all([appid, api_key, api_secret, text]):
+                    self.send_response(400)
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'error': 'Missing parameters'}).encode())
+                    logger.warning("请求参数不完整")
+                    return
+
+                # 使用单例TTS服务
+                tts_service = TTSService()
+                file_path = tts_service.generate_voice(appid, api_key, api_secret, text, voice)
+
+                if file_path and os.path.exists(file_path):
+                    self.send_response(200)
+                    self.send_header('Content-type', 'application/json')
+                    self.end_headers()
+                    response = {'file_path': file_path}
+                    self.wfile.write(json.dumps(response).encode())
+                    logger.info(f"TTS请求处理成功: {file_path}")
+                else:
+                    self.send_response(500)
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'error': 'TTS generation failed'}).encode())
+                    logger.error("TTS生成失败")
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': f'Internal server error: {str(e)}'}).encode())
+                logger.error(f"处理POST请求时发生异常: {str(e)}")
+        else:
+            self.send_response(404)
+            self.end_headers()
+            logger.warning(f"请求的路径不存在: {self.path}")
+
+    def do_GET(self):
+        if self.path.startswith('/voice/'):
+            filename = self.path[7:]  # 移除 '/voice/' 前缀
+            file_path = os.path.join(TTSService().output_dir, filename)
+
+            if os.path.exists(file_path):
+                self.send_response(200)
+                self.send_header('Content-type', 'audio/wav')
+                self.send_header('Content-Length', str(os.path.getsize(file_path)))
+                self.end_headers()
+
+                with open(file_path, 'rb') as f:
+                    self.wfile.write(f.read())
+                logger.info(f"提供语音文件: {filename}")
+            else:
+                self.send_response(404)
+                self.end_headers()
+                logger.warning(f"请求的语音文件不存在: {filename}")
+        else:
+            self.send_response(404)
+            self.end_headers()
+            logger.warning(f"请求的路径不存在: {self.path}")
+
+
+def run_server(port=9140):
+    try:
+        server = HTTPServer(('localhost', port), TTSRequestHandler)
+        logger.info(f"TTS服务器启动，监听端口: {port}")
+        server.serve_forever()
+    except Exception as e:
+        logger.error(f"服务器启动失败: {str(e)}")
+
+
+if __name__ == "__main__":
+    try:
+        # 尝试加载图标
+        try:
+            image = Image.open("assets/image/PLauncher.png")
+        except:
+            # 如果找不到图标，创建一个简单的默认图标
+            logger.warning("无法加载图标文件，使用默认图标")
+            image = Image.new('RGB', (64, 64), color='red')
+
+        # 创建系统托盘菜单
+        menu = Menu(MenuItem('退出', lambda: icon.stop()))
+        icon = pystray.Icon("PLauncher TTS Server", image, "PLauncher TTS Server", menu)
+
+        # 启动服务器线程
+        server_thread = threading.Thread(target=run_server, daemon=True)
+        server_thread.start()
+
+        logger.info("TTS服务已启动，系统托盘图标已创建")
+        # 运行系统托盘图标
+        icon.run()
+    except Exception as e:
+        logger.error(f"应用程序启动失败: {str(e)}")

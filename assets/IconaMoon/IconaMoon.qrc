@@ -1,0 +1,308 @@
+<RCC>
+  <qresource prefix="assets/IconaMoon">
+    <file>Arrow/Arrow Bottom Left 1 - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Left 2 - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Left 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Left 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Left 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Left 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Right 1 - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Right 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Right 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Right 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Right 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Bottom Up 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Down 1 - 24x24.png</file>
+    <file>Arrow/Arrow Down 2 - 24x24.png</file>
+    <file>Arrow/Arrow Down 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Down 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Down 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Down 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Left 1 - 24x24.png</file>
+    <file>Arrow/Arrow Left 2 - 24x24.png</file>
+    <file>Arrow/Arrow Left 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Left 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Left 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Left 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Right  2 - 24x24.png</file>
+    <file>Arrow/Arrow Right 1 - 24x24.png</file>
+    <file>Arrow/Arrow Right 2 - 24x24.png</file>
+    <file>Arrow/Arrow Right 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Right 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Right 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Right 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Top Left 1 - 24x24.png</file>
+    <file>Arrow/Arrow Top Left 2 - 24x24.png</file>
+    <file>Arrow/Arrow Top Left 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Top Left 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Top Left 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Top Left 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Top Right 1 - 24x24.png</file>
+    <file>Arrow/Arrow Top Right 2 - 24x24.png</file>
+    <file>Arrow/Arrow Top Right 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Top Right 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Top Right 6 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Up 1 - 24x24.png</file>
+    <file>Arrow/Arrow Up 2 - 24x24.png</file>
+    <file>Arrow/Arrow Up 3 Square - 24x24.png</file>
+    <file>Arrow/Arrow Up 4 Square - 24x24.png</file>
+    <file>Arrow/Arrow Up 5 Circle - 24x24.png</file>
+    <file>Arrow/Arrow Up 6 Circle - 24x24.png</file>
+    <file>Communication/Comment - 24x24.png</file>
+    <file>Communication/Comment Add - 24x24.png</file>
+    <file>Communication/Comment Check - 24x24.png</file>
+    <file>Communication/Comment Close - 24x24.png</file>
+    <file>Communication/Comment Dots - 24x24.png</file>
+    <file>Communication/Comment Remove - 24x24.png</file>
+    <file>Communication/Dislike - 24x24.png</file>
+    <file>Communication/Email - 24x24.png</file>
+    <file>Communication/Like - 24x24.png</file>
+    <file>Communication/Phone - 24x24.png</file>
+    <file>Communication/Phone Off - 24x24.png</file>
+    <file>Communication/Profile - 24x24.png</file>
+    <file>Communication/Profile Circle - 24x24.png</file>
+    <file>Communication/Send - 24x24.png</file>
+    <file>Communication/Share 1 - 24x24.png</file>
+    <file>Communication/Share 2 - 24x24.png</file>
+    <file>eCommerce/Badge - 24x24.png</file>
+    <file>eCommerce/Box - 24x24.png</file>
+    <file>eCommerce/Certificate Badge - 24x24.png</file>
+    <file>eCommerce/Cheque - 24x24.png</file>
+    <file>eCommerce/Credit Card - 24x24.png</file>
+    <file>eCommerce/Delivery - 24x24.png</file>
+    <file>eCommerce/Delivery Fast - 24x24.png</file>
+    <file>eCommerce/Delivery Free - 24x24.png</file>
+    <file>eCommerce/Discount - 24x24.png</file>
+    <file>eCommerce/Invoice - 24x24.png</file>
+    <file>eCommerce/Shopping Bag - 24x24.png</file>
+    <file>eCommerce/Shopping Card - 24x24.png</file>
+    <file>eCommerce/Shopping Card Add - 24x24.png</file>
+    <file>eCommerce/Shopping Card Remove - 24x24.png</file>
+    <file>eCommerce/Store - 24x24.png</file>
+    <file>eCommerce/Ticket - 24x24.png</file>
+    <file>Emojis/Confused Face - 24x24.png</file>
+    <file>Emojis/Disappointed Face - 24x24.png</file>
+    <file>Emojis/Expressionless Face - 24x24.png</file>
+    <file>Emojis/Face with Open Mouth - 24x24.png</file>
+    <file>Emojis/Face Without Mouth - 24x24.png</file>
+    <file>Emojis/Frowning Face - 24x24.png</file>
+    <file>Emojis/Kissing Face - 24x24.png</file>
+    <file>Emojis/Kissing Face with Smiling Eyes - 24x24.png</file>
+    <file>Emojis/Neutral Face - 24x24.png</file>
+    <file>Emojis/Pensive Face - 24x24.png</file>
+    <file>Emojis/Relieved Face - 24x24.png</file>
+    <file>Emojis/Slightly Smiling Face - 24x24.png</file>
+    <file>Emojis/Smiling Face - 24x24.png</file>
+    <file>Emojis/Squinting Face - 24x24.png</file>
+    <file>Emojis/Upside-Down Face - 24x24.png</file>
+    <file>Emojis/Winking Face - 24x24.png</file>
+    <file>Files/Attachment - 24x24.png</file>
+    <file>Files/Cloud - 24x24.png</file>
+    <file>Files/Cloud Add - 24x24.png</file>
+    <file>Files/Cloud Clock - 24x24.png</file>
+    <file>Files/Cloud Download - 24x24.png</file>
+    <file>Files/Cloud Error - 24x24.png</file>
+    <file>Files/Cloud No - 24x24.png</file>
+    <file>Files/Cloud Off - 24x24.png</file>
+    <file>Files/Cloud Remove - 24x24.png</file>
+    <file>Files/Cloud Upload - 24x24.png</file>
+    <file>Files/Cloud Yes - 24x24.png</file>
+    <file>Files/Copy - 24x24.png</file>
+    <file>Files/Download - 24x24.png</file>
+    <file>Files/File - 24x24.png</file>
+    <file>Files/File Add - 24x24.png</file>
+    <file>Files/File Audio - 24x24.png</file>
+    <file>Files/File Check - 24x24.png</file>
+    <file>Files/File Close - 24x24.png</file>
+    <file>Files/File Document - 24x24.png</file>
+    <file>Files/File Image - 24x24.png</file>
+    <file>Files/File Remove - 24x24.png</file>
+    <file>Files/File Video - 24x24.png</file>
+    <file>Files/Folder - 24x24.png</file>
+    <file>Files/Folder Add - 24x24.png</file>
+    <file>Files/Folder Check - 24x24.png</file>
+    <file>Files/Folder Close - 24x24.png</file>
+    <file>Files/Folder Document - 24x24.png</file>
+    <file>Files/Folder Image - 24x24.png</file>
+    <file>Files/Folder Music - 24x24.png</file>
+    <file>Files/Folder Remove - 24x24.png</file>
+    <file>Files/Folder Video - 24x24.png</file>
+    <file>Files/Upload - 24x24.png</file>
+    <file>General/3D - 24x24.png</file>
+    <file>General/Apps - 24x24.png</file>
+    <file>General/Bookmark - 24x24.png</file>
+    <file>General/Bookmark Off - 24x24.png</file>
+    <file>General/Briefcase - 24x24.png</file>
+    <file>General/Calendar 1 - 24x24.png</file>
+    <file>General/Calendar 2 - 24x24.png</file>
+    <file>General/Calendar Add - 24x24.png</file>
+    <file>General/Calendar Remove - 24x24.png</file>
+    <file>General/Category - 24x24.png</file>
+    <file>General/Clock - 24x24.png</file>
+    <file>General/Discover - 24x24.png</file>
+    <file>General/Edit - 24x24.png</file>
+    <file>General/Eye - 24x24.png</file>
+    <file>General/Eye Off - 24x24.png</file>
+    <file>General/Flag - 24x24.png</file>
+    <file>General/Gift - 24x24.png</file>
+    <file>General/Heart - 24x24.png</file>
+    <file>General/Heart Off - 24x24.png</file>
+    <file>General/Home - 24x24.png</file>
+    <file>General/Lightning 1 - 24x24.png</file>
+    <file>General/Lightning 2 - 24x24.png</file>
+    <file>General/Location - 24x24.png</file>
+    <file>General/Location Pin - 24x24.png</file>
+    <file>General/Location Pin Off - 24x24.png</file>
+    <file>General/Lock - 24x24.png</file>
+    <file>General/Lock Off - 24x24.png</file>
+    <file>General/Mode -  Dark - 24x24.png</file>
+    <file>General/Mode -  Light - 24x24.png</file>
+    <file>General/Mouse - 24x24.png</file>
+    <file>General/News - 24x24.png</file>
+    <file>General/Notification - 24x24.png</file>
+    <file>General/Notification Off - 24x24.png</file>
+    <file>General/Options - 24x24.png</file>
+    <file>General/Printer - 24x24.png</file>
+    <file>General/Scanner - 24x24.png</file>
+    <file>General/Search - 24x24.png</file>
+    <file>General/Settings - 24x24.png</file>
+    <file>General/Shield - 24x24.png</file>
+    <file>General/Shield No - 24x24.png</file>
+    <file>General/Shield Off - 24x24.png</file>
+    <file>General/Shield Yes - 24x24.png</file>
+    <file>General/Star - 24x24.png</file>
+    <file>General/Star Off - 24x24.png</file>
+    <file>General/Trash - 24x24.png</file>
+    <file>General/Trash Simple - 24x24.png</file>
+    <file>General/Zoom In - 24x24.png</file>
+    <file>General/Zoom Out - 24x24.png</file>
+    <file>Interface/Attention Circle - 24x24.png</file>
+    <file>Interface/Attention Square - 24x24.png</file>
+    <file>Interface/Backspace - 24x24.png</file>
+    <file>Interface/Bluetooth - 24x24.png</file>
+    <file>Interface/Check - 24x24.png</file>
+    <file>Interface/Check Circle 1 - 24x24.png</file>
+    <file>Interface/Check Circle 2 - 24x24.png</file>
+    <file>Interface/Check Square - 24x24.png</file>
+    <file>Interface/Close - 24x24.png</file>
+    <file>Interface/Close Circle 1 - 24x24.png</file>
+    <file>Interface/Close Circle 2 - 24x24.png</file>
+    <file>Interface/Close Square - 24x24.png</file>
+    <file>Interface/Compare - 24x24.png</file>
+    <file>Interface/Component - 24x24.png</file>
+    <file>Interface/Cursor - 24x24.png</file>
+    <file>Interface/Do -  Redo - 24x24.png</file>
+    <file>Interface/Do -  Undo - 24x24.png</file>
+    <file>Interface/Enter - 24x24.png</file>
+    <file>Interface/Exit - 24x24.png</file>
+    <file>Interface/Frame - 24x24.png</file>
+    <file>Interface/Funnel - 24x24.png</file>
+    <file>Interface/History - 24x24.png</file>
+    <file>Interface/Information Circle - 24x24.png</file>
+    <file>Interface/Information Square - 24x24.png</file>
+    <file>Interface/Link - 24x24.png</file>
+    <file>Interface/Link External - 24x24.png</file>
+    <file>Interface/Menu Burger Horizontal - 24x24.png</file>
+    <file>Interface/Menu Burger Vertical - 24x24.png</file>
+    <file>Interface/Menu Kebab Horizontal - 24x24.png</file>
+    <file>Interface/Menu Kebab Horizontal Circle - 24x24.png</file>
+    <file>Interface/Menu Kebab Horizontal Square - 24x24.png</file>
+    <file>Interface/Menu Kebab Vertical - 24x24.png</file>
+    <file>Interface/Menu Kebab Vertical Circle - 24x24.png</file>
+    <file>Interface/Menu Kebab Vertical Square - 24x24.png</file>
+    <file>Interface/Move - 24x24.png</file>
+    <file>Interface/Pen - 24x24.png</file>
+    <file>Interface/Question Mark Circle - 24x24.png</file>
+    <file>Interface/Question Mark Square - 24x24.png</file>
+    <file>Interface/Restart - 24x24.png</file>
+    <file>Interface/Screen Full - 24x24.png</file>
+    <file>Interface/Screen Normal - 24x24.png</file>
+    <file>Interface/Sorting Center - 24x24.png</file>
+    <file>Interface/Sorting Left - 24x24.png</file>
+    <file>Interface/Sorting Right - 24x24.png</file>
+    <file>Interface/Swap - 24x24.png</file>
+    <file>Interface/Synchronize - 24x24.png</file>
+    <file>Interface/Type - 24x24.png</file>
+    <file>Interface/Unavailable - 24x24.png</file>
+    <file>Math/Calculator - 24x24.png</file>
+    <file>Math/Number 0 - 24x24.png</file>
+    <file>Math/Number 0 Circle - 24x24.png</file>
+    <file>Math/Number 0 Square - 24x24.png</file>
+    <file>Math/Number 1 - 24x24.png</file>
+    <file>Math/Number 1 Circle - 24x24.png</file>
+    <file>Math/Number 1 Square - 24x24.png</file>
+    <file>Math/Number 2 - 24x24.png</file>
+    <file>Math/Number 2 Circle - 24x24.png</file>
+    <file>Math/Number 2 Square - 24x24.png</file>
+    <file>Math/Number 3 - 24x24.png</file>
+    <file>Math/Number 3 Circle - 24x24.png</file>
+    <file>Math/Number 3 Square - 24x24.png</file>
+    <file>Math/Number 4 - 24x24.png</file>
+    <file>Math/Number 4 Circle - 24x24.png</file>
+    <file>Math/Number 4 Square - 24x24.png</file>
+    <file>Math/Number 5 - 24x24.png</file>
+    <file>Math/Number 5 Circle - 24x24.png</file>
+    <file>Math/Number 5 Square - 24x24.png</file>
+    <file>Math/Number 6 - 24x24.png</file>
+    <file>Math/Number 6 Circle - 24x24.png</file>
+    <file>Math/Number 6 Square - 24x24.png</file>
+    <file>Math/Number 7 - 24x24.png</file>
+    <file>Math/Number 7 Circle - 24x24.png</file>
+    <file>Math/Number 7 Square - 24x24.png</file>
+    <file>Math/Number 8 - 24x24.png</file>
+    <file>Math/Number 8 Circle - 24x24.png</file>
+    <file>Math/Number 8 Square - 24x24.png</file>
+    <file>Math/Number 9 - 24x24.png</file>
+    <file>Math/Number 9 Circle - 24x24.png</file>
+    <file>Math/Number 9 Square - 24x24.png</file>
+    <file>Math/Sign -  Division - 24x24.png</file>
+    <file>Math/Sign -  Division Circle - 24x24.png</file>
+    <file>Math/Sign -  Division Slash - 24x24.png</file>
+    <file>Math/Sign -  Division Square - 24x24.png</file>
+    <file>Math/Sign -  Equal - 24x24.png</file>
+    <file>Math/Sign -  f - 24x24.png</file>
+    <file>Math/Sign -  Factorial - 24x24.png</file>
+    <file>Math/Sign -  Lemniscate - 24x24.png</file>
+    <file>Math/Sign -  Minus - 24x24.png</file>
+    <file>Math/Sign -  Minus Circle - 24x24.png</file>
+    <file>Math/Sign -  Minus Square - 24x24.png</file>
+    <file>Math/Sign -  Percent - 24x24.png</file>
+    <file>Math/Sign -  Pi - 24x24.png</file>
+    <file>Math/Sign -  Plus - 24x24.png</file>
+    <file>Math/Sign -  Plus Circle - 24x24.png</file>
+    <file>Math/Sign -  Plus Minus - 24x24.png</file>
+    <file>Math/Sign -  Plus Square - 24x24.png</file>
+    <file>Math/Sign -  Radical - 24x24.png</file>
+    <file>Math/Sign -  Times - 24x24.png</file>
+    <file>Math/Sign -  Times Circle - 24x24.png</file>
+    <file>Math/Sign -  Times Square - 24x24.png</file>
+    <file>Math/Sign -  x - 24x24.png</file>
+    <file>Math/Sign -  y - 24x24.png</file>
+    <file>Math/Trend Down - 24x24.png</file>
+    <file>Math/Trend Up - 24x24.png</file>
+    <file>Media/Camera Image - 24x24.png</file>
+    <file>Media/Camera Video - 24x24.png</file>
+    <file>Media/Headphone - 24x24.png</file>
+    <file>Media/Microphone - 24x24.png</file>
+    <file>Media/Microphone Off - 24x24.png</file>
+    <file>Media/Music 1 - 24x24.png</file>
+    <file>Media/Music 2 - 24x24.png</file>
+    <file>Media/Music Album - 24x24.png</file>
+    <file>Media/Music Artist - 24x24.png</file>
+    <file>Media/Play Circle - 24x24.png</file>
+    <file>Media/Player -  End - 24x24.png</file>
+    <file>Media/Player -  Next - 24x24.png</file>
+    <file>Media/Player -  Pause - 24x24.png</file>
+    <file>Media/Player -  Play - 24x24.png</file>
+    <file>Media/Player -  Previous - 24x24.png</file>
+    <file>Media/Player -  Start - 24x24.png</file>
+    <file>Media/Player -  Stop - 24x24.png</file>
+    <file>Media/Playlist -  Repeat List - 24x24.png</file>
+    <file>Media/Playlist -  Repeat Song - 24x24.png</file>
+    <file>Media/Playlist -  Shuffle - 24x24.png</file>
+    <file>Media/Playlist - 24x24.png</file>
+    <file>Media/Volume Down - 24x24.png</file>
+    <file>Media/Volume Off - 24x24.png</file>
+    <file>Media/Volume Up - 24x24.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,65 @@
+#pragma once
+#include <QDateTime>
+#include  "data.hpp"
+#include  "BubbleBox.h"
+#include <QList>
+
+class TodoNotify {
+    TodoNotify() = default; // 私有构造函数
+    ~TodoNotify() = default; // 私有析构函数
+    TodoNotify(const TodoNotify &) = delete; // 删除拷贝构造函数
+    TodoNotify &operator=(const TodoNotify &) = delete; // 删除赋值运算符
+
+public:
+    QString newest_title = "";
+
+    static TodoNotify &instance() {
+        static TodoNotify instance;
+        return instance;
+    }
+
+    // 不会修改数据，只读取
+    void todoNotify() {
+        // 加载数据
+        QList<TodoData> data = DataManager::instance().todo_data; //first
+        bool is_notify = DataManager::instance().is_todo_notify; //second
+        // 遍历比较数据的时间
+        const QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm");
+        for (const TodoData &item: data) {
+            if (now == item.deadline && is_notify && item.title != newest_title && item.isNotify) {
+                // 发送提醒
+                QString msg = "您的事件：「" + item.title + "」即将截止，请及时完成！\n" + now;
+                // 如果是待办事项，则显示气泡提示
+                if (item.category == 1) BubbleBox::instance()->textSet(msg);
+                qDebug() << "提醒：" << msg;
+                // 更新最新数据
+                newest_title = item.title;
+            }
+        }
+    }
+
+    static void askLatestNextEvent() {
+        // 加载数据
+        QList<TodoData> data = DataManager::instance().todo_data; //first
+        const QDateTime now = QDateTime::currentDateTime();
+        QDateTime nearestFuture;
+        TodoData nearestEvent;
+        for (TodoData a: data) {
+            QDateTime eventTime = QDateTime::fromString(a.deadline);
+            // 确保时间转换成功且是未来时间
+            if (eventTime.isValid() && eventTime > now) {
+                // 如果是第一个未来时间，或者比当前记录的更近
+                if (!nearestFuture.isValid() || eventTime < nearestFuture) {
+                    nearestFuture = eventTime;
+                    nearestEvent = a;
+                }
+            }
+        }
+        if (nearestEvent.title.isEmpty()) {
+            qInfo() << "nearestEvent.title isEmpty";
+            BubbleBox::instance()->textSet("还没有最近的待办事项哦！");
+            return;
+        }
+        BubbleBox::instance()->textSet("最近的一次待办事项是「" + nearestEvent.title + "」，截止时间是：" + nearestEvent.deadline);
+    }
+};
