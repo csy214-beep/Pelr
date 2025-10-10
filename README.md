@@ -8,6 +8,7 @@
 ![](repo_assets/preview.png)
 
 >**NOTE**
+>
 >本项目仍处于开发阶段，功能和稳定性可能有所不足，请谨慎使用。
 >
 >This project is still in the development phase, and its functionality and stability may not be fully optimized. Please use with caution.
@@ -44,6 +45,7 @@
 ## 🖥️ 系统要求
 
 >**NOTE**
+>
 >仅供参考
 
 - **操作系统**: Windows 10/11 (仅支持 Windows 平台)
@@ -152,9 +154,11 @@ mingw32-make
 
 ## 📖 使用指南
 >**CAUTION**
+>
 >**请不要上传 `user`文件夹中的任何内容**
 
 >**NOTE**
+>
 >详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/plauncher/wikis)
 
 ### 基本操作
@@ -175,6 +179,7 @@ mingw32-make
 
 ## 📄 许可证
 >**NOTE**
+>
 >本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
 
 **注意**: 部分组件使用不同许可证：
