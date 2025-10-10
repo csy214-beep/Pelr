@@ -205,7 +205,7 @@ void SettingWidget::connectSignals() {
     });
     //author
     connect(ui->pushButton_9, &QPushButton::clicked, [&]() {
-        launchByPath(DataManager::instance().const_config_data.author_link);
+        launchByPath(DataManager::instance().const_config_data.team_link);
     });
     //issues
     connect(ui->pushButton_6, &QPushButton::clicked, [&]() {

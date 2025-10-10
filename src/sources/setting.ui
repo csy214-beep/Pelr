@@ -386,7 +386,7 @@
          <string>讯飞开放平台 在线语音合成</string>
         </property>
         <property name="icon">
-         <iconset resource="../Resource.qrc">
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
         </property>
        </widget>
@@ -397,7 +397,7 @@
          <string>启动讯飞TTS服务端</string>
         </property>
         <property name="icon">
-         <iconset resource="../Resource.qrc">
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</iconset>
         </property>
        </widget>
@@ -463,7 +463,7 @@
          <string>Ollama</string>
         </property>
         <property name="icon">
-         <iconset resource="../Resource.qrc">
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
         </property>
        </widget>
@@ -548,7 +548,7 @@
          <string>OpenWeather</string>
         </property>
         <property name="icon">
-         <iconset resource="../Resource.qrc">
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
         </property>
        </widget>
@@ -556,7 +556,7 @@
       <item row="3" column="1">
        <widget class="QLabel" name="label_23">
         <property name="text">
-         <string>此功能在国内网络内可能无法使用。</string>
+         <string>此功能在国内网络环境下可能无法使用。</string>
         </property>
        </widget>
       </item>
@@ -595,10 +595,10 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QPushButton" name="pushButton_8">
             <property name="text">
-             <string>GitHub</string>
+             <string>Gitee</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
             </property>
            </widget>
@@ -606,10 +606,10 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QPushButton" name="pushButton_9">
             <property name="text">
-             <string>Author（Pfolg）</string>
+             <string>Team</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
             </property>
            </widget>
@@ -620,7 +620,7 @@ p, li { white-space: pre-wrap; }
              <string>自定义语录库</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Files/File Document - 24x24.png</normaloff>:/assets/IconaMoon/Files/File Document - 24x24.png</iconset>
             </property>
            </widget>
@@ -631,7 +631,7 @@ p, li { white-space: pre-wrap; }
              <string>语音目录</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</iconset>
             </property>
            </widget>
@@ -646,7 +646,7 @@ p, li { white-space: pre-wrap; }
              <string>检查更新</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Interface/Synchronize - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Synchronize - 24x24.png</iconset>
             </property>
            </widget>
@@ -657,7 +657,7 @@ p, li { white-space: pre-wrap; }
              <string>问题反馈</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Interface/Attention Circle - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Attention Circle - 24x24.png</iconset>
             </property>
            </widget>
@@ -668,7 +668,7 @@ p, li { white-space: pre-wrap; }
              <string>程序文件夹</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</iconset>
             </property>
            </widget>
@@ -679,7 +679,7 @@ p, li { white-space: pre-wrap; }
              <string>重置应用</string>
             </property>
             <property name="icon">
-             <iconset resource="../Resource.qrc">
+             <iconset resource="../../Resource.qrc">
               <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
             </property>
            </widget>
@@ -747,7 +747,7 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
  </resources>
  <connections/>
 </ui>

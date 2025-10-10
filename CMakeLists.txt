@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 4.0)
 project(PLauncher)
+# ------------------
+# 设置是否为debug模式
+set(D_OR_R ON)#ON for Debug, OFF for Release
+
+# 是否开启控制台调试输出
+set(CONSOLE ON)
+# ------------------
+
 # 启用 Unicode 模式（Windows 平台）
 if (WIN32)
     add_compile_definitions(UNICODE _UNICODE)
@@ -27,11 +35,7 @@ find_package(Qt5 COMPONENTS
         MultimediaWidgets
         REQUIRED)
 
-# 设置是否为debug模式
-set(D_OR_R OFF)#ON for Debug, OFF for Release
 
-# 是否开启控制台调试输出
-set(CONSOLE OFF)
 #设置渲染方式，选择为0penGL，不然默认是Cocos2d，编译包报错的，CMake也会给你警告的
 set(FRAMEWORK_SOURCE OpenGL)
 qt_add_resources(QT_RESOURCES

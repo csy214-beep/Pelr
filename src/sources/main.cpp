@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     QDir().mkpath("log"); // 如果目录不存在则创建，包括所有必要的父目录
     QFile::remove(QT_LOG_FILE); // 删除日志文件
     // 安装自定义消息处理器
-    qInstallMessageHandler(messageHandler);
+    // qInstallMessageHandler(messageHandler);
     // 初始化随机数生成器
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);

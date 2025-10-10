@@ -99,9 +99,9 @@ struct constConfigData {
     const QString version = "ver0.0.5";
     const QString name = "PLauncher";
     const QString repo_owner = "Pfolg";
-    const QString author_link = "https://github.com/Pfolg";
-    const QString website_link = "https://github.com/Pfolg/PLauncher";
-    const QString feedback_link = "https://github.com/Pfolg/PLauncher/issues/new";
+    const QString team_link = "https://gitee.com/Pfolg/plauncher/contributors?ref=master";
+    const QString website_link = "https://gitee.com/Pfolg/plauncher";
+    const QString feedback_link = "https://gitee.com/Pfolg/plauncher/issues";
     const QString textFile = "assets\\text"; //local path
     const QString VoiceFolder = "voice_files"; //local path
 };
