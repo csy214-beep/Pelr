@@ -20,7 +20,8 @@ We adopt the Contributor Covenant for our community. By participating, you are e
 
 ### Reporting Bugs
 
->[!TIP]
+>**TIP**
+>
 >Before creating a bug report, please check the existing issues to avoid duplicates.
 >
 >在创建错误报告之前，请检查现有的 Issues 以避免重复。
@@ -56,7 +57,8 @@ Use the Bug Report template to file a new issue. Please include as many details 
 
 ### Suggesting Enhancements
 
->[!NOTE]
+>**NOTE**
+>
 >We love new ideas! Use the Feature Request template to suggest a new feature or enhancement.
 >
 >我们欢迎新想法！使用功能请求模板来建议新功能或改进。
@@ -167,7 +169,8 @@ We welcome pull requests. Follow these steps:
 
 ## License
 
->[!NOTE]
+>**NOTE**
+>
 >By contributing to PLauncher, you agree that your contributions will be licensed under the project's MIT License.
 >
 >通过向 PLauncher 贡献，您同意您的贡献将根据项目的 MIT 许可证进行许可。

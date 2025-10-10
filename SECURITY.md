@@ -1,13 +1,14 @@
 # 安全政策
 
->[!CAUTION]
+>**CAUTION**
+>
 >**请不要上传 `user`文件夹中的任何内容**
 
 PLauncher 项目的维护者和社区非常重视所有安全问题。我们感谢安全研究人员和用户报告潜在的安全漏洞。
 
 ## 🛡️ 支持的版本
 
-我们通常仅对最新发布的主要版本提供安全更新。请确保您使用的是 [最新版本](https://github.com/Pfolg/PLauncher/releases/latest)。
+我们通常仅对最新发布的主要版本提供安全更新。请确保您使用的是 [最新版本](https://gitee.com/Pfolg/plauncher/releases)。
 
 ## 📧 报告漏洞
 

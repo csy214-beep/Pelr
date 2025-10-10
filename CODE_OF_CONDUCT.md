@@ -60,9 +60,9 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement / 执行
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at https://docs.github.com/communities/maintaining-your-safety-on-github/reporting-abuse-or-spam.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at https://gitee.com/oschina/git-osc/issues
 
-虐待、骚扰或其他不可接受的行为实例可以向负责执行的社区领导者报告，网址为：https://docs.github.com/communities/maintaining-your-safety-on-github/reporting-abuse-or-spam
+虐待、骚扰或其他不可接受的行为实例可以向负责执行的社区领导者报告，网址为：https://gitee.com/oschina/git-osc/issues
 
 All complaints will be reviewed and investigated promptly and fairly.
 
