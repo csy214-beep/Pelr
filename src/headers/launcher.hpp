@@ -13,8 +13,6 @@
 #include <QUrl>
 #include <QDebug>
 #include <QDir>
-#include <QMessageBox>
-#include <windows.h>
 #include <QFileInfo>
 #include <QPair>
 #include <QFuture>
@@ -23,67 +21,45 @@
 
 
 static QFuture<void> launchByPathAsync(const QString &path) {
-    return QtConcurrent::run([path]() {
-        // 打开链接
-        if (path.startsWith("http://") || path.startsWith("https://")) {
-            QUrl url(path);
-            if (QDesktopServices::openUrl(url)) {
-                qDebug() << "URL opened successfully:" << path;
-            } else {
-                qDebug() << "Failed to open URL:" << path;
-                QMetaObject::invokeMethod(qApp, [path]() {
-                    if (auto tray = TrayIcon::instance()) {
-                        tray->showMessage("PLauncher", "Failed to open URL: " + path,
-                                          QSystemTrayIcon::Warning, 5000);
-                    }
-                }, Qt::QueuedConnection);
+    qDebug()<<"launching: "<<path;
+    return QtConcurrent::run([path]() -> bool {
+        try {
+            bool success = false;
+
+            // 对于URL，使用QDesktopServices
+            if (path.startsWith("http://") || path.startsWith("https://") ||
+                path.startsWith("ftp://") || path.startsWith("file://")) {
+                success = QDesktopServices::openUrl(QUrl(path));
             }
-            return;
-        }
-
-        // 打开文件或文件夹
-        QFileInfo fileInfo(path);
-        QDir dir(path);
-
-        if (!fileInfo.exists()) {
-            qDebug() << "Path does not exist:" << path;
-            QMetaObject::invokeMethod(qApp, [path]() {
-                if (auto tray = TrayIcon::instance()) {
-                    tray->showMessage("PLauncher", "Path does not exist: " + path,
-                                      QSystemTrayIcon::Warning, 5000);
+            // 对于本地文件/文件夹，使用QDesktopServices
+            else {
+                QFileInfo fileInfo(path);
+                if (fileInfo.exists()) {
+                    QUrl localUrl = QUrl::fromLocalFile(QDir::toNativeSeparators(path));
+                    success = QDesktopServices::openUrl(localUrl);
+                } else {
+                    qWarning() << "File or directory does not exist:" << path;
+                    TrayIcon::instance()->showMessage("Warning", "File or directory does not exist:" + path, QSystemTrayIcon::Warning, 5000);
+                    return false;
                 }
-            }, Qt::QueuedConnection);
-            return;
-        }
+            }
 
-        // 检查是否为文件夹路径
-        if (dir.exists()) {
-            // 使用ShellExecute打开文件夹
-            if (ShellExecuteW(NULL, L"explore", reinterpret_cast<LPCWSTR>(path.utf16()),
-                              NULL, NULL, SW_SHOWNORMAL) > (HINSTANCE) 32) {
-                qDebug() << "Folder opened successfully:" << path;
-            } else {
-                qDebug() << "Failed to open folder:" << path;
-                QMetaObject::invokeMethod(qApp, [path]() {
-                    if (auto tray = TrayIcon::instance()) {
-                        tray->showMessage("PLauncher", "Failed to open folder: " + path,
-                                          QSystemTrayIcon::Warning, 5000);
-                    }
-                }, Qt::QueuedConnection);
+            if (!success) {
+                qWarning() << "Failed to open:" << path;
+                TrayIcon::instance()->showMessage("Warning", "Failed to open:" + path, QSystemTrayIcon::Warning, 5000);
+                return false;
             }
-        } else {
-            // 打开其他文件
-            if (ShellExecuteW(NULL, L"open", reinterpret_cast<LPCWSTR>(path.utf16()), NULL, NULL, SW_SHOWNORMAL) == 0) {
-                qDebug() << "Failed to open file:" << path;
-                QMetaObject::invokeMethod(qApp, [path]() {
-                    if (auto tray = TrayIcon::instance()) {
-                        tray->showMessage("PLauncher", "Failed to open file: " + path,
-                                          QSystemTrayIcon::Warning, 5000);
-                    }
-                }, Qt::QueuedConnection);
-            } else {
-                qDebug() << "File opened successfully:" << path;
-            }
+
+            return true;
+
+        } catch (const std::exception& e) {
+            qCritical() << "Exception occurred while launching" << path << ":" << e.what();
+            TrayIcon::instance()->showMessage("Error", "Exception occurred while launching:" + path + ":" + e.what(), QSystemTrayIcon::Critical, 5000);
+            return false;
+        } catch (...) {
+            qCritical() << "Unknown exception occurred while launching" << path;
+            TrayIcon::instance()->showMessage("Error", "Unknown exception occurred while launching:" + path, QSystemTrayIcon::Critical, 5000);
+            return false;
         }
     });
 }
