@@ -74,20 +74,20 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
 
     // 连接信号
     connect(VoiceGenerator::instance(), &VoiceGenerator::voiceGenerated,
-            this, [&](const QString &filePath)
-            {
-                qDebug()   << "Voice generated:" << filePath;
+            this, [&](const QString &filePath) {
+                qDebug() << "Voice generated:" << filePath;
                 // 可以直接播放
                 VoiceGenerator::instance()->playVoice(filePath);
                 show();
-                resetFadeTimer(); });
+                resetFadeTimer();
+            });
 
     connect(VoiceGenerator::instance(), &VoiceGenerator::errorOccurred,
-            this, [&](const QString &error)
-            {
-                qDebug()   << "Error:" << error;
+            this, [&](const QString &error) {
+                qDebug() << "Error:" << error;
                 show();
-                resetFadeTimer(); });
+                resetFadeTimer();
+            });
 
     fadeTimer = new QTimer(this);
     fadeTimer->setSingleShot(true);
@@ -228,6 +228,13 @@ void BubbleBox::showTime() {
 QString BubbleBox::GetSystemTime() {
     QTime currentTime = QTime::currentTime();
     return currentTime.toString("hh:mm");
+}
+
+void BubbleBox::setThinkingText() {
+    fadeTimer->stop();
+    setText("In response...");
+    adjustSize();
+    show();
 }
 
 

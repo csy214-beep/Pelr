@@ -80,6 +80,7 @@ void ChatBoxOnModel::on_sendMsg() {
         role, // 使用自定义角色
         roleName // 指定自定义角色名称
     );
+    BubbleBox::instance()->setThinkingText();
 }
 
 void ChatBoxOnModel::onTextGenerated(const QString &text) {

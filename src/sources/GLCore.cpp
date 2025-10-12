@@ -517,9 +517,7 @@ void GLCore::mouseReleaseEvent(QMouseEvent *event) {
 void GLCore::mouseDoubleClickEvent(QMouseEvent *event) {
 	if (event->buttons() & Qt::LeftButton) {
 		modelChatBox->setVisible(!modelChatBox->isVisible());
-	}
-	if (event->buttons() & Qt::LeftButton) {
-		qDebug() << "显示可播放的表情-动作列表&按钮"; //TODO
+		qDebug() << "model chat box visible: " << modelChatBox->isVisible();
 	}
 }
 

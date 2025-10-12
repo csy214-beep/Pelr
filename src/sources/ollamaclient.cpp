@@ -96,6 +96,7 @@ void OllamaClient::generateTextAsync(const QString &prompt, const QString &model
     jsonBody["prompt"] = fullPrompt;
     jsonBody["stream"] = stream;
     QByteArray data = QJsonDocument(jsonBody).toJson();
+    qDebug() << "request:" << request.url().toString() << "model:" << model << "prompt:" << prompt;
 
     // 发送 POST 请求（异步）
     m_manager->post(request, data);
@@ -175,6 +176,9 @@ QString OllamaClient::getPromptByRole(Role role, const QString &customRoleName) 
 }
 
 QString OllamaClient::buildFullPrompt(const QString &rolePrompt, const QString &userPrompt) const {
+    // 当前时间
+    QDateTime now = QDateTime::currentDateTime();
+    QString timeStr = now.toString("yyyy-MM-dd HH:mm:ss");
     // 简单地将角色提示词和用户提示词拼接
-    return rolePrompt + "\n\n输出前请检查语句是否通顺、合理，并做合理的修改。\n\n用户的提问：" + userPrompt;
+    return rolePrompt + "\n\n输出前请检查语句是否通顺、合理，并做合理的修改。\n当前时间：" + timeStr + "\n\n用户的提问：" + userPrompt;
 }

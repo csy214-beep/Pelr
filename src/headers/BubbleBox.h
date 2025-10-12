@@ -33,7 +33,7 @@ public:
     // 获取单例实例的静态方法
     static BubbleBox *instance(QLabel *parent = nullptr);
 
-
+    void setThinkingText();
 
     QString GetSystemTime();
 
