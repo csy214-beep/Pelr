@@ -9,7 +9,6 @@
 #include "setting.h"
 #include <QFileDialog>
 #include  <QString>
-#include  "ui_setting.h"
 #include "launcher.hpp"
 #include <windows.h>
 #include <shlobj.h>
@@ -238,6 +237,10 @@ void SettingWidget::connectSignals() {
             this, &SettingWidget::onVersionCheckCompleted);
     connect(m_versionChecker, &VersionChecker::errorOccurred,
             this, &SettingWidget::onVersionCheckError);
+}
+
+QSlider *SettingWidget::getHorizontalSlider() {
+    return ui->horizontalSlider;
 }
 
 void SettingWidget::saveData() {

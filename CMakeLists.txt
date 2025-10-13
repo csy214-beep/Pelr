@@ -42,16 +42,18 @@ qt_add_resources(QT_RESOURCES
         Resource.qrc
 )
 FILE(GLOB SOURCE_FILES "./src/sources/*.cpp")
-FILE(GLOB UI_FILES "./src/sources/*.ui")
+FILE(GLOB UI_FILES "./src/ui/*.ui")
 FILE(GLOB HEADER_FILES "./src/headers/*.h")
 FILE(GLOB HPP_FILES "./src/headers/*.hpp")
 file(GLOB LApp2D "LAppLive2D/src/*.cpp")
+qt5_wrap_ui(UI_HEADERS ${UI_FILES})
 message(STATUS ${LApp2D})
 
 # 头文件搜索路径
 include_directories(
         ./
         src/headers
+        src/ui
         LAppLive2D/inc
         thirdParty/Core/include
         thirdParty/Framework/src
@@ -70,10 +72,15 @@ if (NOT CONSOLE)
     set(CON WIN32)
 endif ()
 # 包含目录
+# 明确设置 UI 文件目录
+set(UI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/ui")
+
 include_directories(PLauncher PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${UI_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}  # 重要：包含构建目录，ui_*.h文件在这里生成
 )
+# 确保 AUTOUIC 能找到 .ui 文件
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${UI_DIR}) # 没有这句就GG
 
 add_executable(PLauncher
         ${CON}

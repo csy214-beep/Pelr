@@ -6,8 +6,7 @@
  * MIT License
  * https://github.com/Pfolg/PLauncher/blob/main/LICENSE
  */
-#ifndef SETTING_H
-#define SETTING_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -15,6 +14,10 @@
 #include <QWidget>
 #include "DoubleClickableLabel.h"
 #include  "VersionChecker.h"
+#include <QtWidgets/QSlider>
+
+#include "ui_setting.h"
+
 
 namespace Ui {
     class setting;
@@ -24,8 +27,6 @@ class SettingWidget : public QWidget {
     Q_OBJECT
 
 public:
-    Ui::setting *ui;
-
     explicit SettingWidget(QWidget *parent = nullptr);
 
     ~SettingWidget();
@@ -37,6 +38,9 @@ public:
     void connectSignals();
 
     bool checkStartupLink();
+
+    //horizontalSlider
+    QSlider *getHorizontalSlider();
 
 private slots:
     void saveData();
@@ -55,7 +59,6 @@ private slots:
 
 private:
     VersionChecker *m_versionChecker;
+    Ui::setting *ui;
 };
 
-
-#endif

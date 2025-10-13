@@ -28,7 +28,6 @@
 #include "BubbleBox.h"
 #include "convertcodetostring.h"
 #include  "getpowerstatus.h"
-#include "ui_setting.h"
 #include "weathermanager.h"
 #include "todoNotify.hpp"
 #include "ExtraMotionManager.h"
@@ -317,8 +316,8 @@ void GLCore::connectSignals() {
 	// load model //void SettingWidget::selectModelPath()
 	//  connect(main_widget->Widget_Setting->ui->lineEdit, &QLineEdit::textChanged, this, &GLCore::loadModel);
 	// size
-	connect(main_widget->Widget_Setting->ui->horizontalSlider, &QSlider::valueChanged, [&]() {
-		int var = main_widget->Widget_Setting->ui->horizontalSlider->value();
+	connect(main_widget->Widget_Setting->getHorizontalSlider(), &QSlider::valueChanged, [&]() {
+		int var = main_widget->Widget_Setting->getHorizontalSlider()->value();
 		resize(4 * var, 3 * var);
 	});
 }
