@@ -69,6 +69,8 @@ void KeyLabelWidget::on_keyRelease(QString keyName, QString modifiersName) {
         this->keyLabel->setText(modifiersName);
     } else if (modifiersName.isEmpty()) {
         this->keyLabel->setText(keyName);
+        if (keyName.length() == 1)
+            this->keyLabel->setText("  " + keyName + "  ");
     } else {
         this->keyLabel->setText(modifiersName + " " + keyName);
     }
