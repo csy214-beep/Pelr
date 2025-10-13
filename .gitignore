@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+/.idea/.gitignore
+/.idea/.name
+/.idea/editor.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/plauncher.iml
+/.idea/QtSettings.xml
+/.idea/vcs.xml

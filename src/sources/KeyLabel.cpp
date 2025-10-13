@@ -19,6 +19,7 @@ KeyLabelWidget::KeyLabelWidget(QWidget *parent)
     : QWidget(parent) {
     // 窗口顶置，去标题栏，去除任务栏图标，鼠标穿透，窗口透明，不可聚焦
     this->setAttribute(Qt::WA_TranslucentBackground, true);
+    /*
     if (DataManager::instance().getBasicData().isTop) {
         this->setWindowFlags(
             Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool | Qt::WindowTransparentForInput |
@@ -28,7 +29,9 @@ KeyLabelWidget::KeyLabelWidget(QWidget *parent)
             Qt::FramelessWindowHint | Qt::Tool | Qt::WindowTransparentForInput |
             Qt::WindowDoesNotAcceptFocus);
     }
-
+*/
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
+                   | Qt::Tool | Qt::WindowTransparentForInput | Qt::WindowDoesNotAcceptFocus);
     this->keyLabel = new QLabel(this);
     this->mouseLabel = new QLabel(this);
     // 样式
