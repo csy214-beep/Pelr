@@ -33,6 +33,9 @@ private:
     // 从GitHub API获取最新Release版本号
     void getLatestGithubVersion(const QString &owner, const QString &repo);
 
+    // Gitee检查函数
+    void getLatestGiteeVersion(const QString &owner, const QString &repo);
+
     QNetworkAccessManager *m_networkManager;
     QString m_localVersion;
 };

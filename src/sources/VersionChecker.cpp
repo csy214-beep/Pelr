@@ -30,7 +30,41 @@ void VersionChecker::checkVersionMatch(const QString &localVersion) {
     const QString REPO_OWNER = DataManager::instance().const_config_data.repo_owner;
     const QString REPO_NAME = DataManager::instance().const_config_data.name;
 
-    getLatestGithubVersion(REPO_OWNER, REPO_NAME);
+
+    // getLatestGithubVersion(REPO_OWNER, REPO_NAME);//Github API
+    //gitee 确保小写
+    getLatestGiteeVersion(REPO_OWNER.toLower(), REPO_NAME.toLower()); //Gitee API
+}
+
+void VersionChecker::getLatestGiteeVersion(const QString &owner, const QString &repo) {
+    // 构建 Gitee API 请求 URL，格式与 GitHub 类似
+    QString url = QString("https://gitee.com/api/v5/repos/%1/%2/releases/latest")
+            .arg(owner, repo);
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    const QString header = "APP" + DataManager::instance().const_config_data.name + "_" + DataManager::instance().
+                           const_config_data.version;
+    request.setHeader(QNetworkRequest::UserAgentHeader, header);
+
+    // 设置超时（通过定时器实现）
+    QTimer *timeoutTimer = new QTimer(this);
+    timeoutTimer->setSingleShot(true);
+    timeoutTimer->start(10000); // 10秒超时
+
+    QNetworkReply *reply = m_networkManager->get(request);
+
+    // 连接超时处理
+    connect(timeoutTimer, &QTimer::timeout, this, [reply, timeoutTimer, this]() {
+        if (reply && reply->isRunning()) {
+            reply->abort();
+            timeoutTimer->deleteLater();
+            emit errorOccurred("请求 Gitee 超时: 10秒内未收到响应");
+        }
+    });
+
+    // 请求完成时删除定时器
+    connect(reply, &QNetworkReply::finished, timeoutTimer, &QTimer::deleteLater);
 }
 
 void VersionChecker::getLatestGithubVersion(const QString &owner, const QString &repo) {
@@ -99,6 +133,7 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
         return;
     }
 
+
     QJsonObject jsonObj = jsonDoc.object();
     if (!jsonObj.contains("tag_name")) {
         QString errorMsg = "API响应中未找到版本号";
@@ -107,7 +142,24 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
         return;
     }
 
+    if (reply->url().host().contains("gitee.com")) {
+        // Gitee API 的 releases/latest 接口中，版本号字段也是 "tag_name"
+        if (!jsonObj.contains("tag_name")) {
+            QString errorMsg = "Gitee API 响应中未找到版本号 (tag_name)";
+            qWarning() << "⚠️" << errorMsg;
+            emit errorOccurred(errorMsg);
+            return;
+        }
+    } else {
+        if (!jsonObj.contains("tag_name")) {
+            QString errorMsg = "GitHub API 响应中未找到版本号";
+            qWarning() << "⚠️" << errorMsg;
+            emit errorOccurred(errorMsg);
+            return;
+        }
+    }
     QString remoteVer = jsonObj["tag_name"].toString();
+
 
     if (remoteVer == m_localVersion) {
         QString message = QString("✅ 版本一致 \n当前版本 %1 已是最新版！")
