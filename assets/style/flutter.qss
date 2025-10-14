@@ -169,7 +169,6 @@ QCheckBox::indicator:checked {
     border: 2px solid #2196f3;
     border-radius: 2px;
     background-color: #2196f3;
-    image: url(:/icons/check_white.svg);
 }
 
 QRadioButton::indicator:unchecked {

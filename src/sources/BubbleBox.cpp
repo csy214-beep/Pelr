@@ -57,7 +57,7 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
     QFont font = DataManager::instance()._font;
     font.setPointSize((int) 12 * (DataManager::instance().getBasicData().model_size / 150));
     font.setWeight(50);
-    font.setItalic(true);
+    // font.setItalic(true);
     setFont(font);
     QString foreColor = DataManager::instance().getBasicData().color_bubble.second;
     if (foreColor.isEmpty()) {
