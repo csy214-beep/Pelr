@@ -16,7 +16,7 @@
 #include <iostream>
 #include <QString>
 #include <QDir>
-
+#include  "CheckApplication.h"
 #define QT_LOG_FILE "log/plauncher_qt.log"
 // 输出到控制台（如果启用）
 #ifdef CONSOLE
@@ -75,12 +75,21 @@ int main(int argc, char *argv[]) {
     QDir().mkpath("log"); // 如果目录不存在则创建，包括所有必要的父目录
     QFile::remove(QT_LOG_FILE); // 删除日志文件
     // 安装自定义消息处理器
-    qInstallMessageHandler(messageHandler);
-    // 初始化随机数生成器
+    // qInstallMessageHandler(messageHandler);
+    //  初始化随机数生成器
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);
     app.setFont(DataManager::instance()._font); //整个应用程序的界面都会使用这个字体
     app.setWindowIcon(QIcon(":/assets/image/PLauncher.png"));
+
+    if (!CheckApplication::hasValidLicense()) {
+        CheckApplication licenseDialog;
+        if (!(licenseDialog.exec() == QDialog::Accepted && licenseDialog.isLicenseAccepted())) {
+            qDebug() << "应用程序因许可证拒绝而退出";
+            return 0;
+        }
+        qDebug() << "许可证已被接受";
+    }
 
     GLCore w;
 

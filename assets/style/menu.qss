@@ -5,7 +5,6 @@ QMenu {
     padding: 4px 0; /* 减少内边距 */
     font-size: 16px; /* 字体大小 */
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 2px; /* 添加外边距确保边框完整显示 */
 }
 
