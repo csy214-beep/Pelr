@@ -2,18 +2,18 @@
 
 [![star](https://gitee.com/Pfolg/plauncher/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/stargazers) [![fork](https://gitee.com/Pfolg/plauncher/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/members)
 
-![LICENSE](https://img.shields.io/badge/LICENSE-MIT-lightgreen.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg) 
-
+![LICENSE](https://img.shields.io/badge/LICENSE-MIT-lightgreen.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)
 
 **PLauncher** 是一款基于 Live2D 技术的智能桌面虚拟助手，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
 ![](repo_assets/preview.png)
 
->**NOTE**
+> **NOTE**
 >
 >本项目仍处于开发阶段，功能和稳定性可能有所不足，请谨慎使用。
 >
->This project is still in the development phase, and its functionality and stability may not be fully optimized. Please use with caution.
+>This project is still in the development phase, and its functionality and stability may not be fully optimized. Please
+> use with caution.
 >
 >这是一个 **C++** 项目，Python仅用于 TTS 服务端。
 >
@@ -21,7 +21,8 @@
 >
 >本项目为非盈利性开源项目，作者出于个人兴趣开发，任何人均可免费使用。
 >
->This is a non-profit, open-source project, developed out of personal interest by the author. It is free for anyone to use.
+>This is a non-profit, open-source project, developed out of personal interest by the author. It is free for anyone to
+> use.
 
 ## ✨ 主要特性
 
@@ -43,10 +44,9 @@
 - 快捷键
 - 热加载用户配置
 
-
 ## 🖥️ 系统要求
 
->**NOTE**
+> **NOTE**
 >
 >仅供参考
 
@@ -68,18 +68,18 @@
 ### 首次运行配置
 
 1. **设置 Live2D 模型路径** (必需)
-   - 在设置 → 基本设置中配置模型路径
-   - 支持 model3.json 格式的 Live2D 模型
-   - 模型下载：[Booth](https://booth.pm) | [模之屋](https://www.aplaybox.com/)
+    - 在设置 → 基本设置中配置模型路径
+    - 支持 model3.json 格式的 Live2D 模型
+    - 模型下载：[Booth](https://booth.pm) | [模之屋](https://www.aplaybox.com/)
 
 2. **配置 TTS 服务** (可选)
-   - 申请[讯飞开放平台](https://www.xfyun.cn/)账号
-   - 在设置 → TTS配置中填写 API 凭证
-   - 点击`启动讯飞TTS服务端`或手动运行目录下的 `tts_server.exe`
+    - 申请[讯飞开放平台](https://www.xfyun.cn/)账号
+    - 在设置 → TTS配置中填写 API 凭证
+    - 点击`启动讯飞TTS服务端`或手动运行目录下的 `tts_server.exe`
 
 3. **设置 AI 服务** (可选)
-   - 安装 [Ollama](https://ollama.ai/)
-   - 在设置 → Ollama集成中选择模型和角色
+    - 安装 [Ollama](https://ollama.ai/)
+    - 在设置 → Ollama集成中选择模型和角色
 
 ## 📦 项目结构
 
@@ -87,7 +87,7 @@
 PLauncher/
 ├── CMakeLists.txt          # C++ 项目构建配置
 ├── scripts/
-│   ├── AUCF                # 已弃用的模块
+│   ├── AUCF                # 已弃用的模块 Archived Unused Cpp Files
 │   ├── requirements.txt    # Python 依赖清单
 │   └── tts_server.py       # TTS 服务端
 ├── src/                    # C++ 源代码
@@ -114,12 +114,14 @@ PLauncher/
 ## 🔧 技术栈
 
 ### C++ 核心组件
+
 - **Qt 5.15.2** - 跨平台应用框架
 - **OpenGL** - 图形渲染 (GLEW + GLFW)
 - **Live2D Cubism** - 2D 动画渲染引擎 (仅支持 model3.json 格式)
 - **STB 库** - 图像处理功能
 
 ### Python 工具链
+
 - **Python 3.11** - 开发环境
 - **PyInstaller** - 应用打包分发
 - **Pillow** - 图像处理
@@ -139,7 +141,7 @@ PLauncher/
 
 ### 编译步骤
 
->可参考[构建流程](docs/构建流程.md)
+> 可参考[构建流程](docs/构建流程.md)
 
 **使用CLion开发，不保证以下命令有效性**
 
@@ -158,13 +160,13 @@ cmake -G "MinGW Makefiles" ..
 mingw32-make
 ```
 
-
 ## 📖 使用指南
->**CAUTION**
+
+> **CAUTION**
 >
 >**请不要上传 `user`文件夹中的任何内容**
 
->**NOTE**
+> **NOTE**
 >
 >详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/plauncher/wikis)
 
@@ -186,11 +188,13 @@ mingw32-make
 - [帮助中心](https://help.gitee.com/)
 
 ## 📄 许可证
->**NOTE**
+
+> **NOTE**
 >
 >本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
 
 **注意**: 部分组件使用不同许可证：
+
 - Live2D Cubism SDK 使用专有许可证
 - Qt 框架使用 LGPL/GPL 许可证
 - 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/plauncher/wikis)
