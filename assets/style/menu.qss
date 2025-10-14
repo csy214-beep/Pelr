@@ -1,0 +1,34 @@
+QMenu {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; /* 减小圆角 */
+    padding: 4px 0; /* 减少内边距 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 2px; /* 添加外边距确保边框完整显示 */
+}
+
+QMenu::item {
+    padding: 8px 16px; /* 减少内边距 */
+    border-radius: 4px;
+    color: #2d3748;
+    margin: 1px 4px; /* 减少外边距 */
+    min-width: 120px; /* 减小最小宽度 */
+}
+
+QMenu::item:hover {
+    background-color: #f7fafc;
+    color: #2196f3;
+}
+
+QMenu::item:selected {
+    background-color: #2196f3;
+    color: white;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 3px 8px;
+}

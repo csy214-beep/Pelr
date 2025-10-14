@@ -1,8 +1,9 @@
 #pragma once
 #include <QMenu>
 #include "LAppModel.hpp"
+#include "custommenu.h"
 
-class ExtraMotionManager : public QMenu {
+class ExtraMotionManager : public CustomMenu {
     Q_OBJECT
 
 public:

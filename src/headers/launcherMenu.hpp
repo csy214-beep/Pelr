@@ -15,8 +15,9 @@
 #include <QIcon>
 #include <QDebug>
 #include <QPushButton>
+#include "custommenu.h"
 
-class launcherMenu : public QMenu {
+class launcherMenu : public CustomMenu {
     Q_OBJECT
 
 public:
@@ -101,8 +102,9 @@ public:
 
 protected:
     // 将构造函数设为protected，确保只能通过instance方法创建
-    explicit launcherMenu(QWidget *parent = nullptr) : QMenu(parent) {
+    explicit launcherMenu(QWidget *parent = nullptr) : CustomMenu(parent) {
         initMenu();
+        applyStyle();
     }
 
     QMenu *menu_Star, *menu_App, *menu_Link, *menu_Scripts;

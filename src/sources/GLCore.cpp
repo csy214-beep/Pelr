@@ -168,7 +168,7 @@ void GLCore::initContextMenu() {
 
 
 	//询问天气（按钮）/询问电源状态/询问按键数（废弃）
-	QMenu *QuestionMenu = new QMenu(this);
+	QMenu *QuestionMenu = new CustomMenu(this);
 	/*
 		QAction *askKeyCounter = new QAction("按键数", QuestionMenu);
 		connect(askKeyCounter, &QAction::triggered, [&]() {
@@ -180,7 +180,6 @@ void GLCore::initContextMenu() {
 		*/
 	QAction *askWeather = new QAction("天气", QuestionMenu);
 	connect(askWeather, &QAction::triggered, [&]() {
-		// bubbleBox->textSet(TODO_FEATURE_MSG);
 		onAskWeather();
 	});
 	QAction *askPowerStatus = new QAction("电源状态", QuestionMenu);

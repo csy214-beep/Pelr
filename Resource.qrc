@@ -309,6 +309,7 @@
     <file>assets/font/MapleMono-NF-CN-Medium.ttf</file>
   </qresource>
   <qresource>
+    <file>assets/style/menu.qss</file>
     <file>assets/style/style.qss</file>
     <file>assets/style/flutter.qss</file>
   </qresource>

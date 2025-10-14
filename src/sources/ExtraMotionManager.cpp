@@ -4,7 +4,7 @@
 ExtraMotionManager *ExtraMotionManager::instance = nullptr;
 
 ExtraMotionManager::ExtraMotionManager()
-    : QMenu(nullptr), model(nullptr) {
+    : CustomMenu(nullptr), model(nullptr) {
     setTitle("额外内容");
 
     motionMenu = new QMenu("动作", this);
