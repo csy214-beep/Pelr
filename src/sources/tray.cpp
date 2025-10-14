@@ -14,7 +14,7 @@
 #include <QFile>
 #include "launcher.hpp"
 #include "data.hpp"
-
+#include "launcherMenu.hpp"
 // 初始化静态成员变量
 TrayIcon *TrayIcon::m_instance = nullptr;
 
@@ -74,7 +74,12 @@ TrayIcon::TrayIcon(QObject *parent)
         switchText(action_switchTransparent);
     });
 
+    QAction *action_startApp = new QAction("启动项目", this);
+    action_startApp->setMenu(launcherMenu::instance());
     // 添加菜单项到菜单
+    menu->addAction(action_startApp);
+    menu->addSeparator();
+
     menu->addActions({
         action_resetWinLoc, action_silentMode, action_switchDrag,
         action_showWin, action_mediaPlayer, action_openPath

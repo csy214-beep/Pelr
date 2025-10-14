@@ -33,7 +33,7 @@ struct ConfigData {
     QPair<QString, QString> color_keyLabel;
     //bool
     bool isStartUp = false;
-    bool isListening = true;
+    bool isListening = false;
     bool isLookingMouse = true;
     bool isStartStar = false;
     bool isRandomSpeech = true;
