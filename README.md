@@ -63,7 +63,10 @@
 
 1. 前往 [Release 页面](https://gitee.com/Pfolg/plauncher/releases) 下载最新版本
 2. 解压压缩包到任意目录
-3. 运行 `PLauncher.exe` 即可启动应用
+3. 下载`tts_server.exe`并将其放到程序根目录下
+4. 运行 `PLauncher.exe` 即可启动应用
+
+另外，囿于Gitee的release限制，您可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
 
 ### 首次运行配置
 
