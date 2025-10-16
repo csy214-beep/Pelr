@@ -42,9 +42,6 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 
 **完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.0.4b...ver0.0.5
 
----
-
-请将`tts_server.exe`放入程序根目录，如无需要，不必下载
 
 ## ver0.0.4b
 
@@ -78,6 +75,7 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 + 第二聊天功能
 
 **基本使用方法**: https://github.com/Pfolg/PLauncher/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
+
 **Full Changelog**: https://github.com/Pfolg/PLauncher/compare/ver0.0.1...ver0.0.2
 
 ## ver0.0.1

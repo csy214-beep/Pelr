@@ -25,6 +25,10 @@
 *.la
 *.a
 
+# IDE Settings
+.vscode/
+.idea/
+
 # Executables
 *.exe
 *.out
