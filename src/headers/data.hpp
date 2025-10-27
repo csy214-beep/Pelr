@@ -96,7 +96,7 @@ struct constConfigData {
     const QString ollama_url = "https://ollama.com/";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     //about
-    const QString version = "ver0.0.6";
+    const QString version = "ver0.5-251018";
     const QString name = "PLauncher";
     const QString repo_owner = "Pfolg";
     const QString team_link = "https://gitee.com/Pfolg/plauncher/contributors?ref=master";

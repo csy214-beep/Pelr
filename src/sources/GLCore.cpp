@@ -338,16 +338,13 @@ void GLCore::silentMode() {
 		inputCheckTimer->start();
 		if (DataManager::instance().getBasicData().isRandomSpeech) randomSentenceTimer->start();
 		if (DataManager::instance().getBasicData().isListening) listener->startListening();
-		keyLabel->show();
 		qDebug() << "silent mode off";
 		isSilentMode = false;
 	} else {
 		hide();
-		listener->stopListening();
 		timer->stop();
 		inputCheckTimer->stop();
 		randomSentenceTimer->stop();
-		keyLabel->hide();
 		BubbleBox::instance()->hide();
 		menuWidget->hide();
 		modelChatBox->hide();
