@@ -1,3 +1,15 @@
+## ver0.5-251018
+
+### 更新内容
+* feat(ui): 添加启动项编辑标签与部署脚本
+* fix(core/keyLabel): 移除静默模式keyLabel功能控制
+* docs: 更新完整更新日志并调整版本号
+* docs: 更新README.md中的安装说明
+* docs: 添加完整版本更新日志
+* feat(ui): 添加许可证检查功能
+
+**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.0.5...ver0.5-251018
+
 ## ver0.0.5
 
 **本次更新**：
