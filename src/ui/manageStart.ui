@@ -45,7 +45,7 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="../Resource.qrc">
+       <iconset>
         <normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</iconset>
       </property>
       <property name="iconSize">
@@ -68,7 +68,7 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="../Resource.qrc">
+       <iconset>
         <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Square - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Square - 24x24.png</iconset>
       </property>
       <property name="iconSize">
@@ -88,7 +88,7 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="../Resource.qrc">
+       <iconset>
         <normaloff>:/assets/IconaMoon/General/Edit - 24x24.png</normaloff>:/assets/IconaMoon/General/Edit - 24x24.png</iconset>
       </property>
       <property name="iconSize">
@@ -108,7 +108,7 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="../Resource.qrc">
+       <iconset>
         <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
       </property>
       <property name="iconSize">
@@ -134,6 +134,13 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>启动项编辑</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
