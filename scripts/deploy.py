@@ -1,3 +1,12 @@
+# PLauncher - Live2D Virtual Desktop Assistant
+# https://gitee.com/Pfolg/plauncher
+# https://sourceforge.net/projects/pfolg-plauncher/
+# Copyright (c) 2025 SY Cheng
+#
+# GPL v3 License
+# https://gnu.ac.cn/licenses/gpl-3.0.html
+
+
 """
 cd ..\
 
@@ -16,6 +25,7 @@ cd  cmake-build-release
 import os
 import subprocess
 import sys
+
 
 def run_command(command, description=""):
     """执行命令并处理错误"""
@@ -37,6 +47,7 @@ def run_command(command, description=""):
             print(f"错误输出: {e.stderr}")
         return False
 
+
 def copy_files(src_pattern, dst, description=""):
     """复制文件"""
     if description:
@@ -55,6 +66,7 @@ def copy_files(src_pattern, dst, description=""):
         print(f"✗ 复制失败: {e}")
         return False
 
+
 def copy_directory(src, dst, description=""):
     """复制目录"""
     if description:
@@ -72,6 +84,7 @@ def copy_directory(src, dst, description=""):
     except subprocess.CalledProcessError as e:
         print(f"✗ 目录复制失败: {e}")
         return False
+
 
 def main():
     print("开始执行部署脚本...")
@@ -118,15 +131,16 @@ def main():
 
     # 输出最终结果
     if all_success:
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("✓ 所有操作完成！部署成功！")
-        print("="*50)
+        print("=" * 50)
     else:
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("⚠ 部署完成，但部分操作可能有问题")
-        print("="*50)
+        print("=" * 50)
 
     return all_success
+
 
 if __name__ == "__main__":
     success = main()

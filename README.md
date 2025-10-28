@@ -107,7 +107,7 @@ PLauncher/
 ├── user/                   # 用户配置文件
 ├── logs/                   # 日志文件
 ├── docs/                   # 文档文件
-├── LICENSE                 # 许可证文件
+├── LICENSE.md              # 许可证文件
 ├── README.md               # 项目说明文件
 ├── SUPPORT.md              # 参与贡献指南
 ├── SECURITY.md             # 安全说明文件
@@ -194,7 +194,14 @@ mingw32-make
 
 > **NOTE**
 >
->本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
+> 本项目基于 GNU General Public License v3.0 许可证发布。
+>
+> 详见 [LICENSE](LICENSE.md) 文件。
+>
+>
+
+[//]: # (> edited by Pfolg 2025.10.28)
+> 过往版本的发行版（Release）仍然遵循原许可证（MIT），但其源代码（由本项目开发者编写的部分）则采用GPLv3许可证。
 
 **注意**: 部分组件使用不同许可证：
 

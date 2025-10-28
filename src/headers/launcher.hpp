@@ -1,10 +1,11 @@
 /*
- * PLauncher - Live2D Virtual Desktop Assistant
- * https://github.com/Pfolg/PLauncher
+* PLauncher - Live2D Virtual Desktop Assistant
+ * https://gitee.com/Pfolg/plauncher
+ * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
- * MIT License
- * https://github.com/Pfolg/PLauncher/blob/main/LICENSE
+ * GPL v3 License
+ * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #pragma once
 
@@ -21,7 +22,7 @@
 
 
 static QFuture<void> launchByPathAsync(const QString &path) {
-    qDebug()<<"launching: "<<path;
+    qDebug() << "launching: " << path;
     return QtConcurrent::run([path]() -> bool {
         try {
             bool success = false;
@@ -39,7 +40,8 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                     success = QDesktopServices::openUrl(localUrl);
                 } else {
                     qWarning() << "File or directory does not exist:" << path;
-                    TrayIcon::instance()->showMessage("Warning", "File or directory does not exist:" + path, QSystemTrayIcon::Warning, 5000);
+                    TrayIcon::instance()->showMessage("Warning", "File or directory does not exist:" + path,
+                                                      QSystemTrayIcon::Warning, 5000);
                     return false;
                 }
             }
@@ -51,14 +53,15 @@ static QFuture<void> launchByPathAsync(const QString &path) {
             }
 
             return true;
-
-        } catch (const std::exception& e) {
+        } catch (const std::exception &e) {
             qCritical() << "Exception occurred while launching" << path << ":" << e.what();
-            TrayIcon::instance()->showMessage("Error", "Exception occurred while launching:" + path + ":" + e.what(), QSystemTrayIcon::Critical, 5000);
+            TrayIcon::instance()->showMessage("Error", "Exception occurred while launching:" + path + ":" + e.what(),
+                                              QSystemTrayIcon::Critical, 5000);
             return false;
         } catch (...) {
             qCritical() << "Unknown exception occurred while launching" << path;
-            TrayIcon::instance()->showMessage("Error", "Unknown exception occurred while launching:" + path, QSystemTrayIcon::Critical, 5000);
+            TrayIcon::instance()->showMessage("Error", "Unknown exception occurred while launching:" + path,
+                                              QSystemTrayIcon::Critical, 5000);
             return false;
         }
     });

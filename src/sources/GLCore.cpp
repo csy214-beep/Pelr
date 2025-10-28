@@ -1,10 +1,11 @@
 /*
- * PLauncher - Live2D Virtual Desktop Assistant
- * https://github.com/Pfolg/PLauncher
+* PLauncher - Live2D Virtual Desktop Assistant
+ * https://gitee.com/Pfolg/plauncher
+ * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
- * MIT License
- * https://github.com/Pfolg/PLauncher/blob/main/LICENSE
+ * GPL v3 License
+ * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #include "LAppDelegate.hpp"//一定要第一个导入
 #include "LAppView.hpp"

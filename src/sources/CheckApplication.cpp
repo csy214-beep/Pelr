@@ -1,10 +1,12 @@
 /*
-PROJE  CT_NAME PLauncher
-PRODUCT_NAME CLion
-NAME CheckApplication
-AUTHOR Pfolg
-TIME 2025/10/14 21:04
-*/
+ * PLauncher - Live2D Virtual Desktop Assistant
+ * https://gitee.com/Pfolg/plauncher
+ * https://sourceforge.net/projects/pfolg-plauncher/
+ * Copyright (c) 2025 SY Cheng
+ *
+ * GPL v3 License
+ * https://gnu.ac.cn/licenses/gpl-3.0.html
+ */
 #include "CheckApplication.h"
 #include "data.hpp"
 #define LICENSE_CHECK_FILE "user/license.dat"
@@ -74,11 +76,11 @@ bool CheckApplication::hasValidLicense() {
 }
 
 void CheckApplication::setupUI() {
-    setWindowTitle("MIT 许可证确认");
+    setWindowTitle("GNU GPL v3 许可证确认");
     setFixedSize(800, 600);
 
     // 创建控件
-    QLabel *titleLabel = new QLabel("MIT 许可证协议", this);
+    QLabel *titleLabel = new QLabel("GNU 通用公共许可证 v3", this);
     QFont titleFont = titleLabel->font();
     titleFont.setBold(true);
     titleFont.setPointSize(14);
@@ -90,23 +92,40 @@ void CheckApplication::setupUI() {
     licenseText->setReadOnly(true);
 
     QString mitLicense =
-            "MIT 许可证\n\n"
-            "版权所有 (c) " + QDateTime::currentDateTime().toString("yyyy") + " SY Cheng\n\n"
-            "特此免费授予任何获得本软件及相关文档文件（以下简称\"软件\"）副本的人"
-            "无限制地处理本软件的权限，包括但不限于使用、复制、修改、合并、发布、分发、再许可"
-            "和/或销售本软件副本的权利，并允许向其提供本软件的人这样做，但须符合以下条件：\n\n"
-            "上述版权声明和本许可声明应包含在本软件的所有副本或重要部分中。\n\n"
-            "本软件按\"原样\"提供，不附带任何明示或暗示的保证，包括但不限于对适销性、"
-            "特定用途的适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对"
-            "因本软件或本软件的使用或其他交易而产生的任何索赔、损害赔偿或其他责任负责，"
-            "无论是在合同诉讼、侵权行为还是其他方面。\n\n"
+            "GNU 通用公共许可证\n"
+            "第三版，2007年6月29日\n\n"
+
+            "版权所有 (C) 2007 自由软件基金会 <https://fsf.org/>\n\n"
+
+            "本程序是自由软件：您可以根据自由软件基金会发布的 GNU 通用公共许可证"
+            "的条款重新分发和/或修改它，可以是许可证的第3版，或者（根据您的选择）任何后续版本。\n\n"
+
+            "分发本程序是希望它有用，但没有任何担保；甚至没有适销性或特定用途适用性的暗示担保。"
+            "有关更多详细信息，请参阅 GNU 通用公共许可证。\n\n"
+
+            "您应该已经随本程序收到了 GNU 通用公共许可证的副本。"
+            "如果没有，请参阅 <https://www.gnu.org/licenses/>。\n\n"
+
+            "本程序的主要条款：\n\n"
+            "1. 您可以任何媒介运行本程序，无需付费\n"
+            "2. 您可以学习程序如何工作，并对其进行修改\n"
+            "3. 您可以重新分发副本\n"
+            "4. 您可以发布修改后的版本\n\n"
+
+            "当您重新分发本程序时，您必须：\n"
+            "- 保留所有原始版权声明\n"
+            "- 使用相同的 GPLv3 许可证\n"
+            "- 提供源代码或获取源代码的方法\n"
+            "- 保持所有通知完整无损\n\n"
+
+            "详细信息请参阅完整的 GNU GPL v3 许可证文本。\n\n"
             "用户: " + m_username + "\n"
             "版本: " + m_version;
 
     licenseText->setPlainText(mitLicense);
 
     // 同意复选框
-    agreeCheckbox = new QCheckBox("我理解并接受上述 MIT 许可证条款", this);
+    agreeCheckbox = new QCheckBox("我理解并接受上述 GNU GPL v3 许可证条款", this);
 
     // 按钮
     acceptButton = new QPushButton("接受", this);
