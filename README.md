@@ -194,7 +194,7 @@ mingw32-make
 
 > **NOTE**
 >
-> 本项目基于 GNU General Public License v3.0 许可证发布。
+> 本项目基于 [GNU General Public License v3.0](https://gnu.ac.cn/licenses/gpl-3.0.html) 许可证发布。
 >
 > 详见 [LICENSE](LICENSE.md) 文件。
 >
