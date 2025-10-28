@@ -2,7 +2,7 @@
 
 [![star](https://gitee.com/Pfolg/plauncher/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/stargazers) [![fork](https://gitee.com/Pfolg/plauncher/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/members)
 
-![LICENSE](https://img.shields.io/badge/LICENSE-MIT-lightgreen.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)
+![LICENSE](https://img.shields.io/badge/LICENSE-GPLv3-yellow.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)
 
 **PLauncher** 是一款基于 Live2D 技术的智能桌面虚拟助手，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
