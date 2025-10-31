@@ -101,11 +101,7 @@ PLauncher/
 ├── repo_assets/            # 仓库相关资源
 ├── SampleShaders/          # 示例着色器
 ├── FrameworkShaders/       # 框架着色器
-├── bin_dlls/               # 依赖的动态链接库
-├── mediaservice/           # Qt媒体服务
 ├── thirdParty/             # 第三方库
-├── user/                   # 用户配置文件
-├── logs/                   # 日志文件
 ├── docs/                   # 文档文件
 ├── LICENSE.md              # 许可证文件
 ├── README.md               # 项目说明文件
@@ -113,6 +109,10 @@ PLauncher/
 ├── SECURITY.md             # 安全说明文件
 └── build/                  # 构建输出目录
 ```
+
+> [!NOTE]
+>
+> 仓库中不提供的文件请参见[necessaryParyStructure](docs/necessaryParyStructure)
 
 ## 🔧 技术栈
 
