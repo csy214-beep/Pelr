@@ -29,6 +29,7 @@
 #include  "data.hpp"
 #include <QString>
 #include <QColor>
+#include "tray.h"
 // 时间段语录文件
 #define TIMETEXT_FILE ":/assets/text/timeText.json"
 #define DAILYTEXT_FILE ":/assets/text/dailyText.json"
@@ -65,9 +66,9 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
         foreColor = "rgba(255, 255, 255, 0.8)";
     }
     setStyleSheet(
-        "color: " + foreColor + ";"
-        "border-radius:20px;"
-        "padding:8px;"
+            "color: " + foreColor + ";"
+                                    "border-radius:20px;"
+                                    "padding:8px;"
     );
     setWordWrap(true);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -222,6 +223,11 @@ void BubbleBox::showTime() {
         isFirst = false;
     } else if ((time.contains(":00") || time.contains(":30")) && time != this->now) {
         textSet(period + "\n现在是" + time + "哦~");
+        bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
+        if (fg) {
+            TrayIcon::instance()->showMessage("PLauncher", "现在是" + time);
+        }
+        qDebug() << "报时:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;
     }
 }

@@ -52,6 +52,7 @@ ConfigData SettingWidget::getAllValues() {
     data.isSaying = ui->checkBox_6->isChecked();
     data.isHourAlarm = ui->checkBox_7->isChecked();
     data.isTop = ui->checkBox_8->isChecked();
+    data.isTrayHourAlarm = ui->checkBox_9->isChecked();
     //TTS
     data.APPID = ui->lineEdit_2->text();
     data.APISecret = ui->lineEdit_3->text();
@@ -99,6 +100,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->checkBox_6->setChecked(data.isSaying);
     ui->checkBox_7->setChecked(data.isHourAlarm);
     ui->checkBox_8->setChecked(data.isTop);
+    ui->checkBox_9->setChecked(data.isTrayHourAlarm);
     //TTS
     ui->lineEdit_2->setText(data.APPID);
     ui->lineEdit_3->setText(data.APISecret);
@@ -137,7 +139,7 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         QString content = in.readAll();
         file.close();
         ui->textEdit->setMarkdown(
-            "### PLauncher " + DataManager::instance().const_config_data.version + "\n\n" + content);
+                "### PLauncher " + DataManager::instance().const_config_data.version + "\n\n" + content);
     }
     ui->textEdit->setReadOnly(true);
 

@@ -12,6 +12,7 @@
  * this file is very important, no data no program!
  */
 #pragma once
+
 #include <qdatastream.h>
 #include <QFile>
 #include <QString>
@@ -19,6 +20,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include  <QFontDatabase>
+
 #define MENU_DATA_FILE "user/menuData.dat"
 #define CONFIG_DATA_FILE "user/configData.dat"
 #define TODO_DATA_FILE "user/todoData.dat"
@@ -41,6 +43,7 @@ struct ConfigData {
     bool isSaying = true;
     bool isHourAlarm = true;
     bool isTop = false;
+    bool isTrayHourAlarm = false;
     //TTS
     QString APPID;
     QString APISecret;
@@ -64,8 +67,8 @@ struct ConfigData {
         out << data.color_keyLabel.first << data.color_keyLabel.second;
 
         out << data.isStartUp << data.isListening << data.isLookingMouse
-                << data.isStartStar << data.isRandomSpeech << data.isSaying
-                << data.isHourAlarm << data.isTop;
+            << data.isStartStar << data.isRandomSpeech << data.isSaying
+            << data.isHourAlarm << data.isTop << data.isTrayHourAlarm;
 
         out << data.APPID << data.APISecret << data.APIKey << data.speaker;
         out << data.model << data.role << data.customRoleDesc;
@@ -81,8 +84,8 @@ struct ConfigData {
         in >> data.color_keyLabel.first >> data.color_keyLabel.second;
 
         in >> data.isStartUp >> data.isListening >> data.isLookingMouse
-                >> data.isStartStar >> data.isRandomSpeech >> data.isSaying
-                >> data.isHourAlarm >> data.isTop;
+           >> data.isStartStar >> data.isRandomSpeech >> data.isSaying
+           >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm;
 
         in >> data.APPID >> data.APISecret >> data.APIKey >> data.speaker;
         in >> data.model >> data.role >> data.customRoleDesc;
@@ -97,7 +100,7 @@ struct constConfigData {
     const QString ollama_url = "https://ollama.com/";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     //about
-    const QString version = "ver0.5-251018";
+    const QString version = "ver0.5-251031";
     const QString name = "PLauncher";
     const QString repo_owner = "Pfolg";
     const QString team_link = "https://gitee.com/Pfolg/plauncher/contributors?ref=master";
@@ -114,6 +117,7 @@ struct TodoData {
     QString deadline;
     QString remarks;
     bool isNotify;
+
     // 重载运算符以便使用QDataStream进行序列化
     friend QDataStream &operator<<(QDataStream &out, const TodoData &data) {
         out << data.category << data.title << data.content << data.deadline << data.remarks << data.isNotify;
@@ -132,6 +136,7 @@ struct MenuData {
     QString path;
     QString icon;
     QString description;
+
     // 重载运算符以便使用QDataStream进行序列化
     friend QDataStream &operator<<(QDataStream &out, const MenuData &data) {
         out << data.category << data.name << data.path << data.icon << data.description;
@@ -145,7 +150,7 @@ struct MenuData {
 
     friend bool operator!=(const MenuData &m1, const MenuData &m2) {
         return m1.category != m2.category || m1.name != m2.name || m1.path != m2.path || m1.icon != m2.icon || m1.
-               description != m2.description;
+                description != m2.description;
     }
 };
 
