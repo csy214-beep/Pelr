@@ -29,6 +29,9 @@
 .vscode/
 .idea/
 
+# Third-party Libraries
+.thirdParty/Core/
+
 # Executables
 *.exe
 *.out
@@ -42,4 +45,3 @@
 /.idea/QtSettings.xml
 /.idea/vcs.xml
 
-./thirdParty/Core
