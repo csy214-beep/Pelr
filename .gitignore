@@ -41,3 +41,5 @@
 /.idea/plauncher.iml
 /.idea/QtSettings.xml
 /.idea/vcs.xml
+
+./thirdParty/Core
