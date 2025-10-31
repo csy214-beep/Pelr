@@ -31,6 +31,7 @@
 
 # Third-party Libraries
 thirdParty/
+lib/
 
 # Executables
 *.exe
@@ -45,3 +46,7 @@ thirdParty/
 /.idea/QtSettings.xml
 /.idea/vcs.xml
 
+# Resources
+Resources/
+SampleShaders/
+FrameworkShaders/
