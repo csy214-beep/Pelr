@@ -29,7 +29,8 @@
 .vscode/
 .idea/
 
-
+# Third-party Libraries
+thirdParty/
 
 # Executables
 *.exe
