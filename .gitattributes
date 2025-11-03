@@ -57,8 +57,8 @@
 # 假设你的 tools/ 目录下有一些 Python 脚本
 # *.py linguist-vendored   # 标记为“vendored”代码，Linguist 将忽略其统计
 # 或者直接忽略整个工具目录的语言统计
-# assets/ linguist-vendored
-# assets/Mono Icons/ linguist-vendored
+assets/ linguist-vendored
+assets/Mono Icons/ linguist-vendored
 
 # 对于确实需要被识别为 Python 的文件（虽然不是主语言），可以明确指定，但通常不需要为主项目设置
 *.py linguist-language=Python
