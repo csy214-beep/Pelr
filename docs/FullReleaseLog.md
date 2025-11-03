@@ -1,6 +1,30 @@
+## ver20251031-7
+
+### 更新内容
+
+* feat: 新增调试和发布部署脚本
+* style: assets 目录及其子目录的 Linguist 忽略设置
+* docs: 添加仓库中不提供文件的说明
+* fix: 更新版本号格式
+* docs: 添加必要环境依赖说明及结构文件
+* chore: ignore hand Third-party Libraries 3
+* chore: ignore hand Third-party Libraries
+* chore: ignore hand Third-party Libraries
+* style: 删除了重复的注释行
+* style: 添加第三方库忽略规则并移除旧路径
+* docs: 移除Live2DCubismCore头文件引用
+* feat(ui): 添加托盘报时功能
+* fix: 删除不必要的assets复制步骤
+* fix: 更改许可证标识为 GPLv3
+* docs: 更新许可证链接格式
+* fix: 更新项目许可证信息和版权声明
+
+**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.5-251018...ver20251031-7
+
 ## ver0.5-251018
 
 ### 更新内容
+
 * feat(ui): 添加启动项编辑标签与部署脚本
 * fix(core/keyLabel): 移除静默模式keyLabel功能控制
 * docs: 更新完整更新日志并调整版本号
@@ -53,7 +77,6 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 * docs: 更新社区准则和安全报告链接
 
 **完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.0.4b...ver0.0.5
-
 
 ## ver0.0.4b
 
