@@ -105,7 +105,6 @@ def main():
         ("FrameworkShaders", "cmake-build-release\\FrameworkShaders"),
         ("Resources", "cmake-build-release\\Resources"),
         ("SampleShaders", "cmake-build-release\\SampleShaders"),
-        ("assets", "cmake-build-release\\assets")
     ]
 
     all_success = True
