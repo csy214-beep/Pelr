@@ -19,7 +19,7 @@
 #include "custommenu.h"
 
 class launcherMenu : public CustomMenu {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     // 删除拷贝构造函数和赋值运算符
@@ -43,10 +43,10 @@ public:
         p2 = ":/assets/IconaMoon/General/Apps - 24x24.png";
         p3 = ":/assets/IconaMoon/Interface/Link External - 24x24.png";
         p4 = ":/assets/IconaMoon/Files/File - 24x24.png";
-        menu_Star = new QMenu("Star", this);
-        menu_App = new QMenu("App", this);
-        menu_Link = new QMenu("Link", this);
-        menu_Scripts = new QMenu("Scripts", this);
+        menu_Star = new CustomMenu("Star", this);
+        menu_App = new CustomMenu("App", this);
+        menu_Link = new CustomMenu("Link", this);
+        menu_Scripts = new CustomMenu("Scripts", this);
         for (MenuData &item: menu_data) {
             if (item.name.isEmpty() || item.category.isEmpty() || item.path.isEmpty())continue;
             QAction *action = new QAction(QString(item.name), this);
