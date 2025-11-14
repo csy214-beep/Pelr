@@ -1,3 +1,16 @@
+## ver20251114-8
+
+## 更新内容
+
+* release: ver20251114-8 close https://gitee.com/Pfolg/plauncher/issues/ID6AXW [✔ empty push]
+* release: ver20251114-8 close https://gitee.com/Pfolg/plauncher/issues [X empty push]
+* chore: 删除旧部署脚本并更新版本号及忽略规则
+* refactor(启动项目菜单): 使用CustomMenu替换QMenu
+* docs: 添加README_en.txt和README_sourceforge.txt文档
+* decs: update release log
+
+**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver20251031-7...ver20251114-8
+
 ## ver20251031-7
 
 ### 更新内容
@@ -118,6 +131,7 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 > [!WARNING]
 > 已知问题：该版本的“随系统启动”功能无效，对基本使用无影响。
 
-如果提示缺失*.dll文件，可以下载选择性[bin_dlls](https://github.com/Pfolg/PLauncher/tree/main/bin_dlls)内的对应缺失文件到程序根目录，并提交相关错误信息（界面->设置->关于->问题反馈）。
+如果提示缺失*.dll文件，可以下载选择性[bin_dlls](https://github.com/Pfolg/PLauncher/tree/main/bin_dlls)
+内的对应缺失文件到程序根目录，并提交相关错误信息（界面->设置->关于->问题反馈）。
 
 第一次运行提示缺失模型属于正常现象，在设置内完成初次配置后就不会提示了。
