@@ -1,3 +1,7 @@
+@REM this script is used to test the deployment of the project in debug mode
+@REM only used for testing purposes
+@REM some commands are outdated and may not work as expected or work badly
+
 echo off "run the bat file in the root directory of the project"
 
 @REM cd ..\

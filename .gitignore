@@ -28,6 +28,14 @@
 # IDE Settings
 .vscode/
 .idea/
+.venv/
+release/
+build/
+dist/
+tts_server/build/
+tts_server/dist/
+tts_server/log/
+tts_server/*.spec
 
 # Third-party Libraries
 thirdParty/
