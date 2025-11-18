@@ -101,13 +101,20 @@ int main(int argc, char *argv[]) {
     QObject::connect(TrayIcon::instance()->action_showWin, SIGNAL(triggered()), w.main_widget, SLOT(show()));
     //静默模式
     QObject::connect(TrayIcon::instance()->action_silentMode, SIGNAL(triggered()), &w, SLOT(silentMode()));
+
     //拖动窗口
     QObject::connect(TrayIcon::instance()->action_switchDrag, SIGNAL(triggered()), &w, SLOT(switchDragStatus()));
     //播放媒体
     QObject::connect(TrayIcon::instance()->action_mediaPlayer, SIGNAL(triggered()), &w, SLOT(onPlayMedia()));
 
     TrayIcon::instance()->show();
-    w.show();
+
+    // boot by silent mode
+    if (DataManager::instance().getBasicData().isSilentBoot) {
+        TrayIcon::instance()->action_silentMode->triggered();
+    } else {
+        w.show();
+    }
 
     return app.exec();
 }

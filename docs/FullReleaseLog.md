@@ -7,7 +7,7 @@
 * chore: 删除旧部署脚本并更新版本号及忽略规则
 * refactor(启动项目菜单): 使用CustomMenu替换QMenu
 * docs: 添加README_en.txt和README_sourceforge.txt文档
-* decs: update release log
+* docs: update release log
 
 **完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver20251031-7...ver20251114-8
 

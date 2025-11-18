@@ -53,6 +53,7 @@ ConfigData SettingWidget::getAllValues() {
     data.isHourAlarm = ui->checkBox_7->isChecked();
     data.isTop = ui->checkBox_8->isChecked();
     data.isTrayHourAlarm = ui->checkBox_9->isChecked();
+    data.isSilentBoot = ui->checkBox_10->isChecked();
     //TTS
     data.APPID = ui->lineEdit_2->text();
     data.APISecret = ui->lineEdit_3->text();
@@ -101,6 +102,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->checkBox_7->setChecked(data.isHourAlarm);
     ui->checkBox_8->setChecked(data.isTop);
     ui->checkBox_9->setChecked(data.isTrayHourAlarm);
+    ui->checkBox_10->setChecked(data.isSilentBoot);
     //TTS
     ui->lineEdit_2->setText(data.APPID);
     ui->lineEdit_3->setText(data.APISecret);
@@ -149,6 +151,7 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
 }
 
 void SettingWidget::connectSignals() {
+    //basic
     connect(ui->pushButton_2, &QPushButton::clicked, this, &SettingWidget::selectModelPath);
     connect(ui->horizontalSlider, &QSlider::valueChanged, [&]() {
         ui->label_7->setText(QString::number(ui->horizontalSlider->value()));
@@ -189,6 +192,7 @@ void SettingWidget::connectSignals() {
             onCheckBox1Clicked(true);
         }
     });
+    //
     connect(ui->pushButton_3, &QPushButton::clicked, [&]() {
         launchByPath(DataManager::instance().const_config_data.tts_url);
     });
