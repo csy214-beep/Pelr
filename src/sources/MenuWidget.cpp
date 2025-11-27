@@ -24,8 +24,6 @@
 #include <QFocusEvent>
 #include "data.hpp"
 
-#include "data.hpp"
-
 MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent) {
     setupUI();
     applyStyles();
