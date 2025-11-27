@@ -21,13 +21,23 @@
 #include <QStyle>
 #include <QPainter>
 #include <QDebug>
+#include <QFocusEvent>
+#include "data.hpp"
 
 #include "data.hpp"
 
-MenuWidget::MenuWidget(QWidget *parent) : QWidget(
-    parent) {
+MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent) {
     setupUI();
     applyStyles();
+
+    // 初始化隐藏计时器
+    m_hideTimer = new QTimer(this);
+    m_hideTimer->setSingleShot(true);
+    connect(m_hideTimer, &QTimer::timeout, this, &MenuWidget::hideMenu);
+
+    // 安装事件过滤器到应用程序，监控全局焦点变化
+    qApp->installEventFilter(this);
+
     //置顶
     if (DataManager::instance().getBasicData().isTop) {
         setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
@@ -36,6 +46,14 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(
     }
     // 设置窗口背景和圆角
     setAttribute(Qt::WA_TranslucentBackground);
+
+    // 启用鼠标跟踪
+    setMouseTracking(true);
+}
+
+MenuWidget::~MenuWidget() {
+    // 清理事件过滤器
+    qApp->removeEventFilter(this);
 }
 
 void MenuWidget::showNearMouse() {
@@ -88,6 +106,15 @@ void MenuWidget::showNearMouse() {
 
     // 激活窗口
     activateWindow();
+
+    // 启动隐藏计时器（默认5秒）
+    startHideTimer(short_interval);
+}
+
+void MenuWidget::hideMenu() {
+    qInfo() << "Auto hiding menu";
+    hide();
+    stopHideTimer();
 }
 
 void MenuWidget::paintEvent(QPaintEvent *event) {
@@ -100,7 +127,6 @@ void MenuWidget::paintEvent(QPaintEvent *event) {
     painter.setPen(Qt::NoPen);
     painter.drawRoundedRect(rect(), 10, 10);
 }
-
 
 void MenuWidget::setupUI() {
     mainLayout = new QVBoxLayout(this);
@@ -143,6 +169,98 @@ void MenuWidget::applyStyles() {
         )");
 }
 
+// 鼠标进入窗口 (Qt5版本)
+void MenuWidget::enterEvent(QEvent *event) {
+    Q_UNUSED(event);
+    m_mouseInWindow = true;
+    stopHideTimer();  // 鼠标在窗口内时停止自动隐藏
+    qDebug() << "Mouse entered menu, hiding timer stopped";
+}
+
+// 鼠标离开窗口
+void MenuWidget::leaveEvent(QEvent *event) {
+    Q_UNUSED(event);
+    m_mouseInWindow = false;
+
+    // 鼠标离开但窗口仍有焦点时，使用较长超时
+    if (hasFocus()) {
+        restartHideTimer(long_interval);  // 8秒后隐藏
+    } else {
+        restartHideTimer(short_interval);  // 失去焦点时5秒后隐藏
+    }
+    qDebug() << "Mouse left menu, hiding timer restarted";
+}
+
+// 获得焦点
+void MenuWidget::focusInEvent(QFocusEvent *event) {
+    Q_UNUSED(event);
+    qDebug() << "Menu gained focus";
+
+    // 获得焦点时，如果鼠标不在窗口内，使用正常超时
+    if (!m_mouseInWindow) {
+        restartHideTimer(long_interval);
+    }
+    // 如果鼠标在窗口内，定时器已经停止，不需要操作
+}
+
+
+// 失去焦点
+void MenuWidget::focusOutEvent(QFocusEvent *event) {
+    Q_UNUSED(event);
+    qDebug() << "Menu lost focus";
+
+    // 检查新的焦点控件是否在本窗口层级内
+    if (!isFocusInWindowHierarchy()) {
+        // 焦点完全离开窗口层级，使用较短超时
+        restartHideTimer(short_interval);
+    }
+    // 如果焦点还在窗口层级内（比如切换到子控件），不改变定时器状态
+}
+
+// 事件过滤器 - 监控全局焦点变化
+bool MenuWidget::eventFilter(QObject *obj, QEvent *event) {
+    if (event->type() == QEvent::WindowDeactivate) {
+        // 整个应用程序失去激活状态时立即隐藏
+        if (qApp->activeWindow() == nullptr) {
+            qDebug() << "Application deactivated, hiding menu immediately";
+            hideMenu();
+        }
+    }
+    return QWidget::eventFilter(obj, event);
+}
+
+// 检查焦点是否在窗口层级内
+bool MenuWidget::isFocusInWindowHierarchy() const {
+    QWidget *focused = QApplication::focusWidget();
+    if (!focused) return false;
+
+    // 检查焦点控件是否是这个窗口或其子控件
+    return isAncestorOf(focused) || focused == this;
+}
+
+// 启动隐藏计时器
+void MenuWidget::startHideTimer(int timeoutMs) {
+    if (m_hideTimer->isActive()) {
+        m_hideTimer->stop();
+    }
+    m_hideTimer->start(timeoutMs);
+    qDebug() << "Hide timer started:" << timeoutMs << "ms";
+}
+
+// 停止隐藏计时器
+void MenuWidget::stopHideTimer() {
+    if (m_hideTimer->isActive()) {
+        m_hideTimer->stop();
+        qDebug() << "Hide timer stopped";
+    }
+}
+
+// 重启隐藏计时器
+void MenuWidget::restartHideTimer(int timeoutMs) {
+    stopHideTimer();
+    startHideTimer(timeoutMs);
+}
+
 void MenuWidget::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         left_button_down = true;
@@ -165,5 +283,6 @@ void MenuWidget::mouseReleaseEvent(QMouseEvent *event) {
 
 void MenuWidget::closeEvent(QCloseEvent *event) {
     hide();
+    stopHideTimer();
     event->ignore();
 }

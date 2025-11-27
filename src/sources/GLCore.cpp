@@ -199,7 +199,6 @@ void GLCore::initContextMenu() {
     QuestionMenu->addActions({askLatestNextTodoEvent, askWeather, askPowerStatus});
     QPushButton *QuestionButton = new QPushButton("问个问题", this);
     QuestionButton->setMenu(QuestionMenu);
-    //TODO: ~~大小调节（滚轮 P:实现不顺利）~~ /置顶调节（按钮）/关闭（按钮）
 
     //设置界面
     QPushButton *SettingButton = new QPushButton("界面", this);
