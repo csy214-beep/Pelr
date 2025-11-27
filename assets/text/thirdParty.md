@@ -38,11 +38,11 @@
 ## 其他资源
 图标资源：
 
-[![dariushhpg1/IconaMoon - GitHub](https://gh-card.dev/repos/dariushhpg1/IconaMoon.svg?fullname=)](https://github.com/dariushhpg1/IconaMoon)
+[dariushhpg1/IconaMoon - GitHub](https://github.com/dariushhpg1/IconaMoon)
 
 使用字体：
 
-[![subframe7536/Maple-font - GitHub](https://gh-card.dev/repos/subframe7536/Maple-font.svg?fullname=)](https://github.com/subframe7536/Maple-font)
+[subframe7536/Maple-font - GitHub](https://github.com/subframe7536/Maple-font)
 
 使用了[Cubism SDK For Native](https://www.live2d.com/zh-CHS/sdk/download/native/)的附加资源（Live2D模型、Demo等）。
 
@@ -74,14 +74,14 @@
 
 以下项目在一些方面给予了我很多思考，在此表示感谢。
 
-[![moeru-ai/airi - GitHub](https://gh-card.dev/repos/moeru-ai/airi.svg)](https://github.com/moeru-ai/airi)
+[moeru-ai/airi - GitHub](https://github.com/moeru-ai/airi)
 
-[![Open-LLM-VTuber/Open-LLM-VTuber - GitHub](https://gh-card.dev/repos/Open-LLM-VTuber/Open-LLM-VTuber.svg)](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber)
+[Open-LLM-VTuber/Open-LLM-VTuber - GitHub](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber)
 
-[![FLCYR/QtLive2dDesktop - GitHub](https://gh-card.dev/repos/FLCYR/QtLive2dDesktop.svg)](https://github.com/FLCYR/QtLive2dDesktop)
+[FLCYR/QtLive2dDesktop - GitHub](https://github.com/FLCYR/QtLive2dDesktop)
 
-[![LorisYounger/VPet - GitHub](https://gh-card.dev/repos/LorisYounger/VPet.svg)](https://github.com/LorisYounger/VPet)
+[LorisYounger/VPet - GitHub](https://github.com/LorisYounger/VPet)
 
-[![ANDYERE999/DesktopGirlClient - GitHub](https://gh-card.dev/repos/ANDYERE999/DesktopGirlClient.svg)](https://github.com/ANDYERE999/DesktopGirlClient)
+[ANDYERE999/DesktopGirlClient - GitHub](https://github.com/ANDYERE999/DesktopGirlClient)
 
-[![Arkueid/Live2DDesktop-CMake - GitHub](https://gh-card.dev/repos/Arkueid/Live2DDesktop-CMake.svg)](https://github.com/Arkueid/Live2DDesktop-CMake)
+[Arkueid/Live2DDesktop-CMake - GitHub](https://github.com/Arkueid/Live2DDesktop-CMake)
