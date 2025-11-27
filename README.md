@@ -1,14 +1,14 @@
-# PLauncher - Live2D 虚拟桌面助手
+# PLauncher - Live2D 虚拟桌面伙伴
 
 [![star](https://gitee.com/Pfolg/plauncher/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/stargazers) [![fork](https://gitee.com/Pfolg/plauncher/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/members)
 
 ![LICENSE](https://img.shields.io/badge/LICENSE-GPLv3-yellow.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)
 
-**PLauncher** 是一款基于 Live2D 技术的智能桌面虚拟助手，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
+**PLauncher** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
 ![](repo_assets/preview.png)
 
-> **NOTE**
+> [!NOTE]
 >
 >本项目仍处于开发阶段，功能和稳定性可能有所不足，请谨慎使用。
 >
@@ -63,12 +63,15 @@
 
 1. 前往 [Release 页面](https://gitee.com/Pfolg/plauncher/releases) 下载最新版本
 2. 解压压缩包到任意目录
-3. 下载`tts_server.exe`并将其放到程序根目录下
-4. 运行 `PLauncher.exe` 即可启动应用
+3. 运行 `PLauncher.exe` 即可启动应用
 
 另外，囿于Gitee的release限制，您可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
 
 ### 首次运行配置
+
+> [!CAUTION]
+>
+>**请不要上传 `user`文件夹中的任何内容**
 
 1. **设置 Live2D 模型路径** (必需)
     - 在设置 → 基本设置中配置模型路径
@@ -83,6 +86,8 @@
 3. **设置 AI 服务** (可选)
     - 安装 [Ollama](https://ollama.ai/)
     - 在设置 → Ollama集成中选择模型和角色
+
+
 
 ## 📦 项目结构
 
@@ -165,11 +170,11 @@ mingw32-make
 
 ## 📖 使用指南
 
-> **CAUTION**
+> [!CAUTION]
 >
 >**请不要上传 `user`文件夹中的任何内容**
 
-> **NOTE**
+> [!NOTE]
 >
 >详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/plauncher/wikis)
 
@@ -192,7 +197,7 @@ mingw32-make
 
 ## 📄 许可证
 
-> **NOTE**
+> [!NOTE]
 >
 > 本项目基于 [GNU General Public License v3.0](https://gnu.ac.cn/licenses/gpl-3.0.html) 许可证发布。
 >
