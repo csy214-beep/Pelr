@@ -15,14 +15,13 @@
 #include "data.hpp"
 
 void checkSslSupport() {
-    qDebug() << "SSL 支持:" << QSslSocket::supportsSsl();
-    qDebug() << "SSL 版本:" << QSslSocket::sslLibraryVersionString();
-    qDebug() << "SSL 编译版本:" << QSslSocket::sslLibraryBuildVersionString();
+    qDebug() << "SSL support:" << QSslSocket::supportsSsl();
+    qDebug() << "SSL version:" << QSslSocket::sslLibraryVersionString();
+    qDebug() << "SSL build version:" << QSslSocket::sslLibraryBuildVersionString();
 }
 
 VersionChecker::VersionChecker(QObject *parent)
-    : QObject(parent)
-      , m_networkManager(new QNetworkAccessManager(this)) {
+        : QObject(parent), m_networkManager(new QNetworkAccessManager(this)) {
     checkSslSupport();
     // 连接网络请求完成信号
     connect(m_networkManager, &QNetworkAccessManager::finished,
@@ -53,7 +52,7 @@ void VersionChecker::getLatestGiteeVersion(const QString &owner, const QString &
     QNetworkRequest request;
     request.setUrl(QUrl(url));
     const QString header = "APP" + DataManager::instance().const_config_data.name + "_" + DataManager::instance().
-                           const_config_data.version;
+            const_config_data.version;
     request.setHeader(QNetworkRequest::UserAgentHeader, header);
 
     // 设置超时（通过定时器实现）
@@ -68,7 +67,7 @@ void VersionChecker::getLatestGiteeVersion(const QString &owner, const QString &
         if (reply && reply->isRunning()) {
             reply->abort();
             timeoutTimer->deleteLater();
-            emit errorOccurred("请求 Gitee 超时: 10秒内未收到响应");
+            emit errorOccurred("Request Timeout: 10 seconds have not received a response");
         }
     });
 
@@ -83,7 +82,7 @@ void VersionChecker::getLatestGithubVersion(const QString &owner, const QString 
     QNetworkRequest request;
     request.setUrl(QUrl(url));
     const QString header = "APP" + DataManager::instance().const_config_data.name + "_" + DataManager::instance().
-                           const_config_data.version;
+            const_config_data.version;
     request.setHeader(QNetworkRequest::UserAgentHeader, header);
 
     // 设置超时（通过定时器实现）
@@ -98,7 +97,7 @@ void VersionChecker::getLatestGithubVersion(const QString &owner, const QString 
         if (reply && reply->isRunning()) {
             reply->abort();
             timeoutTimer->deleteLater();
-            emit errorOccurred("请求超时: 10秒内未收到响应");
+            emit errorOccurred("Request Timeout: 10 seconds have not received a response");
         }
     });
 
@@ -113,12 +112,12 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
     if (reply->error() != QNetworkReply::NoError) {
         QString errorMsg;
         if (reply->error() == QNetworkReply::OperationCanceledError) {
-            errorMsg = "请求超时或被取消";
+            errorMsg = "Request Timeout or Canceled";
         } else {
-            errorMsg = QString("GitHub API错误: %1").arg(reply->errorString());
+            errorMsg = QString("GitHub API Error: %1").arg(reply->errorString());
         }
 
-        qWarning() << "⚠️ 检查失败:" << errorMsg;
+        qWarning() << "⚠️ Check Version Error:" << errorMsg;
         emit errorOccurred(errorMsg);
         return;
     }
@@ -129,14 +128,14 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData, &parseError);
 
     if (parseError.error != QJsonParseError::NoError) {
-        QString errorMsg = QString("JSON解析错误: %1").arg(parseError.errorString());
-        qWarning() << "⚠️ JSON解析失败:" << errorMsg;
+        QString errorMsg = QString("JSON Parse Error: %1").arg(parseError.errorString());
+        qWarning() << "⚠️ JSON Parse Error:" << errorMsg;
         emit errorOccurred(errorMsg);
         return;
     }
 
     if (!jsonDoc.isObject()) {
-        QString errorMsg = "无效的API响应格式";
+        QString errorMsg = "Invalid JSON Document";
         qWarning() << "⚠️" << errorMsg;
         emit errorOccurred(errorMsg);
         return;
@@ -145,7 +144,7 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
 
     QJsonObject jsonObj = jsonDoc.object();
     if (!jsonObj.contains("tag_name")) {
-        QString errorMsg = "API响应中未找到版本号";
+        QString errorMsg = "No version number found in JSON document";
         qWarning() << "⚠️" << errorMsg;
         emit errorOccurred(errorMsg);
         return;
@@ -154,14 +153,14 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
     if (reply->url().host().contains("gitee.com")) {
         // Gitee API 的 releases/latest 接口中，版本号字段也是 "tag_name"
         if (!jsonObj.contains("tag_name")) {
-            QString errorMsg = "Gitee API 响应中未找到版本号 (tag_name)";
+            QString errorMsg = "Gitee API not contains version: (tag_name)";
             qWarning() << "⚠️" << errorMsg;
             emit errorOccurred(errorMsg);
             return;
         }
     } else {
         if (!jsonObj.contains("tag_name")) {
-            QString errorMsg = "GitHub API 响应中未找到版本号";
+            QString errorMsg = "GitHub API not contains version: (tag_name)";
             qWarning() << "⚠️" << errorMsg;
             emit errorOccurred(errorMsg);
             return;
@@ -171,12 +170,12 @@ void VersionChecker::onReplyFinished(QNetworkReply *reply) {
 
 
     if (remoteVer == m_localVersion) {
-        QString message = QString("✅ 版本一致 \n当前版本 %1 已是最新版！")
+        QString message = QString("✅ Same Version \nVersion %1 is the latest release")
                 .arg(m_localVersion);
         qDebug() << message;
         emit versionCheckCompleted(true, message);
     } else {
-        QString message = QString("❌ 版本不一致 \nGitHub 最新发布：%1 \n当前：%2")
+        QString message = QString("❌ Version Different \nLatest release: %1 \nLocal Version: %2")
                 .arg(remoteVer, m_localVersion);
         qDebug() << message;
         emit versionCheckCompleted(false, message);

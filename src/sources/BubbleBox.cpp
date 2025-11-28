@@ -123,7 +123,7 @@ void BubbleBox::RandomSentence() {
     // 打开文件
     QFile file(DAILYTEXT_FILE);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "无法打开文件:" << file.errorString();
+        qWarning() << "cannot open file:" << file.errorString();
         textSet("今天也是美好的一天呢~");
         return;
     }
@@ -133,7 +133,7 @@ void BubbleBox::RandomSentence() {
     // 解析JSON
     QJsonDocument doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
-        qWarning() << "解析JSON失败";
+        qWarning() << "JSON parse failed";
         textSet("今天也是美好的一天呢~");
         return;
     }
@@ -142,7 +142,7 @@ void BubbleBox::RandomSentence() {
 
     // 检查key是否存在
     if (!root.contains(keyName) || !root[keyName].isArray()) {
-        qWarning() << "JSON格式错误或缺少'daily'键";
+        qWarning() << "JSON format error or missing 'daily'";
         textSet("今天也是美好的一天呢~");
         return;
     }
@@ -150,6 +150,7 @@ void BubbleBox::RandomSentence() {
     // 获取数组
     QJsonArray targetArray = root[keyName].toArray();
     if (targetArray.isEmpty()) {
+        qWarning() << "JSON Array is empty";
         textSet("今天也是美好的一天呢~");
         return;
     }
@@ -162,7 +163,7 @@ QString BubbleBox::getPeriodText() {
     QTime currentTime = QTime::currentTime();
     int hour = currentTime.hour();
     QString keyName;
-
+    // todo: english
     if (hour >= 6 && hour < 10) {
         keyName = "清晨";
     } else if (hour >= 10 && hour < 12) {
@@ -180,7 +181,7 @@ QString BubbleBox::getPeriodText() {
     // 打开文件
     QFile file(TIMETEXT_FILE);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "无法打开文件:" << file.errorString();
+        qWarning() << "cannot open file:" << file.errorString();
         return "你好呀~";
     }
 
@@ -191,7 +192,7 @@ QString BubbleBox::getPeriodText() {
     // 解析JSON
     QJsonDocument doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
-        qWarning() << "解析JSON失败";
+        qWarning() << "JSON parse failed";
         return "你好呀~";
     }
 
@@ -200,7 +201,7 @@ QString BubbleBox::getPeriodText() {
 
     // 检查key是否存在
     if (!root.contains(keyName) || !root[keyName].isArray()) {
-        qWarning() << "JSON格式错误或缺少时段键";
+        qWarning() << "JSON format error or missing '" << keyName << "'";
         return "你好呀~";
     }
 
@@ -227,7 +228,7 @@ void BubbleBox::showTime() {
         if (fg) {
             TrayIcon::instance()->showMessage("PLauncher", "现在是" + time);
         }
-        qDebug() << "报时:" << time << "isTrayHourAlarm：" << fg;
+        qDebug() << "now:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;
     }
 }
@@ -247,7 +248,7 @@ void BubbleBox::setThinkingText() {
 
 void BubbleBox::textSet(const QString &text) {
     if (!DataManager::instance().getBasicData().isSaying) {
-        qDebug() << "不使用语音合成接口";
+        qDebug() << "No text-to-speech interface is used";
         setText(text);
         qInfo() << "BubbleBox:" << text; // 日志记录
         adjustSize();
@@ -260,12 +261,12 @@ void BubbleBox::textSet(const QString &text) {
     QString APISecret = DataManager::instance().getBasicData().APISecret;
     QString voice = DataManager::instance().getBasicData().speaker;
     if (!APPID.isEmpty() && !APIKey.isEmpty() && !APISecret.isEmpty()) {
-        qDebug() << "TTS 配置完整，调用语音合成接口";
+        qDebug() << "TTS Config is Complete, interface is used";
         VoiceGenerator::instance()->generateVoice(APPID, APIKey, APISecret, text, voice);
         setText(text);
         adjustSize();
     } else {
-        qDebug() << "TTS 配置不完整，不使用语音合成接口";
+        qDebug() << "TTS Config is incomplete, interface is not used";
         setText(text);
         adjustSize();
         show();

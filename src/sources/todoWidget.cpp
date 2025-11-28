@@ -161,7 +161,7 @@ void todoWidget::moveItem(QTableView *view) {
         // 添加到目标模型
         to_model->appendRow(rowItems);
     }
-    qDebug() << "[" << __func__ << "]" << "移动项目数：" << selectedRows.size();
+    qDebug() << "[" << __func__ << "]" << "count of moved items:" << selectedRows.size();
 
     // 清除原视图的选择
     selectionModel->clearSelection();
@@ -222,7 +222,7 @@ void todoWidget::deleteSelectedItem(QTableView *view) {
         QList<QStandardItem *> rowItems = model->takeRow(row);
         model->removeRow(row);
     }
-    qDebug() << "[" << __func__ << "]" << "删除项目数：" << selectedRows.size();
+    qDebug() << "[" << __func__ << "]" << "count of deleted items:" << selectedRows.size();
 
     // 清除原视图的选择
     selectionModel->clearSelection();
@@ -272,16 +272,16 @@ void todoWidget::saveAllData() {
             data.remarks = model->item(i, 3)->text(); //可选
             data.isNotify = model->item(i, 4)->checkState() == Qt::Checked;
             if (data.title.isEmpty() && data.deadline.isEmpty()) {
-                qWarning() << "[" << __func__ << "]" << "项目" << i << "数据为空，不保存";
+                qWarning() << "[" << __func__ << "]" << "item" << i << "is empty, skip it.";
                 continue;
             } //如果标题、截止日期为空，则不保存
             todo_data.append(data);
         }
     }
-    qDebug() << "[" << __func__ << "]" << "保存数据数：" << todo_data.size();
+    qDebug() << "[" << __func__ << "]" << "count of saved items:" << todo_data.size();
     // 保存数据到文件
     DataManager::instance().writeData<QList<TodoData> >(todo_data);
-    qDebug() << "[" << __func__ << "]" << "保存所有数据成功";
+    qDebug() << "[" << __func__ << "]" << "data saved successfully.";
 }
 
 void todoWidget::addTodoItem(QStandardItemModel *model) {

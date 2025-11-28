@@ -48,7 +48,7 @@ public:
                 if (is_notify_by_tray) {
                     TrayIcon::showMessage("待办事项提醒", msg, QSystemTrayIcon::Information, 10000);
                 }
-                qDebug() << "提醒：" << msg;
+                qDebug() << "notify：" << msg;
                 // 更新最新数据
                 newest_title = item.title;
             }

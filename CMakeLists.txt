@@ -33,6 +33,7 @@ find_package(Qt5 COMPONENTS
         Multimedia
         Concurrent
         MultimediaWidgets
+        LinguistTools
         REQUIRED)
 
 

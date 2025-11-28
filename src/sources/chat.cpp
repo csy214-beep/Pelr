@@ -70,8 +70,8 @@ void ChatWidget::addMessage(const QString &message, const bool &isAI) {
     label->setText(message);
     label->setAlignment(Qt::AlignLeft);
     label->setStyleSheet(
-        ("background-color: " + QString(isAI ? "lightgray" : "lightblue") +
-         ";border-radius: 10px;padding: 10px;margin: 10px;"));
+            ("background-color: " + QString(isAI ? "lightgray" : "lightblue") +
+             ";border-radius: 10px;padding: 10px;margin: 10px;"));
     label->setMaximumWidth(maxWidth);
     // 计算标签所需高度
     label->adjustSize();
@@ -107,20 +107,20 @@ void ChatWidget::on_sendMsg() {
     }
     //  发送消息到服务器(ollama)
     client.generateTextAsync(
-        message, DataManager::instance().getBasicData().model, false,
-        role, // 使用自定义角色
-        roleName // 指定自定义角色名称
+            message, DataManager::instance().getBasicData().model, false,
+            role, // 使用自定义角色
+            roleName // 指定自定义角色名称
     );
 }
 
 void ChatWidget::onTextGenerated(const QString &text) {
-    qDebug() << "生成的文本:" << text;
+    qDebug() << "textGenerated:" << text;
     // 处理生成的文本
     addMessage(text, true);
 }
 
 void ChatWidget::onErrorOccurred(const QString &error) {
-    qDebug() << "错误:" << error;
+    qDebug() << "errorOccurred:" << error;
     // 处理错误
     addMessage("错误：" + error, true);
 }

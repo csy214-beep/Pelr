@@ -77,7 +77,7 @@ GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     connectSignals();
     //鼠标跟踪
     if (DataManager::instance().getBasicData().isLookingMouse) {
-        qDebug() << "开启鼠标跟踪";
+        qDebug() << "mouse tracking enabled";
         this->setMouseTracking(true);
     }
     int step = DataManager::instance().getBasicData().model_size; //150;
@@ -234,7 +234,7 @@ void GLCore::initContextMenu() {
 
     // 启动启动项
     if (DataManager::instance().getBasicData().isStartStar) {
-        qDebug() << "启动Star类下项目";
+        qDebug() << "starting app in star category";
         startRunStarIfPoweredInThread();
     }
 }
@@ -282,7 +282,7 @@ void GLCore::connectSignals() {
 
     inputCheckTimer->start();
     if (DataManager::instance().getBasicData().isListening) {
-        qDebug() << "启用键盘鼠标监听";
+        qDebug() << "key listening enabled";
         // 开始监听
         if (!listener->startListening()) {
             qCritical() << "Failed to start global input listening";
@@ -300,7 +300,7 @@ void GLCore::connectSignals() {
         randomSentenceTimer->start(randomTime * 60 * 1000);
     });
     if (DataManager::instance().getBasicData().isRandomSpeech) {
-        qDebug() << "启用随机说话";
+        qDebug() << "random speech enabled";
         randomSentenceTimer->start(10 * 60 * 1000); //3min
     }
     /*
@@ -324,10 +324,10 @@ void GLCore::connectSignals() {
 void GLCore::switchListener() {
     if (listener->isListening) {
         listener->stopListening();
-        BubbleBox::instance()->textSet("按键监听已关闭");
+        BubbleBox::instance()->textSet("key listening disabled");
     } else {
         listener->startListening();
-        BubbleBox::instance()->textSet("按键监听已开启");
+        BubbleBox::instance()->textSet("key listening enabled");
     }
 }
 
@@ -421,9 +421,9 @@ void GLCore::runStarIfPowered() {
 void GLCore::switchDragStatus() {
     isAllowDrag = !isAllowDrag;
     if (isAllowDrag) {
-        qDebug() << "允许窗口拖动";
+        qDebug() << "drag enabled";
     } else {
-        qDebug() << "禁止窗口拖动";
+        qDebug() << "drag disabled";
         switchWindowTransparent(true);
     }
 }

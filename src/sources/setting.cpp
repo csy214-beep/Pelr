@@ -253,7 +253,7 @@ QSlider *SettingWidget::getHorizontalSlider() {
 void SettingWidget::saveData() {
     ConfigData data = getAllValues();
     DataManager::instance().writeData<ConfigData>(data);
-    qDebug() << "保存成功";
+    qDebug() << "save data success";
 }
 
 bool SettingWidget::checkStartupLink() {
@@ -264,7 +264,7 @@ bool SettingWidget::checkStartupLink() {
     if (appData.isEmpty()) {
         appData = env.value("USERPROFILE");
         if (appData.isEmpty()) {
-            qWarning() << "无法获取启动文件夹路径。";
+            qWarning() << "cannot get startup folder path";
             return false;
         }
         appData.append("/AppData/Roaming");
@@ -275,7 +275,7 @@ bool SettingWidget::checkStartupLink() {
     // 获取当前应用程序路径
     QString executablePath = QCoreApplication::applicationFilePath();
     if (executablePath.isEmpty()) {
-        qWarning() << "无法获取应用程序路径。";
+        qWarning() << "cannot get application path";
         return false;
     }
 
@@ -283,7 +283,7 @@ bool SettingWidget::checkStartupLink() {
     QString shortcutName = QFileInfo(executablePath).baseName() + ".lnk";
     QString shortcutPath = QDir(startupFolder).filePath(shortcutName);
     if (!QFile::exists(shortcutPath)) {
-        qDebug() << "启动项已不存在：" << shortcutPath;
+        qDebug() << "shortcut not exists: " << shortcutPath;
         return false;
     }
     return true;
@@ -295,7 +295,7 @@ void SettingWidget::resetSetting() {
     DataManager::instance().writeData<ConfigData>(new_data);
     // 重置启动项（移除）
     onCheckBox1Clicked(true);
-    qDebug() << "重置设置成功";
+    qDebug() << "reset setting success";
     QMessageBox::information(this, "Information", "重置设置成功！", QMessageBox::Ok);
 }
 
@@ -307,7 +307,7 @@ void SettingWidget::onCheckBox1Clicked(bool flag) {
     if (appData.isEmpty()) {
         appData = env.value("USERPROFILE");
         if (appData.isEmpty()) {
-            qWarning() << "无法获取启动文件夹路径。";
+            qWarning() << "cannot get startup folder path";
         }
         appData.append("/AppData/Roaming");
     }
@@ -317,7 +317,7 @@ void SettingWidget::onCheckBox1Clicked(bool flag) {
     // 获取当前应用程序路径
     QString executablePath = QCoreApplication::applicationFilePath();
     if (executablePath.isEmpty()) {
-        qWarning() << "无法获取应用程序路径。";
+        qWarning() << "cannot get application path";
     }
 
     // 构建快捷方式名称和路径
@@ -326,14 +326,14 @@ void SettingWidget::onCheckBox1Clicked(bool flag) {
     if (!ui->checkBox->isChecked() || flag) {
         // 移除启动项
         if (!QFile::exists(shortcutPath)) {
-            qDebug() << "启动项已不存在：" << shortcutPath;
+            qDebug() << "shortcut not exists: " << shortcutPath;
             return;
         }
         bool success = QFile::remove(shortcutPath);
         if (!success) {
-            qWarning() << "无法从启动项中移除：" << shortcutPath;
+            qWarning() << "cannot remove shortcut: " << shortcutPath;
         }
-        qDebug() << "移除启动项成功：" << shortcutPath;
+        qDebug() << "remove shortcut success: " << shortcutPath;
     } else {
         // 添加启动项
         IShellLink *pShellLink = nullptr;
@@ -357,9 +357,9 @@ void SettingWidget::onCheckBox1Clicked(bool flag) {
         }
 
         if (FAILED(hr)) {
-            qWarning() << "创建快捷方式失败: " << shortcutPath;
+            qWarning() << "cannot create shortcut: " << shortcutPath;
         } else {
-            qDebug() << "创建快捷方式成功: " << shortcutPath;
+            qDebug() << "create shortcut success: " << shortcutPath;
         }
     }
 }

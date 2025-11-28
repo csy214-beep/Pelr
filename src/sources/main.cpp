@@ -87,10 +87,10 @@ int main(int argc, char *argv[]) {
     if (!CheckApplication::hasValidLicense()) {
         CheckApplication licenseDialog;
         if (!(licenseDialog.exec() == QDialog::Accepted && licenseDialog.isLicenseAccepted())) {
-            qDebug() << "应用程序因许可证拒绝而退出";
+            qDebug() << "License not accepted, exit";
             return 0;
         }
-        qDebug() << "许可证已被接受";
+        qDebug() << "License accepted";
     }
 
     GLCore w;

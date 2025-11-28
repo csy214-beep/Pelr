@@ -16,10 +16,8 @@
 
 // ScrollLabel 实现
 ScrollLabel::ScrollLabel(QWidget *parent)
-    : QLabel(parent)
-      , m_scrollAnimation(new QPropertyAnimation(this, "scrollOffset", this))
-      , m_scrollOffset(0)
-      , m_needsScrolling(false) {
+        : QLabel(parent), m_scrollAnimation(new QPropertyAnimation(this, "scrollOffset", this)), m_scrollOffset(0),
+          m_needsScrolling(false) {
     setAlignment(Qt::AlignCenter);
     setStyleSheet("QLabel { background-color: #f0f0f0; padding: 5px; }");
 
@@ -130,19 +128,12 @@ MediaPlayerWidget &MediaPlayerWidget::instance() {
 }
 
 MediaPlayerWidget::MediaPlayerWidget(QWidget *parent)
-    : QWidget(parent)
-      , m_player(new QMediaPlayer(this))
-      , m_videoWidget(nullptr)
-      , m_openButton(new QPushButton("打开文件", this))
-      , m_playPauseButton(new QPushButton("播放", this))
-      , m_stopButton(new QPushButton("停止", this))
-      , m_positionSlider(new QSlider(Qt::Horizontal, this))
-      , m_volumeSlider(new QSlider(Qt::Horizontal, this))
-      , m_timeLabel(new QLabel("00:00/00:00", this))
-      , m_fileNameLabel(new ScrollLabel(this))
-      , m_positionTimer(new QTimer(this))
-      , m_hasVideo(false)
-      , m_isSeeking(false) {
+        : QWidget(parent), m_player(new QMediaPlayer(this)), m_videoWidget(nullptr),
+          m_openButton(new QPushButton("打开文件", this)), m_playPauseButton(new QPushButton("播放", this)),
+          m_stopButton(new QPushButton("停止", this)), m_positionSlider(new QSlider(Qt::Horizontal, this)),
+          m_volumeSlider(new QSlider(Qt::Horizontal, this)), m_timeLabel(new QLabel("00:00/00:00", this)),
+          m_fileNameLabel(new ScrollLabel(this)), m_positionTimer(new QTimer(this)), m_hasVideo(false),
+          m_isSeeking(false) {
     setupUI();
     setupConnections();
 
@@ -174,7 +165,7 @@ void MediaPlayerWidget::showLAVFiltersDownloadDialog() {
     msgBox.setWindowTitle("解码器问题");
     msgBox.setIcon(QMessageBox::Warning);
     msgBox.setText("无法播放此视频文件，可能是因为缺少合适的解码器。\n\n"
-        "建议下载并安装 LAV Filters 以获得更好的视频格式支持。");
+                   "建议下载并安装 LAV Filters 以获得更好的视频格式支持。");
 
     // 添加按钮
     QPushButton *downloadButton = msgBox.addButton("下载 LAV Filters", QMessageBox::ActionRole);
@@ -265,7 +256,7 @@ void MediaPlayerWidget::onOpenFile() {
 
 void MediaPlayerWidget::playMedia(const QString &filePath) {
     if (!checkFormatSupport(filePath)) {
-        qDebug() << "不支持的媒体格式:" << filePath;
+        qDebug() << "unsupported media format:" << filePath;
         m_fileNameLabel->setText("不支持的媒体格式: " + QFileInfo(filePath).fileName());
         return;
     }
@@ -355,7 +346,7 @@ void MediaPlayerWidget::onStateChanged(QMediaPlayer::State state) {
 void MediaPlayerWidget::onMediaStatusChanged(QMediaPlayer::MediaStatus status) {
     // 当媒体状态变为无效媒体时，提示用户
     if (status == QMediaPlayer::InvalidMedia) {
-        qDebug() << "无效的媒体文件:" << m_currentMedia;
+        qDebug() << "invalid media file:" << m_currentMedia;
 
         // 如果是视频文件，提示下载解码器
         // if (m_hasVideo) {
@@ -365,7 +356,7 @@ void MediaPlayerWidget::onMediaStatusChanged(QMediaPlayer::MediaStatus status) {
 }
 
 void MediaPlayerWidget::onPlayerError(QMediaPlayer::Error error) {
-    qDebug() << "播放器错误:" << error << "文件:" << m_currentMedia;
+    qDebug() << "player error:" << error << "file:" << m_currentMedia;
 
     // 如果是视频文件且出现格式错误，提示下载解码器
     if (m_hasVideo && (error == QMediaPlayer::FormatError || error == QMediaPlayer::ResourceError)) {
@@ -434,8 +425,8 @@ bool MediaPlayerWidget::checkFormatSupport(const QString &filePath) {
 
     // 支持的格式列表
     static const QStringList supportedFormats = {
-        "mp3", "wav", "flac", "ogg", "aac",
-        "mp4", "avi", "mkv", "mov", "wmv"
+            "mp3", "wav", "flac", "ogg", "aac",
+            "mp4", "avi", "mkv", "mov", "wmv"
     };
 
     return supportedFormats.contains(extension);

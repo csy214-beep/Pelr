@@ -16,15 +16,15 @@
 #include "BubbleBox.h"
 
 ChatBoxOnModel::ChatBoxOnModel(QLineEdit *parent)
-    : QLineEdit(parent) {
+        : QLineEdit(parent) {
     // 窗口顶置，去标题栏，去除任务栏图标
     this->setAttribute(Qt::WA_TranslucentBackground, true);
     if (DataManager::instance().getBasicData().isTop) {
         this->setWindowFlags(
-            Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
+                Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
     } else {
         this->setWindowFlags(
-            Qt::FramelessWindowHint | Qt::Tool);
+                Qt::FramelessWindowHint | Qt::Tool);
     }
     //位置
     int _width = 300 * DataManager::instance().getBasicData().model_size / 150;
@@ -78,21 +78,21 @@ void ChatBoxOnModel::on_sendMsg() {
     }
     //  发送消息到服务器(ollama)
     client.generateTextAsync(
-        message, DataManager::instance().getBasicData().model, false,
-        role, // 使用自定义角色
-        roleName // 指定自定义角色名称
+            message, DataManager::instance().getBasicData().model, false,
+            role, // 使用自定义角色
+            roleName // 指定自定义角色名称
     );
     BubbleBox::instance()->setThinkingText();
 }
 
 void ChatBoxOnModel::onTextGenerated(const QString &text) {
-    qDebug() << "生成的文本:" << text;
+    qDebug() << "text:" << text;
     // 处理生成的文本
     BubbleBox::instance()->textSet(text);
 }
 
 void ChatBoxOnModel::onErrorOccurred(const QString &error) {
-    qDebug() << "错误:" << error;
+    qDebug() << "error:" << error;
     // 处理错误
     BubbleBox::instance()->textSet("错误：" + error);
 }

@@ -9,12 +9,13 @@
  */
 #include "CheckApplication.h"
 #include "data.hpp"
+
 #define LICENSE_CHECK_FILE "user/license.dat"
 
 CheckApplication::CheckApplication(QWidget *parent)
-    : QDialog(parent),
-      m_licenseAccepted(false),
-      m_licenseValidated(false) {
+        : QDialog(parent),
+          m_licenseAccepted(false),
+          m_licenseValidated(false) {
     // 获取系统信息
     m_username = getComputerName();
     m_version = getCurrentVersion();
@@ -67,7 +68,7 @@ bool CheckApplication::hasValidLicense() {
     if (savedUsername == username && savedVersion == version) {
         // 检查许可证是否在有效期内
         if (savedTimestamp.daysTo(QDateTime::currentDateTime()) <= 365) {
-            qDebug() << "找到有效的许可证文件";
+            qDebug() << "found valid license file";
             return true;
         }
     }
@@ -120,7 +121,7 @@ void CheckApplication::setupUI() {
 
             "详细信息请参阅完整的 GNU GPL v3 许可证文本。\n\n"
             "用户: " + m_username + "\n"
-            "版本: " + m_version;
+                                    "版本: " + m_version;
 
     licenseText->setPlainText(mitLicense);
 
@@ -154,12 +155,12 @@ void CheckApplication::setupUI() {
 bool CheckApplication::validateExistingLicense() {
     QFile file(LICENSE_CHECK_FILE);
     if (!file.exists()) {
-        qDebug() << "许可证文件不存在";
+        qDebug() << "license check file not found";
         return false;
     }
 
     if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "无法打开许可证文件进行读取";
+        qDebug() << "license check file open failed";
         return false;
     }
 
@@ -174,15 +175,15 @@ bool CheckApplication::validateExistingLicense() {
 
     if (savedUsername == m_username && savedVersion == m_version) {
         if (savedTimestamp.daysTo(QDateTime::currentDateTime()) <= 365) {
-            qDebug() << "找到有效的许可证文件，用户:" << savedUsername << "版本:" << savedVersion;
+            qDebug() << "found valid license file, user:" << savedUsername << "version:" << savedVersion;
             return true;
         } else {
-            qDebug() << "许可证已过期";
+            qDebug() << "found expired license file";
         }
     }
 
-    qDebug() << "许可证验证失败，期望用户:" << m_username << "实际:" << savedUsername
-            << "期望版本:" << m_version << "实际:" << savedVersion;
+    qDebug() << "license check failed, expected user:" << m_username << "actual user:" << savedUsername
+             << "expected version:" << m_version << "actual version:" << savedVersion;
     return false;
 }
 
@@ -200,9 +201,9 @@ void CheckApplication::saveLicenseAgreement() {
         QDateTime timestamp = QDateTime::currentDateTime();
         out << m_username << m_version << timestamp;
         file.close();
-        qDebug() << "许可证已保存，用户:" << m_username << "版本:" << m_version;
+        qDebug() << "license agreement saved, user:" << m_username << "version:" << m_version;
     } else {
-        qDebug() << "无法保存许可证文件";
+        qDebug() << "can't save license agreement";
     }
 }
 

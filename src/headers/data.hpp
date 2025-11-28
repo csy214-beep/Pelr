@@ -27,6 +27,7 @@
 #define TODO_NOTIFY_FILE "user/todoNotify.dat"
 
 #define VERSION "ver20251118-9"
+//todo: 多语言支持
 
 struct ConfigData {
     //basic
@@ -232,6 +233,7 @@ public:
         if (!file.open(QIODevice::WriteOnly)) {
             // 无法打开文件进行写入
             QMessageBox::critical(nullptr, "Error", "写入数据失败！");
+            qCritical() << "write data failed: can not open file";
             return;
         }
 
@@ -255,6 +257,7 @@ public:
         if (!file.open(QIODevice::WriteOnly)) {
             // 无法打开文件进行写入
             QMessageBox::critical(nullptr, "Error", "写入数据失败！");
+            qCritical() << "write todo setting data failed: can not open file";
             return;
         }
 
@@ -302,7 +305,7 @@ protected:
             if (boldFontId != -1) {
                 QStringList boldFamilies = QFontDatabase::applicationFontFamilies(boldFontId);
                 if (!boldFamilies.isEmpty()) {
-                    qInfo() << "成功加载字体:" << boldFamilies.at(0);
+                    qInfo() << "load font success:" << boldFamilies.at(0);
                     return QFont(boldFamilies.at(0));
                 }
             }
@@ -314,7 +317,7 @@ protected:
         QList<MenuData> menu_data;
         QFile file(MENU_DATA_FILE);
         if (!file.open(QIODevice::ReadOnly)) {
-            qDebug() << "读取菜单数据失败";
+            qDebug() << "menu data file not exist or can not open, return empty list";
             return; // 文件不存在或无法打开，返回空列表
         }
         QDataStream in(&file);
