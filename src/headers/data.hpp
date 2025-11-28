@@ -157,6 +157,22 @@ struct MenuData {
     }
 };
 
+struct ToDoSettingData {
+    bool is_show_todo = true;
+    bool is_notify_tray = true;
+
+    // 重载运算符以便使用QDataStream进行序列化
+    friend QDataStream &operator<<(QDataStream &out, const ToDoSettingData &data) {
+        out << data.is_show_todo << data.is_notify_tray;
+        return out;
+    }
+
+    friend QDataStream &operator>>(QDataStream &in, ToDoSettingData &data) {
+        in >> data.is_show_todo >> data.is_notify_tray;
+        return in;
+    }
+};
+
 class DataManager {
 private:
     DataManager() = default; // 私有构造函数
@@ -166,17 +182,22 @@ private:
 protected:
     QList<MenuData> cached_menu_data;
     ConfigData basic_data;
+    ToDoSettingData todo_setting_data;
     QString fontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";
 
 public:
     QList<TodoData> todo_data;
-    bool is_todo_notify = false;
     constConfigData const_config_data;
     QFont _font = loadFont();
 
     static DataManager &instance() {
         static DataManager instance;
         return instance;
+    }
+
+    ToDoSettingData getTodoSetting() {
+        readTodoNotify();
+        return todo_setting_data;
     }
 
     QList<MenuData> getMenuData() {
@@ -190,8 +211,6 @@ public:
     }
 
     QList<TodoData> getTodoData() {
-        //同时读取
-        readTodoNotify();
         readTodoData();
         return todo_data;
     }
@@ -231,7 +250,7 @@ public:
         }
     }
 
-    void writeData(bool is_notify) {
+    void writeData(ToDoSettingData setting) {
         QFile file(TODO_NOTIFY_FILE);
         if (!file.open(QIODevice::WriteOnly)) {
             // 无法打开文件进行写入
@@ -243,9 +262,9 @@ public:
         out.setVersion(QDataStream::Qt_5_15); // 设置流版本以确保兼容性
 
         // 写入数据
-        out << is_notify;
+        out << setting;
         // 更新缓存
-        is_todo_notify = is_notify;
+        todo_setting_data = setting;
     }
 
 protected:
@@ -257,7 +276,7 @@ protected:
         }
         QDataStream in(&file);
         in.setVersion(QDataStream::Qt_5_11); // 设置流版本以确保兼容性
-        in >> is_todo_notify;
+        in >> todo_setting_data;
         file.close();
     }
 

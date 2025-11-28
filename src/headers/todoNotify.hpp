@@ -8,10 +8,12 @@
  * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #pragma once
+
 #include <QDateTime>
 #include  "data.hpp"
 #include  "BubbleBox.h"
 #include <QList>
+#include "tray.h"
 
 class TodoNotify {
     TodoNotify() = default; // 私有构造函数
@@ -31,7 +33,9 @@ public:
     void todoNotify() {
         // 加载数据
         QList<TodoData> data = DataManager::instance().todo_data; //first
-        bool is_notify = DataManager::instance().is_todo_notify; //second
+        auto todo_setting_data = DataManager::instance().getTodoSetting(); //second
+        bool is_notify = todo_setting_data.is_show_todo; //second
+        bool is_notify_by_tray = todo_setting_data.is_notify_tray; //second
         // 遍历比较数据的时间
         const QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm");
         for (const TodoData &item: data) {
@@ -40,6 +44,10 @@ public:
                 QString msg = "您的事件：「" + item.title + "」即将截止，请及时完成！\n" + now;
                 // 如果是待办事项，则显示气泡提示
                 if (item.category == 1) BubbleBox::instance()->textSet(msg);
+                // 如果选择了托盘提醒，则弹出提示
+                if (is_notify_by_tray) {
+                    TrayIcon::showMessage("待办事项提醒", msg, QSystemTrayIcon::Information, 10000);
+                }
                 qDebug() << "提醒：" << msg;
                 // 更新最新数据
                 newest_title = item.title;
@@ -69,6 +77,7 @@ public:
             BubbleBox::instance()->textSet("还没有最近的待办事项哦！");
             return;
         }
-        BubbleBox::instance()->textSet("最近的一次待办事项是「" + nearestEvent.title + "」，截止时间是：" + nearestEvent.deadline);
+        BubbleBox::instance()->textSet(
+                "最近的一次待办事项是「" + nearestEvent.title + "」，截止时间是：" + nearestEvent.deadline);
     }
 };

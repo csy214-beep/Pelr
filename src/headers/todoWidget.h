@@ -23,7 +23,7 @@ namespace Ui {
 }
 
 class todoWidget : public QWidget {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     QStandardItemModel *model_todo;
@@ -38,6 +38,7 @@ public:
     void loadAllData();
 
 private slots:
+
     void addTodoItem(QStandardItemModel *model);
 
     void deleteSelectedItem(QTableView *view);
@@ -49,6 +50,8 @@ private slots:
     void moveItem(QTableView *view);
 
     void saveAllData();
+
+    void onCheckBoxClicked();
 
 private:
     Ui::todoWidget *ui;

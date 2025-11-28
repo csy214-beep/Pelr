@@ -45,7 +45,7 @@ void todoWidget::onTableViewDoubleClicked(const QModelIndex &index) {
         // 显示日期时间选择对话框
         bool ok;
         QDateTime selectedDateTime = DateTimePickerDialog::getDateTime(
-            this, currentDateTime, &ok);
+                this, currentDateTime, &ok);
 
         if (ok) {
             // 更新模型数据
@@ -109,7 +109,16 @@ void todoWidget::initWidget() {
     // 保存数据 这个经验它是无价的
     connect(model_todo, &QStandardItemModel::dataChanged, this, &todoWidget::saveAllData);
     connect(model_done, &QStandardItemModel::dataChanged, this, &todoWidget::saveAllData);
-    connect(ui->checkBox, &QCheckBox::clicked, [&]() { DataManager::instance().writeData(ui->checkBox->isChecked()); });
+    connect(ui->checkBox, &QCheckBox::clicked, this, &todoWidget::onCheckBoxClicked);
+    connect(ui->checkBox_2, &QCheckBox::clicked, this, &todoWidget::onCheckBoxClicked);
+}
+
+void todoWidget::onCheckBoxClicked() {
+    ToDoSettingData setting;
+    setting.is_show_todo = ui->checkBox->isChecked();
+    setting.is_notify_tray = ui->checkBox_2->isChecked();
+    DataManager::instance().writeData(setting);
+    qDebug() << "todoNotySetting changed and saved.";
 }
 
 void todoWidget::moveItem(QTableView *view) {
@@ -131,7 +140,7 @@ void todoWidget::moveItem(QTableView *view) {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Confirm",
                                   QString("确定移动选中的 %1 个项目吗?")
-                                  .arg(selectedRows.size()),
+                                          .arg(selectedRows.size()),
                                   QMessageBox::Yes | QMessageBox::No);
 
     if (reply != QMessageBox::Yes) {
@@ -194,7 +203,7 @@ void todoWidget::deleteSelectedItem(QTableView *view) {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Confirm",
                                   QString("确定删除选中的 %1 个项目吗?")
-                                  .arg(selectedRows.size()),
+                                          .arg(selectedRows.size()),
                                   QMessageBox::Yes | QMessageBox::No);
 
     if (reply != QMessageBox::Yes) {
@@ -225,7 +234,8 @@ void todoWidget::loadAllData() {
     clearModelData(model_done, false);
     // 读取数据
     QList<TodoData> todo_data = DataManager::instance().getTodoData();
-    ui->checkBox->setChecked(DataManager::instance().is_todo_notify);
+    ui->checkBox->setChecked(DataManager::instance().getTodoSetting().is_show_todo);
+    ui->checkBox_2->setChecked(DataManager::instance().getTodoSetting().is_notify_tray);
     // 加载数据到模型
     for (QTableView *tv: {ui->tableView, ui->tableView_2}) {
         QStandardItemModel *model = tv == ui->tableView ? model_todo : model_done;
