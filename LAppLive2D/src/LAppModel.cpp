@@ -22,15 +22,14 @@
 #include "LAppTextureManager.hpp"
 #include "LAppDelegate.hpp"
 #include "ExtraMotionManager.h"
+
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Framework::DefaultParameterId;
 using namespace LAppDefine;
 
 LAppModel::LAppModel()
-    : LAppModel_Common()
-      , _modelSetting(NULL)
-      , _userTimeSeconds(0.0f),
-      _extraFileManager(new ExtraFileManager()) // 初始化文件管理器
+        : LAppModel_Common(), _modelSetting(NULL), _userTimeSeconds(0.0f),
+          _extraFileManager(new ExtraFileManager()) // 初始化文件管理器
 {
     if (MocConsistencyValidationEnable) {
         _mocConsistency = true;
@@ -72,7 +71,7 @@ LAppModel::~LAppModel() {
         const csmChar *group = _modelSetting->GetMotionGroupName(i);
         ReleaseMotionGroup(group);
     }
-    delete(_modelSetting);
+    delete (_modelSetting);
 
     delete _extraFileManager; // 清理额外文件管理器
 }
@@ -82,6 +81,7 @@ void LAppModel::LoadAssets(const csmChar *dir, const csmChar *fileName) {
 
     if (_debugMode) {
         LAppPal::PrintLogLn("[APP]load model setting: %s", fileName);
+        qDebug() << "load model setting: " << fileName;
     }
 
     csmSizeInt size;
@@ -95,6 +95,7 @@ void LAppModel::LoadAssets(const csmChar *dir, const csmChar *fileName) {
 
     if (_model == NULL) {
         LAppPal::PrintLogLn("Failed to LoadAssets().");
+        qDebug() << "Failed to LoadAssets().";
         return;
     }
 
@@ -119,6 +120,7 @@ void LAppModel::SetupModel(ICubismModelSetting *setting) {
 
         if (_debugMode) {
             LAppPal::PrintLogLn("[APP]create model: %s", setting->GetModelFileName());
+            qDebug() << "create model: " << setting->GetModelFileName();
         }
 
         buffer = CreateBuffer(path.GetRawString(), &size);
@@ -185,8 +187,9 @@ void LAppModel::SetupModel(ICubismModelSetting *setting) {
         breathParameters.PushBack(CubismBreath::BreathParameterData(_idParamAngleZ, 0.0f, 10.0f, 5.5345f, 0.5f));
         breathParameters.PushBack(CubismBreath::BreathParameterData(_idParamBodyAngleX, 0.0f, 4.0f, 15.5345f, 0.5f));
         breathParameters.PushBack(
-            CubismBreath::BreathParameterData(CubismFramework::GetIdManager()->GetId(ParamBreath), 0.5f, 0.5f, 3.2345f,
-                                              0.5f));
+                CubismBreath::BreathParameterData(CubismFramework::GetIdManager()->GetId(ParamBreath), 0.5f, 0.5f,
+                                                  3.2345f,
+                                                  0.5f));
 
         _breath->SetParameters(breathParameters);
     }
@@ -218,6 +221,7 @@ void LAppModel::SetupModel(ICubismModelSetting *setting) {
 
     if (_modelSetting == NULL || _modelMatrix == NULL) {
         LAppPal::PrintLogLn("Failed to SetupModel().");
+        qDebug() << "Failed to SetupModel().";
         return;
     }
 
@@ -251,13 +255,14 @@ void LAppModel::PreloadMotionGroup(const csmChar *group) {
 
         if (_debugMode) {
             LAppPal::PrintLogLn("[APP]load motion: %s => [%s_%d] ", path.GetRawString(), group, i);
+            qDebug() << "load motion: " << path.GetRawString() << " => [" << group << i << "]";
         }
 
         csmByte *buffer;
         csmSizeInt size;
         buffer = CreateBuffer(path.GetRawString(), &size);
         CubismMotion *tmpMotion = static_cast<CubismMotion *>(LoadMotion(
-            buffer, size, name.GetRawString(), NULL, NULL, _modelSetting, group, i, _motionConsistency));
+                buffer, size, name.GetRawString(), NULL, NULL, _modelSetting, group, i, _motionConsistency));
 
         if (tmpMotion) {
             tmpMotion->SetEffectIds(_eyeBlinkIds, _lipSyncIds);
@@ -303,7 +308,7 @@ void LAppModel::ReleaseMotions() {
 */
 void LAppModel::ReleaseExpressions() {
     for (csmMap<csmString, ACubismMotion *>::const_iterator iter = _expressions.Begin(); iter != _expressions.End(); ++
-         iter) {
+            iter) {
         ACubismMotion::Delete(iter->Second);
     }
 
@@ -400,6 +405,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar *group, csmInt
     } else if (!_motionManager->ReserveMotion(priority)) {
         if (_debugMode) {
             LAppPal::PrintLogLn("[APP]can't start motion.");
+            qDebug() << "can't start motion.";
         }
         return InvalidMotionQueueEntryHandleValue;
     }
@@ -449,6 +455,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar *group, csmInt
 
     if (_debugMode) {
         LAppPal::PrintLogLn("[APP]start motion: [%s_%d]", group, no);
+        qDebug() << "start motion: " << group << no;
     }
     return _motionManager->StartMotionPriority(motion, autoDelete, priority);
 }
@@ -504,12 +511,16 @@ void LAppModel::SetExpression(const csmChar *expressionID) {
     ACubismMotion *motion = _expressions[expressionID];
     if (_debugMode) {
         LAppPal::PrintLogLn("[APP]expression: [%s]", expressionID);
+        qDebug() << "expression: " << expressionID;
     }
 
     if (motion != NULL) {
         _expressionManager->StartMotion(motion, false);
     } else {
-        if (_debugMode) LAppPal::PrintLogLn("[APP]expression[%s] is null ", expressionID);
+        if (_debugMode) {
+            LAppPal::PrintLogLn("[APP]expression[%s] is null ", expressionID);
+            qDebug() << "expression[" << expressionID << "] is null ";
+        }
     }
 }
 
@@ -612,9 +623,9 @@ void LAppModel::LoadExtraFiles() {
         if (!data.isEmpty()) {
             // 加载到额外表情列表
             ACubismMotion *motion = LoadExpression(
-                reinterpret_cast<const csmByte *>(data.constData()),
-                data.size(),
-                expr.toUtf8().constData()
+                    reinterpret_cast<const csmByte *>(data.constData()),
+                    data.size(),
+                    expr.toUtf8().constData()
             );
 
             if (motion) {
@@ -635,10 +646,10 @@ void LAppModel::LoadExtraFiles() {
         if (!data.isEmpty()) {
             // 加载到额外动作列表
             CubismMotion *motion = static_cast<CubismMotion *>(LoadMotion(
-                reinterpret_cast<const csmByte *>(data.constData()),
-                data.size(),
-                motionName.toUtf8().constData(),
-                NULL, NULL, NULL, "Extra", 0, _motionConsistency
+                    reinterpret_cast<const csmByte *>(data.constData()),
+                    data.size(),
+                    motionName.toUtf8().constData(),
+                    NULL, NULL, NULL, "Extra", 0, _motionConsistency
             ));
 
             if (motion) {
@@ -655,7 +666,7 @@ void LAppModel::LoadExtraFiles() {
 
     if (_debugMode) {
         qDebug() << "Loaded" << extraExpressions.GetSize() << "extra expressions and"
-                << extraMotions.GetSize() << "extra motions";
+                 << extraMotions.GetSize() << "extra motions";
     }
     ExtraMotionManager::getInstance()->setModel(this);
 }

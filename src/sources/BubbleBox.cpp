@@ -165,24 +165,24 @@ QString BubbleBox::getPeriodText() {
     QString keyName;
     // todo: english
     if (hour >= 6 && hour < 10) {
-        keyName = "清晨";
+        keyName = "dawn";
     } else if (hour >= 10 && hour < 12) {
-        keyName = "上午";
+        keyName = "morning";
     } else if (hour >= 12 && hour < 14) {
-        keyName = "午间";
+        keyName = "noon";
     } else if (hour >= 14 && hour < 18) {
-        keyName = "下午";
+        keyName = "afternoon";
     } else if (hour >= 18 && hour < 20) {
-        keyName = "傍晚";
+        keyName = "dusk";
     } else {
-        keyName = "深夜";
+        keyName = "night";
     }
 
     // 打开文件
     QFile file(TIMETEXT_FILE);
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "cannot open file:" << file.errorString();
-        return "你好呀~";
+        return "Hello World!";
     }
 
     // 读取文件内容
@@ -193,7 +193,7 @@ QString BubbleBox::getPeriodText() {
     QJsonDocument doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
         qWarning() << "JSON parse failed";
-        return "你好呀~";
+        return "Hello World!";
     }
 
     // 获取根对象
@@ -202,13 +202,13 @@ QString BubbleBox::getPeriodText() {
     // 检查key是否存在
     if (!root.contains(keyName) || !root[keyName].isArray()) {
         qWarning() << "JSON format error or missing '" << keyName << "'";
-        return "你好呀~";
+        return "Hello World!";
     }
 
     // 获取数组
     QJsonArray targetArray = root[keyName].toArray();
     if (targetArray.isEmpty()) {
-        return "你好呀~";
+        return "Hello World!";
     }
 
     int index = std::rand() % targetArray.size();

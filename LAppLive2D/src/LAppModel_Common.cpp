@@ -9,21 +9,20 @@
 
 #include "LAppDefine.hpp"
 #include "LAppPal.hpp"
+#include <QDebug>
 
-Csm::csmByte* LAppModel_Common::CreateBuffer(const Csm::csmChar* path, Csm::csmSizeInt* size)
-{
-    if (LAppDefine::DebugLogEnable)
-    {
+Csm::csmByte *LAppModel_Common::CreateBuffer(const Csm::csmChar *path, Csm::csmSizeInt *size) {
+    if (LAppDefine::DebugLogEnable) {
         LAppPal::PrintLogLn("[APP]create buffer: %s ", path);
+        qDebug() << "create buffer: " << path;
     }
     return LAppPal::LoadFileAsBytes(path, size);
 }
 
-void LAppModel_Common::DeleteBuffer(Csm::csmByte* buffer, const Csm::csmChar* path)
-{
-    if (LAppDefine::DebugLogEnable)
-    {
+void LAppModel_Common::DeleteBuffer(Csm::csmByte *buffer, const Csm::csmChar *path) {
+    if (LAppDefine::DebugLogEnable) {
         LAppPal::PrintLogLn("[APP]delete buffer: %s", path);
+        qDebug() << "delete buffer: " << path;
     }
     LAppPal::ReleaseBytes(buffer);
 }

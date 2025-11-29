@@ -94,7 +94,7 @@ void MenuWidget::showNearMouse() {
     if (x < screenGeometry.left()) {
         x = screenGeometry.left();
     }
-    qInfo() << "Menu show at: (" << x << "," << y << ")";
+    qInfo() << "Menu show at:" << x << "," << y;
 
     // 移动窗口到计算位置
     move(x, y);
@@ -105,7 +105,7 @@ void MenuWidget::showNearMouse() {
     // 激活窗口
     activateWindow();
 
-    // 启动隐藏计时器（默认5秒）
+    // 启动隐藏计时器
     startHideTimer(short_interval);
 }
 
