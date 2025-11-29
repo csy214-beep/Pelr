@@ -124,7 +124,7 @@ void BubbleBox::RandomSentence() {
     QFile file(DAILYTEXT_FILE);
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "cannot open file:" << file.errorString();
-        textSet("今天也是美好的一天呢~");
+        textSet("Hello World!");
         return;
     }
     // 读取文件内容
@@ -134,7 +134,7 @@ void BubbleBox::RandomSentence() {
     QJsonDocument doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
         qWarning() << "JSON parse failed";
-        textSet("今天也是美好的一天呢~");
+        textSet("Hello World!");
         return;
     }
     // 获取根对象
@@ -143,7 +143,7 @@ void BubbleBox::RandomSentence() {
     // 检查key是否存在
     if (!root.contains(keyName) || !root[keyName].isArray()) {
         qWarning() << "JSON format error or missing 'daily'";
-        textSet("今天也是美好的一天呢~");
+        textSet("Hello World!");
         return;
     }
 
@@ -151,7 +151,7 @@ void BubbleBox::RandomSentence() {
     QJsonArray targetArray = root[keyName].toArray();
     if (targetArray.isEmpty()) {
         qWarning() << "JSON Array is empty";
-        textSet("今天也是美好的一天呢~");
+        textSet("Hello World!");
         return;
     }
 
@@ -163,7 +163,6 @@ QString BubbleBox::getPeriodText() {
     QTime currentTime = QTime::currentTime();
     int hour = currentTime.hour();
     QString keyName;
-    // todo: english
     if (hour >= 6 && hour < 10) {
         keyName = "dawn";
     } else if (hour >= 10 && hour < 12) {
