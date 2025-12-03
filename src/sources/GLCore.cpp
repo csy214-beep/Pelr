@@ -456,14 +456,18 @@ void GLCore::loadModel() {
 }
 
 void GLCore::resetLocation() {
+    // 重置窗口大小
+    int step = DataManager::instance().getBasicData().model_size;
+    resize(4 * step, 3 * step);
+    // 获取主屏幕可用尺寸
     QCoreApplication *coreapp = QCoreApplication::instance();
     QApplication *app = qobject_cast<QApplication *>(coreapp);
     QScreen *screen = app->screens().at(0);
-    QRect screenRect = screen->geometry();
+    QRect screenRect = screen->availableGeometry();
+    // 计算窗口位置
     int x = (screenRect.width() - width()) / 2;
     int y = (screenRect.height() - height()) / 2;
-    int step = DataManager::instance().getBasicData().model_size;
-    resize(4 * step, 3 * step);
+    // 重置位置
     move(x, y);
 }
 
