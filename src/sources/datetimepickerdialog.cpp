@@ -12,10 +12,11 @@
 #include <QKeySequence>
 #include <QApplication>
 
-DateTimePickerDialog::DateTimePickerDialog(QWidget *parent,
-                                           const QDateTime &initialDateTime,
-                                           const QString &title)
-    : QDialog(parent), m_selectedDateTime(initialDateTime) {
+DateTimePickerDialog::DateTimePickerDialog(
+        QWidget *parent,
+        const QDateTime &initialDateTime,
+        const QString &title)
+        : QDialog(parent), m_selectedDateTime(initialDateTime) {
     setWindowTitle(title);
     setupUI();
     setupShortcuts();
@@ -35,9 +36,9 @@ void DateTimePickerDialog::setupUI() {
 
     // 快速选择按钮
     QHBoxLayout *quickSelectLayout = new QHBoxLayout();
-    QPushButton *todayBtn = new QPushButton("今天", this);
-    QPushButton *tomorrowBtn = new QPushButton("明天", this);
-    QPushButton *nextWeekBtn = new QPushButton("下周", this);
+    QPushButton *todayBtn = new QPushButton(tr("今天"), this);
+    QPushButton *tomorrowBtn = new QPushButton(tr("明天"), this);
+    QPushButton *nextWeekBtn = new QPushButton(tr("下周"), this);
 
     // 设置按钮尺寸
     todayBtn->setFixedHeight(30);
@@ -55,7 +56,7 @@ void DateTimePickerDialog::setupUI() {
 
     // 日期选择 - 使用 QDateEdit
     QHBoxLayout *dateLayout = new QHBoxLayout();
-    dateLayout->addWidget(new QLabel("日期:", this));
+    dateLayout->addWidget(new QLabel(tr("日期:"), this));
 
     m_dateEdit = new QDateEdit(this);
     m_dateEdit->setDate(m_selectedDateTime.date());
@@ -68,7 +69,7 @@ void DateTimePickerDialog::setupUI() {
 
     // 时间选择
     QHBoxLayout *timeLayout = new QHBoxLayout();
-    timeLayout->addWidget(new QLabel("时间:", this));
+    timeLayout->addWidget(new QLabel(tr("时间:"), this));
 
     m_timeEdit = new QTimeEdit(this);
     m_timeEdit->setTime(m_selectedDateTime.time());
@@ -106,13 +107,13 @@ void DateTimePickerDialog::setupUI() {
 
     // 按钮框
     QDialogButtonBox *buttonBox = new QDialogButtonBox(
-        QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+            QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
 
     // 添加到主布局
     mainLayout->addLayout(quickSelectLayout);
-    mainLayout->addWidget(new QLabel("选择日期:", this));
+    mainLayout->addWidget(new QLabel(tr("选择日期:"), this));
     mainLayout->addLayout(dateLayout);
-    mainLayout->addWidget(new QLabel("选择时间:", this));
+    mainLayout->addWidget(new QLabel(tr("选择时间:"), this));
     mainLayout->addLayout(timeLayout);
     mainLayout->addStretch(); // 添加弹性空间
     mainLayout->addWidget(buttonBox);
@@ -171,4 +172,8 @@ void DateTimePickerDialog::onNextWeekClicked() {
     QDate nextWeek = QDate::currentDate().addDays(7);
     m_dateEdit->setDate(nextWeek); // 改为设置 QDateEdit 的日期
     m_selectedDateTime.setDate(nextWeek);
+}
+
+void DateTimePickerDialog::retranslateUI() {
+
 }

@@ -13,11 +13,11 @@
 ExtraMotionManager *ExtraMotionManager::instance = nullptr;
 
 ExtraMotionManager::ExtraMotionManager()
-    : CustomMenu(nullptr), model(nullptr) {
-    setTitle("额外内容");
+        : CustomMenu(nullptr), model(nullptr) {
+    setTitle(tr("额外内容"));
 
-    motionMenu = new QMenu("动作", this);
-    expressionMenu = new QMenu("表情", this);
+    motionMenu = new QMenu(tr("动作"), this);
+    expressionMenu = new QMenu(tr("表情"), this);
 
     addMenu(motionMenu);
     addMenu(expressionMenu);
@@ -50,7 +50,7 @@ void ExtraMotionManager::refreshMenu() {
     expressionMenu->clear();
 
     if (!model) {
-        QAction *noModelAction = new QAction("没有加载模型", this);
+        QAction *noModelAction = new QAction(tr("没有加载模型"), this);
         noModelAction->setEnabled(false);
         motionMenu->addAction(noModelAction);
         return;
@@ -73,7 +73,7 @@ void ExtraMotionManager::refreshMenu() {
         motionMenu->addAction(action);
         motionCount++;
     }
-    motionMenu->setTitle("动作 (" + QString::number(motionCount) + ")");
+    motionMenu->setTitle(tr("动作 (%1)").arg(motionCount));
 
     // 添加表情
     int expressionCount = 0;
@@ -91,5 +91,5 @@ void ExtraMotionManager::refreshMenu() {
         expressionMenu->addAction(action);
         expressionCount++;
     }
-    expressionMenu->setTitle("表情 (" + QString::number(expressionCount) + ")");
+    expressionMenu->setTitle(tr("表情 (%1)").arg(expressionCount));
 }

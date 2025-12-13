@@ -8,6 +8,7 @@
  * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #pragma once
+
 #include <QMenu>
 #include <QWidget>
 #include <QOpenGLWidget>
@@ -28,80 +29,96 @@
 // https://www.bilibili.com/video/BV1kcc8emEfR
 
 class GLCore : public QOpenGLWidget {
-	Q_OBJECT // 可以用信号槽机制进行通信 信号与槽
+Q_OBJECT // 可以用信号槽机制进行通信 信号与槽
 public:
-	QTimer *timer;
-	QTimer *inputCheckTimer;
-	QMenu *contextMenu;
-	GlobalInputListener *listener;
-	MenuWidget *menuWidget;
-	KeyLabelWidget *keyLabel;
-	QTimer *randomSentenceTimer;
-	mainWidget *main_widget;
-	ChatBoxOnModel *modelChatBox;
+    QTimer *timer;
+    QTimer *inputCheckTimer;
+    QMenu *contextMenu;
+    GlobalInputListener *listener;
+    MenuWidget *menuWidget;
+    KeyLabelWidget *keyLabel;
+    QTimer *randomSentenceTimer;
+    mainWidget *main_widget;
+    ChatBoxOnModel *modelChatBox;
 
 
-	void initContextMenu();
+    void initContextMenu();
 
-	void switchWindowTransparent(bool transparent);
+    void switchWindowTransparent(bool transparent);
 
-	void switchListener();
+    void switchListener();
 
-	GLCore(QWidget *parent = nullptr);
+    GLCore(QWidget *parent = nullptr);
 
 public slots:
-	void resetLocation();
 
-	void loadModel();
+    void resetLocation();
 
-	void onAskWeather();
+    void loadModel();
 
-	void silentMode();
+    void onAskWeather();
 
-	void switchDragStatus();
+    void silentMode();
 
-	void onExpMotionSelected();
+    void switchDragStatus();
 
-	void onPlayMedia();
+    void onExpMotionSelected();
+
+    void onPlayMedia();
 
 private slots:
-	// 鼠标透明度检查->是否进行鼠标穿透
-	void checkMouseTransparency();
+
+    // 鼠标透明度检查->是否进行鼠标穿透
+    void checkMouseTransparency();
+
+    void retranslateUI();
 
 private:
-	bool isAllowDrag = true;
-	bool isSilentMode = false;
-	bool left_button_down = false;
-	bool right_button_down = false;
-	bool m_currentlyTransparent = false;
-	QPoint dragStartPos;
-	// QPair<long, long> keyCounter = QPair<long, long>(0, 0);
-	// QTimer *keyCounterTimer;
-	// Recorder *recorder;
-	QFutureWatcher<void> m_watcher;
+    // buttons actions
+    QPushButton *switchListenerButton;
+    QPushButton *RandomSentenceButton;
+    QPushButton *QuickStartButton;
+    QAction *askWeather;
+    QAction *askPowerStatus;
+    QAction *askLatestNextTodoEvent;
+    QPushButton *QuestionButton;
+    QPushButton *SettingButton;
+    QPushButton *EmotionButton;
+    QPushButton *MediaButton;
+    // bool flags
+    bool isAllowDrag = true;
+    bool isSilentMode = false;
+    bool left_button_down = false;
+    bool right_button_down = false;
+    bool m_currentlyTransparent = false;
+    QPoint dragStartPos;
+    // QPair<long, long> keyCounter = QPair<long, long>(0, 0);
+    // QTimer *keyCounterTimer;
+    // Recorder *recorder;
+    QFutureWatcher<void> m_watcher;
 
-	void connectSignals();
+    void connectSignals();
 
-	void startRunStarIfPoweredInThread();
+    void startRunStarIfPoweredInThread();
 
-	void runStarIfPowered();
+    void runStarIfPowered();
 
-	void onRunStarIfPoweredFinished();
+    void onRunStarIfPoweredFinished();
 
 protected:
-	void initializeGL() override;
+    void initializeGL() override;
 
-	void resizeGL(int w, int h) override;
+    void resizeGL(int w, int h) override;
 
-	void paintGL() override;
+    void paintGL() override;
 
-	void mousePressEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
 
-	void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
 
-	void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
-	void wheelEvent(QWheelEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
-	void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
 };

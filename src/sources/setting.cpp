@@ -132,7 +132,9 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->lineEdit_4->setEchoMode(QLineEdit::Password);
     ui->lineEdit_8->setEchoMode(QLineEdit::Password);
     //Ollama
-    ui->comboBox->addItems({"编程助手", "桌宠女友", "技术导师", "创意写作助手", "自定义角色"});
+    ui->comboBox->addItems(
+            {"ProgrammingAssistant", "TablePetGirlfriend", "TechnicalMentors", "CreativeWritingAssistant",
+             "CustomizedRole"});
     //说明
     QFile file(":/assets/text/thirdParty.md");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -234,7 +236,7 @@ void SettingWidget::connectSignals() {
     //save
     connect(ui->pushButton, &QPushButton::clicked, [&]() {
         saveData();
-        QMessageBox::information(this, "Information", "保存成功！\n下次应用启动生效。", QMessageBox::Ok);
+        QMessageBox::information(this, "Information", tr("保存成功！\n下次应用启动生效。"), QMessageBox::Ok);
     });
     // 检查更新
     connect(ui->pushButton_10, &QPushButton::clicked, [&]() {
@@ -296,7 +298,7 @@ void SettingWidget::resetSetting() {
     // 重置启动项（移除）
     onCheckBox1Clicked(true);
     qDebug() << "reset setting success";
-    QMessageBox::information(this, "Information", "重置设置成功！", QMessageBox::Ok);
+    QMessageBox::information(this, "Information", tr("重置设置成功！"), QMessageBox::Ok);
 }
 
 void SettingWidget::onCheckBox1Clicked(bool flag) {
@@ -387,15 +389,15 @@ void SettingWidget::selectColor(QLabel *label, QLineEdit *line, bool isBackgroun
 void SettingWidget::onVersionCheckCompleted(bool isMatch, const QString &message) {
     if (isMatch) {
         // 版本一致的处理
-        QMessageBox::information(this, "版本检查", message);
+        QMessageBox::information(this, tr("版本检查"), message);
     } else {
         // 版本不一致的处理
-        QMessageBox::warning(this, "版本检查", message);
+        QMessageBox::warning(this, tr("版本检查"), message);
     }
 }
 
 void SettingWidget::onVersionCheckError(const QString &errorMessage) {
-    QMessageBox::critical(this, "版本检查错误", errorMessage);
+    QMessageBox::critical(this, tr("版本检查错误"), errorMessage);
 }
 
 void SettingWidget::selectModelPath() {

@@ -18,6 +18,7 @@
 #include <QString>
 #include <QDir>
 #include  "CheckApplication.h"
+#include "TranslationManager.h"
 
 #define QT_LOG_FILE "log/plauncher_qt.log"
 // 输出到控制台（如果启用）
@@ -58,6 +59,21 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
         textStream << txt << Qt::endl;
         logFile.close();
     }
+}
+
+void initTranslator(QApplication &a, const QString &path) {
+    // 初始化翻译管理器
+    TranslationManager::setApplication(&a);
+
+    // 设置自定义翻译路径
+    TranslationManager::instance()->addTranslationPath(path);
+
+    // 自动检测并设置系统语言
+    QString sysLang = TranslationManager::instance()->detectSystemLanguage();
+    TranslationManager::instance()->setLanguage(sysLang);
+
+    qDebug() << "System language: " << sysLang;
+    qDebug() << "Translator initialized";
 }
 
 /*
@@ -108,6 +124,9 @@ int main(int argc, char *argv[]) {
     QObject::connect(TrayIcon::instance()->action_mediaPlayer, SIGNAL(triggered()), &w, SLOT(onPlayMedia()));
 
     TrayIcon::instance()->show();
+
+    // 初始化翻译管理器
+    initTranslator(app, ":/translations");
 
     // boot by silent mode
     if (DataManager::instance().getBasicData().isSilentBoot) {

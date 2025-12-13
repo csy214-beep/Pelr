@@ -21,7 +21,7 @@ ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent), ui(new Ui::chat) {
     ui->setupUi(this);
     currentY = 0;
     standardHeight = ui->scrollAreaWidgetContents->height();
-    ui->label->setText("你好，欢迎使用PLauncher！");
+    ui->label->setText(tr("Hello, welcome to PLauncher!"));
     connect(ui->pushButton, &QPushButton::clicked, this, &ChatWidget::on_sendMsg);
     connect(ui->lineEdit, &QLineEdit::returnPressed, this, &ChatWidget::on_sendMsg);
     connect(&client, &OllamaClient::textGenerated,
@@ -93,16 +93,16 @@ void ChatWidget::on_sendMsg() {
     addMessage(message, false);
     OllamaClient::Role role;
     QString roleName = DataManager::instance().getBasicData().role;
-    if (roleName == "编程助手") {
+    if (roleName == "ProgrammingAssistant") {
         role = OllamaClient::Role::DefaultCoder;
-    } else if (roleName == "桌宠女友") {
+    } else if (roleName == "TablePetGirlfriend") {
         role = OllamaClient::Role::DesktopPetGirlfriend;
-    } else if (roleName == "技术导师") {
+    } else if (roleName == "TechnicalMentors") {
         role = OllamaClient::Role::TechnicalTeacher;
-    } else if (roleName == "创意写作助手") {
+    } else if (roleName == "CreativeWritingAssistant") {
         role = OllamaClient::Role::CreativeWriter;
-    } else if (roleName == "自定义角色") {
-        client.setCustomRolePrompt("自定义角色", DataManager::instance().getBasicData().customRoleDesc);
+    } else if (roleName == "CustomizedRole") {
+        client.setCustomRolePrompt("CustomizedRole", DataManager::instance().getBasicData().customRoleDesc);
         role = OllamaClient::Role::CustomRole;
     }
     //  发送消息到服务器(ollama)
@@ -122,7 +122,11 @@ void ChatWidget::onTextGenerated(const QString &text) {
 void ChatWidget::onErrorOccurred(const QString &error) {
     qDebug() << "errorOccurred:" << error;
     // 处理错误
-    addMessage("错误：" + error, true);
+    addMessage(tr("错误：%1").arg(error), true);
+}
+
+void ChatWidget::retranslateUI() {
+    ui->label->setText(tr("Hello, welcome to PLauncher!"));
 }
 
 ChatWidget::~ChatWidget() {

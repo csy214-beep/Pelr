@@ -2,10 +2,425 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>BubbleBox</name>
+    <message>
+        <location filename="../src/sources/BubbleBox.cpp" line="127"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="137"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="146"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="154"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="184"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="195"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="204"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="210"/>
+        <source>Hello World!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/BubbleBox.cpp" line="222"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="225"/>
+        <source>%1
+现在是%2哦~</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/BubbleBox.cpp" line="228"/>
+        <source>现在是%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/BubbleBox.cpp" line="242"/>
+        <source>In response...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatBoxOnModel</name>
+    <message>
+        <location filename="../src/sources/chatBoxOnModel.cpp" line="97"/>
+        <source>错误：%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatWidget</name>
+    <message>
+        <location filename="../src/sources/chat.cpp" line="24"/>
+        <location filename="../src/sources/chat.cpp" line="129"/>
+        <source>Hello, welcome to PLauncher!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chat.cpp" line="125"/>
+        <source>错误：%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CheckApplication</name>
+    <message>
+        <location filename="../src/sources/CheckApplication.cpp" line="80"/>
+        <source>GNU GPL v3 许可证确认</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/CheckApplication.cpp" line="84"/>
+        <source>GNU 通用公共许可证 v3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/CheckApplication.cpp" line="95"/>
+        <source>GNU 通用公共许可证
+第三版，2007年6月29日
+
+版权所有 (C) 2007 自由软件基金会 &lt;https://fsf.org/&gt;
+
+本程序是自由软件：您可以根据自由软件基金会发布的 GNU 通用公共许可证的条款重新分发和/或修改它，可以是许可证的第3版，或者（根据您的选择）任何后续版本。
+
+分发本程序是希望它有用，但没有任何担保；甚至没有适销性或特定用途适用性的暗示担保。有关更多详细信息，请参阅 GNU 通用公共许可证。
+
+您应该已经随本程序收到了 GNU 通用公共许可证的副本。如果没有，请参阅 &lt;https://www.gnu.org/licenses/&gt;。
+
+本程序的主要条款：
+
+1. 您可以任何媒介运行本程序，无需付费
+2. 您可以学习程序如何工作，并对其进行修改
+3. 您可以重新分发副本
+4. 您可以发布修改后的版本
+
+当您重新分发本程序时，您必须：
+- 保留所有原始版权声明
+- 使用相同的 GPLv3 许可证
+- 提供源代码或获取源代码的方法
+- 保持所有通知完整无损
+
+详细信息请参阅完整的 GNU GPL v3 许可证文本。
+
+用户: %1
+版本: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/CheckApplication.cpp" line="160"/>
+        <source>我理解并接受上述 GNU GPL v3 许可证条款</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/CheckApplication.cpp" line="163"/>
+        <source>接受</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/CheckApplication.cpp" line="164"/>
+        <source>拒绝</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DateTimePickerDialog</name>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="39"/>
+        <source>今天</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="40"/>
+        <source>明天</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="41"/>
+        <source>下周</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="59"/>
+        <source>日期:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="72"/>
+        <source>时间:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="114"/>
+        <source>选择日期:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/datetimepickerdialog.cpp" line="116"/>
+        <source>选择时间:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditorWidget</name>
+    <message>
+        <location filename="../src/sources/editor.cpp" line="34"/>
+        <location filename="../src/sources/editor.cpp" line="50"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/editor.cpp" line="34"/>
+        <source>名称和路径不能为空</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/editor.cpp" line="50"/>
+        <source>至少选择一个分类</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/editor.cpp" line="57"/>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExtraMotionManager</name>
+    <message>
+        <location filename="../src/sources/ExtraMotionManager.cpp" line="17"/>
+        <source>额外内容</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ExtraMotionManager.cpp" line="19"/>
+        <source>动作</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ExtraMotionManager.cpp" line="20"/>
+        <source>表情</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ExtraMotionManager.cpp" line="53"/>
+        <source>没有加载模型</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ExtraMotionManager.cpp" line="76"/>
+        <source>动作 (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ExtraMotionManager.cpp" line="94"/>
+        <source>表情 (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GLCore</name>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="157"/>
+        <location filename="../src/sources/GLCore.cpp" line="533"/>
+        <source>按键监听</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="161"/>
+        <location filename="../src/sources/GLCore.cpp" line="534"/>
+        <source>说点什么</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="167"/>
+        <location filename="../src/sources/GLCore.cpp" line="535"/>
+        <source>启动</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="175"/>
+        <location filename="../src/sources/GLCore.cpp" line="536"/>
+        <source>天气</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="179"/>
+        <location filename="../src/sources/GLCore.cpp" line="537"/>
+        <source>电源状态</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="183"/>
+        <source>主人，这是您电脑目前的电源状态：
+AC: %1
+Percentage: %2%
+Battery State: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="189"/>
+        <location filename="../src/sources/GLCore.cpp" line="538"/>
+        <source>TODO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="192"/>
+        <location filename="../src/sources/GLCore.cpp" line="539"/>
+        <source>问个问题</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="196"/>
+        <location filename="../src/sources/GLCore.cpp" line="540"/>
+        <source>界面</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="212"/>
+        <location filename="../src/sources/GLCore.cpp" line="541"/>
+        <source>EMO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="216"/>
+        <location filename="../src/sources/GLCore.cpp" line="542"/>
+        <source>媒体播放</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/GLCore.cpp" line="366"/>
+        <source>%1, %2℃, %3, humidity: %4%.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/headers/launcher.hpp" line="44"/>
+        <location filename="../src/headers/launcher.hpp" line="54"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/launcher.hpp" line="45"/>
+        <source>File or directory does not exist: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/launcher.hpp" line="55"/>
+        <source>Failed to open: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/launcher.hpp" line="64"/>
+        <location filename="../src/headers/launcher.hpp" line="72"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/launcher.hpp" line="65"/>
+        <source>Exception occurred while launching: %1 
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/launcher.hpp" line="73"/>
+        <source>Unknown exception occurred while launching: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingWidget</name>
     <message>
-        <location filename="../src/sources/setting.cpp" line="406"/>
+        <location filename="../src/sources/setting.cpp" line="239"/>
+        <source>保存成功！
+下次应用启动生效。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="301"/>
+        <source>重置设置成功！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="392"/>
+        <location filename="../src/sources/setting.cpp" line="395"/>
+        <source>版本检查</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="400"/>
+        <source>版本检查错误</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="408"/>
         <source>选择模型文件</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodoNotify</name>
+    <message>
+        <location filename="../src/headers/todoNotify.hpp" line="46"/>
+        <source>您的事件：「%1」即将截止，请及时完成！
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/todoNotify.hpp" line="51"/>
+        <source>待办事项提醒</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/todoNotify.hpp" line="80"/>
+        <source>还没有最近的待办事项哦！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/todoNotify.hpp" line="83"/>
+        <source>最近的一次待办事项是「%1」，截止时间是：%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TranslationManager</name>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="44"/>
+        <source>English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="45"/>
+        <source>简体中文</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="46"/>
+        <source>繁體中文</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="47"/>
+        <source>日本語</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="48"/>
+        <source>한국어</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="49"/>
+        <source>Français</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="50"/>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="51"/>
+        <source>Русский</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/TranslationManager.cpp" line="52"/>
+        <source>Español</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

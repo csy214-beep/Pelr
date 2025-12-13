@@ -15,7 +15,9 @@
 #include <QList>
 #include "tray.h"
 
-class TodoNotify {
+class TodoNotify : public QObject {
+Q_OBJECT
+
     TodoNotify() = default; // 私有构造函数
     ~TodoNotify() = default; // 私有析构函数
     TodoNotify(const TodoNotify &) = delete; // 删除拷贝构造函数
@@ -41,12 +43,12 @@ public:
         for (const TodoData &item: data) {
             if (now == item.deadline && is_notify && item.title != newest_title && item.isNotify) {
                 // 发送提醒
-                QString msg = "您的事件：「" + item.title + "」即将截止，请及时完成！\n" + now;
+                QString msg = tr("您的事件：「%1」即将截止，请及时完成！\n%2").arg(item.title).arg(now);
                 // 如果是待办事项，则显示气泡提示
                 if (item.category == 1) BubbleBox::instance()->textSet(msg);
                 // 如果选择了托盘提醒，则弹出提示
                 if (is_notify_by_tray) {
-                    TrayIcon::showMessage("待办事项提醒", msg, QSystemTrayIcon::Information, 10000);
+                    TrayIcon::showMessage(tr("待办事项提醒"), msg, QSystemTrayIcon::Information, 10000);
                 }
                 qDebug() << "notify：" << msg;
                 // 更新最新数据
@@ -55,6 +57,7 @@ public:
         }
     }
 
+    // todo: 加入询问菜单
     static void askLatestNextEvent() {
         // 加载数据
         QList<TodoData> data = DataManager::instance().todo_data; //first
@@ -74,10 +77,10 @@ public:
         }
         if (nearestEvent.title.isEmpty()) {
             qInfo() << "nearestEvent.title isEmpty";
-            BubbleBox::instance()->textSet("还没有最近的待办事项哦！");
+            BubbleBox::instance()->textSet(tr("还没有最近的待办事项哦！"));
             return;
         }
-        BubbleBox::instance()->textSet(
-                "最近的一次待办事项是「" + nearestEvent.title + "」，截止时间是：" + nearestEvent.deadline);
+        QString rem = tr("最近的一次待办事项是「%1」，截止时间是：%2").arg(nearestEvent.title).arg(nearestEvent.deadline);
+        BubbleBox::instance()->textSet(rem);
     }
 };

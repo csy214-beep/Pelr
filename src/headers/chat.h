@@ -9,6 +9,7 @@
  */
 #ifndef CHAT_H
 #define CHAT_H
+
 #include <QWidget>
 #include "ollamaclient.h"
 
@@ -17,7 +18,7 @@ namespace Ui {
 }
 
 class ChatWidget : public QWidget {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     OllamaClient client;
@@ -29,6 +30,9 @@ public:
     ~ChatWidget();
 
 private slots:
+
+    void retranslateUI();
+
     void on_sendMsg();
 
     void onTextGenerated(const QString &text);
@@ -37,6 +41,7 @@ private slots:
     void onErrorOccurred(const QString &error);
 
 private:
+
     Ui::chat *ui;
     int currentY;
     int standardHeight;

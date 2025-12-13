@@ -61,9 +61,10 @@ void TranslationManager::addTranslationPath(const QString &path) {
 QString TranslationManager::findTranslationFile(const QString &languageCode) {
     QStringList possibleNames;
     possibleNames << QString("%1.qm").arg(languageCode);
-    possibleNames << QString("app_%1.qm").arg(languageCode);
+    possibleNames << QString("languages_%1.qm").arg(languageCode);
     possibleNames << QString("qt_%1.qm").arg(languageCode);
     possibleNames << QString("%1.ts").arg(languageCode); // 也支持.ts文件
+    possibleNames << QString("languages_%1.ts").arg(languageCode); // 也支持.ts文件
 
     // 搜索所有路径
     for (const QString &path: m_translationPaths) {

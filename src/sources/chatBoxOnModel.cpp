@@ -64,16 +64,16 @@ void ChatBoxOnModel::on_sendMsg() {
     clear();
     OllamaClient::Role role;
     QString roleName = DataManager::instance().getBasicData().role;
-    if (roleName == "编程助手") {
+    if (roleName == "ProgrammingAssistant") {
         role = OllamaClient::Role::DefaultCoder;
-    } else if (roleName == "桌宠女友") {
+    } else if (roleName == "TablePetGirlfriend") {
         role = OllamaClient::Role::DesktopPetGirlfriend;
-    } else if (roleName == "技术导师") {
+    } else if (roleName == "TechnicalMentors") {
         role = OllamaClient::Role::TechnicalTeacher;
-    } else if (roleName == "创意写作助手") {
+    } else if (roleName == "CreativeWritingAssistant") {
         role = OllamaClient::Role::CreativeWriter;
-    } else if (roleName == "自定义角色") {
-        client.setCustomRolePrompt("自定义角色", DataManager::instance().getBasicData().customRoleDesc);
+    } else if (roleName == "CustomizedRole") {
+        client.setCustomRolePrompt("CustomizedRole", DataManager::instance().getBasicData().customRoleDesc);
         role = OllamaClient::Role::CustomRole;
     }
     //  发送消息到服务器(ollama)
@@ -94,7 +94,7 @@ void ChatBoxOnModel::onTextGenerated(const QString &text) {
 void ChatBoxOnModel::onErrorOccurred(const QString &error) {
     qDebug() << "error:" << error;
     // 处理错误
-    BubbleBox::instance()->textSet("错误：" + error);
+    BubbleBox::instance()->textSet(tr("错误：%1").arg(error));
 }
 
 void ChatBoxOnModel::setLineStyle() {

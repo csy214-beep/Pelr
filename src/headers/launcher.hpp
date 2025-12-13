@@ -32,7 +32,7 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                 path.startsWith("ftp://") || path.startsWith("file://")) {
                 success = QDesktopServices::openUrl(QUrl(path));
             }
-            // 对于本地文件/文件夹，使用QDesktopServices
+                // 对于本地文件/文件夹，使用QDesktopServices
             else {
                 QFileInfo fileInfo(path);
                 if (fileInfo.exists()) {
@@ -40,28 +40,38 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                     success = QDesktopServices::openUrl(localUrl);
                 } else {
                     qWarning() << "File or directory does not exist:" << path;
-                    TrayIcon::instance()->showMessage("Warning", "File or directory does not exist:" + path,
-                                                      QSystemTrayIcon::Warning, 5000);
+                    TrayIcon::instance()->showMessage(
+                            QObject::tr("Warning"),
+                            QObject::tr("File or directory does not exist: %1").arg(path),
+                            QSystemTrayIcon::Warning, 5000);
                     return false;
                 }
             }
 
             if (!success) {
                 qWarning() << "Failed to open:" << path;
-                TrayIcon::instance()->showMessage("Warning", "Failed to open:" + path, QSystemTrayIcon::Warning, 5000);
+                TrayIcon::instance()->showMessage(
+                        QObject::tr("Warning"),
+                        QObject::tr("Failed to open: %1").arg(path),
+                        QSystemTrayIcon::Warning, 5000);
                 return false;
             }
 
             return true;
         } catch (const std::exception &e) {
             qCritical() << "Exception occurred while launching" << path << ":" << e.what();
-            TrayIcon::instance()->showMessage("Error", "Exception occurred while launching:" + path + ":" + e.what(),
-                                              QSystemTrayIcon::Critical, 5000);
+            TrayIcon::instance()->showMessage(
+                    QObject::tr("Error"),
+                    QObject::tr("Exception occurred while launching: %1 \n%2").arg(path).arg(
+                            e.what()),
+                    QSystemTrayIcon::Critical, 5000);
             return false;
         } catch (...) {
             qCritical() << "Unknown exception occurred while launching" << path;
-            TrayIcon::instance()->showMessage("Error", "Unknown exception occurred while launching:" + path,
-                                              QSystemTrayIcon::Critical, 5000);
+            TrayIcon::instance()->showMessage(
+                    QObject::tr("Error"),
+                    QObject::tr("Unknown exception occurred while launching: %1").arg(path),
+                    QSystemTrayIcon::Critical, 5000);
             return false;
         }
     });

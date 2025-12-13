@@ -8,6 +8,7 @@
  * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #pragma once
+
 #include <QDialog>
 #include <QDateTime>
 #include <QDateEdit>
@@ -19,7 +20,7 @@
 #include <QPushButton>
 
 class DateTimePickerDialog : public QDialog {
-    Q_OBJECT
+Q_OBJECT
 
 public:
     explicit DateTimePickerDialog(QWidget *parent = nullptr,
@@ -35,6 +36,9 @@ public:
                                  bool *ok = nullptr);
 
 private slots:
+
+    void retranslateUI();
+
     void onTodayClicked();
 
     void onTomorrowClicked();

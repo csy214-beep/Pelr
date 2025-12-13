@@ -77,11 +77,11 @@ bool CheckApplication::hasValidLicense() {
 }
 
 void CheckApplication::setupUI() {
-    setWindowTitle("GNU GPL v3 许可证确认");
+    setWindowTitle(tr("GNU GPL v3 许可证确认"));
     setFixedSize(800, 600);
 
     // 创建控件
-    QLabel *titleLabel = new QLabel("GNU 通用公共许可证 v3", this);
+    QLabel *titleLabel = new QLabel(tr("GNU 通用公共许可证 v3"), this);
     QFont titleFont = titleLabel->font();
     titleFont.setBold(true);
     titleFont.setPointSize(14);
@@ -92,7 +92,7 @@ void CheckApplication::setupUI() {
     licenseText = new QTextEdit(this);
     licenseText->setReadOnly(true);
 
-    QString mitLicense =
+    QString LicenseText = tr(
             "GNU 通用公共许可证\n"
             "第三版，2007年6月29日\n\n"
 
@@ -120,17 +120,48 @@ void CheckApplication::setupUI() {
             "- 保持所有通知完整无损\n\n"
 
             "详细信息请参阅完整的 GNU GPL v3 许可证文本。\n\n"
-            "用户: " + m_username + "\n"
-                                    "版本: " + m_version;
+            "用户: %1\n"
+            "版本: %2"
+    ).arg(m_username).arg(m_version);
+/*
+            "GNU General Public License\n"
+            "Version 3, 29 June 2007\n\n"
 
-    licenseText->setPlainText(mitLicense);
+            "Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n\n"
+
+            "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License "
+            "as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\n"
+
+            "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of "
+            "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\n"
+
+            "You should have received a copy of the GNU General Public License along with this program. "
+            "If not, see <https://www.gnu.org/licenses/>.\n\n"
+
+            "Main terms of this program:\n\n"
+            "1. You can run this program in any medium without paying a fee\n"
+            "2. You can study how the program works and modify it\n"
+            "3. You can redistribute copies of the program\n"
+            "4. You can distribute modified versions of the program\n\n"
+
+            "When you redistribute this program, you must:\n"
+            "- Keep all original copyright notices intact\n"
+            "- Use the same GPLv3 license\n"
+            "- Provide the source code or a way to obtain the source code\n"
+            "- Keep all notices complete and unaltered\n\n"
+
+            "For details, see the full text of the GNU GPL v3 License.\n\n"
+            "User: %1\n"
+            "Version: %2"
+*/
+    licenseText->setPlainText(LicenseText);
 
     // 同意复选框
-    agreeCheckbox = new QCheckBox("我理解并接受上述 GNU GPL v3 许可证条款", this);
+    agreeCheckbox = new QCheckBox(tr("我理解并接受上述 GNU GPL v3 许可证条款"), this);
 
     // 按钮
-    acceptButton = new QPushButton("接受", this);
-    rejectButton = new QPushButton("拒绝", this);
+    acceptButton = new QPushButton(tr("接受"), this);
+    rejectButton = new QPushButton(tr("拒绝"), this);
 
     acceptButton->setEnabled(false);
 

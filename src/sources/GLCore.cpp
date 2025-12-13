@@ -86,6 +86,7 @@ GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     keyLabel->show();
     BubbleBox::instance()->show();
     move(1400, 300);
+    retranslateUI();
 }
 
 void GLCore::checkMouseTransparency() {
@@ -153,55 +154,46 @@ void GLCore::initContextMenu() {
     qInfo() << "init context menu";
     // 实时显示键盘and鼠标按键状态 switch on/off
     keyLabel->updateWindowLocation(this->x(), this->y(), width(), height());
-    QPushButton *switchListenerButton = new QPushButton("按键监听", this);
+    switchListenerButton = new QPushButton(tr("按键监听"), this);
     connect(switchListenerButton, &QPushButton::clicked, this, &GLCore::switchListener);
 
     // 聊天
-    QPushButton *RandomSentenceButton = new QPushButton("说点什么", this);
+    RandomSentenceButton = new QPushButton(tr("说点什么"), this);
     connect(RandomSentenceButton, &QPushButton::clicked, [&]() {
         BubbleBox::instance()->RandomSentence();
     });
 
     //启动 把Quick Tray的功能移植到这里
-    QPushButton *QuickStartButton = new QPushButton("启动", this);
+    QuickStartButton = new QPushButton(tr("启动"), this);
     launcherMenu *launcher_menu = launcherMenu::instance(this);
     QuickStartButton->setMenu(launcher_menu);
 
 
     //询问天气（按钮）/询问电源状态/询问按键数（废弃）
     QMenu *QuestionMenu = new CustomMenu(this);
-    /*
-        QAction *askKeyCounter = new QAction("按键数", QuestionMenu);
-        connect(askKeyCounter, &QAction::triggered, [&]() {
-            bubbleBox->textSet(
-                "自" + recorder->getFileCreationTimeWindows(RECORD_FILE)
-                + "以来，主人一共按下键盘 " + QString::number(keyCounter.first)
-                + " 次，点击鼠标 " + QString::number(keyCounter.second) + " 次。");
-        });
-        */
-    QAction *askWeather = new QAction("天气", QuestionMenu);
+
+    askWeather = new QAction(tr("天气"), QuestionMenu);
     connect(askWeather, &QAction::triggered, [&]() {
         onAskWeather();
     });
-    QAction *askPowerStatus = new QAction("电源状态", QuestionMenu);
+    askPowerStatus = new QAction(tr("电源状态"), QuestionMenu);
     connect(askPowerStatus, &QAction::triggered, [&]() {
         std::vector<QString> powerStatus = getPowerStatus();
         if (!powerStatus.empty()) {
-            BubbleBox::instance()->textSet(
-                    "主人，这是您电脑目前的电源状态：\nAC: " + powerStatus[0]
-                    + "\nPercentage: " + powerStatus[1]
-                    + "%\nBattery State: " + powerStatus[2]);
+            QString msg = tr("主人，这是您电脑目前的电源状态：\nAC: %1\nPercentage: %2%\nBattery State: %3").arg(
+                    powerStatus[0]).arg(powerStatus[1]).arg(powerStatus[2]);
+            BubbleBox::instance()->textSet(msg);
         }
     });
     //询问最近一次待办事项
-    QAction *askLatestNextTodoEvent = new QAction("TODO", QuestionMenu);
+    askLatestNextTodoEvent = new QAction(tr("TODO"), QuestionMenu);
     connect(askLatestNextTodoEvent, &QAction::triggered, [&]() { TodoNotify::instance().askLatestNextEvent(); });
     QuestionMenu->addActions({askLatestNextTodoEvent, askWeather, askPowerStatus});
-    QPushButton *QuestionButton = new QPushButton("问个问题", this);
+    QuestionButton = new QPushButton(tr("问个问题"), this);
     QuestionButton->setMenu(QuestionMenu);
 
     //设置界面
-    QPushButton *SettingButton = new QPushButton("界面", this);
+    SettingButton = new QPushButton(tr("界面"), this);
     connect(SettingButton, &QPushButton::clicked, [&]() {
         if (main_widget->isHidden()) {
             main_widget->show(); // 显示界面
@@ -217,11 +209,11 @@ void GLCore::initContextMenu() {
         }
     });
     //表情/动作控制菜单
-    QPushButton *EmotionButton = new QPushButton("EMO", this);
+    EmotionButton = new QPushButton(tr("EMO"), this);
     EmotionButton->setMenu(ExtraMotionManager::getInstance());
 
     //媒体播放
-    QPushButton *MediaButton = new QPushButton("媒体播放", this);
+    MediaButton = new QPushButton(tr("媒体播放"), this);
     connect(MediaButton, &QPushButton::clicked, this, &GLCore::onPlayMedia);
     // 以一定次序添加按钮
     menuWidget->mainLayout->addWidget(SettingButton);
@@ -371,10 +363,9 @@ void GLCore::onAskWeather() {
         qDebug() << "温度：" << weather.temperature << "℃";
         qDebug() << "天气：" << weather.description;
         qDebug() << "湿度：" << weather.humidity << "%";*/
-        msg = weather.city + "，" + QString::number(weather.temperature) + "℃，" + weather.description + "，湿度：" +
-              weather.humidity + "%。";
+        msg = tr("%1, %2℃, %3, humidity: %4%.").arg(weather.city).arg(weather.temperature).arg(weather.description).arg(
+                weather.humidity);
     } else {
-        // qDebug() <<__func__<< "错误：" << weather.error;
         msg = weather.error;
     }
     qDebug() << msg;
@@ -438,13 +429,11 @@ void GLCore::loadModel() {
     // QString msg;
     if (model_path.isEmpty()) {
         qCritical() << "model path is empty";
-        // msg = "模型路径为空，请在设置中设置模型路径！";
         model_path = "Resources/Hiyori/Hiyori.model3.json";
     }
     QFileInfo file_info(model_path);
     if (!file_info.exists()) {
         qCritical() << "model file not exists: " << model_path;
-        // msg = "模型文件不存在！";
         model_path = "Resources/Hiyori/Hiyori.model3.json";
         file_info.setFile(model_path);
     }
@@ -452,7 +441,6 @@ void GLCore::loadModel() {
     QString fileName = file_info.fileName();
     qDebug() << "model dir: " << dir << " fileName: " << fileName;
     LAppLive2DManager::GetInstance()->LoadModelFromPath(dir.toStdString() + "/", fileName.toStdString());
-    // if (!msg.isEmpty()) QMessageBox::critical(this, "Error", msg);
 }
 
 void GLCore::resetLocation() {
@@ -535,4 +523,22 @@ void GLCore::paintGL() {
 
 void GLCore::resizeGL(int w, int h) {
     LAppDelegate::GetInstance()->resize(w, h);
+}
+
+void GLCore::retranslateUI() {
+    if (!switchListenerButton) {
+        qDebug() << "ui part is null, can not retranslate ui by " << typeid(*this).name();
+        return;
+    }
+    switchListenerButton->setText(tr("按键监听"));
+    RandomSentenceButton->setText(tr("说点什么"));
+    QuickStartButton->setText(tr("启动"));
+    askWeather->setText(tr("天气"));
+    askPowerStatus->setText(tr("电源状态"));
+    askLatestNextTodoEvent->setText(tr("TODO"));
+    QuestionButton->setText(tr("问个问题"));
+    SettingButton->setText(tr("界面"));
+    EmotionButton->setText(tr("EMO"));
+    MediaButton->setText(tr("媒体播放"));
+    qDebug() << "retranslate ui:" << typeid(*this).name();
 }

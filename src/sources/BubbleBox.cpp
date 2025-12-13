@@ -124,7 +124,7 @@ void BubbleBox::RandomSentence() {
     QFile file(DAILYTEXT_FILE);
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "cannot open file:" << file.errorString();
-        textSet("Hello World!");
+        textSet(tr("Hello World!"));
         return;
     }
     // 读取文件内容
@@ -134,7 +134,7 @@ void BubbleBox::RandomSentence() {
     QJsonDocument doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
         qWarning() << "JSON parse failed";
-        textSet("Hello World!");
+        textSet(tr("Hello World!"));
         return;
     }
     // 获取根对象
@@ -143,7 +143,7 @@ void BubbleBox::RandomSentence() {
     // 检查key是否存在
     if (!root.contains(keyName) || !root[keyName].isArray()) {
         qWarning() << "JSON format error or missing 'daily'";
-        textSet("Hello World!");
+        textSet(tr("Hello World!"));
         return;
     }
 
@@ -151,7 +151,7 @@ void BubbleBox::RandomSentence() {
     QJsonArray targetArray = root[keyName].toArray();
     if (targetArray.isEmpty()) {
         qWarning() << "JSON Array is empty";
-        textSet("Hello World!");
+        textSet(tr("Hello World!"));
         return;
     }
 
@@ -181,7 +181,7 @@ QString BubbleBox::getPeriodText() {
     QFile file(TIMETEXT_FILE);
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "cannot open file:" << file.errorString();
-        return "Hello World!";
+        return tr("Hello World!");
     }
 
     // 读取文件内容
@@ -192,7 +192,7 @@ QString BubbleBox::getPeriodText() {
     QJsonDocument doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
         qWarning() << "JSON parse failed";
-        return "Hello World!";
+        return tr("Hello World!");
     }
 
     // 获取根对象
@@ -201,13 +201,13 @@ QString BubbleBox::getPeriodText() {
     // 检查key是否存在
     if (!root.contains(keyName) || !root[keyName].isArray()) {
         qWarning() << "JSON format error or missing '" << keyName << "'";
-        return "Hello World!";
+        return tr("Hello World!");
     }
 
     // 获取数组
     QJsonArray targetArray = root[keyName].toArray();
     if (targetArray.isEmpty()) {
-        return "Hello World!";
+        return tr("Hello World!");
     }
 
     int index = std::rand() % targetArray.size();
@@ -219,13 +219,13 @@ void BubbleBox::showTime() {
     QString time = currentTime.toString("hh:mm");
     QString period = getPeriodText(); // 获取当前时间段句子
     if (isFirst) {
-        textSet(period + "\n现在是" + time + "哦~");
+        textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
         isFirst = false;
     } else if ((time.contains(":00") || time.contains(":30")) && time != this->now) {
-        textSet(period + "\n现在是" + time + "哦~");
+        textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
         bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {
-            TrayIcon::instance()->showMessage("PLauncher", "现在是" + time);
+            TrayIcon::instance()->showMessage("PLauncher", tr("现在是%1").arg(time));
         }
         qDebug() << "now:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;
@@ -239,7 +239,7 @@ QString BubbleBox::GetSystemTime() {
 
 void BubbleBox::setThinkingText() {
     fadeTimer->stop();
-    setText("In response...");
+    setText(tr("In response..."));
     adjustSize();
     show();
 }

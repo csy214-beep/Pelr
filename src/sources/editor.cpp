@@ -31,7 +31,7 @@ QPair<QList<QString>, QList<QString> > EditorWidget::getAllInfo() {
     QString desc = ui->textEdit->toPlainText();
     QList<QString> category;
     if (name.isEmpty() || path.isEmpty()) {
-        QMessageBox::warning(this, "Warning", "名称和路径不能为空");
+        QMessageBox::warning(this, tr("Warning"), tr("名称和路径不能为空"));
         return {};
     }
     if (ui->checkBox->isChecked()) {
@@ -47,14 +47,14 @@ QPair<QList<QString>, QList<QString> > EditorWidget::getAllInfo() {
         category.append("Scripts");
     }
     if (category.isEmpty()) {
-        QMessageBox::warning(this, "Warning", "至少选择一个分类");
+        QMessageBox::warning(this, tr("Warning"), tr("至少选择一个分类"));
         return {};
     }
     return {category, {name, path, icon, desc}};
 }
 
 void EditorWidget::selectFile(QLineEdit *lineEdit) {
-    QString fileName = QFileDialog::getOpenFileName(this, "Open File");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"));
     if (fileName.isEmpty()) {
         return;
     }
