@@ -214,31 +214,31 @@
     <name>GLCore</name>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="157"/>
-        <location filename="../src/sources/GLCore.cpp" line="533"/>
+        <location filename="../src/sources/GLCore.cpp" line="541"/>
         <source>按键监听</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="161"/>
-        <location filename="../src/sources/GLCore.cpp" line="534"/>
+        <location filename="../src/sources/GLCore.cpp" line="542"/>
         <source>说点什么</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="167"/>
-        <location filename="../src/sources/GLCore.cpp" line="535"/>
+        <location filename="../src/sources/GLCore.cpp" line="543"/>
         <source>启动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="175"/>
-        <location filename="../src/sources/GLCore.cpp" line="536"/>
+        <location filename="../src/sources/GLCore.cpp" line="544"/>
         <source>天气</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="179"/>
-        <location filename="../src/sources/GLCore.cpp" line="537"/>
+        <location filename="../src/sources/GLCore.cpp" line="545"/>
         <source>电源状态</source>
         <translation type="unfinished"></translation>
     </message>
@@ -252,36 +252,36 @@ Battery State: %3</source>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="189"/>
-        <location filename="../src/sources/GLCore.cpp" line="538"/>
+        <location filename="../src/sources/GLCore.cpp" line="546"/>
         <source>TODO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="192"/>
-        <location filename="../src/sources/GLCore.cpp" line="539"/>
+        <location filename="../src/sources/GLCore.cpp" line="547"/>
         <source>问个问题</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="196"/>
-        <location filename="../src/sources/GLCore.cpp" line="540"/>
+        <location filename="../src/sources/GLCore.cpp" line="548"/>
         <source>界面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="212"/>
-        <location filename="../src/sources/GLCore.cpp" line="541"/>
+        <location filename="../src/sources/GLCore.cpp" line="549"/>
         <source>EMO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="216"/>
-        <location filename="../src/sources/GLCore.cpp" line="542"/>
+        <location filename="../src/sources/GLCore.cpp" line="550"/>
         <source>媒体播放</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="366"/>
+        <location filename="../src/sources/GLCore.cpp" line="367"/>
         <source>%1, %2℃, %3, humidity: %4%.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -366,12 +366,12 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/headers/todoNotify.hpp" line="80"/>
+        <location filename="../src/headers/todoNotify.hpp" line="79"/>
         <source>还没有最近的待办事项哦！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/headers/todoNotify.hpp" line="83"/>
+        <location filename="../src/headers/todoNotify.hpp" line="82"/>
         <source>最近的一次待办事项是「%1」，截止时间是：%2</source>
         <translation type="unfinished"></translation>
     </message>

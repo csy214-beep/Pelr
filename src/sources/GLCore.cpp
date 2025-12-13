@@ -243,6 +243,7 @@ void GLCore::connectSignals() {
             // qDebug() << "user: 开启报时功能";
             BubbleBox::instance()->showTime();
         }
+        checkFocus();
         TodoNotify::instance().todoNotify();
     });
     timer->start((1.0 / DataManager::instance().getBasicData().FPS) * 1000.0); // 30fps
@@ -419,9 +420,16 @@ void GLCore::switchDragStatus() {
     }
 }
 
-void GLCore::onExpMotionSelected() {
-}
 
+void GLCore::checkFocus() {
+    QWidget *focusWidget = QApplication::focusWidget();
+    //qDebug() << "focusWidget:" << &focusWidget;
+
+    isFocused = focusWidget != nullptr;
+    if (!isFocused && menuWidget->isVisible()) {
+        menuWidget->hide();
+    }
+}
 
 //unused
 void GLCore::loadModel() {

@@ -57,7 +57,6 @@ public:
         }
     }
 
-    // todo: 加入询问菜单
     static void askLatestNextEvent() {
         // 加载数据
         QList<TodoData> data = DataManager::instance().todo_data; //first

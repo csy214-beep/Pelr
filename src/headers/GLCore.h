@@ -61,9 +61,7 @@ public slots:
     void silentMode();
 
     void switchDragStatus();
-
-    void onExpMotionSelected();
-
+    
     void onPlayMedia();
 
 private slots:
@@ -72,6 +70,8 @@ private slots:
     void checkMouseTransparency();
 
     void retranslateUI();
+
+    void checkFocus();
 
 private:
     // buttons actions
@@ -86,6 +86,7 @@ private:
     QPushButton *EmotionButton;
     QPushButton *MediaButton;
     // bool flags
+    bool isFocused = false;
     bool isAllowDrag = true;
     bool isSilentMode = false;
     bool left_button_down = false;
