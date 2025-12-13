@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 4.0)
 project(PLauncher)
 # ------------------
 # 设置是否为debug模式
-set(D_OR_R ON)#ON for Debug, OFF for Release
+set(D_OR_R OFF)#ON for Debug, OFF for Release
 
 # 是否开启控制台调试输出
 set(CONSOLE ON)
@@ -36,6 +36,15 @@ find_package(Qt5 COMPONENTS
         LinguistTools
         REQUIRED)
 
+# @Translations
+FILE(GLOB TRANSLATION_FILES "./translations/*.ts")
+# 定义翻译文件（.ts）列表，自定义语言（如zh_CN=中文，en_US=英文）
+# 注意：文件路径可以自定义，这里放在项目根目录的translations文件夹下
+#set(TRANSLATION_FILES
+#        translations/language_zh_CN.ts
+#        translations/language_en_US.ts
+#)
+
 
 #设置渲染方式，选择为0penGL，不然默认是Cocos2d，编译包报错的，CMake也会给你警告的
 set(FRAMEWORK_SOURCE OpenGL)
@@ -49,6 +58,16 @@ FILE(GLOB HPP_FILES "./src/headers/*.hpp")
 file(GLOB LApp2D "LAppLive2D/src/*.cpp")
 qt5_wrap_ui(UI_HEADERS ${UI_FILES})
 message(STATUS ${LApp2D})
+
+# @Translations
+# Qt5的MOC、UIC、RCC工具处理（必须，Qt5项目标配）
+qt5_wrap_cpp(MOC_SOURCES ${HEADER_FILES} ${HPP_FILES})
+qt5_wrap_ui(UI_SOURCES ${UI_FILES})
+
+# @Translations
+# 使用lupdate生成/更新.ts文件：扫描源文件、头文件、UI文件中的tr()字符串
+# 第一个参数：生成的QM文件变量（后续用），第二个参数：TS文件列表，第三个参数：需要扫描的文件
+qt5_create_translation(QM_FILES ${SOURCE_FILES} ${UI_FILES} ${HEADER_FILES} ${HPP_FILES} ${TRANSLATION_FILES})
 
 # 头文件搜索路径
 include_directories(
@@ -85,12 +104,15 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ${UI_DIR}) # 没有这句就GG
 
 add_executable(PLauncher
         ${CON}
-        ${UI_FILES}
+        #        ${UI_FILES}
         ${SOURCE_FILES}
-        ${HEADER_FILES}
-        ${HPP_FILES}
+        #        ${HEADER_FILES}
+        #        ${HPP_FILES}
+        ${MOC_SOURCES}
+        ${UI_SOURCES}
         ${LApp2D}
         ${QT_RESOURCES}
+        ${QM_FILES}  # 将QM文件加入项目，确保编译时生成
 )
 target_link_libraries(PLauncher
         Framework
@@ -113,33 +135,89 @@ target_link_libraries(PLauncher
         Qt5::Concurrent
         Qt5::MultimediaWidgets
 )
-
-
+# @Translations
+# 问题：$<TARGET_FILE_DIR:${PROJECT_NAME}> 是生成器表达式，只能在构建阶段解析
+# 解决方案：将「创建目录+复制文件」合并到 POST_BUILD 命令中，构建阶段执行
+set(QM_OUTPUT_DIR "$<TARGET_FILE_DIR:${PROJECT_NAME}>/translations")
+foreach (qm_file ${QM_FILES})
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            # 第一步：创建目录（构建阶段解析生成器表达式，路径有效）
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${QM_OUTPUT_DIR}
+            # 第二步：复制 QM 文件到目录
+            COMMAND ${CMAKE_COMMAND} -E copy ${qm_file} ${QM_OUTPUT_DIR}/
+            COMMENT "Copying ${qm_file} to ${QM_OUTPUT_DIR}"
+    )
+endforeach ()
+# ==============================================
+# Windows 平台专属：复制 Qt 运行时依赖（DLL + 平台插件）
+# 核心修正：Qt 路径拼接逻辑，确保指向正确的 bin/plugins 目录
+# ==============================================
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    set(DEBUG_SUFFIX)
-    if (MSVC AND CMAKE_BUILD_TYPE MATCHES "Debug")
-        set(DEBUG_SUFFIX "d")
+    # 1. 配置 Debug 后缀（适配 MSVC/MinGW 双编译器）
+    set(DEBUG_SUFFIX "")
+    #    if (CMAKE_BUILD_TYPE MATCHES "Debug")
+    #        set(DEBUG_SUFFIX "d")
+    #    endif () # 由于我没有debug的动态库，所以注释掉了
+
+    # 2. 正确设置 Qt 路径（关键修正！）
+    # CMAKE_PREFIX_PATH = D:/Qt/5.15.2/mingw81_64（Qt 安装根目录）
+    # Qt 的 DLL 在 bin 目录下，插件在 plugins 目录下（与 bin 同级）
+    set(QT_BIN_PATH "${CMAKE_PREFIX_PATH}/bin")  # 直接指向 Qt 的 bin 目录
+    set(QT_PLUGIN_PATH "${CMAKE_PREFIX_PATH}/plugins")  # 直接指向 Qt 的 plugins 目录
+
+    # 路径有效性检查
+    if (NOT EXISTS "${QT_BIN_PATH}")
+        message(FATAL_ERROR "Qt bin directory does not exist! Path: ${QT_BIN_PATH}, please check if CMAKE_PREFIX_PATH is correct")
     endif ()
-    set(QT_INSTALL_PATH "${CMAKE_PREFIX_PATH}")
-    if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
-        set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")
-        if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
-            set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")
-        endif ()
+    if (NOT EXISTS "${QT_PLUGIN_PATH}")
+        message(FATAL_ERROR "Qt plugins directory does not exist! Path: ${QT_PLUGIN_PATH}")
     endif ()
-    if (EXISTS "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll")
+
+    # 3. 复制 Qt 平台插件（修正路径：直接用 QT_PLUGIN_PATH）
+    set(QT_WINDOWS_PLUGIN "${QT_PLUGIN_PATH}/platforms/qwindows${DEBUG_SUFFIX}.dll")
+    if (EXISTS "${QT_WINDOWS_PLUGIN}")
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E make_directory
-                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/"
+                COMMENT "Create Qt platform plugin directory: plugins/platforms/"
+        )
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
-                "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll"
-                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
+                "${QT_WINDOWS_PLUGIN}"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/"
+                COMMENT "Copy Qt platform plugin: qwindows${DEBUG_SUFFIX}.dll"
+        )
+    else ()
+        message(FATAL_ERROR "Qt platform plugin missing! Path: ${QT_WINDOWS_PLUGIN}")
     endif ()
-    foreach (QT_LIB Core Gui Widgets)
-        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy
-                "${QT_INSTALL_PATH}/bin/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll"
-                "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
-    endforeach (QT_LIB)
+
+    # 4. 复制所有依赖的 Qt DLL（修正路径：从 QT_BIN_PATH 复制）
+    set(QT_REQUIRED_LIBS
+            Core        # 核心模块
+            Gui         # 图形界面模块
+            Widgets     # 控件模块
+            Network     # 网络模块
+            OpenGL      # OpenGL 模块
+            SerialPort  # 串口模块
+            Sql         # 数据库模块
+            Svg         # SVG 图形模块
+            WebChannel  # Web 通信模块
+            WebSockets  # WebSocket 模块
+            Multimedia  # 多媒体模块
+            Concurrent  # 并发编程模块
+            MultimediaWidgets  # 多媒体控件模块
+    )
+    foreach (QT_LIB ${QT_REQUIRED_LIBS})
+        set(QT_DLL_PATH "${QT_BIN_PATH}/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll")
+        if (EXISTS "${QT_DLL_PATH}")
+            add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy
+                    "${QT_DLL_PATH}"
+                    "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+                    COMMENT "Copying Qt DLL: Qt5${QT_LIB}${DEBUG_SUFFIX}.dll"
+            )
+        else ()
+            message(FATAL_ERROR "Qt DLL missing! Path: ${QT_DLL_PATH}, please check if this component of Qt is installed.")
+        endif ()
+    endforeach ()
 endif ()

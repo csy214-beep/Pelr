@@ -87,8 +87,6 @@
     - 安装 [Ollama](https://ollama.ai/)
     - 在设置 → Ollama集成中选择模型和角色
 
-
-
 ## 📦 项目结构
 
 ```
@@ -107,6 +105,7 @@ PLauncher/
 ├── SampleShaders/          # 示例着色器
 ├── FrameworkShaders/       # 框架着色器
 ├── thirdParty/             # 第三方库
+├── translations/           # 翻译文件
 ├── docs/                   # 文档文件
 ├── LICENSE.md              # 许可证文件
 ├── README.md               # 项目说明文件
@@ -143,30 +142,15 @@ PLauncher/
 1. **安装 Qt 5.15.2** (MingW81_64 版本)
 2. **安装 Python 3.11** 和所需依赖:
    ```bash
-   pip install -r scripts/requirements.txt
+   pip install -r requirements.txt
    ```
 3. **配置 C++ 编译环境** (CMake + MingW)
 
 ### 编译步骤
 
+> [!TIP]
+>
 > 可参考[构建流程](docs/构建流程.md)
-
-**使用CLion开发，不保证以下命令有效性**
-
-```bash
-# 克隆仓库
-git clone https://gitee.com/Pfolg/plauncher.git
-cd PLauncher
-
-# 创建构建目录
-mkdir build && cd build
-
-# 生成构建文件
-cmake -G "MinGW Makefiles" ..
-
-# 编译项目
-mingw32-make
-```
 
 ## 📖 使用指南
 
@@ -181,7 +165,7 @@ mingw32-make
 ### 基本操作
 
 - **主界面导航**: 使用左侧侧边栏切换功能模块
-- **聊天功能**: 在聊天界面输入消息与虚拟角色互动 (Ollama AI 与 TTS 功能相互独立)
+- **聊天功能**: 在聊天界面输入消息或双击角色显示对话框
 - **启动项管理**: 管理自定义的启动程序
 
 ## 🤝 参与贡献
