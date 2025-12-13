@@ -36,6 +36,7 @@ tts_server/build/
 tts_server/dist/
 tts_server/log/
 tts_server/*.spec
+test_docs
 
 # Third-party Libraries
 thirdParty/
@@ -58,3 +59,6 @@ lib/
 Resources/
 SampleShaders/
 FrameworkShaders/
+
+**/timeText.json
+**/dailyText.json

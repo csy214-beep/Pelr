@@ -70,7 +70,7 @@ void initTranslator(QApplication &a, const QString &path) {
 
     // 自动检测并设置系统语言
     QString sysLang = TranslationManager::instance()->detectSystemLanguage();
-    TranslationManager::instance()->setLanguage(sysLang);
+    TranslationManager::instance()->setLanguage("en_US");
 
     qDebug() << "System language: " << sysLang;
     qDebug() << "Translator initialized";
