@@ -1,5 +1,5 @@
 /*
-* PLauncher - Live2D Virtual Desktop Assistant
+* PLauncher - Live2D Virtual Desktop Partner
  * https://gitee.com/Pfolg/plauncher
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng

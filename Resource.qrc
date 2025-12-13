@@ -306,6 +306,10 @@
     <file>assets/IconaMoon/General/Zoom Out - 24x24.png</file>
   </qresource>
   <qresource>
+    <file>translations/language_en_US.ts</file>
+    <file>translations/language_zh_CN.ts</file>
+  </qresource>
+  <qresource>
     <file>assets/font/MapleMono-NF-CN-Medium.ttf</file>
   </qresource>
   <qresource>

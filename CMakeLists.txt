@@ -37,13 +37,13 @@ find_package(Qt5 COMPONENTS
         REQUIRED)
 
 # @Translations
-FILE(GLOB TRANSLATION_FILES "./translations/*.ts")
+#FILE(GLOB TRANSLATION_FILES "./translations/*.ts")
 # 定义翻译文件（.ts）列表，自定义语言（如zh_CN=中文，en_US=英文）
 # 注意：文件路径可以自定义，这里放在项目根目录的translations文件夹下
-#set(TRANSLATION_FILES
-#        translations/language_zh_CN.ts
-#        translations/language_en_US.ts
-#)
+set(TRANSLATION_FILES
+        translations/language_zh_CN.ts
+        translations/language_en_US.ts
+)
 
 
 #设置渲染方式，选择为0penGL，不然默认是Cocos2d，编译包报错的，CMake也会给你警告的

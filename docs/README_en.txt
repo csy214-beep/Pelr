@@ -1,4 +1,4 @@
-# PLauncher - Live2D Virtual Desktop Assistant
+# PLauncher - Live2D Virtual Desktop Partner
 
 repo site: https://gitee.com/Pfolg/plauncher
 release log: https://gitee.com/Pfolg/plauncher/blob/master/docs/FullReleaseLog.md
@@ -79,9 +79,9 @@ Additionally, due to Gitee's release limitations, you can visit sourceforge to v
 PLauncher/
 +-- CMakeLists.txt          # C++ project build configuration
 +-- scripts/
-¦   +-- AUCF                # Deprecated module Archived Unused Cpp Files
-¦   +-- requirements.txt    # Python dependencies list
-¦   +-- tts_server.py       # TTS server
+ï¿½   +-- AUCF                # Deprecated module Archived Unused Cpp Files
+ï¿½   +-- requirements.txt    # Python dependencies list
+ï¿½   +-- tts_server.py       # TTS server
 +-- src/                    # C++ source code
 +-- Resources/              # Model resource files
 +-- lib/                    # Third-party libraries
