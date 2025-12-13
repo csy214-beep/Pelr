@@ -31,8 +31,8 @@
 #include <QColor>
 #include "tray.h"
 // 时间段语录文件
-#define TIMETEXT_FILE ":/assets/text/timeText.json"
-#define DAILYTEXT_FILE ":/assets/text/dailyText.json"
+#define TIMETEXT_FILE "assets/text/timeText.json"
+#define DAILYTEXT_FILE "assets/text/dailyText.json"
 
 // 初始化静态成员变量
 BubbleBox *BubbleBox::m_instance = nullptr;

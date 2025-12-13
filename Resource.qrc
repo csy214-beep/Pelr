@@ -322,7 +322,5 @@
   </qresource>
   <qresource>
     <file>assets/text/thirdParty.md</file>
-    <file>assets/text/dailyText.json</file>
-    <file>assets/text/timeText.json</file>
   </qresource>
 </RCC>

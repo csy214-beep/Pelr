@@ -1,0 +1,26 @@
+{
+  "dawn": [
+    "Good morning！",
+    "Greetings！"
+  ],
+  "morning": [
+    "Good morning！",
+    "morning"
+  ],
+  "noon": [
+    "Hi, it's noon now.",
+    "hello"
+  ],
+  "afternoon": [
+    "Good afternoon！",
+    "Hi, good afternoon!"
+  ],
+  "dusk": [
+    "Hi, it's dusk now.",
+    "hello"
+  ],
+  "night": [
+    "best wishes!",
+    "Good night！"
+  ]
+}
