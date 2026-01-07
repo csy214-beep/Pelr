@@ -1,0 +1,2 @@
+// PLauncher.rc 资源脚本文件 (Windows专属)
+IDI_ICON1 ICON "assets/image/PLauncher.ico"

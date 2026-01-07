@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 4.0)
 project(PLauncher)
 # ------------------
 # 设置是否为debug模式
-set(D_OR_R OFF)#ON for Debug, OFF for Release
+set(D_OR_R ON)#ON for Debug, OFF for Release
 
 # 是否开启控制台调试输出
 set(CONSOLE ON)
@@ -116,7 +116,7 @@ add_executable(PLauncher
 )
 target_link_libraries(PLauncher
         Framework
-        libglew32d.dll
+        libglew32d
         glfw3
         Live2DCubismCore_d
         opengl32
@@ -135,6 +135,32 @@ target_link_libraries(PLauncher
         Qt5::Concurrent
         Qt5::MultimediaWidgets
 )
+# ===================== 正确的Windows程序图标设置 =====================
+if (WIN32)
+    # 1. 定义图标文件路径和rc脚本路径
+    set(APP_ICON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/assets/image/PLauncher.ico")
+    set(APP_RC_FILE "${CMAKE_CURRENT_SOURCE_DIR}/PLauncher.rc")
+
+    # 2. 检查图标和rc脚本是否存在
+    if (EXISTS ${APP_ICON_FILE} AND EXISTS ${APP_RC_FILE})
+        # 3. 将rc脚本文件加入项目编译（核心：通过rc脚本绑定图标）
+        target_sources(${PROJECT_NAME} PRIVATE ${APP_RC_FILE})
+
+        # 4. 配合你的CONSOLE开关，设置是否为无控制台的GUI程序（完美联动你的原有逻辑）
+        if (NOT CONSOLE)
+            set_target_properties(${PROJECT_NAME} PROPERTIES
+                    WIN32_EXECUTABLE TRUE  # 无控制台窗口
+            )
+        else()
+            set_target_properties(${PROJECT_NAME} PROPERTIES
+                    WIN32_EXECUTABLE FALSE # 带控制台窗口
+            )
+        endif()
+    else()
+        message(WARNING "程序图标文件或RC脚本缺失，将使用默认图标！")
+    endif ()
+endif ()
+
 # @Translations
 # 问题：$<TARGET_FILE_DIR:${PROJECT_NAME}> 是生成器表达式，只能在构建阶段解析
 # 解决方案：将「创建目录+复制文件」合并到 POST_BUILD 命令中，构建阶段执行
