@@ -1,6 +1,6 @@
 ## ver20251118.9
 
-## 更新内容
+### 更新内容
 
 * fix: window no icon
 * fix(core): 修改时间语录文件路径并添加新文件
@@ -21,20 +21,20 @@
 * feat(ui): 实现菜单自动隐藏功能
 * feat(setting): 添加静默启动选项
 
-**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver20251114-8...ver20251118.9
+**完整的更新日志**: <https://gitee.com/Pfolg/plauncher/compare/ver20251114-8...ver20251118.9>
 
 ## ver20251114-8
 
-## 更新内容
+### 更新内容
 
-* release: ver20251114-8 close https://gitee.com/Pfolg/plauncher/issues/ID6AXW [✔ empty push]
-* release: ver20251114-8 close https://gitee.com/Pfolg/plauncher/issues [X empty push]
+* release: ver20251114-8 close <https://gitee.com/Pfolg/plauncher/issues/ID6AXW> [✔ empty push]
+* release: ver20251114-8 close <https://gitee.com/Pfolg/plauncher/issues> [X empty push]
 * chore: 删除旧部署脚本并更新版本号及忽略规则
 * refactor(启动项目菜单): 使用CustomMenu替换QMenu
 * docs: 添加README_en.txt和README_sourceforge.txt文档
 * docs: update release log
 
-**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver20251031-7...ver20251114-8
+**完整的更新日志**: <https://gitee.com/Pfolg/plauncher/compare/ver20251031-7...ver20251114-8>
 
 ## ver20251031-7
 
@@ -57,7 +57,7 @@
 * docs: 更新许可证链接格式
 * fix: 更新项目许可证信息和版权声明
 
-**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.5-251018...ver20251031-7
+**完整的更新日志**: <https://gitee.com/Pfolg/plauncher/compare/ver0.5-251018...ver20251031-7>
 
 ## ver0.5-251018
 
@@ -70,15 +70,15 @@
 * docs: 添加完整版本更新日志
 * feat(ui): 添加许可证检查功能
 
-**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.0.5...ver0.5-251018
+**完整的更新日志**: <https://gitee.com/Pfolg/plauncher/compare/ver0.0.5...ver0.5-251018>
 
 ## ver0.0.5
 
 **本次更新**：
 
-+ 完成项目适配Gitee
-+ ui优化
-+ 项目结构优化
+* 完成项目适配Gitee
+* ui优化
+* 项目结构优化
 
 ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 
@@ -114,7 +114,7 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 * chore: add necessary parts
 * docs: 更新社区准则和安全报告链接
 
-**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver0.0.4b...ver0.0.5
+**完整的更新日志**: <https://gitee.com/Pfolg/plauncher/compare/ver0.0.4b...ver0.0.5>
 
 ## ver0.0.4b
 
@@ -122,8 +122,8 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 
 本次更新：
 
-- 添加媒体播放功能
-- 原有的**关于**功能失效（将在后续更新修复）
+* 添加媒体播放功能
+* 原有的**关于**功能失效（将在后续更新修复）
 
 你可以尝试访问：[GitHub上的提交](https://github.com/Pfolg/PLauncher/commits/main/)（可能无效） 以获取本版本的特性
 
@@ -131,25 +131,25 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 
 本次更新：
 
-+ 表情系统 https://github.com/Pfolg/PLauncher/commit/700c7c3d0334a98db348f398dc7776a7b4bfe212
-+ 检查更新的功能 https://github.com/Pfolg/PLauncher/commit/67c397e2adae10e9c129780edf5cf07a143429a9
-+ 局部优化
+* 表情系统 <https://github.com/Pfolg/PLauncher/commit/700c7c3d0334a98db348f398dc7776a7b4bfe212>
+* 检查更新的功能 <https://github.com/Pfolg/PLauncher/commit/67c397e2adae10e9c129780edf5cf07a143429a9>
+* 局部优化
 
-**Full Changelog**: https://github.com/Pfolg/PLauncher/compare/ver0.0.2...ver0.0.3
+**Full Changelog**: <https://github.com/Pfolg/PLauncher/compare/ver0.0.2...ver0.0.3>
 
 ## ver0.0.2
 
 > [!WARNING]
 > 已知问题：有的额外窗口的大小不会根据设定自动调整，建议使用默认大小
 
-+ TODO功能实现
-+ UI优化
-+ 托盘功能优化
-+ 第二聊天功能
+* TODO功能实现
+* UI优化
+* 托盘功能优化
+* 第二聊天功能
 
-**基本使用方法**: https://github.com/Pfolg/PLauncher/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
+**基本使用方法**: <https://github.com/Pfolg/PLauncher/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95>
 
-**Full Changelog**: https://github.com/Pfolg/PLauncher/compare/ver0.0.1...ver0.0.2
+**Full Changelog**: <https://github.com/Pfolg/PLauncher/compare/ver0.0.1...ver0.0.2>
 
 ## ver0.0.1
 
