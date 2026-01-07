@@ -8,7 +8,6 @@
  * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #pragma once
-
 #include <QProcess>
 #include <QDesktopServices>
 #include <QUrl>
@@ -19,14 +18,11 @@
 #include <QFuture>
 #include <QtConcurrent>
 #include "tray.h"
-
-
 static QFuture<void> launchByPathAsync(const QString &path) {
     qDebug() << "launching: " << path;
     return QtConcurrent::run([path]() -> bool {
         try {
             bool success = false;
-
             // 对于URL，使用QDesktopServices
             if (path.startsWith("http://") || path.startsWith("https://") ||
                 path.startsWith("ftp://") || path.startsWith("file://")) {
@@ -36,8 +32,28 @@ static QFuture<void> launchByPathAsync(const QString &path) {
             else {
                 QFileInfo fileInfo(path);
                 if (fileInfo.exists()) {
-                    QUrl localUrl = QUrl::fromLocalFile(QDir::toNativeSeparators(path));
-                    success = QDesktopServices::openUrl(localUrl);
+                    // 如果是可执行文件，使用QProcess启动以设置工作目录
+                    if (fileInfo.isFile() && fileInfo.isExecutable()) {
+                        QProcess *process = new QProcess();
+                        process->setWorkingDirectory(fileInfo.absolutePath());
+                        process->setProgram(fileInfo.absoluteFilePath());
+
+                        // 连接finished信号以便清理
+                        QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                                       process, &QProcess::deleteLater);
+                        QObject::connect(process, &QProcess::errorOccurred,
+                                       [path, process](QProcess::ProcessError error) {
+                            qWarning() << "Process error for" << path << ":" << error;
+                            process->deleteLater();
+                        });
+
+                        process->startDetached();
+                        success = true;
+                    } else {
+                        // 非可执行文件使用原来的方式
+                        QUrl localUrl = QUrl::fromLocalFile(QDir::toNativeSeparators(path));
+                        success = QDesktopServices::openUrl(localUrl);
+                    }
                 } else {
                     qWarning() << "File or directory does not exist:" << path;
                     TrayIcon::instance()->showMessage(
@@ -47,7 +63,6 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                     return false;
                 }
             }
-
             if (!success) {
                 qWarning() << "Failed to open:" << path;
                 TrayIcon::instance()->showMessage(
@@ -56,7 +71,6 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                         QSystemTrayIcon::Warning, 5000);
                 return false;
             }
-
             return true;
         } catch (const std::exception &e) {
             qCritical() << "Exception occurred while launching" << path << ":" << e.what();
@@ -76,7 +90,6 @@ static QFuture<void> launchByPathAsync(const QString &path) {
         }
     });
 }
-
 // 同步版本
 static void launchByPath(const QString &path) {
     launchByPathAsync(path);

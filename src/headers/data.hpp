@@ -26,7 +26,7 @@
 #define TODO_DATA_FILE "user/todoData.dat"
 #define TODO_NOTIFY_FILE "user/todoNotify.dat"
 
-#define VERSION "ver20251118.9"
+#define VERSION "ver20260107.10"
 //todo: 多语言支持
 
 struct ConfigData {
