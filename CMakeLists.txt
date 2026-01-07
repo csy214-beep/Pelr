@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 4.0)
 project(PLauncher)
 # ------------------
 # 设置是否为debug模式
-set(D_OR_R ON)#ON for Debug, OFF for Release
+set(D_OR_R OFF)#ON for Debug, OFF for Release
 
 # 是否开启控制台调试输出
-set(CONSOLE ON)
+set(CONSOLE OFF)
 # ------------------
 
 # 启用 Unicode 模式（Windows 平台）
@@ -157,7 +157,7 @@ if (WIN32)
             )
         endif()
     else()
-        message(WARNING "程序图标文件或RC脚本缺失，将使用默认图标！")
+        message(WARNING "Program icon file or RC script is missing, the default icon will be used!")
     endif ()
 endif ()
 

@@ -1,3 +1,28 @@
+## ver20251118.9
+
+## 更新内容
+
+* fix: window no icon
+* fix(core): 修改时间语录文件路径并添加新文件
+* refactor: 删除不再使用的文本文件并更新语言设置
+* refactor: 移除未使用函数并添加焦点检查功能
+* style(core): 添加国际化支持并调整代码格式
+* style: 修改文件头注释
+* feat(translations): 修改配置文件
+* fix(core): 修正窗口重置位置逻辑
+* fix: 修改默认文本为 "Hello World!"
+* fix(log): 日志信息国际化
+* fix: 优化日志信息并添加多语言支持待办
+* feat（todoNotification）: todo消息使用托盘提醒（可选）
+* style/docs (thirdParty): 移除图标链接的图片标签，优化markdown显示
+* docs: 修改README中的NOTE格式
+* docs: 修改README中的术语和格式
+* style(ui): 移除重复包含的data.hpp
+* feat(ui): 实现菜单自动隐藏功能
+* feat(setting): 添加静默启动选项
+
+**完整的更新日志**: https://gitee.com/Pfolg/plauncher/compare/ver20251114-8...ver20251118.9
+
 ## ver20251114-8
 
 ## 更新内容
