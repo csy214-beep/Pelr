@@ -320,36 +320,36 @@ Battery State: %3</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/headers/launcher.hpp" line="60"/>
-        <location filename="../src/headers/launcher.hpp" line="69"/>
+        <location filename="../src/headers/launcher.hpp" line="61"/>
+        <location filename="../src/headers/launcher.hpp" line="70"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/headers/launcher.hpp" line="61"/>
+        <location filename="../src/headers/launcher.hpp" line="62"/>
         <source>File or directory does not exist: %1</source>
         <translation>File or directory does not exist: %1</translation>
     </message>
     <message>
-        <location filename="../src/headers/launcher.hpp" line="70"/>
+        <location filename="../src/headers/launcher.hpp" line="71"/>
         <source>Failed to open: %1</source>
         <translation>Failed to open: %1</translation>
     </message>
     <message>
-        <location filename="../src/headers/launcher.hpp" line="78"/>
-        <location filename="../src/headers/launcher.hpp" line="86"/>
+        <location filename="../src/headers/launcher.hpp" line="79"/>
+        <location filename="../src/headers/launcher.hpp" line="87"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/headers/launcher.hpp" line="79"/>
+        <location filename="../src/headers/launcher.hpp" line="80"/>
         <source>Exception occurred while launching: %1 
 %2</source>
         <translation>Exception occurred while launching: %1 
 %2</translation>
     </message>
     <message>
-        <location filename="../src/headers/launcher.hpp" line="87"/>
+        <location filename="../src/headers/launcher.hpp" line="88"/>
         <source>Unknown exception occurred while launching: %1</source>
         <translation>Unknown exception occurred while launching: %1</translation>
     </message>

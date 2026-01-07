@@ -32,8 +32,9 @@ static QFuture<void> launchByPathAsync(const QString &path) {
             else {
                 QFileInfo fileInfo(path);
                 if (fileInfo.exists()) {
-                    // 如果是可执行文件，使用QProcess启动以设置工作目录
-                    if (fileInfo.isFile() && fileInfo.isExecutable()) {
+                    // 只对.exe文件使用QProcess启动以设置工作目录
+                    QString suffix = fileInfo.suffix().toLower();
+                    if (fileInfo.isFile() && suffix == "exe") {
                         QProcess *process = new QProcess();
                         process->setWorkingDirectory(fileInfo.absolutePath());
                         process->setProgram(fileInfo.absoluteFilePath());
@@ -50,7 +51,7 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                         process->startDetached();
                         success = true;
                     } else {
-                        // 非可执行文件使用原来的方式
+                        // 其他所有文件（包括.lnk、.bat等）使用原来的方式
                         QUrl localUrl = QUrl::fromLocalFile(QDir::toNativeSeparators(path));
                         success = QDesktopServices::openUrl(localUrl);
                     }
