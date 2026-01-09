@@ -1,11 +1,19 @@
+# PLauncher - Live2D Virtual Desktop Partner
+# https://gitee.com/Pfolg/plauncher
+# https://sourceforge.net/projects/pfolg-plauncher/
+# Copyright (c) 2025 SY Cheng
+#
+# GPL v3 License
+# https://gnu.ac.cn/licenses/gpl-3.0.html
+
 cmake_minimum_required(VERSION 4.0)
 project(PLauncher)
 # ------------------
 # 设置是否为debug模式
-set(D_OR_R OFF)#ON for Debug, OFF for Release
+set(D_OR_R ON)#ON for Debug, OFF for Release
 
 # 是否开启控制台调试输出
-set(CONSOLE OFF)
+set(CONSOLE ON)
 # ------------------
 
 # 启用 Unicode 模式（Windows 平台）
@@ -151,12 +159,12 @@ if (WIN32)
             set_target_properties(${PROJECT_NAME} PROPERTIES
                     WIN32_EXECUTABLE TRUE  # 无控制台窗口
             )
-        else()
+        else ()
             set_target_properties(${PROJECT_NAME} PROPERTIES
                     WIN32_EXECUTABLE FALSE # 带控制台窗口
             )
-        endif()
-    else()
+        endif ()
+    else ()
         message(WARNING "Program icon file or RC script is missing, the default icon will be used!")
     endif ()
 endif ()

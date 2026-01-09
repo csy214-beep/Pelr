@@ -29,7 +29,7 @@
 // https://www.bilibili.com/video/BV1kcc8emEfR
 
 class GLCore : public QOpenGLWidget {
-Q_OBJECT // 可以用信号槽机制进行通信 信号与槽
+    Q_OBJECT // 可以用信号槽机制进行通信 信号与槽
 public:
     QTimer *timer;
     QTimer *inputCheckTimer;
@@ -51,7 +51,6 @@ public:
     GLCore(QWidget *parent = nullptr);
 
 public slots:
-
     void resetLocation();
 
     void loadModel();
@@ -61,17 +60,20 @@ public slots:
     void silentMode();
 
     void switchDragStatus();
-    
+
     void onPlayMedia();
 
 private slots:
-
     // 鼠标透明度检查->是否进行鼠标穿透
     void checkMouseTransparency();
 
     void retranslateUI();
 
     void checkFocus();
+
+    void saveWindowLocation();
+
+    void loadWindowLocation();
 
 private:
     // buttons actions
@@ -122,4 +124,10 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
 
     void mouseDoubleClickEvent(QMouseEvent *event) override;
+
+    void closeEvent(QCloseEvent *event) override;
+
+    void hideEvent(QHideEvent *event) override;
+
+    void showEvent(QShowEvent *event) override;
 };

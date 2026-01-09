@@ -35,6 +35,7 @@
 #include  "launcherMenu.hpp"
 
 #define RECORD_FILE "user/record.dat"
+#define WINDOW_LOCATION_FILE "user/window_location.dat"
 #define TODO_FEATURE_MSG "暂时不支持这个功能哟，试试别的功能吧！"
 
 GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
@@ -57,18 +58,18 @@ GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     // 窗口标志
     if (DataManager::instance().getBasicData().isTop) {
         this->setWindowFlags(
-                Qt::FramelessWindowHint |
-                Qt::WindowStaysOnTopHint |
-                Qt::Tool |
-                Qt::WindowTransparentForInput |
-                Qt::WindowDoesNotAcceptFocus
+            Qt::FramelessWindowHint |
+            Qt::WindowStaysOnTopHint |
+            Qt::Tool |
+            Qt::WindowTransparentForInput |
+            Qt::WindowDoesNotAcceptFocus
         );
     } else {
         this->setWindowFlags(
-                Qt::FramelessWindowHint |
-                Qt::Tool |
-                Qt::WindowTransparentForInput |
-                Qt::WindowDoesNotAcceptFocus
+            Qt::FramelessWindowHint |
+            Qt::Tool |
+            Qt::WindowTransparentForInput |
+            Qt::WindowDoesNotAcceptFocus
         );
     }
     this->setAttribute(Qt::WA_TranslucentBackground);
@@ -181,7 +182,7 @@ void GLCore::initContextMenu() {
         std::vector<QString> powerStatus = getPowerStatus();
         if (!powerStatus.empty()) {
             QString msg = tr("主人，这是您电脑目前的电源状态：\nAC: %1\nPercentage: %2%\nBattery State: %3").arg(
-                    powerStatus[0]).arg(powerStatus[1]).arg(powerStatus[2]);
+                powerStatus[0]).arg(powerStatus[1]).arg(powerStatus[2]);
             BubbleBox::instance()->textSet(msg);
         }
     });
@@ -287,7 +288,9 @@ void GLCore::connectSignals() {
     randomSentenceTimer = new QTimer();
     randomSentenceTimer->setSingleShot(true);
     connect(randomSentenceTimer, &QTimer::timeout, [&]() {
-        int randomTime = rand() % 10 + 25; //15-25min
+        int minTime = DataManager::instance().getBasicData().RandomInterval.first;
+        int maxTime = DataManager::instance().getBasicData().RandomInterval.second;
+        int randomTime = rand() % (maxTime - minTime + 1) + minTime; //15-25min
         qInfo() << "next random sentence in " << QString::number(randomTime * 60 * 1000) << " s";
         BubbleBox::instance()->RandomSentence();
         randomSentenceTimer->start(randomTime * 60 * 1000);
@@ -312,6 +315,22 @@ void GLCore::connectSignals() {
         int var = main_widget->Widget_Setting->getHorizontalSlider()->value();
         resize(4 * var, 3 * var);
     });
+    // 退出时记录窗口位置
+    connect(TrayIcon::instance()->action_quit, &QAction::triggered, [&]() {
+        saveWindowLocation();
+        QCoreApplication::quit();
+    });
+    //重置window位置
+    connect(TrayIcon::instance()->action_resetWinLoc, SIGNAL(triggered()), this, SLOT(resetLocation()));
+    //显示界面
+    connect(TrayIcon::instance()->action_showWin, SIGNAL(triggered()), this->main_widget, SLOT(show()));
+    //静默模式
+    connect(TrayIcon::instance()->action_silentMode, SIGNAL(triggered()), this, SLOT(silentMode()));
+
+    //拖动窗口
+    connect(TrayIcon::instance()->action_switchDrag, SIGNAL(triggered()), this, SLOT(switchDragStatus()));
+    //播放媒体
+    connect(TrayIcon::instance()->action_mediaPlayer, SIGNAL(triggered()), this, SLOT(onPlayMedia()));
 }
 
 void GLCore::switchListener() {
@@ -365,7 +384,7 @@ void GLCore::onAskWeather() {
         qDebug() << "天气：" << weather.description;
         qDebug() << "湿度：" << weather.humidity << "%";*/
         msg = tr("%1, %2℃, %3, humidity: %4%.").arg(weather.city).arg(weather.temperature).arg(weather.description).arg(
-                weather.humidity);
+            weather.humidity);
     } else {
         msg = weather.error;
     }
@@ -449,6 +468,45 @@ void GLCore::loadModel() {
     QString fileName = file_info.fileName();
     qDebug() << "model dir: " << dir << " fileName: " << fileName;
     LAppLive2DManager::GetInstance()->LoadModelFromPath(dir.toStdString() + "/", fileName.toStdString());
+}
+
+// 保存窗口位置
+void GLCore::saveWindowLocation() {
+    // 如果记录窗口位置选项关闭，则不保存
+    if (!DataManager::instance().getBasicData().isRecordWindowLocation)return;
+    QFile file(WINDOW_LOCATION_FILE);
+    if (!file.open(QIODevice::WriteOnly)) {
+        // 无法打开文件进行写入
+        QMessageBox::critical(nullptr, "Error", "写入数据失败！");
+        qCritical() << "write data failed: can not open file" << WINDOW_LOCATION_FILE;
+        return;
+    }
+
+    QDataStream out(&file);
+    out.setVersion(QDataStream::Qt_5_15); // 设置流版本以确保兼容性
+
+    // 写入数据
+    out << x() << y();
+    file.close();
+}
+
+// 加载窗口位置
+void GLCore::loadWindowLocation() {
+    // 如果记录窗口位置选项关闭，则不加载
+    if (!DataManager::instance().getBasicData().isRecordWindowLocation)return;
+    QFile file(WINDOW_LOCATION_FILE);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "read data failed: can not open file" << WINDOW_LOCATION_FILE;
+        return; // 文件不存在或无法打开，返回空列表
+    }
+    QDataStream in(&file);
+    in.setVersion(QDataStream::Qt_5_11); // 设置流版本以确保兼容性
+    int x, y;
+    in >> x >> y;
+    file.close();
+    qDebug() << "load window location: " << x << " " << y;
+    // 移动窗口到指定位置
+    move(x, y);
 }
 
 void GLCore::resetLocation() {
@@ -549,4 +607,20 @@ void GLCore::retranslateUI() {
     EmotionButton->setText(tr("EMO"));
     MediaButton->setText(tr("媒体播放"));
     qDebug() << "retranslate ui:" << typeid(*this).name();
+}
+
+void GLCore::closeEvent(QCloseEvent *event) {
+    // 保存窗口位置
+    saveWindowLocation();
+    event->accept();
+}
+
+void GLCore::hideEvent(QHideEvent *event) {
+    saveWindowLocation();
+    event->accept();
+}
+
+void GLCore::showEvent(QShowEvent *event) {
+    loadWindowLocation();
+    event->accept();
 }

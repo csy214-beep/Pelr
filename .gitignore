@@ -29,6 +29,10 @@
 .vscode/
 .idea/
 .venv/
+
+# Build output
+cmake-build-debug
+cmake-build-release
 release/
 build/
 dist/
@@ -36,6 +40,7 @@ tts_server/build/
 tts_server/dist/
 tts_server/log/
 tts_server/*.spec
+# Documentation
 test_docs
 
 # Third-party Libraries
@@ -46,6 +51,8 @@ lib/
 *.exe
 *.out
 *.app
+
+
 /.idea/.gitignore
 /.idea/.name
 /.idea/editor.xml

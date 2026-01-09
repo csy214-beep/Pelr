@@ -44,20 +44,16 @@ TrayIcon::TrayIcon(QObject *parent)
     // 创建右键菜单
     menu = new CustomMenu();
 
-    action_resetWinLoc = new QAction("重置位置", this);
-    action_showWin = new QAction("显示界面", this);
-    action_silentMode = new QAction("静默模式", this);
-    action_switchDrag = new QAction("锁定位置", this);
-    action_switchTransparent = new QAction("鼠标穿透", this);
-    action_mediaPlayer = new QAction("播放媒体", this);
-    QAction *action_openPath = new QAction("打开目录", this);
-    QAction *exitAction = new QAction("退出程序", this);
+    action_resetWinLoc = new QAction(tr("重置位置"), this);
+    action_showWin = new QAction(tr("显示界面"), this);
+    action_silentMode = new QAction(tr("静默模式"), this);
+    action_switchDrag = new QAction(tr("锁定位置"), this);
+    action_switchTransparent = new QAction(tr("鼠标穿透"), this);
+    action_mediaPlayer = new QAction(tr("播放媒体"), this);
+    QAction *action_openPath = new QAction(tr("打开目录"), this);
+    action_quit = new QAction(tr("退出程序"), this);
 
     // 连接信号和槽（保持原有连接不变）
-    connect(exitAction, &QAction::triggered, []() {
-        QCoreApplication::quit();
-    });
-
     connect(action_openPath, &QAction::triggered, []() {
         QString appDir = QCoreApplication::applicationDirPath();
         launchByPath(appDir);
@@ -87,7 +83,7 @@ TrayIcon::TrayIcon(QObject *parent)
         action_showWin, action_mediaPlayer, action_openPath
     });
     menu->addSeparator();
-    menu->addAction(exitAction);
+    menu->addAction(action_quit);
 
     // 设置托盘图标的菜单
     this->setContextMenu(menu);

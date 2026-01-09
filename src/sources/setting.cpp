@@ -38,6 +38,8 @@ ConfigData SettingWidget::getAllValues() {
     data.model_size = ui->horizontalSlider->value();
     data.FPS = ui->horizontalSlider_2->value();
     data.volume = ui->horizontalSlider_3->value();
+    data.RandomInterval.first=ui->spinBox->value();
+    data.RandomInterval.second=ui->spinBox_2->value();
     // basic color
     data.color_bubble.first = ui->lineEdit_9->text();
     data.color_bubble.second = ui->lineEdit_10->text();
@@ -54,6 +56,7 @@ ConfigData SettingWidget::getAllValues() {
     data.isTop = ui->checkBox_8->isChecked();
     data.isTrayHourAlarm = ui->checkBox_9->isChecked();
     data.isSilentBoot = ui->checkBox_10->isChecked();
+    data.isRecordWindowLocation=ui->checkBox_11->isChecked();
     //TTS
     data.APPID = ui->lineEdit_2->text();
     data.APISecret = ui->lineEdit_3->text();
@@ -79,6 +82,9 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->label_7->setText(QString::number(data.model_size));
     ui->label_8->setText(QString::number(data.FPS));
     ui->label_9->setText(QString::number(data.volume));
+    ui->spinBox->setValue(data.RandomInterval.first);
+    ui->spinBox_2->setValue(data.RandomInterval.second);
+    // color
     ui->lineEdit_9->setText(data.color_bubble.first);
     ui->label_24->setStyleSheet("background-color: " + data.color_bubble.first + ";");
     ui->lineEdit_10->setText(data.color_bubble.second);
@@ -103,6 +109,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->checkBox_8->setChecked(data.isTop);
     ui->checkBox_9->setChecked(data.isTrayHourAlarm);
     ui->checkBox_10->setChecked(data.isSilentBoot);
+    ui->checkBox_11->setChecked(data.isRecordWindowLocation);
     //TTS
     ui->lineEdit_2->setText(data.APPID);
     ui->lineEdit_3->setText(data.APISecret);

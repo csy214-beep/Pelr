@@ -37,6 +37,7 @@ struct ConfigData {
     int volume = 50;
     QPair<QString, QString> color_bubble;
     QPair<QString, QString> color_keyLabel;
+    QPair<int, int> RandomInterval = {10, 25};
     //bool
     bool isStartUp = false;
     bool isListening = false;
@@ -48,6 +49,7 @@ struct ConfigData {
     bool isTop = false;
     bool isTrayHourAlarm = false;
     bool isSilentBoot = false;
+    bool isRecordWindowLocation = false;
     //TTS
     QString APPID;
     QString APISecret;
@@ -69,10 +71,12 @@ struct ConfigData {
         // 分别序列化 QPair 的 first 和 second
         out << data.color_bubble.first << data.color_bubble.second;
         out << data.color_keyLabel.first << data.color_keyLabel.second;
+        out << data.RandomInterval.first << data.RandomInterval.second;
 
         out << data.isStartUp << data.isListening << data.isLookingMouse
-            << data.isStartStar << data.isRandomSpeech << data.isSaying
-            << data.isHourAlarm << data.isTop << data.isTrayHourAlarm << data.isSilentBoot;
+                << data.isStartStar << data.isRandomSpeech << data.isSaying
+                << data.isHourAlarm << data.isTop << data.isTrayHourAlarm
+                << data.isSilentBoot << data.isRecordWindowLocation;
 
         out << data.APPID << data.APISecret << data.APIKey << data.speaker;
         out << data.model << data.role << data.customRoleDesc;
@@ -86,10 +90,12 @@ struct ConfigData {
         // 分别反序列化 QPair 的 first 和 second
         in >> data.color_bubble.first >> data.color_bubble.second;
         in >> data.color_keyLabel.first >> data.color_keyLabel.second;
+        in >> data.RandomInterval.first >> data.RandomInterval.second;
 
         in >> data.isStartUp >> data.isListening >> data.isLookingMouse
-           >> data.isStartStar >> data.isRandomSpeech >> data.isSaying
-           >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm >> data.isSilentBoot;
+                >> data.isStartStar >> data.isRandomSpeech >> data.isSaying
+                >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm
+                >> data.isSilentBoot >> data.isRecordWindowLocation;
 
         in >> data.APPID >> data.APISecret >> data.APIKey >> data.speaker;
         in >> data.model >> data.role >> data.customRoleDesc;
@@ -104,7 +110,7 @@ struct constConfigData {
     const QString ollama_url = "https://ollama.com/";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     //about
-    const QString version = VERSION;//开发日期(内容变更起始日).release数量/顺序号(第几个版本)
+    const QString version = VERSION; //开发日期(内容变更起始日).release数量/顺序号(第几个版本)
     const QString name = "PLauncher";
     const QString repo_owner = "Pfolg";
     const QString team_link = "https://gitee.com/Pfolg/plauncher/contributors?ref=master";
@@ -154,7 +160,7 @@ struct MenuData {
 
     friend bool operator!=(const MenuData &m1, const MenuData &m2) {
         return m1.category != m2.category || m1.name != m2.name || m1.path != m2.path || m1.icon != m2.icon || m1.
-                description != m2.description;
+               description != m2.description;
     }
 };
 
@@ -242,6 +248,7 @@ public:
 
         // 写入数据
         out << data;
+        file.close();
         // 更新缓存
         if constexpr (std::is_same_v<T, QList<MenuData> >) {
             cached_menu_data = data;
@@ -266,6 +273,7 @@ public:
 
         // 写入数据
         out << setting;
+        file.close();
         // 更新缓存
         todo_setting_data = setting;
     }

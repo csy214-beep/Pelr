@@ -331,6 +331,9 @@ void BubbleBox::updateWindowLocation(int f_x, int f_y, int f_w, int f_h) {
     move(x, y);
 }
 
+
+
+
 BubbleBox::~BubbleBox() {
     // 清理静态实例指针
     m_instance = nullptr;
