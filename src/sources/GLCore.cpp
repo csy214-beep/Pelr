@@ -331,6 +331,15 @@ void GLCore::connectSignals() {
     connect(TrayIcon::instance()->action_switchDrag, SIGNAL(triggered()), this, SLOT(switchDragStatus()));
     //播放媒体
     connect(TrayIcon::instance()->action_mediaPlayer, SIGNAL(triggered()), this, SLOT(onPlayMedia()));
+    connect(TrayIcon::instance(), &QSystemTrayIcon::activated, (&)[QSystemTrayIcon::ActivationReason reason] {
+// 判断是否为双击动作
+        if (reason == QSystemTrayIcon::DoubleClick) {
+            if (isHidden()) {
+                showWindow();
+            } else {
+                hide();
+            }
+        } });
 }
 
 void GLCore::switchListener() {
