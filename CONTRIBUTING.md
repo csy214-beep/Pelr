@@ -171,9 +171,9 @@ We welcome pull requests. Follow these steps:
 
 >**NOTE**
 >
->By contributing to PLauncher, you agree that your contributions will be licensed under the project's MIT License.
+>By contributing to PLauncher, you agree that your contributions will be licensed under the project's GPL-3.0 License.
 >
->通过向 PLauncher 贡献，您同意您的贡献将根据项目的 MIT 许可证进行许可。
+>通过向 PLauncher 贡献，您同意您的贡献将根据项目的 GPL-3.0 许可证进行许可。
 
 ## Need Help?
 
