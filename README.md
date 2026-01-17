@@ -40,7 +40,7 @@
 尚不支持的功能（未来也不一定会支持）：
 
 - 唇形同步
-- 操作 系统
+- 运行系统命令
 - 快捷键
 - 热加载用户配置
 
@@ -89,14 +89,15 @@
 
 ## 📦 项目结构
 
-```
+```txt
 PLauncher/
 ├── CMakeLists.txt          # C++ 项目构建配置
-├── scripts/
-│   ├── AUCF                # 已弃用的模块 Archived Unused Cpp Files
-│   ├── requirements.txt    # Python 依赖清单
-│   └── tts_server.py       # TTS 服务端
+├── scripts/                # 脚本文件
+│   └── AUCF/               # 已弃用的模块 Archived Unused Cpp Files
 ├── src/                    # C++ 源代码
+│   ├── headers/            # 头文件
+│   ├── sources/            # 源文件
+│   └── ui/                 # UI 界面
 ├── Resources/              # 模型资源文件
 ├── lib/                    # 第三方库
 ├── LAppLive2D              # Live2D 模型加载库
@@ -105,13 +106,19 @@ PLauncher/
 ├── SampleShaders/          # 示例着色器
 ├── FrameworkShaders/       # 框架着色器
 ├── thirdParty/             # 第三方库
+│   ├── Core/
+│   ├── Framework/
+│   ├── glew/
+│   ├── glfw/
+│   └── stb/
 ├── translations/           # 翻译文件
 ├── docs/                   # 文档文件
 ├── LICENSE.md              # 许可证文件
 ├── README.md               # 项目说明文件
 ├── SUPPORT.md              # 参与贡献指南
 ├── SECURITY.md             # 安全说明文件
-└── build/                  # 构建输出目录
+├── requirements.txt        # Python 依赖清单
+└── tts_server/             # Python TTS 服务端
 ```
 
 > [!NOTE]
@@ -141,9 +148,11 @@ PLauncher/
 
 1. **安装 Qt 5.15.2** (MingW81_64 版本)
 2. **安装 Python 3.11** 和所需依赖:
+
    ```bash
    pip install -r requirements.txt
    ```
+
 3. **配置 C++ 编译环境** (CMake + MingW)
 
 ### 编译步骤
@@ -197,10 +206,11 @@ PLauncher/
 - Live2D Cubism SDK 使用专有许可证
 - Qt 框架使用 LGPL/GPL 许可证
 - 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/plauncher/wikis)
+- src 文件夹内由本项目开发者编写的部分采用 GPLv3 许可证
 
 ## 🙏 致谢
 
-https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT
+<https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT>
 
 感谢以下项目和社区的支持：
 
