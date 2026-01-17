@@ -203,7 +203,7 @@ PLauncher/
 
 **注意**: 部分组件使用不同许可证：
 
-- Live2D Cubism SDK 使用专有许可证
+- Live2D Cubism SDK 使用[专有许可证](https://www.live2d.com/zh-CHS/sdk/download/native/)
 - Qt 框架使用 LGPL/GPL 许可证
 - 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/plauncher/wikis)
 - src 文件夹内由本项目开发者编写的部分采用 GPLv3 许可证
