@@ -13,6 +13,8 @@
 #include <QCoreApplication>
 #include <QApplication>
 #include <QVBoxLayout>
+#include <QWindow>
+
 #include "adjustLabel.hpp"
 #include  "data.hpp"
 
@@ -63,6 +65,11 @@ KeyLabelWidget::KeyLabelWidget(QWidget *parent)
     fadeTimer2 = new QTimer(this);
     connect(fadeTimer1, &QTimer::timeout, this, [this]() { keyLabel->hide(); });
     connect(fadeTimer2, &QTimer::timeout, this, [this]() { mouseLabel->hide(); });
+    // 持续顶置
+    updateTopTimer = new QTimer(this);
+    updateTopTimer->setInterval(800); // 800ms
+    connect(updateTopTimer, &QTimer::timeout, this, &KeyLabelWidget::updateWindowOnTop);
+    updateTopTimer->start();
 }
 
 void KeyLabelWidget::on_keyRelease(QString keyName, QString modifiersName) {
@@ -136,9 +143,42 @@ void KeyLabelWidget::updateWindowLocation(int f_x, int f_y, int f_w, int f_h) {
     this->move(x, y);
 }
 
+// 持续顶置
+void KeyLabelWidget::updateWindowOnTop() {
+    // 似乎没什么用？
+    if (isHidden())return;
+    // 获取当前窗口的 QWindow 句柄
+    QWindow *windowHandle = this->windowHandle();
+    if (!windowHandle) {
+        // 窗口句柄可能尚未创建，例如在窗口显示之前
+        // 可以考虑延迟执行或使用其他方法
+        qCritical() << "Failed to get QWindow handle. Window may not have been created yet.";
+        return;
+    }
+    // 获取当前的窗口标志
+    Qt::WindowFlags currentFlags = windowHandle->flags();
+
+    // 如果已经设置了置顶标志，则不再重复设置
+    if (currentFlags & Qt::WindowStaysOnTopHint) {
+        // qDebug() << "Window already on top";
+        return;
+    }
+
+    // 添加穿透标志
+    currentFlags |= Qt::WindowStaysOnTopHint;
+
+    qDebug() << "set keyLabel WindowStaysOnTopHint";
+
+    // 应用新的标志
+    windowHandle->setFlags(currentFlags);
+
+    // 建议调用 update() 来请求重绘，而不是 hide()/show()
+    update();
+}
 
 KeyLabelWidget::~KeyLabelWidget() {
     delete fadeTimer1;
     delete fadeTimer2;
+    delete updateTopTimer;
 }
 

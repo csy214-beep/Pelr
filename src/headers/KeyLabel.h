@@ -26,6 +26,7 @@ public:
     QLabel *mouseLabel;
     QTimer *fadeTimer1;
     QTimer *fadeTimer2;
+    QTimer *updateTopTimer;
 
     void on_keyRelease(QString keyName, QString modifiersName);
 
@@ -33,5 +34,7 @@ public:
 
 public slots:
     void updateWindowLocation(int f_x, int f_y, int f_w, int f_h);
+
+    void updateWindowOnTop();
 };
 

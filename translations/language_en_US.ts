@@ -241,37 +241,37 @@ Version: %2</translation>
 <context>
     <name>GLCore</name>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="158"/>
-        <location filename="../src/sources/GLCore.cpp" line="599"/>
+        <location filename="../src/sources/GLCore.cpp" line="154"/>
+        <location filename="../src/sources/GLCore.cpp" line="594"/>
         <source>按键监听</source>
         <translation>Key Listener</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="162"/>
-        <location filename="../src/sources/GLCore.cpp" line="600"/>
+        <location filename="../src/sources/GLCore.cpp" line="158"/>
+        <location filename="../src/sources/GLCore.cpp" line="595"/>
         <source>说点什么</source>
         <translation>Say Something</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="168"/>
-        <location filename="../src/sources/GLCore.cpp" line="601"/>
+        <location filename="../src/sources/GLCore.cpp" line="162"/>
+        <location filename="../src/sources/GLCore.cpp" line="596"/>
         <source>启动</source>
         <translation>Launcher</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="176"/>
-        <location filename="../src/sources/GLCore.cpp" line="602"/>
+        <location filename="../src/sources/GLCore.cpp" line="169"/>
+        <location filename="../src/sources/GLCore.cpp" line="597"/>
         <source>天气</source>
         <translation>Weather</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="180"/>
-        <location filename="../src/sources/GLCore.cpp" line="603"/>
+        <location filename="../src/sources/GLCore.cpp" line="171"/>
+        <location filename="../src/sources/GLCore.cpp" line="598"/>
         <source>电源状态</source>
         <translation>Power Status</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="184"/>
+        <location filename="../src/sources/GLCore.cpp" line="175"/>
         <source>主人，这是您电脑目前的电源状态：
 AC: %1
 Percentage: %2%
@@ -282,37 +282,37 @@ Percentage: %2%
 Battery State: %3</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="190"/>
-        <location filename="../src/sources/GLCore.cpp" line="604"/>
+        <location filename="../src/sources/GLCore.cpp" line="181"/>
+        <location filename="../src/sources/GLCore.cpp" line="599"/>
         <source>TODO</source>
         <translation>TODO</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="193"/>
-        <location filename="../src/sources/GLCore.cpp" line="605"/>
+        <location filename="../src/sources/GLCore.cpp" line="184"/>
+        <location filename="../src/sources/GLCore.cpp" line="600"/>
         <source>问个问题</source>
         <translation>Ask a Question</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="197"/>
-        <location filename="../src/sources/GLCore.cpp" line="606"/>
+        <location filename="../src/sources/GLCore.cpp" line="188"/>
+        <location filename="../src/sources/GLCore.cpp" line="601"/>
         <source>界面</source>
         <translation>Interface</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="213"/>
-        <location filename="../src/sources/GLCore.cpp" line="607"/>
+        <location filename="../src/sources/GLCore.cpp" line="204"/>
+        <location filename="../src/sources/GLCore.cpp" line="602"/>
         <source>EMO</source>
         <translation>EMO</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="217"/>
-        <location filename="../src/sources/GLCore.cpp" line="608"/>
+        <location filename="../src/sources/GLCore.cpp" line="208"/>
+        <location filename="../src/sources/GLCore.cpp" line="603"/>
         <source>媒体播放</source>
         <translation>Media Player</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="386"/>
+        <location filename="../src/sources/GLCore.cpp" line="385"/>
         <source>%1, %2℃, %3, humidity: %4%.</source>
         <translation>%1, %2℃, %3, humidity: %4%.</translation>
     </message>
