@@ -57,12 +57,12 @@ CubismMotionQueueEntryHandle LAppModel::StartRandomMotion(const csmChar* group, 
 int main(int argc, char *argv[]) {
     // 初始化日志
     initLogFile();
-    // 设置日志级别
-    setLogLevel(LogLevel::Debug);
+    // 初始化日志等级
+    setLogLevel(read_log_level());
     // 确保 user 目录存在
     QDir().mkpath("user"); // 如果目录不存在则创建，包括所有必要的父目录
     // 安装自定义消息处理器
-    // qInstallMessageHandler(messageHandler);
+    qInstallMessageHandler(messageHandler);
     //  初始化随机数生成器
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);

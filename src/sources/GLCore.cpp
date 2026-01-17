@@ -314,6 +314,8 @@ void GLCore::connectSignals() {
     connect(TrayIcon::instance()->action_showWin, SIGNAL(triggered()), this->main_widget, SLOT(show()));
     // 静默模式
     connect(TrayIcon::instance()->action_silentMode, SIGNAL(triggered()), this, SLOT(silentMode()));
+    // 按键监听
+    connect(TrayIcon::instance()->action_keyListener, &QAction::triggered, this, &GLCore::switchListener);
 
     // 拖动窗口
     connect(TrayIcon::instance()->action_switchDrag, SIGNAL(triggered()), this, SLOT(switchDragStatus()));
@@ -334,10 +336,18 @@ void GLCore::connectSignals() {
 void GLCore::switchListener() {
     if (listener->isListening) {
         listener->stopListening();
-        BubbleBox::instance()->textSet("key listening disabled");
+        QString msg = "key listening disabled";
+        if (!isHidden())
+            BubbleBox::instance()->textSet(msg);
+        qDebug() << msg;
+        TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, false);
     } else {
         listener->startListening();
-        BubbleBox::instance()->textSet("key listening enabled");
+        QString msg = "key listening enabled";
+        if (!isHidden())
+            BubbleBox::instance()->textSet(msg);
+        qDebug() << msg;
+        TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, true);
     }
 }
 
@@ -392,6 +402,8 @@ void GLCore::onAskWeather() {
 }
 
 void GLCore::startRunStarIfPoweredInThread() {
+    // 如果开机时长大于20分钟，则return
+    if (isSystemUptimeExceeds(20))return;
     // 设置完成信号与槽的连接
     connect(&m_watcher, &QFutureWatcher<void>::finished, this, &GLCore::onRunStarIfPoweredFinished);
 

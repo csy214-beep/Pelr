@@ -7,6 +7,9 @@
  * GPL v3 License
  * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0600  // Windows Vista及以上
+#endif
 #include <Windows.h>
 #include <QDebug>
 #include "getpowerstatus.h"
@@ -66,4 +69,14 @@ std::vector<QString> getPowerStatus() {
     }
     qDebug() << statusList[0] << statusList[1] << statusList[2];
     return statusList;
+}
+
+bool isSystemUptimeExceeds(const int thresholdMinutes) {
+    // 获取系统启动以来的毫秒数
+    const ULONGLONG uptimeMillis = GetTickCount64();
+    // 转换为分钟
+    const ULONGLONG uptimeMinutes = uptimeMillis / (1000 * 60);
+    qDebug() << "Windows already running over" << uptimeMinutes << "minutes";
+    // 检查是否超过阈值
+    return uptimeMinutes >= static_cast<ULONGLONG>(thresholdMinutes);
 }

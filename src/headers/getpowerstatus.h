@@ -14,4 +14,5 @@
 
 std::vector<QString> getPowerStatus();
 
+bool isSystemUptimeExceeds(const int thresholdMinutes);
 #endif // GETPOWERSTATUS_H

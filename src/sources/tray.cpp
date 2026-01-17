@@ -48,10 +48,10 @@ TrayIcon::TrayIcon(QObject *parent)
     action_showWin = new QAction(tr("显示界面"), this);
     action_silentMode = new QAction(tr("静默模式"), this);
     action_switchDrag = new QAction(tr("锁定位置"), this);
-    action_switchTransparent = new QAction(tr("鼠标穿透"), this);
     action_mediaPlayer = new QAction(tr("播放媒体"), this);
     QAction *action_openPath = new QAction(tr("打开目录"), this);
     action_quit = new QAction(tr("退出程序"), this);
+    action_keyListener = new QAction(tr("按键监听"), this);
 
     // 连接信号和槽（保持原有连接不变）
     connect(action_openPath, &QAction::triggered, []() {
@@ -68,10 +68,6 @@ TrayIcon::TrayIcon(QObject *parent)
         switchText(action_switchDrag);
     });
 
-    connect(action_switchTransparent, &QAction::triggered, [this]() {
-        switchText(action_switchTransparent);
-    });
-
     QAction *action_startApp = new QAction("启动项目", this);
     action_startApp->setMenu(launcherMenu::instance());
     // 添加菜单项到菜单
@@ -80,6 +76,7 @@ TrayIcon::TrayIcon(QObject *parent)
 
     menu->addActions({
         action_resetWinLoc, action_silentMode, action_switchDrag,
+        action_keyListener,
         action_showWin, action_mediaPlayer, action_openPath
     });
     menu->addSeparator();
@@ -102,6 +99,18 @@ void TrayIcon::switchText(QAction *action) {
         action->setText("* " + text);
     }
 }
+
+void TrayIcon::switchText(QAction *action, bool flag) {
+    QString text = action->text();
+    const bool st = text.contains("* ");
+    if (st && !flag) {
+        action->setText(text.replace("* ", ""));
+    }
+    if (!st && flag) {
+        action->setText("* " + text);
+    }
+}
+
 
 TrayIcon::~TrayIcon() {
     delete menu;

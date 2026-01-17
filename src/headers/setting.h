@@ -58,6 +58,8 @@ private slots:
 
     void onVersionCheckError(const QString &errorMessage);
 
+    void onLogLevelChanged();
+
 private:
     VersionChecker *m_versionChecker;
     Ui::setting *ui;

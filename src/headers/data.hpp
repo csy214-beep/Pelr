@@ -197,6 +197,7 @@ public:
     constConfigData const_config_data;
     QFont _font = loadFont();
 
+
     static DataManager &instance() {
         static DataManager instance;
         return instance;

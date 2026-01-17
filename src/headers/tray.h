@@ -31,13 +31,15 @@ public:
                             QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information,
                             int timeout = 10000);
 
+    void switchText(QAction *action, bool flag);
+
     QAction *action_resetWinLoc;
     QAction *action_showWin;
     QAction *action_silentMode;
     QAction *action_switchDrag;
-    QAction *action_switchTransparent;
     QAction *action_mediaPlayer;
     QAction *action_quit;
+    QAction *action_keyListener;
 
 private:
     TrayIcon(QObject *parent = nullptr);
@@ -45,6 +47,7 @@ private:
     ~TrayIcon();
 
     void switchText(QAction *action);
+
 
     // 单例实例指针
     static TrayIcon *m_instance;

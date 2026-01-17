@@ -22,6 +22,7 @@
 #include <QColor>
 #include <QDebug>
 #include "LAppLive2DManager.hpp"
+#include  "logger.hpp"
 
 ConfigData SettingWidget::getAllValues() {
     ConfigData data;
@@ -38,8 +39,8 @@ ConfigData SettingWidget::getAllValues() {
     data.model_size = ui->horizontalSlider->value();
     data.FPS = ui->horizontalSlider_2->value();
     data.volume = ui->horizontalSlider_3->value();
-    data.RandomInterval.first=ui->spinBox->value();
-    data.RandomInterval.second=ui->spinBox_2->value();
+    data.RandomInterval.first = ui->spinBox->value();
+    data.RandomInterval.second = ui->spinBox_2->value();
     // basic color
     data.color_bubble.first = ui->lineEdit_9->text();
     data.color_bubble.second = ui->lineEdit_10->text();
@@ -56,7 +57,7 @@ ConfigData SettingWidget::getAllValues() {
     data.isTop = ui->checkBox_8->isChecked();
     data.isTrayHourAlarm = ui->checkBox_9->isChecked();
     data.isSilentBoot = ui->checkBox_10->isChecked();
-    data.isRecordWindowLocation=ui->checkBox_11->isChecked();
+    data.isRecordWindowLocation = ui->checkBox_11->isChecked();
     //TTS
     data.APPID = ui->lineEdit_2->text();
     data.APISecret = ui->lineEdit_3->text();
@@ -84,6 +85,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->label_9->setText(QString::number(data.volume));
     ui->spinBox->setValue(data.RandomInterval.first);
     ui->spinBox_2->setValue(data.RandomInterval.second);
+    ui->comboBox_3->setCurrentIndex(static_cast<int>(getLogLevel()));
     // color
     ui->lineEdit_9->setText(data.color_bubble.first);
     ui->label_24->setStyleSheet("background-color: " + data.color_bubble.first + ";");
@@ -140,8 +142,10 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->lineEdit_8->setEchoMode(QLineEdit::Password);
     //Ollama
     ui->comboBox->addItems(
-            {"ProgrammingAssistant", "TablePetGirlfriend", "TechnicalMentors", "CreativeWritingAssistant",
-             "CustomizedRole"});
+        {
+            "ProgrammingAssistant", "TablePetGirlfriend", "TechnicalMentors", "CreativeWritingAssistant",
+            "CustomizedRole"
+        });
     //说明
     QFile file(":/assets/text/thirdParty.md");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -150,9 +154,27 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         QString content = in.readAll();
         file.close();
         ui->textEdit->setMarkdown(
-                "### PLauncher " + DataManager::instance().const_config_data.version + "\n\n" + content);
+            "### PLauncher " + DataManager::instance().const_config_data.version + "\n\n" + content);
     }
     ui->textEdit->setReadOnly(true);
+    // 初始化日志等级选择
+    struct LogLevelItem {
+        QString text;
+        LogLevel value;
+    };
+
+    QVector<LogLevelItem> logLevels = {
+        {tr("调试信息"), LogLevel::Debug},
+        {tr("普通信息"), LogLevel::Info},
+        {tr("警告"), LogLevel::Warning},
+        {tr("严重错误"), LogLevel::Critical},
+        {tr("致命错误"), LogLevel::Fatal}
+    };
+
+    ui->comboBox_3->clear();
+    for (const auto &item: logLevels) {
+        ui->comboBox_3->addItem(item.text, static_cast<int>(item.value));
+    }
 
     // 连接信号槽
     connectSignals();
@@ -180,6 +202,7 @@ void SettingWidget::connectSignals() {
     connect(ui->label_9, &DoubleClickableLabel::doubleClicked, [&]() {
         ui->horizontalSlider_3->setValue(50);
     });
+    connect(ui->comboBox_3, &QComboBox::currentTextChanged, this, &SettingWidget::onLogLevelChanged);
     //color
     connect(ui->lineEdit_9, &QLineEdit::returnPressed, [&]() {
         selectColor(ui->label_24, ui->lineEdit_9);
@@ -405,6 +428,12 @@ void SettingWidget::onVersionCheckCompleted(bool isMatch, const QString &message
 
 void SettingWidget::onVersionCheckError(const QString &errorMessage) {
     QMessageBox::critical(this, tr("版本检查错误"), errorMessage);
+}
+
+void SettingWidget::onLogLevelChanged() {
+    LogLevel level = static_cast<LogLevel>(ui->comboBox_3->currentData().toInt());
+    write_log_level(level);
+    qDebug() << "set logLevel to" << static_cast<int>(level);
 }
 
 void SettingWidget::selectModelPath() {
