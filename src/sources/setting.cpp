@@ -23,6 +23,7 @@
 #include <QDebug>
 #include "LAppLive2DManager.hpp"
 #include  "logger.hpp"
+#include "ollamaclient.h"
 
 ConfigData SettingWidget::getAllValues() {
     ConfigData data;
@@ -65,7 +66,7 @@ ConfigData SettingWidget::getAllValues() {
     data.speaker = ui->lineEdit_5->text();
     //Ollama
     data.model = ui->lineEdit_6->text();
-    data.role = ui->comboBox->currentText();
+    data.role = static_cast<OllamaClient::Role>(ui->comboBox->currentIndex());
     data.customRoleDesc = ui->plainTextEdit->toPlainText();
     //OpenWeather
     data.city = ui->lineEdit_7->text();
@@ -119,7 +120,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->lineEdit_5->setText(data.speaker);
     //Ollama
     ui->lineEdit_6->setText(data.model);
-    ui->comboBox->setCurrentText(data.role);
+    ui->comboBox->setCurrentIndex(static_cast<int>(data.role));
     ui->plainTextEdit->setPlainText(data.customRoleDesc);
     //OpenWeather
     ui->lineEdit_7->setText(data.city);
@@ -141,11 +142,22 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->lineEdit_4->setEchoMode(QLineEdit::Password);
     ui->lineEdit_8->setEchoMode(QLineEdit::Password);
     //Ollama
-    ui->comboBox->addItems(
-        {
-            "ProgrammingAssistant", "TablePetGirlfriend", "TechnicalMentors", "CreativeWritingAssistant",
-            "CustomizedRole"
-        });
+    // 初始化角色选择
+    struct RoleItem {
+        QString text;
+        OllamaClient::Role role;
+    };
+    QList<RoleItem> roles = {
+        {tr("编程助手"), OllamaClient::Role::DefaultCoder},
+        {tr("桌宠女友"), OllamaClient::Role::DesktopPetGirlfriend},
+        {tr("技术导师"), OllamaClient::Role::TechnicalTeacher},
+        {tr("创作助手"), OllamaClient::Role::CreativeWriter},
+        {tr("自定义角色"), OllamaClient::Role::CustomRole}
+    };
+    ui->comboBox->clear();
+    for (const auto &item: roles) {
+        ui->comboBox->addItem(item.text, static_cast<int>(item.role));
+    }
     //说明
     QFile file(":/assets/text/thirdParty.md");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {

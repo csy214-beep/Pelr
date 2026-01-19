@@ -32,6 +32,13 @@ public:
 
     Q_ENUM(Role)
 
+    struct RoleItem {
+        QString text;
+        Role role;
+    };
+
+    static const QList<RoleItem> Roles;
+
     explicit OllamaClient(QObject *parent = nullptr);
 
     ~OllamaClient();

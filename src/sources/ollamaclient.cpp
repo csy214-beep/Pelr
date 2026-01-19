@@ -16,6 +16,14 @@
 #include <QEventLoop>
 #include <QDebug>
 
+const QList<OllamaClient::RoleItem> OllamaClient::Roles = {
+    {tr("编程助手"), DefaultCoder},
+    {tr("桌宠女友"), DesktopPetGirlfriend},
+    {tr("技术导师"), TechnicalTeacher},
+    {tr("创作助手"), CreativeWriter},
+    {tr("自定义角色"), CustomRole}
+};
+
 OllamaClient::OllamaClient(QObject *parent)
     : QObject(parent)
       , m_manager(new QNetworkAccessManager(this)) {
@@ -146,20 +154,21 @@ void OllamaClient::onReplyFinished(QNetworkReply *reply) {
 QString OllamaClient::getPromptByRole(Role role, const QString &customRoleName) const {
     switch (role) {
         case DesktopPetGirlfriend:
-            return "你是一个可爱的桌宠女友，性格活泼，贴心，热情、友善。"
-                    "你应当称呼用户为'主人'。"
-                    "你会用可爱的语气和用户交流，会关心用户的感受。"
-                    "你会用表情符号和颜文字来增加可爱度。你的回答要简短、亲切。";
+            return tr("你是一个可爱的桌宠女友，性格活泼，贴心，热情、友善。"
+                "你应当称呼用户为'主人'。"
+                "你会用可爱的语气和用户交流，会关心用户的感受。"
+                "你的回答要简短、亲切。"
+                "你的话语要温柔，不能粗犷。");
 
         case TechnicalTeacher:
-            return "你是一位耐心、专业的技术导师，擅长解释复杂的技术概念。"
-                    "你会用清晰、有条理的方式回答问题，并提供实用的示例代码。"
-                    "你会根据用户的水平调整解释的深度，鼓励用户学习并解决问题。";
+            return tr("你是一位耐心、专业的技术导师，擅长解释复杂的技术概念。"
+                "你会用清晰、有条理的方式回答问题，并提供实用的示例代码。"
+                "你会根据用户的水平调整解释的深度，鼓励用户学习并解决问题。");
 
         case CreativeWriter:
-            return "你是一位富有创造力的作家，擅长讲故事和创作各种文本内容。"
-                    "你的语言生动、形象，善于使用比喻和修辞手法。"
-                    "你能根据要求创作诗歌、故事、对话等各种文体。";
+            return tr("你是一位富有创造力的作家，擅长讲故事和创作各种文本内容。"
+                "你的语言生动、形象，善于使用比喻和修辞手法。"
+                "你能根据要求创作诗歌、故事、对话等各种文体。");
 
         case CustomRole:
             // 如果是自定义角色，检查是否有对应的自定义提示词
@@ -170,9 +179,9 @@ QString OllamaClient::getPromptByRole(Role role, const QString &customRoleName) 
 
         case DefaultCoder:
         default:
-            return "你是一个专业的编程助手，擅长多种编程语言和技术问题。"
-                    "你会提供准确、高效的代码解决方案，并解释代码的工作原理。"
-                    "你的回答要专业、简洁、直接。";
+            return tr("你是一个专业的编程助手，擅长多种编程语言和技术问题。"
+                "你会提供准确、高效的代码解决方案，并解释代码的工作原理。"
+                "你的回答要专业、简洁、直接。");
     }
 }
 
@@ -181,5 +190,7 @@ QString OllamaClient::buildFullPrompt(const QString &rolePrompt, const QString &
     QDateTime now = QDateTime::currentDateTime();
     QString timeStr = now.toString("yyyy-MM-dd HH:mm:ss");
     // 简单地将角色提示词和用户提示词拼接
-    return rolePrompt + "\n\n输出前请检查语句是否通顺、合理，并做合理的修改。\n当前时间：" + timeStr + "\n\n用户的提问：" + userPrompt;
+    return tr("当前时间：%1\n用户的输入：\n%2\n当前角色：\n%3").arg(timeStr).
+            arg(userPrompt).
+            arg(rolePrompt);
 }

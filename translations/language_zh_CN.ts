@@ -36,7 +36,22 @@
 <context>
     <name>ChatBoxOnModel</name>
     <message>
-        <location filename="../src/sources/chatBoxOnModel.cpp" line="97"/>
+        <location filename="../src/sources/chatBoxOnModel.cpp" line="66"/>
+        <source>Message can not be empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chatBoxOnModel.cpp" line="72"/>
+        <source>Please select model first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chatBoxOnModel.cpp" line="80"/>
+        <source>Please set custom role description first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chatBoxOnModel.cpp" line="103"/>
         <source>错误：%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,12 +60,27 @@
     <name>ChatWidget</name>
     <message>
         <location filename="../src/sources/chat.cpp" line="24"/>
-        <location filename="../src/sources/chat.cpp" line="129"/>
+        <location filename="../src/sources/chat.cpp" line="135"/>
         <source>Hello, welcome to PLauncher!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/chat.cpp" line="125"/>
+        <location filename="../src/sources/chat.cpp" line="95"/>
+        <source>Message cannot be empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chat.cpp" line="100"/>
+        <source>Please select a model first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chat.cpp" line="108"/>
+        <source>Please set custom role description first!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/chat.cpp" line="131"/>
         <source>错误：%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -287,6 +317,63 @@ Battery State: %3</source>
     </message>
 </context>
 <context>
+    <name>OllamaClient</name>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="20"/>
+        <source>编程助手</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="21"/>
+        <source>桌宠女友</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="22"/>
+        <source>技术导师</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="23"/>
+        <source>创作助手</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="24"/>
+        <source>自定义角色</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="157"/>
+        <source>你是一个可爱的桌宠女友，性格活泼，贴心，热情、友善。你应当称呼用户为&apos;主人&apos;。你会用可爱的语气和用户交流，会关心用户的感受。你的回答要简短、亲切。你的话语要温柔，不能粗犷。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="193"/>
+        <source>当前时间：%1
+用户的输入：
+%2
+当前角色：
+%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="164"/>
+        <source>你是一位耐心、专业的技术导师，擅长解释复杂的技术概念。你会用清晰、有条理的方式回答问题，并提供实用的示例代码。你会根据用户的水平调整解释的深度，鼓励用户学习并解决问题。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="169"/>
+        <source>你是一位富有创造力的作家，擅长讲故事和创作各种文本内容。你的语言生动、形象，善于使用比喻和修辞手法。你能根据要求创作诗歌、故事、对话等各种文体。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/ollamaclient.cpp" line="182"/>
+        <source>你是一个专业的编程助手，擅长多种编程语言和技术问题。你会提供准确、高效的代码解决方案，并解释代码的工作原理。你的回答要专业、简洁、直接。</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../src/headers/launcher.hpp" line="61"/>
@@ -325,54 +412,79 @@ Battery State: %3</source>
 <context>
     <name>SettingWidget</name>
     <message>
-        <location filename="../src/sources/setting.cpp" line="167"/>
+        <location filename="../src/sources/setting.cpp" line="151"/>
+        <source>编程助手</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="152"/>
+        <source>桌宠女友</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="153"/>
+        <source>技术导师</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="154"/>
+        <source>创作助手</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="155"/>
+        <source>自定义角色</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="179"/>
         <source>调试信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="168"/>
+        <location filename="../src/sources/setting.cpp" line="180"/>
         <source>普通信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="169"/>
+        <location filename="../src/sources/setting.cpp" line="181"/>
         <source>警告</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="170"/>
+        <location filename="../src/sources/setting.cpp" line="182"/>
         <source>严重错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="171"/>
+        <location filename="../src/sources/setting.cpp" line="183"/>
         <source>致命错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="269"/>
+        <location filename="../src/sources/setting.cpp" line="281"/>
         <source>保存成功！
 下次应用启动生效。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="331"/>
+        <location filename="../src/sources/setting.cpp" line="343"/>
         <source>重置设置成功！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="422"/>
-        <location filename="../src/sources/setting.cpp" line="425"/>
+        <location filename="../src/sources/setting.cpp" line="434"/>
+        <location filename="../src/sources/setting.cpp" line="437"/>
         <source>版本检查</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="430"/>
+        <location filename="../src/sources/setting.cpp" line="442"/>
         <source>版本检查错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="444"/>
+        <location filename="../src/sources/setting.cpp" line="456"/>
         <source>选择模型文件</source>
         <translation type="unfinished"></translation>
     </message>

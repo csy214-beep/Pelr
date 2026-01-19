@@ -16,15 +16,15 @@
 #include "BubbleBox.h"
 
 ChatBoxOnModel::ChatBoxOnModel(QLineEdit *parent)
-        : QLineEdit(parent) {
+    : QLineEdit(parent) {
     // 窗口顶置，去标题栏，去除任务栏图标
     this->setAttribute(Qt::WA_TranslucentBackground, true);
     if (DataManager::instance().getBasicData().isTop) {
         this->setWindowFlags(
-                Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
+            Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
     } else {
         this->setWindowFlags(
-                Qt::FramelessWindowHint | Qt::Tool);
+            Qt::FramelessWindowHint | Qt::Tool);
     }
     //位置
     int _width = 300 * DataManager::instance().getBasicData().model_size / 150;
@@ -60,27 +60,33 @@ void ChatBoxOnModel::updateWindowLocation(int f_x, int f_y, int f_w, int f_h) {
 
 void ChatBoxOnModel::on_sendMsg() {
     QString message = text();
-    if (message.isEmpty()) return;
     clear();
-    OllamaClient::Role role;
-    QString roleName = DataManager::instance().getBasicData().role;
-    if (roleName == "ProgrammingAssistant") {
-        role = OllamaClient::Role::DefaultCoder;
-    } else if (roleName == "TablePetGirlfriend") {
-        role = OllamaClient::Role::DesktopPetGirlfriend;
-    } else if (roleName == "TechnicalMentors") {
-        role = OllamaClient::Role::TechnicalTeacher;
-    } else if (roleName == "CreativeWritingAssistant") {
-        role = OllamaClient::Role::CreativeWriter;
-    } else if (roleName == "CustomizedRole") {
-        client.setCustomRolePrompt("CustomizedRole", DataManager::instance().getBasicData().customRoleDesc);
-        role = OllamaClient::Role::CustomRole;
+    if (message.isEmpty()) {
+        // QMessageBox::warning(this, tr("警告"), tr("消息不能为空！"));
+        BubbleBox::instance()->textSet(tr("Message can not be empty!"));
+        return;
+    };
+    QString model = DataManager::instance().getBasicData().model;
+    if (model.isEmpty()) {
+        // QMessageBox::warning(this, tr("警告"), tr("请先选择模型！"));
+        BubbleBox::instance()->textSet(tr("Please select model first!"));
+        return;
+    }
+    OllamaClient::Role role = DataManager::instance().getBasicData().role;
+    if (role == OllamaClient::Role::CustomRole) {
+        QString customPrompt = DataManager::instance().getBasicData().customRoleDesc;
+        if (customPrompt.isEmpty()) {
+            // QMessageBox::warning(this, tr("警告"), tr("请先设置自定义角色描述！"));
+            BubbleBox::instance()->textSet(tr("Please set custom role description first!"));
+            return;
+        }
+        client.setCustomRolePrompt(OllamaClient::Roles.at(role).text, customPrompt);
     }
     //  发送消息到服务器(ollama)
     client.generateTextAsync(
-            message, DataManager::instance().getBasicData().model, false,
-            role, // 使用自定义角色
-            roleName // 指定自定义角色名称
+        message, model, false,
+        role, // 使用自定义角色
+        OllamaClient::Roles.at(role).text // 指定自定义角色名称
     );
     BubbleBox::instance()->setThinkingText();
 }

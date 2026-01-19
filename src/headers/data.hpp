@@ -20,6 +20,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include  <QFontDatabase>
+#include "ollamaclient.h"
 
 #define MENU_DATA_FILE "user/menuData.dat"
 #define CONFIG_DATA_FILE "user/configData.dat"
@@ -57,7 +58,7 @@ struct ConfigData {
     QString speaker = "x4_yezi";
     //ollama
     QString model;
-    QString role;
+    OllamaClient::Role role = OllamaClient::DefaultCoder;
     QString customRoleDesc;
     // openWeather
     QString city;

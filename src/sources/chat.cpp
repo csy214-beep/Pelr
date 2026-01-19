@@ -70,8 +70,8 @@ void ChatWidget::addMessage(const QString &message, const bool &isAI) {
     label->setText(message);
     label->setAlignment(Qt::AlignLeft);
     label->setStyleSheet(
-            ("background-color: " + QString(isAI ? "lightgray" : "lightblue") +
-             ";border-radius: 10px;padding: 10px;margin: 10px;"));
+        ("background-color: " + QString(isAI ? "lightgray" : "lightblue") +
+         ";border-radius: 10px;padding: 10px;margin: 10px;"));
     label->setMaximumWidth(maxWidth);
     // 计算标签所需高度
     label->adjustSize();
@@ -88,28 +88,34 @@ void ChatWidget::addMessage(const QString &message, const bool &isAI) {
 
 void ChatWidget::on_sendMsg() {
     QString message = ui->lineEdit->text();
-    if (message.isEmpty()) return;
-    ui->lineEdit->clear();
     addMessage(message, false);
-    OllamaClient::Role role;
-    QString roleName = DataManager::instance().getBasicData().role;
-    if (roleName == "ProgrammingAssistant") {
-        role = OllamaClient::Role::DefaultCoder;
-    } else if (roleName == "TablePetGirlfriend") {
-        role = OllamaClient::Role::DesktopPetGirlfriend;
-    } else if (roleName == "TechnicalMentors") {
-        role = OllamaClient::Role::TechnicalTeacher;
-    } else if (roleName == "CreativeWritingAssistant") {
-        role = OllamaClient::Role::CreativeWriter;
-    } else if (roleName == "CustomizedRole") {
-        client.setCustomRolePrompt("CustomizedRole", DataManager::instance().getBasicData().customRoleDesc);
-        role = OllamaClient::Role::CustomRole;
+    ui->lineEdit->clear();
+    if (message.isEmpty()) {
+        // QMessageBox::warning(this, tr("警告"), tr("消息不能为空！"));
+        addMessage(tr("Message cannot be empty!"), true);
+        return;
+    };
+    QString model = DataManager::instance().getBasicData().model;
+    if (model.isEmpty()) {
+        addMessage(tr("Please select a model first!"), true);
+        return;
     }
+    OllamaClient::Role role = DataManager::instance().getBasicData().role;
+    if (role == OllamaClient::Role::CustomRole) {
+        QString customPrompt = DataManager::instance().getBasicData().customRoleDesc;
+        if (customPrompt.isEmpty()) {
+            // QMessageBox::warning(this, tr("警告"), tr("请先设置自定义角色描述！"));
+            addMessage(tr("Please set custom role description first!"), true);
+            return;
+        }
+        client.setCustomRolePrompt(OllamaClient::Roles.at(role).text, customPrompt);
+    }
+
     //  发送消息到服务器(ollama)
     client.generateTextAsync(
-            message, DataManager::instance().getBasicData().model, false,
-            role, // 使用自定义角色
-            roleName // 指定自定义角色名称
+        message, model, false,
+        role, // 使用自定义角色
+        OllamaClient::Roles.at(role).text // 指定自定义角色名称
     );
 }
 
