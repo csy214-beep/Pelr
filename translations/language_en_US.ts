@@ -481,30 +481,30 @@ Battery State: %3</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="272"/>
+        <location filename="../src/sources/setting.cpp" line="271"/>
         <source>保存成功！
 下次应用启动生效。</source>
         <translation>Save successful!
 Will take effect on next application launch.</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="334"/>
+        <location filename="../src/sources/setting.cpp" line="333"/>
         <source>重置设置成功！</source>
         <translation>Reset settings successful!</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="425"/>
-        <location filename="../src/sources/setting.cpp" line="428"/>
+        <location filename="../src/sources/setting.cpp" line="424"/>
+        <location filename="../src/sources/setting.cpp" line="427"/>
         <source>版本检查</source>
         <translation>Version Check</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="433"/>
+        <location filename="../src/sources/setting.cpp" line="432"/>
         <source>版本检查错误</source>
         <translation>Version Check Error</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="447"/>
+        <location filename="../src/sources/setting.cpp" line="446"/>
         <source>选择模型文件</source>
         <translation>Select Model File</translation>
     </message>
