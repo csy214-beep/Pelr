@@ -33,6 +33,7 @@
 #include "todoNotify.hpp"
 #include "ExtraMotionManager.h"
 #include "launcherMenu.hpp"
+#include "tray.h"
 
 #define RECORD_FILE "user/record.dat"
 #define WINDOW_LOCATION_FILE "user/window_location.dat"

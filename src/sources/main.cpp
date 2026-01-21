@@ -20,7 +20,7 @@
 #include  "CheckApplication.h"
 #include "TranslationManager.h"
 #include "logger.hpp"
-
+#include "NotificationWidget.h"
 // 输出到控制台（如果启用）
 #ifdef CONSOLE
 QTextStream out(stdout);

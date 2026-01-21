@@ -13,10 +13,10 @@
 #include  "data.hpp"
 #include  "BubbleBox.h"
 #include <QList>
-#include "tray.h"
+#include  "NotificationWidget.h"
 
 class TodoNotify : public QObject {
-Q_OBJECT
+    Q_OBJECT
 
     TodoNotify() = default; // 私有构造函数
     ~TodoNotify() = default; // 私有析构函数
@@ -48,7 +48,11 @@ public:
                 if (item.category == 1) BubbleBox::instance()->textSet(msg);
                 // 如果选择了托盘提醒，则弹出提示
                 if (is_notify_by_tray) {
-                    TrayIcon::showMessage(tr("待办事项提醒"), msg, QSystemTrayIcon::Information, 10000);
+                    QMetaObject::invokeMethod(qApp, [msg]() {
+                        NotificationWidget::showNotification(
+                            tr("待办事项提醒"), msg,
+                            10000, NotificationWidget::Information);
+                    }, Qt::QueuedConnection);
                 }
                 qDebug() << "notify：" << msg;
                 // 更新最新数据

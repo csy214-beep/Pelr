@@ -35,7 +35,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -327,7 +327,7 @@
       <item row="8" column="0">
        <widget class="QCheckBox" name="checkBox_9">
         <property name="text">
-         <string>托盘报时功能</string>
+         <string>弹窗报时功能</string>
         </property>
        </widget>
       </item>

@@ -197,7 +197,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>托盘消息</string>
+      <string>弹窗消息</string>
      </property>
     </widget>
    </widget>

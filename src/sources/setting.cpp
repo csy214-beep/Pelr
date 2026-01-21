@@ -24,6 +24,8 @@
 #include "LAppLive2DManager.hpp"
 #include  "logger.hpp"
 #include "ollamaclient.h"
+#include "tray.h"
+#include "NotificationWidget.h"
 
 ConfigData SettingWidget::getAllValues() {
     ConfigData data;
@@ -268,7 +270,7 @@ void SettingWidget::connectSignals() {
     //save
     connect(ui->pushButton, &QPushButton::clicked, [&]() {
         saveData();
-        QMessageBox::information(this, "Information", tr("保存成功！\n下次应用启动生效。"), QMessageBox::Ok);
+        NotificationWidget::showNotification(tr("Information"), tr("保存成功！\n下次应用启动生效。"));
     });
     // 检查更新
     connect(ui->pushButton_10, &QPushButton::clicked, [&]() {
@@ -330,7 +332,7 @@ void SettingWidget::resetSetting() {
     // 重置启动项（移除）
     onCheckBox1Clicked(true);
     qDebug() << "reset setting success";
-    QMessageBox::information(this, "Information", tr("重置设置成功！"), QMessageBox::Ok);
+    NotificationWidget::showNotification(tr("Information"), tr("重置设置成功！"));
 }
 
 void SettingWidget::onCheckBox1Clicked(const bool flag) {
@@ -361,13 +363,17 @@ void SettingWidget::onCheckBox1Clicked(const bool flag) {
         // 移除启动项
         if (!QFile::exists(shortcutPath)) {
             qDebug() << "shortcut not exists: " << shortcutPath;
+            NotificationWidget::showNotification(tr("Information"), tr("快捷方式已不存在！"));
             return;
         }
         bool success = QFile::remove(shortcutPath);
         if (!success) {
             qWarning() << "cannot remove shortcut: " << shortcutPath;
+            NotificationWidget::showNotification(tr("Warning"), tr("移除快捷方式失败！"));
+            return;
         }
         qDebug() << "remove shortcut success: " << shortcutPath;
+        NotificationWidget::showNotification(tr("Information"), tr("快捷方式已移除！"));
     } else {
         // 添加启动项
         IShellLink *pShellLink = nullptr;
@@ -392,8 +398,10 @@ void SettingWidget::onCheckBox1Clicked(const bool flag) {
 
         if (FAILED(hr)) {
             qWarning() << "cannot create shortcut: " << shortcutPath;
+            NotificationWidget::showNotification(tr("Warning"), tr("创建快捷方式失败！"));
         } else {
             qDebug() << "create shortcut success: " << shortcutPath;
+            NotificationWidget::showNotification(tr("Information"), tr("快捷方式已创建！"));
         }
     }
 }
@@ -419,17 +427,19 @@ void SettingWidget::selectColor(QLabel *label, QLineEdit *line, bool isBackgroun
 }
 
 void SettingWidget::onVersionCheckCompleted(bool isMatch, const QString &message) {
+    NotificationWidget::MessageType type;
     if (isMatch) {
         // 版本一致的处理
-        QMessageBox::information(this, tr("版本检查"), message);
+        type = NotificationWidget::MessageType::Information;
     } else {
         // 版本不一致的处理
-        QMessageBox::warning(this, tr("版本检查"), message);
+        type = NotificationWidget::MessageType::Warning;
     }
+    NotificationWidget::showNotification(tr("Information"), message, 5000, type);
 }
 
 void SettingWidget::onVersionCheckError(const QString &errorMessage) {
-    QMessageBox::critical(this, tr("版本检查错误"), errorMessage);
+    NotificationWidget::showNotification(tr("Warning"), errorMessage, 5000, NotificationWidget::MessageType::Critical);
 }
 
 void SettingWidget::onLogLevelChanged() {

@@ -29,7 +29,8 @@
 #include  "data.hpp"
 #include <QString>
 #include <QColor>
-#include "tray.h"
+#include "NotificationWidget.h"
+
 // 时间段语录文件
 #define TIMETEXT_FILE "assets/text/timeText.json"
 #define DAILYTEXT_FILE "assets/text/dailyText.json"
@@ -66,9 +67,9 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
         foreColor = "rgba(255, 255, 255, 0.8)";
     }
     setStyleSheet(
-            "color: " + foreColor + ";"
-                                    "border-radius:20px;"
-                                    "padding:8px;"
+        "color: " + foreColor + ";"
+        "border-radius:20px;"
+        "padding:8px;"
     );
     setWordWrap(true);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -225,7 +226,9 @@ void BubbleBox::showTime() {
         textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
         bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {
-            TrayIcon::instance()->showMessage("PLauncher", tr("现在是%1").arg(time));
+            NotificationWidget::showNotification(
+                "PLauncher", tr("现在是%1").arg(time), 5000, NotificationWidget::Information
+            );
         }
         qDebug() << "now:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;
@@ -330,8 +333,6 @@ void BubbleBox::updateWindowLocation(int f_x, int f_y, int f_w, int f_h) {
 
     move(x, y);
 }
-
-
 
 
 BubbleBox::~BubbleBox() {

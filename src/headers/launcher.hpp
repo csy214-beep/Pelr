@@ -17,7 +17,8 @@
 #include <QPair>
 #include <QFuture>
 #include <QtConcurrent>
-#include "tray.h"
+#include "NotificationWidget.h"
+
 static QFuture<void> launchByPathAsync(const QString &path) {
     qDebug() << "launching: " << path;
     return QtConcurrent::run([path]() -> bool {
@@ -28,7 +29,7 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                 path.startsWith("ftp://") || path.startsWith("file://")) {
                 success = QDesktopServices::openUrl(QUrl(path));
             }
-                // 对于本地文件/文件夹，使用QDesktopServices
+            // 对于本地文件/文件夹，使用QDesktopServices
             else {
                 QFileInfo fileInfo(path);
                 if (fileInfo.exists()) {
@@ -41,12 +42,12 @@ static QFuture<void> launchByPathAsync(const QString &path) {
 
                         // 连接finished信号以便清理
                         QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
-                                       process, &QProcess::deleteLater);
+                                         process, &QProcess::deleteLater);
                         QObject::connect(process, &QProcess::errorOccurred,
-                                       [path, process](QProcess::ProcessError error) {
-                            qWarning() << "Process error for" << path << ":" << error;
-                            process->deleteLater();
-                        });
+                                         [path, process](QProcess::ProcessError error) {
+                                             qWarning() << "Process error for" << path << ":" << error;
+                                             process->deleteLater();
+                                         });
 
                         process->startDetached();
                         success = true;
@@ -57,40 +58,55 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                     }
                 } else {
                     qWarning() << "File or directory does not exist:" << path;
-                    TrayIcon::instance()->showMessage(
+                    QMetaObject::invokeMethod(qApp, [path]() {
+                        NotificationWidget::showNotification(
                             QObject::tr("Warning"),
                             QObject::tr("File or directory does not exist: %1").arg(path),
-                            QSystemTrayIcon::Warning, 5000);
+                            5000,
+                            NotificationWidget::Warning
+                        );
+                    }, Qt::QueuedConnection);
                     return false;
                 }
             }
             if (!success) {
                 qWarning() << "Failed to open:" << path;
-                TrayIcon::instance()->showMessage(
+                QMetaObject::invokeMethod(qApp, [path]() {
+                    NotificationWidget::showNotification(
                         QObject::tr("Warning"),
                         QObject::tr("Failed to open: %1").arg(path),
-                        QSystemTrayIcon::Warning, 5000);
+                        5000,
+                        NotificationWidget::Warning
+                    );
+                }, Qt::QueuedConnection);
                 return false;
             }
             return true;
         } catch (const std::exception &e) {
             qCritical() << "Exception occurred while launching" << path << ":" << e.what();
-            TrayIcon::instance()->showMessage(
+            QMetaObject::invokeMethod(qApp, [path, e]() {
+                NotificationWidget::showNotification(
                     QObject::tr("Error"),
-                    QObject::tr("Exception occurred while launching: %1 \n%2").arg(path).arg(
-                            e.what()),
-                    QSystemTrayIcon::Critical, 5000);
+                    QObject::tr("Exception occurred while launching: %1\n%2").arg(path).arg(e.what()),
+                    5000, NotificationWidget::Critical
+                );
+            }, Qt::QueuedConnection);
             return false;
         } catch (...) {
             qCritical() << "Unknown exception occurred while launching" << path;
-            TrayIcon::instance()->showMessage(
+            QMetaObject::invokeMethod(qApp, [path]() {
+                NotificationWidget::showNotification(
                     QObject::tr("Error"),
                     QObject::tr("Unknown exception occurred while launching: %1").arg(path),
-                    QSystemTrayIcon::Critical, 5000);
+                    5000,
+                    NotificationWidget::Critical
+                );
+            }, Qt::QueuedConnection);
             return false;
         }
     });
 }
+
 // 同步版本
 static void launchByPath(const QString &path) {
     launchByPathAsync(path);
