@@ -59,6 +59,7 @@ ConfigData SettingWidget::getAllValues() {
     data.isTrayHourAlarm = ui->checkBox_9->isChecked();
     data.isSilentBoot = ui->checkBox_10->isChecked();
     data.isRecordWindowLocation = ui->checkBox_11->isChecked();
+    data.isMusicIcon = ui->checkBox_12->isChecked();
     //TTS
     data.APPID = ui->lineEdit_2->text();
     data.APISecret = ui->lineEdit_3->text();
@@ -113,6 +114,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->checkBox_9->setChecked(data.isTrayHourAlarm);
     ui->checkBox_10->setChecked(data.isSilentBoot);
     ui->checkBox_11->setChecked(data.isRecordWindowLocation);
+    ui->checkBox_12->setChecked(data.isMusicIcon);
     //TTS
     ui->lineEdit_2->setText(data.APPID);
     ui->lineEdit_3->setText(data.APISecret);
@@ -218,13 +220,13 @@ void SettingWidget::connectSignals() {
     });
     //bool
     connect(ui->checkBox, &QCheckBox::clicked, [&]() {
-        if (ui->checkBox->isChecked()) {
-            onCheckBox1Clicked(false);
-        } else {
-            onCheckBox1Clicked(true);
-        }
+        onCheckBox1Clicked(!ui->checkBox->isChecked());
     });
-    //
+    connect(ui->checkBox_12, &QCheckBox::clicked, [&]() {
+        TrayIcon::instance()->switchMusicIcon(ui->checkBox_12->isChecked());
+    });
+
+    // 链接跳转
     connect(ui->pushButton_3, &QPushButton::clicked, [&]() {
         launchByPath(DataManager::instance().const_config_data.tts_url);
     });
@@ -331,7 +333,7 @@ void SettingWidget::resetSetting() {
     QMessageBox::information(this, "Information", tr("重置设置成功！"), QMessageBox::Ok);
 }
 
-void SettingWidget::onCheckBox1Clicked(bool flag) {
+void SettingWidget::onCheckBox1Clicked(const bool flag) {
     // 获取启动文件夹路径
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QString appData = env.value("APPDATA");

@@ -41,6 +41,8 @@ public:
     QAction *action_quit;
     QAction *action_keyListener;
 
+    QIcon m_appIcon = QIcon(":/assets/image/PLauncher.png");
+
 private:
     TrayIcon(QObject *parent = nullptr);
 
@@ -54,6 +56,28 @@ private:
 
     QMenu *menu;
     bool m_silentMode = false;
+
+
+    QPixmap createMusicIcon() const;
+
+    void initializeAudioDetector();
+
+
+    bool m_rotating = false;
+    int m_angle = 0;
+    QTimer *m_rotateTimer;
+    QTimer *m_audioCheckTimer;
+    // Audio detection members
+    class AudioActivityDetector;
+    AudioActivityDetector *m_audioDetector = nullptr;
+
+public:
+    void switchMusicIcon(bool flag);
+
+private slots:
+    void rotateNote();
+
+    void checkAudioActivity();
 };
 
 #endif // TRAY_H

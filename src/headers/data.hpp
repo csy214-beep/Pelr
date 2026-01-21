@@ -51,6 +51,7 @@ struct ConfigData {
     bool isTrayHourAlarm = false;
     bool isSilentBoot = false;
     bool isRecordWindowLocation = false;
+    bool isMusicIcon = false;
     //TTS
     QString APPID;
     QString APISecret;
@@ -77,7 +78,7 @@ struct ConfigData {
         out << data.isStartUp << data.isListening << data.isLookingMouse
                 << data.isStartStar << data.isRandomSpeech << data.isSaying
                 << data.isHourAlarm << data.isTop << data.isTrayHourAlarm
-                << data.isSilentBoot << data.isRecordWindowLocation;
+                << data.isSilentBoot << data.isRecordWindowLocation << data.isMusicIcon;
 
         out << data.APPID << data.APISecret << data.APIKey << data.speaker;
         out << data.model << data.role << data.customRoleDesc;
@@ -96,7 +97,7 @@ struct ConfigData {
         in >> data.isStartUp >> data.isListening >> data.isLookingMouse
                 >> data.isStartStar >> data.isRandomSpeech >> data.isSaying
                 >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm
-                >> data.isSilentBoot >> data.isRecordWindowLocation;
+                >> data.isSilentBoot >> data.isRecordWindowLocation >> data.isMusicIcon;
 
         in >> data.APPID >> data.APISecret >> data.APIKey >> data.speaker;
         in >> data.model >> data.role >> data.customRoleDesc;

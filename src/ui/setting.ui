@@ -296,17 +296,17 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="checkBox">
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="checkBox_10">
         <property name="text">
-         <string>随系统启动</string>
+         <string>以静默模式启动</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="0">
-       <widget class="QCheckBox" name="checkBox_9">
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox_2">
         <property name="text">
-         <string>托盘报时功能</string>
+         <string>启动时监听按键</string>
         </property>
        </widget>
       </item>
@@ -317,7 +317,21 @@
         </property>
        </widget>
       </item>
-      <item row="11" column="0">
+      <item row="10" column="0">
+       <widget class="QCheckBox" name="checkBox_11">
+        <property name="text">
+         <string>记录窗口位置</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QCheckBox" name="checkBox_9">
+        <property name="text">
+         <string>托盘报时功能</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
        <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -329,6 +343,27 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="checkBox_5">
+        <property name="text">
+         <string>随机说话</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="checkBox_6">
+        <property name="text">
+         <string>启用语音</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>随系统启动</string>
+        </property>
+       </widget>
       </item>
       <item row="2" column="0">
        <widget class="QCheckBox" name="checkBox_3">
@@ -344,34 +379,6 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QCheckBox" name="checkBox_6">
-        <property name="text">
-         <string>启用语音</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="checkBox_2">
-        <property name="text">
-         <string>启动时监听按键</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QCheckBox" name="checkBox_5">
-        <property name="text">
-         <string>随机说话</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QCheckBox" name="checkBox_10">
-        <property name="text">
-         <string>以静默模式启动</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
        <widget class="QCheckBox" name="checkBox_4">
         <property name="text">
@@ -379,10 +386,10 @@
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
-       <widget class="QCheckBox" name="checkBox_11">
+      <item row="11" column="0">
+       <widget class="QCheckBox" name="checkBox_12">
         <property name="text">
-         <string>记录窗口位置</string>
+         <string>音乐托盘</string>
         </property>
        </widget>
       </item>
