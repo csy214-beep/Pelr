@@ -10,10 +10,10 @@ cmake_minimum_required(VERSION 4.0)
 project(PLauncher)
 # ------------------
 # 设置是否为debug模式
-set(D_OR_R ON)#ON for Debug, OFF for Release
+set(D_OR_R OFF)#ON for Debug, OFF for Release
 
 # 是否开启控制台调试输出
-set(CONSOLE ON)
+set(CONSOLE OFF)
 # ------------------
 
 # 启用 Unicode 模式（Windows 平台）
@@ -147,7 +147,7 @@ target_link_libraries(PLauncher
 if (WIN32)
     # 1. 定义图标文件路径和rc脚本路径
     set(APP_ICON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/assets/image/PLauncher.ico")
-    set(APP_RC_FILE "${CMAKE_CURRENT_SOURCE_DIR}/PLauncher.rc")
+    set(APP_RC_FILE "${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc")
 
     # 2. 检查图标和rc脚本是否存在
     if (EXISTS ${APP_ICON_FILE} AND EXISTS ${APP_RC_FILE})
@@ -252,6 +252,55 @@ if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
             )
         else ()
             message(FATAL_ERROR "Qt DLL missing! Path: ${QT_DLL_PATH}, please check if this component of Qt is installed.")
+        endif ()
+    endforeach ()
+
+    # 5. 复制项目自定义 DLL 文件（修正：使用 file(GLOB) 获取文件列表）
+    set(CUSTOM_DLL_PATH "${CMAKE_SOURCE_DIR}/lib/Debug")
+    if (EXISTS "${CUSTOM_DLL_PATH}")
+        # 获取所有 DLL 文件
+        file(GLOB CUSTOM_DLLS "${CUSTOM_DLL_PATH}/*.dll")
+
+        if (CUSTOM_DLLS)
+            # 为每个 DLL 文件创建复制命令
+            foreach (CUSTOM_DLL ${CUSTOM_DLLS})
+                get_filename_component(DLL_NAME "${CUSTOM_DLL}" NAME)
+                add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                        COMMAND ${CMAKE_COMMAND} -E copy
+                        "${CUSTOM_DLL}"
+                        "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+                        COMMENT "Copying custom DLL: ${DLL_NAME}"
+                )
+            endforeach ()
+        else ()
+            message(WARNING "No DLL files found in: ${CUSTOM_DLL_PATH}")
+        endif ()
+    else ()
+        message(WARNING "Custom DLL path does not exist: ${CUSTOM_DLL_PATH}")
+    endif ()
+
+    # 6. 复制资源文件夹
+    set(RESOURCE_FOLDERS
+            "assets"
+            "FrameworkShaders"
+            "Resources"
+            "SampleShaders"
+    )
+
+    foreach (FOLDER ${RESOURCE_FOLDERS})
+        set(SOURCE_PATH "${CMAKE_SOURCE_DIR}/${FOLDER}")
+        set(TARGET_PATH "$<TARGET_FILE_DIR:${PROJECT_NAME}>/${FOLDER}")
+
+        if (EXISTS "${SOURCE_PATH}")
+            # 递归复制整个文件夹
+            add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    "${SOURCE_PATH}"
+                    "${TARGET_PATH}"
+                    COMMENT "Copying resource folder: ${FOLDER}"
+            )
+        else ()
+            message(WARNING "Resource folder does not exist: ${SOURCE_PATH}")
         endif ()
     endforeach ()
 endif ()
