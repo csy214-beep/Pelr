@@ -412,79 +412,54 @@ Battery State: %3</source>
 <context>
     <name>SettingWidget</name>
     <message>
-        <location filename="../src/sources/setting.cpp" line="151"/>
-        <source>编程助手</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/sources/setting.cpp" line="152"/>
-        <source>桌宠女友</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/sources/setting.cpp" line="153"/>
-        <source>技术导师</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/sources/setting.cpp" line="154"/>
-        <source>创作助手</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/sources/setting.cpp" line="155"/>
-        <source>自定义角色</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/sources/setting.cpp" line="179"/>
+        <location filename="../src/sources/setting.cpp" line="167"/>
         <source>调试信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="180"/>
+        <location filename="../src/sources/setting.cpp" line="168"/>
         <source>普通信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="181"/>
+        <location filename="../src/sources/setting.cpp" line="169"/>
         <source>警告</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="182"/>
+        <location filename="../src/sources/setting.cpp" line="170"/>
         <source>严重错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="183"/>
+        <location filename="../src/sources/setting.cpp" line="171"/>
         <source>致命错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="281"/>
+        <location filename="../src/sources/setting.cpp" line="269"/>
         <source>保存成功！
 下次应用启动生效。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="343"/>
+        <location filename="../src/sources/setting.cpp" line="331"/>
         <source>重置设置成功！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="434"/>
-        <location filename="../src/sources/setting.cpp" line="437"/>
+        <location filename="../src/sources/setting.cpp" line="422"/>
+        <location filename="../src/sources/setting.cpp" line="425"/>
         <source>版本检查</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="442"/>
+        <location filename="../src/sources/setting.cpp" line="430"/>
         <source>版本检查错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="456"/>
+        <location filename="../src/sources/setting.cpp" line="444"/>
         <source>选择模型文件</source>
         <translation type="unfinished"></translation>
     </message>
