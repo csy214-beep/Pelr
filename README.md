@@ -138,8 +138,7 @@ PLauncher/
 
 - **Python 3.11** - 开发环境
 - **PyInstaller** - 应用打包分发
-- **Pillow** - 图像处理
-- **pystray** - 系统托盘集成
+- **PySide6** - Qt6 跨平台 UI 框架
 - **websocket-client** - 网络通信
 
 ## 🛠️ 开发构建
