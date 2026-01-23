@@ -1,8 +1,6 @@
 本项目使用了很多第三方库，详情请移步[WiKi](https://gitee.com/Pfolg/plauncher/wikis)了解。
 
-
 #### [Cpp 工具链](https://gitee.com/Pfolg/plauncher/wikis/Cpp-%E5%B7%A5%E5%85%B7%E9%93%BE)
-
 
 | 分类 | 库名称 | 版本 | 用途说明 | 许可协议 | 官方来源 |
 |------|--------|------|----------|----------|----------|
@@ -17,25 +15,24 @@
 | 打包工具 | PyInstaller | 6.15.0 | 应用打包和分发 | GPL | [pyinstaller.org](https://www.pyinstaller.org/) |
 | Windows支持 | pywin32-ctypes | 0.2.3 | Windows API调用支持 | BSD | [pypi.org](https://pypi.org/project/pywin32-ctypes/) |
 
-
 #### [Python 工具链](https://gitee.com/Pfolg/plauncher/wikis/Python-%E5%B7%A5%E5%85%B7%E9%93%BE)
-
 
 | **分类**          | **库名**                  | **版本**       | **用途**                                  | **授权协议**       | **来源**                          |
 |--------------------|---------------------------|---------------|-------------------------------------------|--------------------|-----------------------------------|
-| **打包工具**       | PyInstaller               | 6.15.0        | 应用打包与分发                            | GPL                | [PyInstaller](https://www.pyinstaller.org) |
-|                    | pyinstaller-hooks-contrib | 2025.8        | PyInstaller 附加钩子支持                  | GPL                | [GitHub](https://github.com/pyinstaller/pyinstaller-hooks-contrib) |
-| **依赖分析**       | altgraph                  | 0.17.4        | 图形化依赖分析工具                        | MIT                | [PyPI](https://pypi.org/project/altgraph/) |
+| **打包工具**       | PyInstaller               | 6.18.0        | 应用打包与分发                            | GPL                | [PyInstaller](https://www.pyinstaller.org) |
+|                    | pyinstaller-hooks-contrib | 2026.0        | PyInstaller 附加钩子支持                  | GPL                | [GitHub](https://github.com/pyinstaller/pyinstaller-hooks-contrib) |
+| **依赖分析**       | altgraph                  | 0.17.5        | 图形化依赖分析工具                        | MIT                | [PyPI](https://pypi.org/project/altgraph/) |
 | **Windows工具链**  | pywin32-ctypes            | 0.2.3         | Windows API 调用                         | BSD                | [PyPI](https://pypi.org/project/pywin32-ctypes) |
-|                    | pefile                    | 2023.2.7      | PE文件格式解析                           | MIT                | [GitHub](https://github.com/erocarrera/pefile) |
-| **图像处理**       | Pillow                    | 11.3.0        | 图像处理功能增强                          | HPND               | [Python Pillow](https://python-pillow.org) |
-| **系统集成**       | pystray                   | 0.19.5        | 系统托盘图标支持                          | LGPL               | [GitHub](https://github.com/moses-palmer/pystray) |
-| **网络通信**       | websocket-client          | 1.8.0         | WebSocket 客户端实现                     | LGPL               | [GitHub](https://github.com/websocket-client/websocket-client) |
-| **兼容性工具**     | six                       | 1.17.0        | Python 2/3 兼容性库                      | MIT                | [PyPI](https://pypi.org/project/six/) |
-| **工具辅助**       | packaging                 | 25.0          | 包版本与依赖管理                          | Apache-2.0/BSD     | [PyPI](https://pypi.org/project/packaging/) |
-
+|                    | pefile                    | 2024.8.26     | PE文件格式解析                           | MIT                | [GitHub](https://github.com/erocarrera/pefile) |
+| **网络通信**       | websocket-client          | 1.9.0         | WebSocket 客户端实现                     | LGPL               | [GitHub](https://github.com/websocket-client/websocket-client) |
+| **工具辅助**       | packaging                 | 26.0          | 包版本与依赖管理                          | Apache-2.0/BSD     | [PyPI](https://pypi.org/project/packaging/) |
+| **GUI框架**        | PySide6                   | 6.10.1        | Qt for Python 跨平台GUI框架              | LGPL               | [Qt for Python](https://doc.qt.io/qt-6/pyside6-index.html) |
+|                    | PySide6_Addons            | 6.10.1        | PySide6 附加模块                         | LGPL               | [Qt for Python](https://doc.qt.io/qt-6/pyside6-index.html) |
+|                    | PySide6_Essentials        | 6.10.1        | PySide6 核心模块                         | LGPL               | [Qt for Python](https://doc.qt.io/qt-6/pyside6-index.html) |
+| **绑定工具**       | shiboken6                 | 6.10.1        | Python/C++ 绑定生成器                    | LGPL               | [Qt for Python](https://doc.qt.io/qt-6/pyside6-index.html) |
 
 ## 其他资源
+
 图标资源：
 
 [dariushhpg1/IconaMoon - GitHub](https://github.com/dariushhpg1/IconaMoon)
@@ -60,7 +57,7 @@
 + [Live2D For C++(Qt)实现二次元桌宠 by 見崎音羽](https://www.bilibili.com/video/BV1TtkHYpEDA/)
 + [見崎音羽](https://space.bilibili.com/140315806)
 + [Hucci写代码](https://space.bilibili.com/1318868)
-+ [How to Build a Qt Application Using Visual Studio Code ](https://www.youtube.com/watch?v=j2Gfkrajb1M)
++ [How to Build a Qt Application Using Visual Studio Code](https://www.youtube.com/watch?v=j2Gfkrajb1M)
 + [madhawa polkotuwa](https://github.com/madhawapolkotuwa)
 + [黑马程序员匠心之作|C++教程从0到1入门编程,学习编程不再难](https://www.bilibili.com/video/BV1et411b73Z)
 + [Python全栈开发教程](https://www.bilibili.com/video/BV1wD4y1o7AS/)
