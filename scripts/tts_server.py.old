@@ -6,6 +6,7 @@
 # GPL v3 License
 # https://gnu.ac.cn/licenses/gpl-3.0.html
 
+
 import sys
 import os
 import json
@@ -22,13 +23,12 @@ import websocket
 import ssl
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
+import pystray
+from pystray import MenuItem, Menu
+import threading
+from PIL import Image
 import logging
 import tempfile
-
-# PySide6 imports
-from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PySide6.QtGui import QIcon, QAction
-from PySide6.QtCore import QThread, Signal, QObject
 
 
 # 配置日志
@@ -134,20 +134,9 @@ class TTSService:
 
     def on_message(self, ws, message):
         try:
-            # 添加对 None 消息的检查
-            if message is None:
-                logger.warning("收到空消息，忽略")
-                return
-
             message = json.loads(message)
             code = message["code"]
             sid = message["sid"]
-
-            # 检查是否有 data 字段
-            if "data" not in message:
-                logger.error(f"消息缺少data字段: {message}")
-                return
-
             audio = message["data"]["audio"]
             audio = base64.b64decode(audio)
             status = message["data"]["status"]
@@ -158,8 +147,6 @@ class TTSService:
                 errMsg = message["message"]
                 logger.error(f"Error: sid:{sid} call error:{errMsg} code is:{code}")
             else:
-                if not hasattr(ws, 'audio_data'):
-                    ws.audio_data = []
                 ws.audio_data.append(audio)
                 if status == 2:
                     total_audio_size = sum(len(data) for data in ws.audio_data)
@@ -168,13 +155,8 @@ class TTSService:
                         for data in ws.audio_data:
                             f.write(data)
                     logger.info(f"TTS completed. Output file: {ws.output_file}")
-        except json.JSONDecodeError as e:
-            logger.error(f"JSON解析错误: {str(e)}, 原始消息: {message}")
-        except KeyError as e:
-            logger.error(f"消息缺少必要字段 {str(e)}: {message}")
         except Exception as e:
             logger.error(f"解析消息时出错: {str(e)}")
-            logger.debug(f"原始消息内容: {message}")
 
     def write_wav_header(self, file, audio_data_size, sample_rate=16000, num_channels=1, bits_per_sample=16):
         file.write(b'RIFF')
@@ -191,17 +173,11 @@ class TTSService:
         file.write(b'data')
         file.write(struct.pack('<I', audio_data_size))
 
-    def on_error(self, ws, error, *args):
+    def on_error(self, ws, error):
         logger.error(f"WebSocket error: {error}")
-        if args:
-            logger.debug(f"Additional error args: {args}")
 
-    def on_close(self, ws, close_status_code=None, close_msg=None, *args):
-        logger.info(
-            f"WebSocket connection closed (code: {close_status_code}, msg: {close_msg})"
-        )
-        if args:
-            logger.debug(f"Additional close args: {args}")
+    def on_close(self, ws):
+        logger.info("WebSocket connection closed")
 
     def on_open(self, ws):
         def run(*args):
@@ -324,107 +300,35 @@ class TTSRequestHandler(BaseHTTPRequestHandler):
             logger.warning(f"请求的路径不存在: {self.path}")
 
 
-# HTTP服务器线程
-class HTTPServerThread(QThread):
-    def __init__(self, port=9140):
-        super().__init__()
-        self.port = port
-        self.server = None
-
-    def run(self):
-        try:
-            self.server = HTTPServer(('localhost', self.port), TTSRequestHandler)
-            logger.info(f"TTS服务器启动，监听端口: {self.port}")
-            self.server.serve_forever()
-        except Exception as e:
-            logger.error(f"服务器启动失败: {str(e)}")
-
-    def stop(self):
-        if self.server:
-            self.server.shutdown()
-            logger.info("TTS服务器已停止")
-
-
-# 系统托盘类
-class TrayIcon(QSystemTrayIcon):
-    def __init__(self):
-        super().__init__()
-
-        # 尝试加载图标
-        icon_paths = [
-            "assets/image/PLauncher.ico",  # 优先尝试 .ico 格式
-            "assets/image/PLauncher.png",  # 其次尝试 .png 格式
-        ]
-
-        icon = None
-        for path in icon_paths:
-            if os.path.exists(path):
-                try:
-                    icon = QIcon(path)
-                    if not icon.isNull():
-                        logger.info(f"成功加载图标: {path}")
-                        break
-                except Exception as e:
-                    logger.warning(f"加载图标 {path} 失败: {str(e)}")
-
-        # 如果所有文件都加载失败，使用内置图标
-        if not icon or icon.isNull():
-            from PySide6.QtWidgets import QStyle
-
-            try:
-                icon = QApplication.style().standardIcon(QStyle.SP_ComputerIcon)
-                logger.info("使用内置计算机图标")
-            except Exception as e:
-                logger.warning(f"无法加载内置图标: {str(e)}")
-                icon = QIcon()
-
-        self.setIcon(icon)
-        self.setToolTip("PLauncher TTS Server")
-
-        # 创建菜单
-        self.menu = QMenu()
-
-        # 添加退出动作
-        exit_action = QAction("退出", self)
-        exit_action.triggered.connect(self.exit_app)
-        self.menu.addAction(exit_action)
-
-        self.setContextMenu(self.menu)
-
-        # 显示托盘图标
-        self.show()
-
-    def exit_app(self):
-        logger.info("正在退出TTS服务...")
-        # 停止HTTP服务器线程
-        if hasattr(self, 'server_thread'):
-            self.server_thread.stop()
-        # 退出应用程序
-        QApplication.quit()
-
-
-# 主应用程序
-class TTSApp(QApplication):
-    def __init__(self, argv):
-        super().__init__(argv)
-
-        # 创建托盘图标
-        self.tray_icon = TrayIcon()
-
-        # 启动HTTP服务器线程
-        self.server_thread = HTTPServerThread(port=9140)
-        self.server_thread.start()
-
-        logger.info("TTS服务已启动，系统托盘图标已创建")
-
-
-def main():
-    # 创建应用程序实例
-    app = TTSApp(sys.argv)
-
-    # 运行应用程序
-    sys.exit(app.exec())
+def run_server(port=9140):
+    try:
+        server = HTTPServer(('localhost', port), TTSRequestHandler)
+        logger.info(f"TTS服务器启动，监听端口: {port}")
+        server.serve_forever()
+    except Exception as e:
+        logger.error(f"服务器启动失败: {str(e)}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        # 尝试加载图标
+        try:
+            image = Image.open("assets/image/PLauncher.png")
+        except:
+            # 如果找不到图标，创建一个简单的默认图标
+            logger.warning("无法加载图标文件，使用默认图标")
+            image = Image.new('RGB', (64, 64), color='red')
+
+        # 创建系统托盘菜单
+        menu = Menu(MenuItem('退出', lambda: icon.stop()))
+        icon = pystray.Icon("PLauncher TTS Server", image, "PLauncher TTS Server", menu)
+
+        # 启动服务器线程
+        server_thread = threading.Thread(target=run_server, daemon=True)
+        server_thread.start()
+
+        logger.info("TTS服务已启动，系统托盘图标已创建")
+        # 运行系统托盘图标
+        icon.run()
+    except Exception as e:
+        logger.error(f"应用程序启动失败: {str(e)}")

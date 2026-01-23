@@ -225,6 +225,25 @@ if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
         message(FATAL_ERROR "Qt platform plugin missing! Path: ${QT_WINDOWS_PLUGIN}")
     endif ()
 
+    # 复制 Qt mediaservice 插件（多媒体服务插件）
+    set(QT_MEDIASERVICE_PLUGIN_PATH "${QT_PLUGIN_PATH}/mediaservice")
+    if (EXISTS "${QT_MEDIASERVICE_PLUGIN_PATH}")
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E make_directory
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/mediaservice/"
+                COMMENT "Create Qt mediaservice plugin directory: plugins/mediaservice/"
+        )
+        # 复制整个 mediaservice 文件夹及其内容
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory
+                "${QT_MEDIASERVICE_PLUGIN_PATH}"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/mediaservice/"
+                COMMENT "Copy Qt mediaservice plugins"
+        )
+    else ()
+        message(WARNING "Qt mediaservice plugins directory does not exist: ${QT_MEDIASERVICE_PLUGIN_PATH}")
+    endif ()
+
     # 4. 复制所有依赖的 Qt DLL（修正路径：从 QT_BIN_PATH 复制）
     set(QT_REQUIRED_LIBS
             Core        # 核心模块

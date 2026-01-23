@@ -26,9 +26,9 @@
 *.a
 
 # IDE Settings
-.vscode/
-.idea/
-.venv/
+.vscode
+.idea
+.venv
 
 # Build output
 cmake-build-debug
@@ -36,10 +36,7 @@ cmake-build-release
 release/
 build/
 dist/
-tts_server/build/
-tts_server/dist/
-tts_server/log/
-tts_server/*.spec
+*.spec
 # Documentation
 test_docs
 
@@ -52,15 +49,9 @@ lib/
 *.out
 *.app
 
-
-/.idea/.gitignore
-/.idea/.name
-/.idea/editor.xml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/plauncher.iml
-/.idea/QtSettings.xml
-/.idea/vcs.xml
+# log/cache files
+log
+voice_files
 
 # Resources
 Resources/
