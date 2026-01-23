@@ -211,17 +211,17 @@ void GLCore::initContextMenu() {
     // 以一定次序添加按钮
     menuWidget->mainLayout->addWidget(SettingButton);
     menuWidget->mainLayout->addWidget(EmotionButton);
-    menuWidget->mainLayout->addWidget(QuickStartButton);
+    // 如果有内容就添加到菜单
+    if (launcherMenu::instance()->hasContent) {
+        menuWidget->mainLayout->addWidget(QuickStartButton);
+    } else {
+        QuickStartButton->setEnabled(false); // 禁用
+        QuickStartButton->hide(); // 隐藏
+    }
     menuWidget->mainLayout->addWidget(switchListenerButton);
     menuWidget->mainLayout->addWidget(MediaButton);
     menuWidget->mainLayout->addWidget(RandomSentenceButton);
     menuWidget->mainLayout->addWidget(QuestionButton);
-
-    // 启动启动项
-    if (DataManager::instance().getBasicData().isStartStar) {
-        qDebug() << "starting app in star category";
-        startRunStarIfPoweredInThread();
-    }
 }
 
 void GLCore::connectSignals() {
@@ -332,6 +332,12 @@ void GLCore::connectSignals() {
             }
         }
     });
+
+    // 启动启动项
+    if (DataManager::instance().getBasicData().isStartStar) {
+        qDebug() << "starting app in star category";
+        startRunStarIfPoweredInThread();
+    }
 }
 
 void GLCore::switchListener() {

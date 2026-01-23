@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <QFileInfo>
 #include <launcherMenu.hpp>
+#include "NotificationWidget.h"
 
 ManageStartWidget::ManageStartWidget(QWidget *parent) : QWidget(parent), ui(new Ui::manageStart),
                                                         editorWidget(nullptr), isSaved(true) {
@@ -101,7 +102,7 @@ void ManageStartWidget::deleteSelectedItem() {
 
     // 确认对话框
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Confirm", "确定要删除选中的项目吗?",
+    reply = QMessageBox::question(this, tr("Confirm"), tr("确定要删除选中的项目吗?"),
                                   QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
@@ -143,14 +144,14 @@ void ManageStartWidget::saveMenuData() {
         QFileInfo fileInfo(data[i].path);
         if (!fileInfo.exists() && data[i].category != "Link")
             QMessageBox::warning(
-                this, "Warning", "项目 " + data[i].name + "\n的路径不存在：" + data[i].path);
+                this, tr("Warning"), tr("项目 %1 \n的路径不存在：%2").arg(data[i].name).arg(data[i].path));
         qDebug() << "Save data:" << data[i].category << " " << data[i].name << " " << data[i].path << " "
                 << data[i].icon << " " << data[i].description;
     }
     DataManager::instance().writeData<QList<MenuData> >(data);
     isSaved = true;
     launcherMenu::instance()->refreshMenu();
-    QMessageBox::information(this, "Information", "保存成功！");
+    NotificationWidget::showNotification(tr("Information"), tr("保存成功！"));
 }
 
 void ManageStartWidget::getAllItems(QList<MenuData> &data) {

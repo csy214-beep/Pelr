@@ -171,9 +171,12 @@ TrayIcon::TrayIcon(QObject *parent)
 
     QAction *action_startApp = new QAction("启动项目", this);
     action_startApp->setMenu(launcherMenu::instance());
-    // 添加菜单项到菜单
-    menu->addAction(action_startApp);
-    menu->addSeparator();
+    // 如果有内容就添加到菜单
+    if (launcherMenu::instance()->hasContent) {
+        // 添加菜单项到菜单
+        menu->addAction(action_startApp);
+        menu->addSeparator();
+    }
 
     menu->addActions({
         action_resetWinLoc, action_silentMode, action_switchDrag,
@@ -186,10 +189,10 @@ TrayIcon::TrayIcon(QObject *parent)
     // 设置托盘图标的菜单
     this->setContextMenu(menu);
 
+    qDebug() << "TrayIcon singleton initialized";
     // 显示托盘图标
     this->show();
     switchMusicIcon(DataManager::instance().getBasicData().isMusicIcon);
-    qDebug() << "TrayIcon singleton initialized";
 }
 
 void TrayIcon::switchText(QAction *action) {

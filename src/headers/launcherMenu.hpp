@@ -19,9 +19,11 @@
 #include "custommenu.h"
 
 class launcherMenu : public CustomMenu {
-Q_OBJECT
+    Q_OBJECT
 
 public:
+    bool hasContent;
+
     // 删除拷贝构造函数和赋值运算符
     launcherMenu(const launcherMenu &) = delete;
 
@@ -93,6 +95,7 @@ public:
         addMenu(menu_Link);
         addMenu(menu_Scripts);
         qDebug() << "menu loaded";
+        hasContent = (star_count + app_count + link_count + scripts_count != 0);
     }
 
     // 刷新菜单数据

@@ -280,31 +280,31 @@ Version: %2</translation>
     <name>GLCore</name>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="155"/>
-        <location filename="../src/sources/GLCore.cpp" line="607"/>
+        <location filename="../src/sources/GLCore.cpp" line="613"/>
         <source>按键监听</source>
         <translation>Key Listener</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="159"/>
-        <location filename="../src/sources/GLCore.cpp" line="608"/>
+        <location filename="../src/sources/GLCore.cpp" line="614"/>
         <source>说点什么</source>
         <translation>Say Something</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="163"/>
-        <location filename="../src/sources/GLCore.cpp" line="609"/>
+        <location filename="../src/sources/GLCore.cpp" line="615"/>
         <source>启动</source>
         <translation>Launcher</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="170"/>
-        <location filename="../src/sources/GLCore.cpp" line="610"/>
+        <location filename="../src/sources/GLCore.cpp" line="616"/>
         <source>天气</source>
         <translation>Weather</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="172"/>
-        <location filename="../src/sources/GLCore.cpp" line="611"/>
+        <location filename="../src/sources/GLCore.cpp" line="617"/>
         <source>电源状态</source>
         <translation>Power Status</translation>
     </message>
@@ -321,38 +321,72 @@ Battery State: %3</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="182"/>
-        <location filename="../src/sources/GLCore.cpp" line="612"/>
+        <location filename="../src/sources/GLCore.cpp" line="618"/>
         <source>TODO</source>
         <translation>TODO</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="185"/>
-        <location filename="../src/sources/GLCore.cpp" line="613"/>
+        <location filename="../src/sources/GLCore.cpp" line="619"/>
         <source>问个问题</source>
         <translation>Ask a Question</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="189"/>
-        <location filename="../src/sources/GLCore.cpp" line="614"/>
+        <location filename="../src/sources/GLCore.cpp" line="620"/>
         <source>界面</source>
         <translation>Interface</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="205"/>
-        <location filename="../src/sources/GLCore.cpp" line="615"/>
+        <location filename="../src/sources/GLCore.cpp" line="621"/>
         <source>EMO</source>
         <translation>EMO</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="209"/>
-        <location filename="../src/sources/GLCore.cpp" line="616"/>
+        <location filename="../src/sources/GLCore.cpp" line="622"/>
         <source>媒体播放</source>
         <translation>Media Player</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="396"/>
+        <location filename="../src/sources/GLCore.cpp" line="402"/>
         <source>%1, %2℃, %3, humidity: %4%.</source>
         <translation>%1, %2℃, %3, humidity: %4%.</translation>
+    </message>
+</context>
+<context>
+    <name>ManageStartWidget</name>
+    <message>
+        <location filename="../src/sources/manageStart.cpp" line="105"/>
+        <source>Confirm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/manageStart.cpp" line="105"/>
+        <source>确定要删除选中的项目吗?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/manageStart.cpp" line="147"/>
+        <source>Warning</source>
+        <translation type="unfinished">Warning</translation>
+    </message>
+    <message>
+        <location filename="../src/sources/manageStart.cpp" line="147"/>
+        <source>项目 %1 
+的路径不存在：%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/manageStart.cpp" line="154"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/manageStart.cpp" line="154"/>
+        <source>保存成功！</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -568,12 +602,17 @@ Will take effect on next application launch.</translation>
         <translation>Todo Reminder</translation>
     </message>
     <message>
-        <location filename="../src/headers/todoNotify.hpp" line="83"/>
+        <location filename="../src/headers/todoNotify.hpp" line="69"/>
+        <source>还没有待办事项哦！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/todoNotify.hpp" line="91"/>
         <source>还没有最近的待办事项哦！</source>
         <translation>No recent todo items yet!</translation>
     </message>
     <message>
-        <location filename="../src/headers/todoNotify.hpp" line="86"/>
+        <location filename="../src/headers/todoNotify.hpp" line="94"/>
         <source>最近的一次待办事项是「%1」，截止时间是：%2</source>
         <translation>The most recent todo item is &quot;%1&quot;, due at: %2</translation>
     </message>

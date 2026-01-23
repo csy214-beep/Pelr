@@ -77,6 +77,7 @@ public:
 private slots:
     void rotateNote();
 
+
     void checkAudioActivity();
 };
 

@@ -64,11 +64,18 @@ public:
     static void askLatestNextEvent() {
         // 加载数据
         QList<TodoData> data = DataManager::instance().todo_data; //first
+        if (data.isEmpty()) {
+            qDebug() << "todo data is empty";
+            BubbleBox::instance()->textSet(tr("还没有待办事项哦！"));
+            return;
+        }
         const QDateTime now = QDateTime::currentDateTime();
         QDateTime nearestFuture;
         TodoData nearestEvent;
-        for (TodoData a: data) {
-            QDateTime eventTime = QDateTime::fromString(a.deadline);
+
+        const QString timeFormat = "yyyy-MM-dd HH:mm";
+        for (TodoData const &a: data) {
+            QDateTime eventTime = QDateTime::fromString(a.deadline, timeFormat);
             // 确保时间转换成功且是未来时间
             if (eventTime.isValid() && eventTime > now) {
                 // 如果是第一个未来时间，或者比当前记录的更近
@@ -78,6 +85,7 @@ public:
                 }
             }
         }
+        qDebug() << "nearestFuture:" << nearestFuture << "nearestEvent:" << nearestEvent.title;
         if (nearestEvent.title.isEmpty()) {
             qInfo() << "nearestEvent.title isEmpty";
             BubbleBox::instance()->textSet(tr("还没有最近的待办事项哦！"));

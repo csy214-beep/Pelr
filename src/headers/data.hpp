@@ -27,7 +27,7 @@
 #define TODO_DATA_FILE "user/todoData.dat"
 #define TODO_NOTIFY_FILE "user/todoNotify.dat"
 
-#define VERSION "20260107.10.7" //开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
+#define VERSION "20260107.10.9" //开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 //todo: 多语言支持
 
 struct ConfigData {
