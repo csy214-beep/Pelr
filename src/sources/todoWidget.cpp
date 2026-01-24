@@ -138,12 +138,13 @@ void todoWidget::moveItem(QTableView *view) {
         selectedRows.insert(index.row());
     }
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Confirm",
+    reply = QMessageBox::question(this, "Confirmation",
                                   QString("确定移动选中的 %1 个项目吗?")
-                                  .arg(selectedRows.size()),
+                                      .arg(selectedRows.size()),
                                   QMessageBox::Yes | QMessageBox::No);
 
-    if (reply != QMessageBox::Yes) {
+    if (reply != QMessageBox::Yes)
+    {
         return;
     }
 
@@ -155,7 +156,8 @@ void todoWidget::moveItem(QTableView *view) {
     QStandardItemModel *to_model = from_model == model_todo ? model_done : model_todo;
 
     // 移动所有选中的行
-    for (int row: rows) {
+    for (int row : rows)
+    {
         // 获取整行数据
         QList<QStandardItem *> rowItems = from_model->takeRow(row);
         // 添加到目标模型
@@ -168,42 +170,47 @@ void todoWidget::moveItem(QTableView *view) {
     saveAllData();
 }
 
-void todoWidget::clearModelData(QStandardItemModel *model, bool cfm) {
+void todoWidget::clearModelData(QStandardItemModel *model, bool cfm)
+{
     // 确认对话框
-    if (!cfm) {
+    if (!cfm)
+    {
         model->removeRows(0, model->rowCount());
         return;
     }
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Confirm", "确定要清除当前列表吗？",
+    reply = QMessageBox::question(this, "Confirmation", "确定要清除当前列表吗？",
                                   QMessageBox::Yes | QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
+    if (reply == QMessageBox::Yes)
+    {
         model->removeRows(0, model->rowCount());
     }
     saveAllData();
 }
 
-void todoWidget::deleteSelectedItem(QTableView *view) {
+void todoWidget::deleteSelectedItem(QTableView *view)
+{
     // 获取选择模型
     QItemSelectionModel *selectionModel = view->selectionModel();
 
     // 获取所有选中的行（按行号去重）
     QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
-    if (selectedIndexes.isEmpty()) {
+    if (selectedIndexes.isEmpty())
+    {
         qWarning() << "请先选择一个项目";
         return;
     }
 
-
     // 提取不重复的行号
     QSet<int> selectedRows;
-    for (const QModelIndex &index: selectedIndexes) {
+    for (const QModelIndex &index : selectedIndexes)
+    {
         selectedRows.insert(index.row());
     }
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Confirm",
+    reply = QMessageBox::question(this, "Confirmation",
                                   QString("确定删除选中的 %1 个项目吗?")
-                                  .arg(selectedRows.size()),
+                                      .arg(selectedRows.size()),
                                   QMessageBox::Yes | QMessageBox::No);
 
     if (reply != QMessageBox::Yes) {

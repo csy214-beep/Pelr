@@ -352,7 +352,11 @@ bool SettingWidget::checkStartupLink() {
 }
 
 void SettingWidget::resetSetting() {
-    ConfigData new_data = ConfigData();
+    const auto re = QMessageBox::question(
+        this, tr("Confirmation"), tr("确定要重置设置吗？\n重置后将恢复默认设置！"),
+        QMessageBox::Yes | QMessageBox::No);
+    if (re == QMessageBox::No)return;
+    const ConfigData new_data = ConfigData();
     setAllValues(new_data);
     DataManager::instance().writeData<ConfigData>(new_data);
     // 重置启动项（移除）

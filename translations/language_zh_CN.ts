@@ -320,12 +320,12 @@ Battery State: %3</source>
     <name>ManageStartWidget</name>
     <message>
         <location filename="../src/sources/manageStart.cpp" line="105"/>
-        <source>Confirm</source>
+        <source>确定要删除选中的项目吗?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sources/manageStart.cpp" line="105"/>
-        <source>确定要删除选中的项目吗?</source>
+        <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -492,53 +492,64 @@ Battery State: %3</source>
     </message>
     <message>
         <location filename="../src/sources/setting.cpp" line="294"/>
-        <location filename="../src/sources/setting.cpp" line="361"/>
-        <location filename="../src/sources/setting.cpp" line="392"/>
-        <location filename="../src/sources/setting.cpp" line="402"/>
-        <location filename="../src/sources/setting.cpp" line="430"/>
-        <location filename="../src/sources/setting.cpp" line="464"/>
+        <location filename="../src/sources/setting.cpp" line="365"/>
+        <location filename="../src/sources/setting.cpp" line="396"/>
+        <location filename="../src/sources/setting.cpp" line="406"/>
+        <location filename="../src/sources/setting.cpp" line="434"/>
+        <location filename="../src/sources/setting.cpp" line="468"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="392"/>
+        <location filename="../src/sources/setting.cpp" line="356"/>
+        <source>Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="356"/>
+        <source>确定要重置设置吗？
+重置后将恢复默认设置！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sources/setting.cpp" line="396"/>
         <source>快捷方式已不存在！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="398"/>
-        <location filename="../src/sources/setting.cpp" line="427"/>
-        <location filename="../src/sources/setting.cpp" line="468"/>
+        <location filename="../src/sources/setting.cpp" line="402"/>
+        <location filename="../src/sources/setting.cpp" line="431"/>
+        <location filename="../src/sources/setting.cpp" line="472"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="361"/>
+        <location filename="../src/sources/setting.cpp" line="365"/>
         <source>重置设置成功！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="398"/>
+        <location filename="../src/sources/setting.cpp" line="402"/>
         <source>移除快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="402"/>
+        <location filename="../src/sources/setting.cpp" line="406"/>
         <source>快捷方式已移除！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="427"/>
+        <location filename="../src/sources/setting.cpp" line="431"/>
         <source>创建快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="430"/>
+        <location filename="../src/sources/setting.cpp" line="434"/>
         <source>快捷方式已创建！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="482"/>
+        <location filename="../src/sources/setting.cpp" line="486"/>
         <source>选择模型文件</source>
         <translation type="unfinished"></translation>
     </message>

@@ -74,7 +74,7 @@ mainWidget::~mainWidget() {
 void mainWidget::closeEvent(QCloseEvent *event) {
     if (!Widget_ManageStart->isSaved) {
         QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Confirm",
+        reply = QMessageBox::question(this, "Confirmation",
                                       QString("您的更改尚未保存，是否要保存？"),
                                       QMessageBox::Yes | QMessageBox::No);
 

@@ -102,7 +102,7 @@ void ManageStartWidget::deleteSelectedItem() {
 
     // 确认对话框
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, tr("Confirm"), tr("确定要删除选中的项目吗?"),
+    reply = QMessageBox::question(this, tr("Confirmation"), tr("确定要删除选中的项目吗?"),
                                   QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
