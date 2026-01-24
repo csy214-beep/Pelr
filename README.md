@@ -24,16 +24,16 @@
 >This is a non-profit, open-source project, developed out of personal interest by the author. It is free for anyone to
 > use.
 
-## ✨ 主要特性
+## 主要特性
 
-- **🤖 Live2D 虚拟角色** - 支持 Live2D 模型 (仅支持 model3.json 格式)，提供生动的桌面伴侣体验
-- **💬 智能对话** - 集成 Ollama AI，支持自然语言交互
-- **😎 表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
-- **🎤 语音合成** - 内置讯飞 TTS 服务，提供高质量的语音反馈
-- **🚀 启动管理** - 可视化管理启动应用程序，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
-- **⌨️ 键盘监听** - 显示按键状态，继承自[KeyMonitor](https://github.com/Pfolg/KeyMonitor)
-- **🌤️ 天气服务** - OpenWeather 集成，实时获取天气信息
-- **⚙️ 高度可定制** - 丰富的设置选项，满足个性化需求
+- **Live2D 虚拟角色** - 支持 Live2D 模型 (仅支持 model3.json 格式)，提供生动的桌面伴侣体验
+- **智能对话** - 集成 Ollama AI，支持自然语言交互
+- **表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
+- **语音合成** - 内置讯飞 TTS 服务，提供高质量的语音反馈
+- **启动管理** - 可视化管理启动应用程序，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
+- **键盘监听** - 显示按键状态，继承自[KeyMonitor](https://github.com/Pfolg/KeyMonitor)
+- **天气服务** - OpenWeather 集成，实时获取天气信息
+- **高度可定制** - 丰富的设置选项，满足个性化需求
 
 更多功能待开发...
 
@@ -44,7 +44,7 @@
 - 快捷键
 - 热加载用户配置
 
-## 🖥️ 系统要求
+## 系统要求
 
 > [!NOTE]
 >
@@ -57,7 +57,7 @@
 - **显卡**: 支持 OpenGL 3.0 及以上
 - **Python**: 3.11 (可选的，仅用于 TTS 服务端)
 
-## 🚀 快速开始
+## 快速开始
 
 ### 下载安装
 
@@ -87,7 +87,7 @@
     - 安装 [Ollama](https://ollama.ai/)
     - 在设置 → Ollama集成中选择模型和角色
 
-## 📦 项目结构
+## 项目结构
 
 ```txt
 PLauncher/
@@ -125,7 +125,7 @@ PLauncher/
 >
 > 仓库中不提供的文件请参见[necessaryParyStructure](docs/necessaryParyStructure)
 
-## 🔧 技术栈
+## 技术栈
 
 ### C++ 核心组件
 
@@ -141,7 +141,7 @@ PLauncher/
 - **PySide6** - Qt6 跨平台 UI 框架
 - **websocket-client** - 网络通信
 
-## 🛠️ 开发构建
+## 开发构建
 
 ### 环境准备
 
@@ -160,7 +160,7 @@ PLauncher/
 >
 > 可参考[构建流程](docs/构建流程.md)
 
-## 📖 使用指南
+## 使用指南
 
 > [!CAUTION]
 >
@@ -176,7 +176,7 @@ PLauncher/
 - **聊天功能**: 在聊天界面输入消息或双击角色显示对话框
 - **启动项管理**: 管理自定义的启动程序
 
-## 🤝 参与贡献
+## 参与贡献
 
 我们欢迎各种形式的贡献！
 
@@ -185,9 +185,10 @@ PLauncher/
 - [编写代码](https://gitee.com/Pfolg/plauncher/pulls)
 - [提供反馈](https://gitee.com/Pfolg/plauncher/issues)
 - [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
+- [项目文档](docs)
 - [帮助中心](https://help.gitee.com/)
 
-## 📄 许可证
+## 许可证
 
 > [!NOTE]
 >
@@ -207,9 +208,9 @@ PLauncher/
 - 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/plauncher/wikis)
 - src 文件夹内由本项目开发者编写的部分采用 GPLv3 许可证
 
-## 🙏 致谢
+## 致谢
 
-<https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT>
+[wikis-IMPORTANT](https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT)
 
 感谢以下项目和社区的支持：
 
@@ -219,9 +220,9 @@ PLauncher/
 - 讯飞开放平台 - 高质量的语音合成服务
 - 所有贡献者和用户的支持
 
-## 📞 技术支持
+## 技术支持
 
-- 🐛 [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
-- 📖 [Wiki 文档](https://gitee.com/Pfolg/plauncher/wikis)
-- 🤝 [SUPPORT](SUPPORT.md)
-- 🛡️ [Security Policy](SECURITY.md)
+- [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
+- [Wiki 文档](https://gitee.com/Pfolg/plauncher/wikis)
+- [SUPPORT](SUPPORT.md)
+- [Security Policy](SECURITY.md)
