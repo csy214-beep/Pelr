@@ -62,19 +62,45 @@ ConfigData SettingWidget::getAllValues() {
     data.isSilentBoot = ui->checkBox_10->isChecked();
     data.isRecordWindowLocation = ui->checkBox_11->isChecked();
     data.isMusicIcon = ui->checkBox_12->isChecked();
+
+    //Ollama
+    data.model = ui->lineEdit_6->text();
+    data.role = static_cast<OllamaClient::Role>(ui->comboBox->currentIndex());
+    data.customRoleDesc = ui->plainTextEdit->toPlainText();
+
+    return data;
+}
+
+TTSConfig SettingWidget::getTTSConfigValue() const {
+    TTSConfig data;
     //TTS
     data.APPID = ui->lineEdit_2->text();
     data.APISecret = ui->lineEdit_3->text();
     data.APIKey = ui->lineEdit_4->text();
     data.speaker = ui->lineEdit_5->text();
-    //Ollama
-    data.model = ui->lineEdit_6->text();
-    data.role = static_cast<OllamaClient::Role>(ui->comboBox->currentIndex());
-    data.customRoleDesc = ui->plainTextEdit->toPlainText();
+    return data;
+}
+
+OpenWeatherData SettingWidget::getOpenWeatherDataValue() {
+    OpenWeatherData data;
     //OpenWeather
     data.city = ui->lineEdit_7->text();
     data.api_key = ui->lineEdit_8->text();
     return data;
+}
+
+void SettingWidget::setTTSConfig(const TTSConfig &data) const {
+    //TTS
+    ui->lineEdit_2->setText(data.APIKey);
+    ui->lineEdit_3->setText(data.APISecret);
+    ui->lineEdit_4->setText(data.APPID);
+    ui->lineEdit_5->setText(data.speaker);
+}
+
+void SettingWidget::setOpenWeatherData(const OpenWeatherData &data) const {
+    //OpenWeather
+    ui->lineEdit_7->setText(data.city);
+    ui->lineEdit_8->setText(data.api_key);
 }
 
 void SettingWidget::setAllValues(const ConfigData &data) {
@@ -117,23 +143,15 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->checkBox_10->setChecked(data.isSilentBoot);
     ui->checkBox_11->setChecked(data.isRecordWindowLocation);
     ui->checkBox_12->setChecked(data.isMusicIcon);
-    //TTS
-    ui->lineEdit_2->setText(data.APPID);
-    ui->lineEdit_3->setText(data.APISecret);
-    ui->lineEdit_4->setText(data.APIKey);
-    ui->lineEdit_5->setText(data.speaker);
+
     //Ollama
     ui->lineEdit_6->setText(data.model);
     ui->comboBox->setCurrentIndex(static_cast<int>(data.role));
     ui->plainTextEdit->setPlainText(data.customRoleDesc);
-    //OpenWeather
-    ui->lineEdit_7->setText(data.city);
-    ui->lineEdit_8->setText(data.api_key);
 }
 
 SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::setting) {
     ui->setupUi(this);
-    ConfigData cfg_data = DataManager::instance().getBasicData();
     // 检查更新
     m_versionChecker = new VersionChecker(this);
     //basic
@@ -182,7 +200,10 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
 
     // 连接信号槽
     connectSignals();
-    setAllValues(cfg_data);
+    // 设置初始值
+    setAllValues(DataManager::instance().getBasicData());
+    setTTSConfig(DataManager::instance().getTTSConfig());
+    setOpenWeatherData(DataManager::instance().getOpenWeatherData());
 }
 
 void SettingWidget::connectSignals() {
@@ -288,7 +309,12 @@ QSlider *SettingWidget::getHorizontalSlider() {
 
 void SettingWidget::saveData() {
     ConfigData data = getAllValues();
+    TTSConfig tts_data = getTTSConfigValue();
+    OpenWeatherData weather_data = getOpenWeatherDataValue();
+    // 保存配置
     DataManager::instance().writeData<ConfigData>(data);
+    DataManager::writeTTSConfig(tts_data);
+    DataManager::writeOpenWeatherData(weather_data);
     qDebug() << "save data success";
 }
 

@@ -36,6 +36,14 @@ public:
 
     void setAllValues(const ConfigData &data);
 
+    void setTTSConfig(const TTSConfig &data) const;
+
+    void setOpenWeatherData(const OpenWeatherData &data) const;
+
+    TTSConfig getTTSConfigValue() const;
+
+    OpenWeatherData getOpenWeatherDataValue();
+
     void connectSignals();
 
     bool checkStartupLink();

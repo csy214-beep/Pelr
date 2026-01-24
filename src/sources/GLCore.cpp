@@ -387,11 +387,10 @@ void GLCore::onAskWeather() {
     WeatherManager *weatherManager = WeatherManager::instance();
 
     // API Key和城市名
-    QString apiKey = DataManager::instance().getBasicData().api_key;
-    QString city = DataManager::instance().getBasicData().city;
+    OpenWeatherData data = DataManager::instance().getOpenWeatherData();
 
     // 调用单例方法获取天气数据
-    WeatherData weather = weatherManager->getWeatherData(city, apiKey);
+    WeatherData weather = weatherManager->getWeatherData(data.city, data.api_key);
     QString msg;
     if (weather.error.isEmpty()) {
         /*

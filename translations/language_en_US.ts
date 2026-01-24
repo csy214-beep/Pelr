@@ -280,31 +280,31 @@ Version: %2</translation>
     <name>GLCore</name>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="155"/>
-        <location filename="../src/sources/GLCore.cpp" line="613"/>
+        <location filename="../src/sources/GLCore.cpp" line="612"/>
         <source>按键监听</source>
         <translation>Key Listener</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="159"/>
-        <location filename="../src/sources/GLCore.cpp" line="614"/>
+        <location filename="../src/sources/GLCore.cpp" line="613"/>
         <source>说点什么</source>
         <translation>Say Something</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="163"/>
-        <location filename="../src/sources/GLCore.cpp" line="615"/>
+        <location filename="../src/sources/GLCore.cpp" line="614"/>
         <source>启动</source>
         <translation>Launcher</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="170"/>
-        <location filename="../src/sources/GLCore.cpp" line="616"/>
+        <location filename="../src/sources/GLCore.cpp" line="615"/>
         <source>天气</source>
         <translation>Weather</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="172"/>
-        <location filename="../src/sources/GLCore.cpp" line="617"/>
+        <location filename="../src/sources/GLCore.cpp" line="616"/>
         <source>电源状态</source>
         <translation>Power Status</translation>
     </message>
@@ -321,36 +321,36 @@ Battery State: %3</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="182"/>
-        <location filename="../src/sources/GLCore.cpp" line="618"/>
+        <location filename="../src/sources/GLCore.cpp" line="617"/>
         <source>TODO</source>
         <translation>TODO</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="185"/>
-        <location filename="../src/sources/GLCore.cpp" line="619"/>
+        <location filename="../src/sources/GLCore.cpp" line="618"/>
         <source>问个问题</source>
         <translation>Ask a Question</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="189"/>
-        <location filename="../src/sources/GLCore.cpp" line="620"/>
+        <location filename="../src/sources/GLCore.cpp" line="619"/>
         <source>界面</source>
         <translation>Interface</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="205"/>
-        <location filename="../src/sources/GLCore.cpp" line="621"/>
+        <location filename="../src/sources/GLCore.cpp" line="620"/>
         <source>EMO</source>
         <translation>EMO</translation>
     </message>
     <message>
         <location filename="../src/sources/GLCore.cpp" line="209"/>
-        <location filename="../src/sources/GLCore.cpp" line="622"/>
+        <location filename="../src/sources/GLCore.cpp" line="621"/>
         <source>媒体播放</source>
         <translation>Media Player</translation>
     </message>
     <message>
-        <location filename="../src/sources/GLCore.cpp" line="402"/>
+        <location filename="../src/sources/GLCore.cpp" line="401"/>
         <source>%1, %2℃, %3, humidity: %4%.</source>
         <translation>%1, %2℃, %3, humidity: %4%.</translation>
     </message>
@@ -467,6 +467,9 @@ Battery State: %3</translation>
     <message>
         <location filename="../src/headers/launcher.hpp" line="89"/>
         <location filename="../src/headers/launcher.hpp" line="99"/>
+        <location filename="../src/headers/data.hpp" line="253"/>
+        <location filename="../src/headers/data.hpp" line="272"/>
+        <location filename="../src/headers/data.hpp" line="298"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -487,6 +490,17 @@ Battery State: %3</translation>
         <source>Unknown exception occurred while launching: %1</source>
         <translation>Unknown exception occurred while launching: %1</translation>
     </message>
+    <message>
+        <location filename="../src/headers/data.hpp" line="253"/>
+        <source>写入数据失败：%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/headers/data.hpp" line="272"/>
+        <location filename="../src/headers/data.hpp" line="298"/>
+        <source>写入数据失败: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingWidget</name>
@@ -495,81 +509,81 @@ Battery State: %3</translation>
         <translation type="obsolete">Custom Role</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="171"/>
+        <location filename="../src/sources/setting.cpp" line="189"/>
         <source>调试信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="172"/>
+        <location filename="../src/sources/setting.cpp" line="190"/>
         <source>普通信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="173"/>
+        <location filename="../src/sources/setting.cpp" line="191"/>
         <source>警告</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="174"/>
+        <location filename="../src/sources/setting.cpp" line="192"/>
         <source>严重错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="175"/>
+        <location filename="../src/sources/setting.cpp" line="193"/>
         <source>致命错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="273"/>
+        <location filename="../src/sources/setting.cpp" line="294"/>
         <source>保存成功！
 下次应用启动生效。</source>
         <translation>Save successful!
 Will take effect on next application launch.</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="273"/>
-        <location filename="../src/sources/setting.cpp" line="335"/>
-        <location filename="../src/sources/setting.cpp" line="366"/>
-        <location filename="../src/sources/setting.cpp" line="376"/>
-        <location filename="../src/sources/setting.cpp" line="404"/>
-        <location filename="../src/sources/setting.cpp" line="438"/>
+        <location filename="../src/sources/setting.cpp" line="294"/>
+        <location filename="../src/sources/setting.cpp" line="361"/>
+        <location filename="../src/sources/setting.cpp" line="392"/>
+        <location filename="../src/sources/setting.cpp" line="402"/>
+        <location filename="../src/sources/setting.cpp" line="430"/>
+        <location filename="../src/sources/setting.cpp" line="464"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="366"/>
+        <location filename="../src/sources/setting.cpp" line="392"/>
         <source>快捷方式已不存在！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="372"/>
-        <location filename="../src/sources/setting.cpp" line="401"/>
-        <location filename="../src/sources/setting.cpp" line="442"/>
+        <location filename="../src/sources/setting.cpp" line="398"/>
+        <location filename="../src/sources/setting.cpp" line="427"/>
+        <location filename="../src/sources/setting.cpp" line="468"/>
         <source>Warning</source>
         <translation type="unfinished">Warning</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="372"/>
+        <location filename="../src/sources/setting.cpp" line="398"/>
         <source>移除快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="376"/>
+        <location filename="../src/sources/setting.cpp" line="402"/>
         <source>快捷方式已移除！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="401"/>
+        <location filename="../src/sources/setting.cpp" line="427"/>
         <source>创建快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="404"/>
+        <location filename="../src/sources/setting.cpp" line="430"/>
         <source>快捷方式已创建！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="335"/>
+        <location filename="../src/sources/setting.cpp" line="361"/>
         <source>重置设置成功！</source>
         <translation>Reset settings successful!</translation>
     </message>
@@ -582,7 +596,7 @@ Will take effect on next application launch.</translation>
         <translation type="vanished">Version Check Error</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="456"/>
+        <location filename="../src/sources/setting.cpp" line="482"/>
         <source>选择模型文件</source>
         <translation>Select Model File</translation>
     </message>

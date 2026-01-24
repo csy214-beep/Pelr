@@ -258,10 +258,11 @@ void BubbleBox::textSet(const QString &text) {
         resetFadeTimer();
         return;
     }
-    QString APPID = DataManager::instance().getBasicData().APPID;
-    QString APIKey = DataManager::instance().getBasicData().APIKey;
-    QString APISecret = DataManager::instance().getBasicData().APISecret;
-    QString voice = DataManager::instance().getBasicData().speaker;
+    TTSConfig ttsConfig = DataManager::instance().getTTSConfig();
+    QString APPID = ttsConfig.APPID;
+    QString APIKey = ttsConfig.APIKey;
+    QString APISecret = ttsConfig.APISecret;
+    QString voice = ttsConfig.speaker;
     if (!APPID.isEmpty() && !APIKey.isEmpty() && !APISecret.isEmpty()) {
         qDebug() << "TTS Config is Complete, interface is used";
         VoiceGenerator::instance()->generateVoice(APPID, APIKey, APISecret, text, voice);

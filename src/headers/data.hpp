@@ -21,13 +21,16 @@
 #include <QDebug>
 #include  <QFontDatabase>
 #include "ollamaclient.h"
-
+#include <QJsonObject>
+#include <QJsonParseError>
 #define MENU_DATA_FILE "user/menuData.dat"
 #define CONFIG_DATA_FILE "user/configData.dat"
 #define TODO_DATA_FILE "user/todoData.dat"
 #define TODO_NOTIFY_FILE "user/todoNotify.dat"
+#define TTS_CONFIG_FILE "user/ttsConfig.json"
+#define OPEN_WEATHER_FILE "user/openWeather.json"
 
-#define VERSION "20260107.10.9" //开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
+#define VERSION "20260107.10.10" //开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 //todo: 多语言支持
 
 struct ConfigData {
@@ -52,18 +55,11 @@ struct ConfigData {
     bool isSilentBoot = false;
     bool isRecordWindowLocation = false;
     bool isMusicIcon = false;
-    //TTS
-    QString APPID;
-    QString APISecret;
-    QString APIKey;
-    QString speaker = "x4_yezi";
+
     //ollama
     QString model;
     OllamaClient::Role role = OllamaClient::DefaultCoder;
     QString customRoleDesc;
-    // openWeather
-    QString city;
-    QString api_key;
 
 
     // 重载运算符以便使用QDataStream进行序列化
@@ -80,9 +76,7 @@ struct ConfigData {
                 << data.isHourAlarm << data.isTop << data.isTrayHourAlarm
                 << data.isSilentBoot << data.isRecordWindowLocation << data.isMusicIcon;
 
-        out << data.APPID << data.APISecret << data.APIKey << data.speaker;
         out << data.model << data.role << data.customRoleDesc;
-        out << data.city << data.api_key;
         return out;
     }
 
@@ -99,9 +93,7 @@ struct ConfigData {
                 >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm
                 >> data.isSilentBoot >> data.isRecordWindowLocation >> data.isMusicIcon;
 
-        in >> data.APPID >> data.APISecret >> data.APIKey >> data.speaker;
         in >> data.model >> data.role >> data.customRoleDesc;
-        in >> data.city >> data.api_key;
         return in;
     }
 };
@@ -182,6 +174,20 @@ struct ToDoSettingData {
     }
 };
 
+struct TTSConfig {
+    //TTS
+    QString APPID;
+    QString APISecret;
+    QString APIKey;
+    QString speaker = "x4_yezi";
+};
+
+struct OpenWeatherData {
+    // openWeather
+    QString city;
+    QString api_key;
+};
+
 class DataManager {
 private:
     DataManager() = default; // 私有构造函数
@@ -193,6 +199,8 @@ protected:
     ConfigData basic_data;
     ToDoSettingData todo_setting_data;
     QString fontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";
+    TTSConfig tts_config;
+    OpenWeatherData openWeather_data;
 
 public:
     QList<TodoData> todo_data;
@@ -204,6 +212,17 @@ public:
         static DataManager instance;
         return instance;
     }
+
+    OpenWeatherData getOpenWeatherData() {
+        readOpenWeatherData();
+        return openWeather_data;
+    }
+
+    TTSConfig getTTSConfig() {
+        readTTSConfig();
+        return tts_config;
+    }
+
 
     ToDoSettingData getTodoSetting() {
         readTodoNotify();
@@ -225,6 +244,41 @@ public:
         return todo_data;
     }
 
+    static void writeOpenWeatherData(const OpenWeatherData &opwdt) {
+        QJsonObject json_object;
+        json_object.insert("city", opwdt.city);
+        json_object.insert("api_key", opwdt.api_key);
+        QFile file(OPEN_WEATHER_FILE);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(OPEN_WEATHER_FILE));
+            qCritical() << "write OpenWeather Config failed: can not open file";
+            return; // 无法打开文件进行写入
+        }
+        QJsonDocument json_doc(json_object);
+        file.write(json_doc.toJson());
+        file.close();
+    }
+
+
+    static void writeTTSConfig(const TTSConfig &ttsc) {
+        QJsonObject json_object;
+        json_object.insert("APPID", ttsc.APPID);
+        json_object.insert("APISecret", ttsc.APISecret);
+        json_object.insert("APIKey", ttsc.APIKey);
+        json_object.insert("speaker", ttsc.speaker);
+        QFile file(TTS_CONFIG_FILE);
+        if (!file.open(QIODevice::WriteOnly)) {
+            // 无法打开文件进行写入
+            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败: %1").arg(TTS_CONFIG_FILE));
+            qCritical() << "write tts config failed: can not open file";
+            return;
+        }
+        QJsonDocument json_doc(json_object);
+        file.write(json_doc.toJson());
+        file.close();
+    }
+
+
     template<typename T>
     void writeData(const T &data) {
         QString filename;
@@ -241,7 +295,7 @@ public:
         QFile file(filename);
         if (!file.open(QIODevice::WriteOnly)) {
             // 无法打开文件进行写入
-            QMessageBox::critical(nullptr, "Error", "写入数据失败！");
+            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败: %1").arg(filename));
             qCritical() << "write data failed: can not open file";
             return;
         }
@@ -282,6 +336,94 @@ public:
     }
 
 protected:
+    void readOpenWeatherData() {
+        QFile file(OPEN_WEATHER_FILE);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Cannot open file:" << OPEN_WEATHER_FILE << "error:" << file.errorString();
+            return; // 文件不存在或无法打开
+        }
+        QByteArray fileData = file.readAll();
+        file.close();
+
+        if (fileData.isEmpty()) {
+            qWarning() << "OpenWeather Config file is empty:" << OPEN_WEATHER_FILE;
+            return; // 空文件
+        }
+
+        QJsonParseError parseError;
+        QJsonDocument json_doc = QJsonDocument::fromJson(fileData, &parseError);
+
+        if (parseError.error != QJsonParseError::NoError) {
+            qCritical() << "JSON Parse Error:" << parseError.errorString()
+                    << "at offset:" << parseError.offset;
+            return; // JSON格式错误
+        }
+
+        if (!json_doc.isObject()) {
+            qWarning() << "OpenWeather Config file root element is not an object";
+            return; // 根元素必须是对象
+        }
+
+        QJsonObject json_object = json_doc.object();
+
+        // 逐个读取并验证必要字段
+        openWeather_data.api_key = json_object.value("api_key").toString("");
+        if (openWeather_data.api_key.isEmpty()) {
+            qWarning() << "api_key in Config file is empty or not exist";
+        }
+        openWeather_data.city = json_object.value("city").toString("");
+    }
+
+    void readTTSConfig() {
+        QFile file(TTS_CONFIG_FILE);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Cannot open file:" << TTS_CONFIG_FILE << "错误:" << file.errorString();
+            return; // 文件不存在或无法打开
+        }
+
+        QByteArray fileData = file.readAll();
+        file.close();
+
+        if (fileData.isEmpty()) {
+            qWarning() << "TTS Config file is empty:" << TTS_CONFIG_FILE;
+            return; // 空文件
+        }
+
+        QJsonParseError parseError;
+        QJsonDocument json_doc = QJsonDocument::fromJson(fileData, &parseError);
+
+        if (parseError.error != QJsonParseError::NoError) {
+            qCritical() << "JSON Parse Error:" << parseError.errorString()
+                    << "at offset:" << parseError.offset;
+            return; // JSON格式错误
+        }
+
+        if (!json_doc.isObject()) {
+            qWarning() << "TTS Config file root element is not an object";
+            return; // 根元素必须是对象
+        }
+
+        QJsonObject json_object = json_doc.object();
+
+        // 逐个读取并验证必要字段
+        tts_config.APPID = json_object.value("APPID").toString("");
+        if (tts_config.APPID.isEmpty()) {
+            qWarning() << "APPID in Config file is empty or not exist";
+        }
+
+        tts_config.APISecret = json_object.value("APISecret").toString("");
+        if (tts_config.APISecret.isEmpty()) {
+            qWarning() << "APISecret in Config file is empty or not exist";
+        }
+
+        tts_config.APIKey = json_object.value("APIKey").toString("");
+        if (tts_config.APIKey.isEmpty()) {
+            qWarning() << "APIKey in Config file is empty or not exist";
+        }
+
+        tts_config.speaker = json_object.value("speaker").toString("x4_yezi");
+    }
+
     void readTodoNotify() {
         QFile file(TODO_NOTIFY_FILE);
         if (!file.open(QIODevice::ReadOnly)) {
