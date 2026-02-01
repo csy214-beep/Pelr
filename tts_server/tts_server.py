@@ -92,7 +92,7 @@ class TTSService:
         self.output_dir = "voice_files"
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
-        logger.info(f"TTS服务初始化完成，语音文件目录: {self.output_dir}")
+        logger.info(f"TTS service initialized, output directory: {self.output_dir}")
 
     def generate_voice(self, appid, api_key, api_secret, text, voice="x4_yezi"):
         try:
@@ -102,10 +102,10 @@ class TTSService:
 
             # 如果文件已存在，直接返回路径
             if os.path.exists(output_file):
-                logger.info(f"使用缓存语音文件: {output_file}")
+                logger.info(f"use existing voice file: {output_file}")
                 return output_file
 
-            logger.info(f"开始生成语音: {text[:50]}...")
+            logger.info(f"start generating voice: {text[:50]}...")
             wsParam = Ws_Param(appid, api_key, api_secret, text, output_file, voice)
             websocket.enableTrace(False)
             wsUrl = wsParam.create_url()
@@ -123,20 +123,20 @@ class TTSService:
 
             # 返回文件路径（无论成功与否）
             if os.path.exists(output_file):
-                logger.info(f"TTS生成成功，文件路径: {output_file}")
+                logger.info(f"vioce generated successfully, output file: {output_file}")
                 return output_file
             else:
-                logger.error("TTS生成失败，未创建输出文件")
+                logger.error("vioce generation failed, no output file created")
                 return None
         except Exception as e:
-            logger.error(f"生成语音时发生异常: {str(e)}")
+            logger.error(f"unexpected error occurred: {str(e)}")
             return None
 
     def on_message(self, ws, message):
         try:
             # 添加对 None 消息的检查
             if message is None:
-                logger.warning("收到空消息，忽略")
+                logger.warning("Received None message")
                 return
 
             message = json.loads(message)
@@ -145,7 +145,7 @@ class TTSService:
 
             # 检查是否有 data 字段
             if "data" not in message:
-                logger.error(f"消息缺少data字段: {message}")
+                logger.error(f"Message missing data field: {message}")
                 return
 
             audio = message["data"]["audio"]
@@ -169,12 +169,12 @@ class TTSService:
                             f.write(data)
                     logger.info(f"TTS completed. Output file: {ws.output_file}")
         except json.JSONDecodeError as e:
-            logger.error(f"JSON解析错误: {str(e)}, 原始消息: {message}")
+            logger.error(f"JSON parse error: {str(e)}, original message: {message}")
         except KeyError as e:
-            logger.error(f"消息缺少必要字段 {str(e)}: {message}")
+            logger.error(f"Message missing necessary field {str(e)}: {message}")
         except Exception as e:
-            logger.error(f"解析消息时出错: {str(e)}")
-            logger.debug(f"原始消息内容: {message}")
+            logger.error(f"Parse message error: {str(e)}")
+            logger.debug(f"Original message content: {message}")
 
     def write_wav_header(self, file, audio_data_size, sample_rate=16000, num_channels=1, bits_per_sample=16):
         file.write(b'RIFF')
@@ -209,7 +209,7 @@ class TTSService:
                  "business": ws.wsParam.BusinessArgs,
                  "data": ws.wsParam.Data}
             ws.send(json.dumps(d))
-            logger.info("WebSocket连接已打开，发送数据")
+            logger.info("WebSocket connection established")
 
         threading.Thread(target=run).start()
 
@@ -224,7 +224,7 @@ class Ws_Param:
         self.CommonArgs = {"app_id": self.APPID}
         self.BusinessArgs = {"aue": "raw", "auf": "audio/L16;rate=16000", "vcn": voice, "tte": "utf8"}
         self.Data = {"status": 2, "text": str(base64.b64encode(self.Text.encode('utf-8')), "UTF8")}
-        logger.debug(f"Ws_Param初始化: APPID={APPID}, voice={voice}")
+        logger.debug(f"Ws_Param init: APPID={APPID}, voice={voice}")
 
     def create_url(self):
         url = 'wss://tts-api.xfyun.cn/v2/tts'
@@ -241,7 +241,7 @@ class Ws_Param:
 
         v = {"authorization": authorization, "date": date, "host": "ws-api.xfyun.cn"}
         final_url = url + '?' + urlencode(v)
-        logger.debug(f"创建的WebSocket URL: {final_url}")
+        logger.debug(f"Final url: {final_url}")
         return final_url
 
 
@@ -265,13 +265,13 @@ class TTSRequestHandler(BaseHTTPRequestHandler):
                 text = data.get('text', '')
                 voice = data.get('voice', 'x4_yezi')
 
-                logger.info(f"收到TTS请求: text={text[:50]}..., voice={voice}")
+                logger.info(f"Received TTS request: text={text[:50]}..., voice={voice}")
 
                 if not all([appid, api_key, api_secret, text]):
                     self.send_response(400)
                     self.end_headers()
                     self.wfile.write(json.dumps({'error': 'Missing parameters'}).encode())
-                    logger.warning("请求参数不完整")
+                    logger.warning("Lack of necessary parameters")
                     return
 
                 # 使用单例TTS服务
@@ -284,21 +284,25 @@ class TTSRequestHandler(BaseHTTPRequestHandler):
                     self.end_headers()
                     response = {'file_path': file_path}
                     self.wfile.write(json.dumps(response).encode())
-                    logger.info(f"TTS请求处理成功: {file_path}")
+                    logger.info(
+                        f"Request processed successfully, output file: {file_path}"
+                    )
                 else:
                     self.send_response(500)
                     self.end_headers()
                     self.wfile.write(json.dumps({'error': 'TTS generation failed'}).encode())
-                    logger.error("TTS生成失败")
+                    logger.error("TTS generation failed")
             except Exception as e:
                 self.send_response(500)
                 self.end_headers()
                 self.wfile.write(json.dumps({'error': f'Internal server error: {str(e)}'}).encode())
-                logger.error(f"处理POST请求时发生异常: {str(e)}")
+                logger.error(
+                    f"An exception occurred while processing POST request: {str(e)}"
+                )
         else:
             self.send_response(404)
             self.end_headers()
-            logger.warning(f"请求的路径不存在: {self.path}")
+            logger.warning(f"Path not found: {self.path}")
 
     def do_GET(self):
         if self.path.startswith('/voice/'):
@@ -313,15 +317,15 @@ class TTSRequestHandler(BaseHTTPRequestHandler):
 
                 with open(file_path, 'rb') as f:
                     self.wfile.write(f.read())
-                logger.info(f"提供语音文件: {filename}")
+                logger.info(f"Voice file sent: {filename}")
             else:
                 self.send_response(404)
                 self.end_headers()
-                logger.warning(f"请求的语音文件不存在: {filename}")
+                logger.warning(f"Voice file not found: {filename}")
         else:
             self.send_response(404)
             self.end_headers()
-            logger.warning(f"请求的路径不存在: {self.path}")
+            logger.warning(f"Path not found: {self.path}")
 
 
 # HTTP服务器线程
@@ -334,15 +338,15 @@ class HTTPServerThread(QThread):
     def run(self):
         try:
             self.server = HTTPServer(('localhost', self.port), TTSRequestHandler)
-            logger.info(f"TTS服务器启动，监听端口: {self.port}")
+            logger.info(f"TTS Server started on port {self.port}")
             self.server.serve_forever()
         except Exception as e:
-            logger.error(f"服务器启动失败: {str(e)}")
+            logger.error(f"Server start failed: {str(e)}")
 
     def stop(self):
         if self.server:
             self.server.shutdown()
-            logger.info("TTS服务器已停止")
+            logger.info("TTS Server stopped")
 
 
 # 系统托盘类
@@ -362,10 +366,10 @@ class TrayIcon(QSystemTrayIcon):
                 try:
                     icon = QIcon(path)
                     if not icon.isNull():
-                        logger.info(f"成功加载图标: {path}")
+                        logger.info(f"Icon loaded: {path}")
                         break
                 except Exception as e:
-                    logger.warning(f"加载图标 {path} 失败: {str(e)}")
+                    logger.warning(f"load icon from {path} failed: {str(e)}")
 
         # 如果所有文件都加载失败，使用内置图标
         if not icon or icon.isNull():
@@ -373,9 +377,9 @@ class TrayIcon(QSystemTrayIcon):
 
             try:
                 icon = QApplication.style().standardIcon(QStyle.SP_ComputerIcon)
-                logger.info("使用内置计算机图标")
+                logger.info("Load default icon")
             except Exception as e:
-                logger.warning(f"无法加载内置图标: {str(e)}")
+                logger.warning(f"Load default icon failed: {str(e)}")
                 icon = QIcon()
 
         self.setIcon(icon)
@@ -385,7 +389,7 @@ class TrayIcon(QSystemTrayIcon):
         self.menu = QMenu()
 
         # 添加退出动作
-        exit_action = QAction("退出", self)
+        exit_action = QAction("Quit", self)
         exit_action.triggered.connect(self.exit_app)
         self.menu.addAction(exit_action)
 
@@ -395,7 +399,7 @@ class TrayIcon(QSystemTrayIcon):
         self.show()
 
     def exit_app(self):
-        logger.info("正在退出TTS服务...")
+        logger.info("Exiting...")
         # 停止HTTP服务器线程
         if hasattr(self, 'server_thread'):
             self.server_thread.stop()
@@ -415,7 +419,7 @@ class TTSApp(QApplication):
         self.server_thread = HTTPServerThread(port=9140)
         self.server_thread.start()
 
-        logger.info("TTS服务已启动，系统托盘图标已创建")
+        logger.info("TTS Server started, Tray icon created")
 
 
 def main():
