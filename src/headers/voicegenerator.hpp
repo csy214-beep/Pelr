@@ -107,6 +107,7 @@ private:
             QByteArray response = reply->readAll();
             QJsonDocument doc = QJsonDocument::fromJson(response);
             QJsonObject json = doc.object();
+            qDebug() << "voice generate response:" << json;
             QString filePath = json["file_path"].toString();
             if (!filePath.isEmpty() && QFile::exists(filePath)) {
                 emit voiceGenerated(filePath);

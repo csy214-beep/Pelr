@@ -1,3 +1,27 @@
+## 20260107.10.16
+
+### 更新内容
+
+1. fix: 修复日志信息中的语言不一致问题
+1. feat(core): 添加批量启动功能
+1. fix(setting): 添加重置设置前的确认消息
+1. feat(ui): 添加TTS和OpenWeather配置结构及读写方法(json)
+1. feat: 如果无启动项则不显示菜单(第一次添加需重启)
+1. feat: 如果系统启动超过20分钟则不运行star线程
+1. feat: 添加通知弹窗功能并替换托盘消息
+1. refactor: 调整构建配置和添加资源文件复制逻辑
+1. feat(ui): 添加音乐托盘图标功能
+1. fix: OllamaClient角色选择和优化消息处理
+1. docs: 更新了一些文档
+1. feat(setting): 添加日志等级设置功能
+1. fix(KeyLabel): 修复窗口顶置失效问题
+1. feat: 添加系统托盘双击事件处理
+1. feat:自定义说话间隔 & 记录位置
+1. fix(launcher.hpp): 优化对exe文件的启动逻辑
+
+> [!CAUTION]
+> 不兼容的文件：`configData.dat` 基本配置文件
+
 ## ver20251118.9
 
 ### 更新内容
