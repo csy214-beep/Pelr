@@ -176,7 +176,7 @@ QPixmap NotificationWidget::getIconForType(MessageType type) {
 
 QPixmap NotificationWidget::getAppIcon() {
     // 这里可以返回您的应用图标
-    QIcon icon = QIcon(":/assets/image/PLauncher.png");
+    QIcon icon = QIcon(":/assets/image/Pelr.png");
     // 如果图标不存在，使用默认图标
     if (icon.isNull()) {
         icon = QApplication::style()->standardIcon(QStyle::SP_ComputerIcon);

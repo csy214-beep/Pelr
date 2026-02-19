@@ -1,9 +1,9 @@
-本项目使用了很多第三方库，详情请移步[WiKi](https://gitee.com/Pfolg/plauncher/wikis)了解。
+本项目使用了很多第三方库，详情请移步[WiKi](https://gitee.com/Pfolg/Pelr/wikis)了解。
 
 
-#### [Cpp 工具链](https://gitee.com/Pfolg/plauncher/wikis/Cpp-%E5%B7%A5%E5%85%B7%E9%93%BE)
+#### [Cpp 工具链](https://gitee.com/Pfolg/Pelr/wikis/Cpp-%E5%B7%A5%E5%85%B7%E9%93%BE)
 
-#### [Python 工具链](https://gitee.com/Pfolg/plauncher/wikis/Python-%E5%B7%A5%E5%85%B7%E9%93%BE)
+#### [Python 工具链](https://gitee.com/Pfolg/Pelr/wikis/Python-%E5%B7%A5%E5%85%B7%E9%93%BE)
 
 ## 其他资源
 图标资源：

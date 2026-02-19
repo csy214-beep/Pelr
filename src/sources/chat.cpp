@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -21,7 +21,7 @@ ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent), ui(new Ui::chat) {
     ui->setupUi(this);
     currentY = 0;
     standardHeight = ui->scrollAreaWidgetContents->height();
-    ui->label->setText(tr("Hello, welcome to PLauncher!"));
+    ui->label->setText(tr("Hello, welcome to Pelr!"));
     connect(ui->pushButton, &QPushButton::clicked, this, &ChatWidget::on_sendMsg);
     connect(ui->lineEdit, &QLineEdit::returnPressed, this, &ChatWidget::on_sendMsg);
     connect(&client, &OllamaClient::textGenerated,
@@ -43,8 +43,8 @@ ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent), ui(new Ui::chat) {
     "你的核心目标是提供情感支持、温暖的陪伴和有趣的互动，让用户感到被爱、被理解和快乐。"
     "你的回答要简要，精炼，尽量避免长篇大论。"
     */
-    // addMessage("你好啊，这是PLauncher开发阶段的AI测试文本，今天过得怎么样？", true);
-    // addMessage("你好，这是PLauncher开发阶段的用户测试文本。这个项目能让我坚持做下去吗？", false);
+    // addMessage("你好啊，这是Pelr开发阶段的AI测试文本，今天过得怎么样？", true);
+    // addMessage("你好，这是Pelr开发阶段的用户测试文本。这个项目能让我坚持做下去吗？", false);
 }
 
 void ChatWidget::addMessage(const QString &message, const bool &isAI) {
@@ -132,7 +132,7 @@ void ChatWidget::onErrorOccurred(const QString &error) {
 }
 
 void ChatWidget::retranslateUI() {
-    ui->label->setText(tr("Hello, welcome to PLauncher!"));
+    ui->label->setText(tr("Hello, welcome to Pelr!"));
 }
 
 ChatWidget::~ChatWidget() {

@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -227,8 +227,7 @@ void BubbleBox::showTime() {
         bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {
             NotificationWidget::showNotification(
-                "PLauncher", tr("现在是%1").arg(time), 5000, NotificationWidget::Information
-            );
+                "Pelr", tr("现在是%1").arg(time), 5000, NotificationWidget::Information);
         }
         qDebug() << "now:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;

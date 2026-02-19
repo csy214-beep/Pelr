@@ -1,5 +1,5 @@
-# PLauncher - Live2D Virtual Desktop Partner
-# https://gitee.com/Pfolg/plauncher
+# Pelr - Live2D Virtual Desktop Partner
+# https://gitee.com/Pfolg/Pelr
 # https://sourceforge.net/projects/pfolg-plauncher/
 # Copyright (c) 2025 SY Cheng
 #
@@ -7,7 +7,7 @@
 # https://gnu.ac.cn/licenses/gpl-3.0.html
 
 cmake_minimum_required(VERSION 4.0)
-project(PLauncher)
+project(Pelr)
 # ------------------
 # 设置是否为debug模式
 set(D_OR_R ON)#ON for Debug, OFF for Release
@@ -103,14 +103,14 @@ endif ()
 # 明确设置 UI 文件目录
 set(UI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/ui")
 
-include_directories(PLauncher PRIVATE
+include_directories(Pelr PRIVATE
         ${UI_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}  # 重要：包含构建目录，ui_*.h文件在这里生成
 )
 # 确保 AUTOUIC 能找到 .ui 文件
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${UI_DIR}) # 没有这句就GG
 
-add_executable(PLauncher
+add_executable(Pelr
         ${CON}
         #        ${UI_FILES}
         ${SOURCE_FILES}
@@ -122,7 +122,7 @@ add_executable(PLauncher
         ${QT_RESOURCES}
         ${QM_FILES}  # 将QM文件加入项目，确保编译时生成
 )
-target_link_libraries(PLauncher
+target_link_libraries(Pelr
         Framework
         libglew32d
         glfw3
@@ -146,7 +146,7 @@ target_link_libraries(PLauncher
 # ===================== 正确的Windows程序图标设置 =====================
 if (WIN32)
     # 1. 定义图标文件路径和rc脚本路径
-    set(APP_ICON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/assets/image/PLauncher.ico")
+    set(APP_ICON_FILE "${CMAKE_CURRENT_SOURCE_DIR}/assets/image/Pelr.ico")
     set(APP_RC_FILE "${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc")
 
     # 2. 检查图标和rc脚本是否存在

@@ -1,6 +1,6 @@
-# Contributing to PLauncher
+# Contributing to Pelr
 
-感谢您有兴趣为 PLauncher 做贡献！
+感谢您有兴趣为 Pelr 做贡献！
 
 We are grateful for any contributions, whether it's code, documentation, design, or ideas.
 
@@ -33,7 +33,7 @@ Use the Bug Report template to file a new issue. Please include as many details 
 *   A clear description of the bug
 
     清晰的错误描述
-    
+
 *   Steps to reproduce
 
     复现步骤
@@ -41,19 +41,19 @@ Use the Bug Report template to file a new issue. Please include as many details 
 *   Expected vs. Actual behavior
 
     预期行为与实际行为
-    
+
 *   Screenshots (if applicable)
 
     截图（如果适用）
-    
-*   Your environment (OS, PLauncher version, etc.)
 
-    您的环境（操作系统、PLauncher 版本等）
-    
+*   Your environment (OS, Pelr version, etc.)
+
+    您的环境（操作系统、Pelr 版本等）
+
 *   Relevant log output (check the log folder in the application directory)
 
     相关日志输出（请检查应用程序目录中的 log 文件夹）
-    
+
 
 ### Suggesting Enhancements
 
@@ -70,15 +70,15 @@ A good enhancement suggestion includes:
 *   A clear and detailed description of the proposed feature.
 
     对提议功能的清晰详细的描述。
-    
+
 *   The problem it solves or the use case it enables.
 
     它解决了什么问题或实现了什么用例。
-    
+
 *   Any alternative solutions you've considered.
 
     您考虑过的任何替代解决方案。
-    
+
 *   Mockups or examples, if it's a UI change.
 
     如果是 UI 更改，请提供模型或示例。
@@ -150,19 +150,19 @@ We welcome pull requests. Follow these steps:
 *   Follow the existing code style and patterns in the project.
 
     遵循项目中现有的代码风格和模式。
-    
+
 *   Use descriptive variable and function names.
 
     使用描述性的变量和函数名。
-    
+
 *   Comment complex sections of code.
 
     对复杂的代码段进行注释。
-    
+
 *   Ensure your code changes do not break existing functionality.
 
     确保您的代码更改不会破坏现有功能。
-    
+
 *   Test your changes on the target platform (Windows).
 
     在目标平台（Windows）上测试您的更改。
@@ -171,9 +171,9 @@ We welcome pull requests. Follow these steps:
 
 >**NOTE**
 >
->By contributing to PLauncher, you agree that your contributions will be licensed under the project's GPL-3.0 License.
+>By contributing to Pelr, you agree that your contributions will be licensed under the project's GPL-3.0 License.
 >
->通过向 PLauncher 贡献，您同意您的贡献将根据项目的 GPL-3.0 许可证进行许可。
+>通过向 Pelr 贡献，您同意您的贡献将根据项目的 GPL-3.0 许可证进行许可。
 
 ## Need Help?
 
@@ -184,7 +184,7 @@ If you have any questions, feel free to:
 *   Open a Discussion.
 
     发起一个讨论。
-    
+
 *   Check the Wiki for more detailed documentation.
 
     查看 Wiki 获取更详细的文档。

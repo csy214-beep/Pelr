@@ -1,5 +1,5 @@
-# PLauncher - Live2D Virtual Desktop Partner
-# https://gitee.com/Pfolg/plauncher
+# Pelr - Live2D Virtual Desktop Partner
+# https://gitee.com/Pfolg/Pelr
 # https://sourceforge.net/projects/pfolg-plauncher/
 # Copyright (c) 2025 SY Cheng
 #
@@ -313,7 +313,7 @@ if __name__ == "__main__":
     try:
         # 尝试加载图标
         try:
-            image = Image.open("assets/image/PLauncher.png")
+            image = Image.open("assets/image/Pelr.png")
         except:
             # 如果找不到图标，创建一个简单的默认图标
             logger.warning("无法加载图标文件，使用默认图标")
@@ -321,7 +321,7 @@ if __name__ == "__main__":
 
         # 创建系统托盘菜单
         menu = Menu(MenuItem('退出', lambda: icon.stop()))
-        icon = pystray.Icon("PLauncher TTS Server", image, "PLauncher TTS Server", menu)
+        icon = pystray.Icon("Pelr TTS Server", image, "Pelr TTS Server", menu)
 
         # 启动服务器线程
         server_thread = threading.Thread(target=run_server, daemon=True)

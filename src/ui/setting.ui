@@ -795,7 +795,7 @@ p, li { white-space: pre-wrap; }
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>PLauncher 设置界面</string>
+       <string>Pelr 设置界面</string>
       </property>
      </widget>
     </item>

@@ -1,6 +1,6 @@
-本项目使用了很多第三方库，详情请移步[WiKi](https://gitee.com/Pfolg/plauncher/wikis)了解。
+本项目使用了很多第三方库，详情请移步[WiKi](https://gitee.com/Pfolg/Pelr/wikis)了解。
 
-#### [Cpp 工具链](https://gitee.com/Pfolg/plauncher/wikis/Cpp-%E5%B7%A5%E5%85%B7%E9%93%BE)
+#### [Cpp 工具链](https://gitee.com/Pfolg/Pelr/wikis/Cpp-%E5%B7%A5%E5%85%B7%E9%93%BE)
 
 | 分类 | 库名称 | 版本 | 用途说明 | 许可协议 | 官方来源 |
 |------|--------|------|----------|----------|----------|
@@ -15,7 +15,7 @@
 | 打包工具 | PyInstaller | 6.15.0 | 应用打包和分发 | GPL | [pyinstaller.org](https://www.pyinstaller.org/) |
 | Windows支持 | pywin32-ctypes | 0.2.3 | Windows API调用支持 | BSD | [pypi.org](https://pypi.org/project/pywin32-ctypes/) |
 
-#### [Python 工具链](https://gitee.com/Pfolg/plauncher/wikis/Python-%E5%B7%A5%E5%85%B7%E9%93%BE)
+#### [Python 工具链](https://gitee.com/Pfolg/Pelr/wikis/Python-%E5%B7%A5%E5%85%B7%E9%93%BE)
 
 | **分类**          | **库名**                  | **版本**       | **用途**                                  | **授权协议**       | **来源**                          |
 |--------------------|---------------------------|---------------|-------------------------------------------|--------------------|-----------------------------------|

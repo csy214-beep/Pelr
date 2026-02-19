@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -176,7 +176,7 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         QString content = in.readAll();
         file.close();
         ui->textEdit->setMarkdown(
-            "### PLauncher " + DataManager::instance().const_config_data.version + "\n\n" + content);
+            "### Pelr " + DataManager::instance().const_config_data.version + "\n\n" + content);
     }
     ui->textEdit->setReadOnly(true);
     // 初始化日志等级选择

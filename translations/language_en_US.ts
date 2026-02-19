@@ -66,8 +66,8 @@ It&apos;s %2 now~</translation>
     <message>
         <location filename="../src/sources/chat.cpp" line="24"/>
         <location filename="../src/sources/chat.cpp" line="135"/>
-        <source>Hello, welcome to PLauncher!</source>
-        <translation>Hello, welcome to PLauncher!</translation>
+        <source>Hello, welcome to Pelr!</source>
+        <translation>Hello, welcome to Pelr!</translation>
     </message>
     <message>
         <location filename="../src/sources/chat.cpp" line="95"/>
@@ -374,7 +374,7 @@ Battery State: %3</translation>
     </message>
     <message>
         <location filename="../src/sources/manageStart.cpp" line="147"/>
-        <source>项目 %1 
+        <source>项目 %1
 的路径不存在：%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -480,9 +480,9 @@ Battery State: %3</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Exception occurred while launching: %1 
+        <source>Exception occurred while launching: %1
 %2</source>
-        <translation type="vanished">Exception occurred while launching: %1 
+        <translation type="vanished">Exception occurred while launching: %1
 %2</translation>
     </message>
     <message>
@@ -1187,8 +1187,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/ui/setting.ui" line="798"/>
-        <source>PLauncher 设置界面</source>
-        <translation>PLauncher Settings Interface</translation>
+        <source>Pelr 设置界面</source>
+        <translation>Pelr Settings Interface</translation>
     </message>
     <message>
         <location filename="../src/ui/setting.ui" line="805"/>
@@ -1258,8 +1258,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/ui/todoWidget.ui" line="362"/>
-        <source>PLauncher TODO Lists</source>
-        <translation>PLauncher TODO Lists</translation>
+        <source>Pelr TODO Lists</source>
+        <translation>Pelr TODO Lists</translation>
     </message>
 </context>
 </TS>

@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -31,7 +31,7 @@
 #define OPEN_WEATHER_FILE "user/openWeather.json"
 
 #define VERSION "20260107.10.16" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
-//todo: 多语言支持
+// todo: 多语言支持
 
 struct ConfigData {
     //basic
@@ -105,11 +105,11 @@ struct constConfigData {
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     //about
     const QString version = VERSION;
-    const QString name = "PLauncher";
+    const QString name = "Pelr";
     const QString repo_owner = "Pfolg";
-    const QString team_link = "https://gitee.com/Pfolg/plauncher/contributors?ref=master";
-    const QString website_link = "https://gitee.com/Pfolg/plauncher";
-    const QString feedback_link = "https://gitee.com/Pfolg/plauncher/issues";
+    const QString team_link = "https://gitee.com/Pfolg/Pelr/contributors?ref=master";
+    const QString website_link = "https://gitee.com/Pfolg/Pelr";
+    const QString feedback_link = "https://gitee.com/Pfolg/Pelr/issues";
     const QString textFile = "assets\\text"; //local path
     const QString VoiceFolder = "voice_files"; //local path
 };

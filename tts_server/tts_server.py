@@ -1,5 +1,5 @@
-# PLauncher - Live2D Virtual Desktop Partner
-# https://gitee.com/Pfolg/plauncher
+# Pelr - Live2D Virtual Desktop Partner
+# https://gitee.com/Pfolg/Pelr
 # https://sourceforge.net/projects/pfolg-plauncher/
 # Copyright (c) 2025 SY Cheng
 #
@@ -356,8 +356,8 @@ class TrayIcon(QSystemTrayIcon):
 
         # 尝试加载图标
         icon_paths = [
-            "assets/image/PLauncher.ico",  # 优先尝试 .ico 格式
-            "assets/image/PLauncher.png",  # 其次尝试 .png 格式
+            "assets/image/Pelr.ico",  # 优先尝试 .ico 格式
+            "assets/image/Pelr.png",  # 其次尝试 .png 格式
         ]
 
         icon = None
@@ -383,7 +383,7 @@ class TrayIcon(QSystemTrayIcon):
                 icon = QIcon()
 
         self.setIcon(icon)
-        self.setToolTip("PLauncher TTS Server")
+        self.setToolTip("Pelr TTS Server")
 
         # 创建菜单
         self.menu = QMenu()

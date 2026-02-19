@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -21,8 +21,8 @@ mainWidget::mainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::mainWidget
 
 void mainWidget::initUI() {
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-    this->setWindowIcon(QIcon(":/assets/image/PLauncher.png"));
-    this->setWindowTitle("PLauncher");
+    this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
+    this->setWindowTitle("Pelr");
     this->setMaximumSize(this->minimumSize());
     QFile styleFile(":/assets/style/flutter.qss");
     if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {

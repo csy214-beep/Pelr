@@ -1,6 +1,6 @@
 /*
- * PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -41,7 +41,7 @@ public:
     QAction *action_quit;
     QAction *action_keyListener;
 
-    QIcon m_appIcon = QIcon(":/assets/image/PLauncher.png");
+    QIcon m_appIcon = QIcon(":/assets/image/Pelr.png");
 
 private:
     TrayIcon(QObject *parent = nullptr);

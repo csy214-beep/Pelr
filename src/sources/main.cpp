@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);
     app.setFont(DataManager::instance()._font); //整个应用程序的界面都会使用这个字体
-    app.setWindowIcon(QIcon(":/assets/image/PLauncher.png"));
+    app.setWindowIcon(QIcon(":/assets/image/Pelr.png"));
 
     if (!CheckApplication::hasValidLicense()) {
         CheckApplication licenseDialog;

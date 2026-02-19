@@ -48,6 +48,8 @@ lib/
 *.exe
 *.out
 *.app
+*.7z
+*.zip
 
 # log/cache files
 log

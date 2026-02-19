@@ -61,7 +61,7 @@
     <message>
         <location filename="../src/sources/chat.cpp" line="24"/>
         <location filename="../src/sources/chat.cpp" line="135"/>
-        <source>Hello, welcome to PLauncher!</source>
+        <source>Hello, welcome to Pelr!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -335,7 +335,7 @@ Battery State: %3</source>
     </message>
     <message>
         <location filename="../src/sources/manageStart.cpp" line="147"/>
-        <source>项目 %1 
+        <source>项目 %1
 的路径不存在：%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1120,7 +1120,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/ui/setting.ui" line="798"/>
-        <source>PLauncher 设置界面</source>
+        <source>Pelr 设置界面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1187,7 +1187,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/ui/todoWidget.ui" line="362"/>
-        <source>PLauncher TODO Lists</source>
+        <source>Pelr TODO Lists</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

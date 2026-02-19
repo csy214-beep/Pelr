@@ -464,7 +464,7 @@
     <item>
      <widget class="QLabel" name="label_13">
       <property name="text">
-       <string>PLauncher 设置界面</string>
+       <string>Pelr 设置界面</string>
       </property>
      </widget>
     </item>

@@ -1,10 +1,10 @@
-# PLauncher - Live2D 虚拟桌面伙伴
+# Pelr - Live2D 虚拟桌面伙伴
 
-[![star](https://gitee.com/Pfolg/plauncher/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/stargazers) [![fork](https://gitee.com/Pfolg/plauncher/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/plauncher/members)
+[![star](https://gitee.com/Pfolg/Pelr/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/Pelr/stargazers) [![fork](https://gitee.com/Pfolg/Pelr/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/Pelr/members)
 
-![LICENSE](https://img.shields.io/badge/LICENSE-GPLv3-yellow.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)
+![LICENSE](https://img.shields.io/badge/LICENSE-GPLv3-yellow.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![OS](https://img.shields.io/badge/OS-Windows-blue.svg)
 
-**PLauncher** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
+**Pelr** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
 ![](repo_assets/preview.png)
 
@@ -61,9 +61,9 @@
 
 ### 下载安装
 
-1. 前往 [Release 页面](https://gitee.com/Pfolg/plauncher/releases) 下载最新版本
+1. 前往 [Release 页面](https://gitee.com/Pfolg/Pelr/releases) 下载最新版本
 2. 解压压缩包到任意目录
-3. 运行 `PLauncher.exe` 即可启动应用
+3. 运行 `Pelr.exe` 即可启动应用
 
 另外，囿于Gitee的release限制，您可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
 
@@ -90,7 +90,7 @@
 ## 项目结构
 
 ```txt
-PLauncher/
+Pelr/
 ├── CMakeLists.txt          # C++ 项目构建配置
 ├── scripts/                # 脚本文件
 │   └── AUCF/               # 已弃用的模块 Archived Unused Cpp Files
@@ -168,7 +168,7 @@ PLauncher/
 
 > [!NOTE]
 >
->详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/plauncher/wikis)
+>详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/Pelr/wikis)
 
 ### 基本操作
 
@@ -180,11 +180,11 @@ PLauncher/
 
 我们欢迎各种形式的贡献！
 
-- [报告 Bug](https://gitee.com/Pfolg/plauncher/issues/new?template=bug.yml)
-- [提出新特性](https://gitee.com/Pfolg/plauncher/issues/new?template=feature.yml)
-- [编写代码](https://gitee.com/Pfolg/plauncher/pulls)
-- [提供反馈](https://gitee.com/Pfolg/plauncher/issues)
-- [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
+- [报告 Bug](https://gitee.com/Pfolg/Pelr/issues/new?template=bug.yml)
+- [提出新特性](https://gitee.com/Pfolg/Pelr/issues/new?template=feature.yml)
+- [编写代码](https://gitee.com/Pfolg/Pelr/pulls)
+- [提供反馈](https://gitee.com/Pfolg/Pelr/issues)
+- [问题反馈](https://gitee.com/Pfolg/Pelr/issues)
 - [项目文档](docs)
 - [帮助中心](https://help.gitee.com/)
 
@@ -205,12 +205,12 @@ PLauncher/
 
 - Live2D Cubism SDK 使用[专有许可证](https://www.live2d.com/zh-CHS/sdk/download/native/)
 - Qt 框架使用 [LGPL/GPL 许可证](https://www.qt.io/development/download)
-- 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/plauncher/wikis)
+- 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/Pelr/wikis)
 - src 文件夹内由本项目开发者编写的部分采用 GPLv3 许可证
 
 ## 致谢
 
-[wikis-IMPORTANT](https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT)
+[wikis-IMPORTANT](https://gitee.com/Pfolg/Pelr/wikis/IMPORTANT)
 
 感谢以下项目和社区的支持：
 
@@ -222,7 +222,7 @@ PLauncher/
 
 ## 技术支持
 
-- [问题反馈](https://gitee.com/Pfolg/plauncher/issues)
-- [Wiki 文档](https://gitee.com/Pfolg/plauncher/wikis)
+- [问题反馈](https://gitee.com/Pfolg/Pelr/issues)
+- [Wiki 文档](https://gitee.com/Pfolg/Pelr/wikis)
 - [SUPPORT](SUPPORT.md)
 - [Security Policy](SECURITY.md)

@@ -1,9 +1,9 @@
-# PLauncher - Live2D Virtual Desktop Partner
+# Pelr - Live2D Virtual Desktop Partner
 
-repo site: https://gitee.com/Pfolg/plauncher
-release log: https://gitee.com/Pfolg/plauncher/blob/master/docs/FullReleaseLog.md
+repo site: https://gitee.com/Pfolg/Pelr
+release log: https://gitee.com/Pfolg/Pelr/blob/master/docs/FullReleaseLog.md
 
-PLauncher is an intelligent desktop virtual assistant based on Live2D technology, integrating AI dialogue, speech synthesis, quick launch, and personalized desktop companion features, providing you with an immersive desktop experience.
+Pelr is an intelligent desktop virtual assistant based on Live2D technology, integrating AI dialogue, speech synthesis, quick launch, and personalized desktop companion features, providing you with an immersive desktop experience.
 
 > NOTE
 >
@@ -53,7 +53,7 @@ Unsupported features (may not be supported in the future either):
 1. Go to the Release page to download the latest version
 2. Extract the zip file to any directory
 3. Download `tts_server.exe` and place it in the program's root directory
-4. Run `PLauncher.exe` to start the application
+4. Run `Pelr.exe` to start the application
 
 Additionally, due to Gitee's release limitations, you can visit sourceforge to view or download historical versions.
 
@@ -76,7 +76,7 @@ Additionally, due to Gitee's release limitations, you can visit sourceforge to v
 ## Project Structure
 
 ```
-PLauncher/
+Pelr/
 +-- CMakeLists.txt          # C++ project build configuration
 +-- scripts/
 �   +-- AUCF                # Deprecated module Archived Unused Cpp Files
@@ -135,8 +135,8 @@ PLauncher/
 
 **Developed using CLion, the effectiveness of the following commands is not guaranteed**
 
-git clone https://gitee.com/Pfolg/plauncher.git
-cd PLauncher
+git clone https://gitee.com/Pfolg/Pelr.git
+cd Pelr
 
 mkdir build && cd build
 
@@ -189,7 +189,7 @@ Note: Some components use different licenses:
 
 ## Acknowledgments
 
-https://gitee.com/Pfolg/plauncher/wikis/IMPORTANT
+https://gitee.com/Pfolg/Pelr/wikis/IMPORTANT
 
 Thanks to the following projects and communities for their support:
 

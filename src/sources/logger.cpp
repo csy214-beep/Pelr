@@ -1,6 +1,6 @@
 /*
-* PLauncher - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/plauncher
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://gitee.com/Pfolg/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -16,7 +16,7 @@
 #include <QMutexLocker>
 
 // 定义日志文件路径
-#define QT_LOG_FILE "log/plauncher_qt.log"
+#define QT_LOG_FILE "log/Pelr_qt.log"
 
 // 定义全局变量
 LogLevel g_logLevel = LogLevel::Debug;

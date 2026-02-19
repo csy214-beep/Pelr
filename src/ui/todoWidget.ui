@@ -359,7 +359,7 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>PLauncher TODO Lists</string>
+       <string>Pelr TODO Lists</string>
       </property>
      </widget>
     </item>

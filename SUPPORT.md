@@ -1,25 +1,25 @@
 # 获取帮助
 
-感谢您使用 PLauncher！我们很乐意帮助您解决问题。为了最高效地获得支持，请遵循以下指南。
+感谢您使用 Pelr！我们很乐意帮助您解决问题。为了最高效地获得支持，请遵循以下指南。
 
 ## 📖 首先，请自助排查
 
 大多数常见问题都能在现有文档中找到答案。在提问前，请先尝试：
 
 1.  **仔细阅读 [README.md](README.md)**：其中包含了最重要的安装、配置和基本使用说明。
-2.  **查阅 [Wiki 文档](https://gitee.com/Pfolg/plauncher/wikis)**：我们提供了更详细的用户手册和常见问题解答（FAQ）。
-3.  **搜索现有的 Issues 和 Discussions**：您遇到的问题可能已经被其他人提出并得到了解决。请在 [Issues](https://gitee.com/Pfolg/plauncher/issues) 搜索关键词。
+2.  **查阅 [Wiki 文档](https://gitee.com/Pfolg/Pelr/wikis)**：我们提供了更详细的用户手册和常见问题解答（FAQ）。
+3.  **搜索现有的 Issues 和 Discussions**：您遇到的问题可能已经被其他人提出并得到了解决。请在 [Issues](https://gitee.com/Pfolg/Pelr/issues) 搜索关键词。
 
 ## 🐛 报告错误（Bug）
 
-如果您确信发现了一个未报告的错误，请 [创建一个新的 Issue](https://gitee.com/Pfolg/plauncher/issues/new)。
+如果您确信发现了一个未报告的错误，请 [创建一个新的 Issue](https://gitee.com/Pfolg/Pelr/issues/new)。
 
 **为了帮助我们快速理解和解决问题，请在报告中包含以下信息：**
 
 *   **清晰的描述**：发生了什么问题？您预期的行为是什么？
 *   **复现步骤**：请详细说明如何重现这个问题。
     *   例如：1. 打开应用 2. 点击 X 按钮 3. 看到 Y 错误
-*   **版本信息**：您使用的 PLauncher 版本、Windows 操作系统版本。
+*   **版本信息**：您使用的 Pelr 版本、Windows 操作系统版本。
 *   **错误日志**：如果应用生成了日志文件（服务端/客户端 日志文件位于: log），请附上相关的日志内容。
 *   **截图/屏幕录制**：如果有助于说明问题，请提供截图或屏幕录制。
 

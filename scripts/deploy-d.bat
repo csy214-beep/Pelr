@@ -13,4 +13,4 @@ xcopy assets cmake-build-debug\assets /E/H/C/I
 
 cd  cmake-build-debug
 
-"D:\Qt\5.15.2\mingw81_64\bin\windeployqt.exe" PLauncher.exe
+"D:\Qt\5.15.2\mingw81_64\bin\windeployqt.exe" Pelr.exe
