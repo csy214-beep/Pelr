@@ -267,6 +267,7 @@ void NotificationWidget::mousePressEvent(QMouseEvent *event) {
             m_clickCallback();
         }
     }
+    hide();
 
     QWidget::mousePressEvent(event);
 }

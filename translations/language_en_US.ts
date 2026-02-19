@@ -29,7 +29,7 @@ It&apos;s %2 now~</translation>
         <translation>It&apos;s %1 now</translation>
     </message>
     <message>
-        <location filename="../src/sources/BubbleBox.cpp" line="245"/>
+        <location filename="../src/sources/BubbleBox.cpp" line="244"/>
         <source>In response...</source>
         <translation>In response...</translation>
     </message>
@@ -374,7 +374,7 @@ Battery State: %3</translation>
     </message>
     <message>
         <location filename="../src/sources/manageStart.cpp" line="147"/>
-        <source>项目 %1
+        <source>项目 %1 
 的路径不存在：%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -477,12 +477,7 @@ Battery State: %3</translation>
         <location filename="../src/headers/launcher.hpp" line="90"/>
         <source>Exception occurred while launching: %1
 %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exception occurred while launching: %1
-%2</source>
-        <translation type="vanished">Exception occurred while launching: %1
+        <translation type="unfinished">Exception occurred while launching: %1
 %2</translation>
     </message>
     <message>
@@ -569,7 +564,7 @@ Will take effect on next application launch.</translation>
     <message>
         <location filename="../src/sources/setting.cpp" line="402"/>
         <location filename="../src/sources/setting.cpp" line="431"/>
-        <location filename="../src/sources/setting.cpp" line="472"/>
+        <location filename="../src/sources/setting.cpp" line="473"/>
         <source>Warning</source>
         <translation type="unfinished">Warning</translation>
     </message>
@@ -607,7 +602,7 @@ Will take effect on next application launch.</translation>
         <translation type="vanished">Version Check Error</translation>
     </message>
     <message>
-        <location filename="../src/sources/setting.cpp" line="486"/>
+        <location filename="../src/sources/setting.cpp" line="488"/>
         <source>选择模型文件</source>
         <translation>Select Model File</translation>
     </message>

@@ -1,3 +1,8 @@
+> [!TIP]
+> 通常在Gitee的Release只保留3个版本，更多过往版本请前往SourceForge查看或下载。
+
+[![sourceforge](https://img.shields.io/badge/↗-SourceForge-red.svg)](https://sourceforge.net/projects/pfolg-plauncher/)
+
 ## 20260107.10.16
 
 ### 更新内容

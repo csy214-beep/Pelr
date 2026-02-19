@@ -465,11 +465,13 @@ void SettingWidget::onVersionCheckCompleted(bool isMatch, const QString &message
         // 版本不一致的处理
         type = NotificationWidget::MessageType::Warning;
     }
-    NotificationWidget::showNotification(tr("Information"), message, 5000, type);
+    NotificationWidget::showNotification(tr("Information"), message, 5000, type,
+                                         []() { launchByPath("https://gitee.com/Pfolg/Pelr/releases"); });
 }
 
 void SettingWidget::onVersionCheckError(const QString &errorMessage) {
-    NotificationWidget::showNotification(tr("Warning"), errorMessage, 5000, NotificationWidget::MessageType::Critical);
+    NotificationWidget::showNotification(tr("Warning"), errorMessage, 5000, NotificationWidget::MessageType::Critical,
+                                         []() { launchByPath("https://gitee.com/Pfolg/Pelr/releases"); });
 }
 
 void SettingWidget::onLogLevelChanged() {
