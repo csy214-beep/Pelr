@@ -14,6 +14,8 @@
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QWindow>
+#include <QScreen>
+#include <QCursor>
 
 #include "adjustLabel.hpp"
 #include  "data.hpp"
@@ -72,6 +74,16 @@ KeyLabelWidget::KeyLabelWidget(QWidget *parent)
     updateTopTimer->start();
 }
 
+void KeyLabelWidget::moveToCenter() {
+    QCoreApplication *coreapp = QCoreApplication::instance();
+    QApplication *app = qobject_cast<QApplication *>(coreapp);
+    if (!app)return;
+    QScreen *screen = app->screenAt(QCursor::pos());
+    int x = screen->geometry().width() / 1.2;
+    int y = screen->geometry().height() / 1.2;
+    move(x, y);
+}
+
 void KeyLabelWidget::on_keyRelease(QString keyName, QString modifiersName) {
     if (keyName.isEmpty()) {
         this->keyLabel->setText(modifiersName);
@@ -106,6 +118,10 @@ void KeyLabelWidget::updateWindowLocation(int f_x, int f_y, int f_w, int f_h) {
     int y = f_y + f_h / 1.6;
     // 位置未改变则不更新
     if (this->x() == x && this->y() == y)return;
+    if (f_x == 0 && f_y == 0) {
+        moveToCenter();
+        return;
+    }
     // 获取目标位置所在的屏幕
     QScreen *targetScreen = app->screenAt(QPoint(x, y));
     if (!targetScreen) {

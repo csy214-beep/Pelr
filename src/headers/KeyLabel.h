@@ -36,5 +36,8 @@ public slots:
     void updateWindowLocation(int f_x, int f_y, int f_w, int f_h);
 
     void updateWindowOnTop();
+
+private slots:
+    void moveToCenter();
 };
 

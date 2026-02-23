@@ -348,6 +348,7 @@ void GLCore::switchListener() {
             BubbleBox::instance()->textSet(msg);
         qDebug() << msg;
         TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, false);
+        keyLabel->hide();
     } else {
         listener->startListening();
         QString msg = "key listening enabled";
@@ -355,6 +356,7 @@ void GLCore::switchListener() {
             BubbleBox::instance()->textSet(msg);
         qDebug() << msg;
         TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, true);
+        keyLabel->show();
     }
 }
 
