@@ -409,7 +409,13 @@ void GLCore::onAskWeather() {
 
 void GLCore::startRunStarIfPoweredInThread() {
     // 如果开机时长大于20分钟，则return
-    if (isSystemUptimeExceeds(20))return;
+    if (isSystemUptimeExceeds(20)) {
+        TrayIcon::showMessage("Pelr", tr("开机时间过长，不启动启动项"));
+        return;
+    }
+    // 显示提示
+    TrayIcon::showMessage("Pelr", tr("将在60秒后启动启动项"));
+
     // 设置完成信号与槽的连接
     connect(&m_watcher, &QFutureWatcher<void>::finished, this, &GLCore::onRunStarIfPoweredFinished);
 
