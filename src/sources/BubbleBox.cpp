@@ -227,7 +227,7 @@ void BubbleBox::showTime() {
         bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {
             NotificationWidget::showNotification(
-                "Pelr", tr("现在是%1").arg(time), 5000, NotificationWidget::Information);
+                DataManager::instance().Project_Name, tr("现在是%1").arg(time), 5000, NotificationWidget::Information);
         }
         qDebug() << "now:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;

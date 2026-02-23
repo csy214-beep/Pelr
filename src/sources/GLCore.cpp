@@ -410,11 +410,15 @@ void GLCore::onAskWeather() {
 void GLCore::startRunStarIfPoweredInThread() {
     // 如果开机时长大于20分钟，则return
     if (isSystemUptimeExceeds(20)) {
-        TrayIcon::showMessage(QTime::currentTime().toString("hh:mm:ss"), tr("开机时间过长，不启动启动项"));
+        TrayIcon::showMessage(
+            DataManager::instance().Project_Name + QTime::currentTime().toString("hh:mm:ss"),
+            tr("开机时间过长，不启动启动项"));
         return;
     }
     // 显示提示
-    TrayIcon::showMessage(QTime::currentTime().toString("hh:mm:ss"), tr("将在60秒后启动启动项"));
+    TrayIcon::showMessage(
+        DataManager::instance().Project_Name + QTime::currentTime().toString("hh:mm:ss"),
+        tr("将在60秒后启动启动项"));
 
     // 设置完成信号与槽的连接
     connect(&m_watcher, &QFutureWatcher<void>::finished, this, &GLCore::onRunStarIfPoweredFinished);
@@ -440,12 +444,11 @@ void GLCore::runStarIfPowered() {
     QThread::sleep(60); // 等待60s
     QList<MenuData> menu_data = DataManager::instance().getMenuData();
     std::vector<QString> powerStatus = getPowerStatus();
-    if (powerStatus[0] == "Online (AC)") {
-        for (MenuData &item: menu_data) {
-            if (item.category == "Star") {
-                launchByPath(item.path);
-                QThread::sleep(3);
-            }
+    if (powerStatus[0] != "Online (AC)") return;
+    for (MenuData &item: menu_data) {
+        if (item.category == "Star") {
+            launchByPath(item.path);
+            QThread::sleep(3);
         }
     }
 }

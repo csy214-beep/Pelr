@@ -206,6 +206,7 @@ public:
     QList<TodoData> todo_data;
     constConfigData const_config_data;
     QFont _font = loadFont();
+    const QString Project_Name = "Pelr";
 
 
     static DataManager &instance() {

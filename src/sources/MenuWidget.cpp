@@ -24,7 +24,7 @@
 #include "data.hpp"
 
 MenuWidget::MenuWidget(QWidget *parent) : QWidget(
-        parent) {
+    parent) {
     setupUI();
     applyStyles();
     //置顶
@@ -107,7 +107,7 @@ void MenuWidget::setupUI() {
     mainLayout->setContentsMargins(15, 15, 15, 15);
 
     // 标题
-    QLabel *titleLabel = new QLabel("Pelr");
+    QLabel *titleLabel = new QLabel(DataManager::instance().Project_Name);
     titleLabel->setAlignment(Qt::AlignCenter);
     titleLabel->setObjectName("titleLabel");
     mainLayout->addWidget(titleLabel);
