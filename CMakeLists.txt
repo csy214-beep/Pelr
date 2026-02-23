@@ -103,14 +103,14 @@ endif ()
 # 明确设置 UI 文件目录
 set(UI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/ui")
 
-include_directories(Pelr PRIVATE
+include_directories(${PROJECT_NAME} PRIVATE
         ${UI_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}  # 重要：包含构建目录，ui_*.h文件在这里生成
 )
 # 确保 AUTOUIC 能找到 .ui 文件
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${UI_DIR}) # 没有这句就GG
 
-add_executable(Pelr
+add_executable(${PROJECT_NAME}
         ${CON}
         #        ${UI_FILES}
         ${SOURCE_FILES}
@@ -122,7 +122,7 @@ add_executable(Pelr
         ${QT_RESOURCES}
         ${QM_FILES}  # 将QM文件加入项目，确保编译时生成
 )
-target_link_libraries(Pelr
+target_link_libraries(${PROJECT_NAME}
         Framework
         libglew32d
         glfw3
