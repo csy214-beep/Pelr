@@ -215,35 +215,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_26">
-          <property name="text">
-           <string>按键背景颜色</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_9">
-          <property name="placeholderText">
-           <string>enter...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QLineEdit" name="lineEdit_10">
-          <property name="placeholderText">
-           <string>enter...</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_11">
-          <property name="placeholderText">
-           <string>enter...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -256,8 +228,8 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_12">
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="lineEdit_10">
           <property name="placeholderText">
            <string>enter...</string>
           </property>
@@ -270,10 +242,10 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="label_27">
-          <property name="text">
-           <string>按键字体颜色</string>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_9">
+          <property name="placeholderText">
+           <string>enter...</string>
           </property>
          </widget>
         </item>

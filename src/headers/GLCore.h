@@ -19,7 +19,7 @@
 #include <QWheelEvent>
 #include <QVariantAnimation>
 #include "MenuWidget.h"
-#include "keyLabel.h"
+#include "keyboardoverlay.h"
 #include  <QPair>
 #include "mainWidget.h"
 #include <QtConcurrent/QtConcurrentRun>
@@ -34,12 +34,12 @@ public:
     QTimer *timer;
     QTimer *inputCheckTimer;
     QMenu *contextMenu;
-    GlobalInputListener *listener;
     MenuWidget *menuWidget;
-    KeyLabelWidget *keyLabel;
+    KeyboardOverlay *overlay;
     QTimer *randomSentenceTimer;
     mainWidget *main_widget;
     ChatBoxOnModel *modelChatBox;
+    GlobalInputListener *listener;
 
 
     void initContextMenu();

@@ -1,22 +1,24 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
 #pragma once
+#include <QString>
+#include <QFlags>
 
-#include <QCoreApplication>
-#include <QDebug>
-#include <QKeySequence>
-#include "globalinputlistener.h"
-#include <QObject>
+enum ModifierKey {
+    NoModifier = 0,
+    Shift = 1 << 0,
+    Ctrl  = 1 << 1,
+    Alt   = 1 << 2,
+    Win   = 1 << 3
+};
+Q_DECLARE_FLAGS(ModifierKeys, ModifierKey)
+Q_DECLARE_OPERATORS_FOR_FLAGS(ModifierKeys)
 
+enum MouseButton {
+    LeftButton, RightButton, MiddleButton, XButton1, XButton2, UnknownButton
+};
+
+// 工具函数
 QString keyCodeToKeyString(int keyCode);
-
 QString modifiersToString(ModifierKeys modifiers);
-
-QString mouseCodeToString(MouseButton &button);
+QString mouseCodeToString(MouseButton button);
+bool isSpecialKey(int keyCode, ModifierKeys modifiers);
+bool isModifierKeyCode(int keyCode);

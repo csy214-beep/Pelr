@@ -47,8 +47,7 @@ ConfigData SettingWidget::getAllValues() {
     // basic color
     data.color_bubble.first = ui->lineEdit_9->text();
     data.color_bubble.second = ui->lineEdit_10->text();
-    data.color_keyLabel.first = ui->lineEdit_11->text();
-    data.color_keyLabel.second = ui->lineEdit_12->text();
+
     //bool
     data.isStartUp = ui->checkBox->isChecked();
     data.isListening = ui->checkBox_2->isChecked();
@@ -121,10 +120,7 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->label_24->setStyleSheet("background-color: " + data.color_bubble.first + ";");
     ui->lineEdit_10->setText(data.color_bubble.second);
     ui->label_25->setStyleSheet("color: " + data.color_bubble.second + ";");
-    ui->lineEdit_11->setText(data.color_keyLabel.first);
-    ui->label_26->setStyleSheet("background-color: " + data.color_keyLabel.first + ";");
-    ui->lineEdit_12->setText(data.color_keyLabel.second);
-    ui->label_27->setStyleSheet("color: " + data.color_keyLabel.second + ";");
+
     //bool
     ui->checkBox->setChecked(data.isStartUp);
     if (checkStartupLink()) {
@@ -234,12 +230,6 @@ void SettingWidget::connectSignals() {
     });
     connect(ui->lineEdit_10, &QLineEdit::returnPressed, [&]() {
         selectColor(ui->label_25, ui->lineEdit_10, false);
-    });
-    connect(ui->lineEdit_11, &QLineEdit::returnPressed, [&]() {
-        selectColor(ui->label_26, ui->lineEdit_11);
-    });
-    connect(ui->lineEdit_12, &QLineEdit::returnPressed, [&]() {
-        selectColor(ui->label_27, ui->lineEdit_12, false);
     });
     //bool
     connect(ui->checkBox, &QCheckBox::clicked, [&]() {

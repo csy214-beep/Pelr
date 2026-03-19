@@ -22,7 +22,6 @@
 #include <QPainter>
 #include <random>
 #include <QSizePolicy>
-#include "adjustLabel.hpp"
 #include <QUrl>
 #include <QThread>
 #include "voicegenerator.hpp"

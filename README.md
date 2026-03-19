@@ -6,7 +6,7 @@
 
 **Pelr** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
-![](repo_assets/preview.png)
+
 
 > [!NOTE]
 >
@@ -30,7 +30,8 @@
 - **智能对话** - 集成 Ollama AI，支持自然语言交互
 - **表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
 - **语音合成** - 内置讯飞 TTS 服务，提供高质量的语音反馈
-- **启动管理** - 可视化管理启动应用程序（内置功能，别于系统），启动Windows的任何文件、链接，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
+- **启动管理** -
+  可视化管理启动应用程序（内置功能，别于系统），启动Windows的任何文件、链接，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
 - **键盘监听** - 显示按键状态，继承自[KeyMonitor](https://github.com/Pfolg/KeyMonitor)
 - **音乐托盘** - 托盘图标随系统音量转动，继承自[Rotating Rhythm](https://gitee.com/Pfolg/Rotating-Rhythm)
 - **天气服务** - OpenWeather 集成，实时获取天气信息
@@ -44,6 +45,13 @@
 - 运行系统命令
 - 快捷键
 - 热加载用户配置
+
+### 预览
+
+<div style="display: flex; overflow-x: auto; gap: 10px; padding: 10px; background: #f5f5f5; border-radius: 8px;">
+  <img src="repo_assets/preview1.png" alt="preview1" style="width: 49%; height: auto; flex-shrink: 0; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+  <img src="repo_assets/preview2.png" alt="preview2" style="width: 49%; height: auto; flex-shrink: 0; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+</div>
 
 ## 系统要求
 

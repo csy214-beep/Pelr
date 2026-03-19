@@ -33,7 +33,6 @@
 #define VERSION "20260219.11b" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 // todo: 多语言支持
 // todo: 优化语句文件路径&读取逻辑&用户友好的存储与修改方式
-// todo: C++按键监视器，带栈，限定长度，延迟，隐藏时间...
 
 
 struct ConfigData {
@@ -43,7 +42,6 @@ struct ConfigData {
     int FPS = 30;
     int volume = 50;
     QPair<QString, QString> color_bubble;
-    QPair<QString, QString> color_keyLabel;
     QPair<int, int> RandomInterval = {10, 25};
     //bool
     bool isStartUp = false;
@@ -71,7 +69,6 @@ struct ConfigData {
 
         // 分别序列化 QPair 的 first 和 second
         out << data.color_bubble.first << data.color_bubble.second;
-        out << data.color_keyLabel.first << data.color_keyLabel.second;
         out << data.RandomInterval.first << data.RandomInterval.second;
 
         out << data.isStartUp << data.isListening << data.isLookingMouse
@@ -88,7 +85,6 @@ struct ConfigData {
 
         // 分别反序列化 QPair 的 first 和 second
         in >> data.color_bubble.first >> data.color_bubble.second;
-        in >> data.color_keyLabel.first >> data.color_keyLabel.second;
         in >> data.RandomInterval.first >> data.RandomInterval.second;
 
         in >> data.isStartUp >> data.isListening >> data.isLookingMouse

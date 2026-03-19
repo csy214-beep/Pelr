@@ -27,13 +27,15 @@
 #include <QApplication>
 #include <QPushButton>
 #include "BubbleBox.h"
-#include "convertcodetostring.h"
 #include "getpowerstatus.h"
 #include "weathermanager.h"
 #include "todoNotify.hpp"
 #include "ExtraMotionManager.h"
 #include "launcherMenu.hpp"
 #include "tray.h"
+// 键盘监听相关
+#include "globalinputlistener.h"
+#include "convertcodetostring.h"
 
 #define RECORD_FILE "user/record.dat"
 #define WINDOW_LOCATION_FILE "user/window_location.dat"
@@ -42,10 +44,10 @@
 GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     timer = new QTimer();
     inputCheckTimer = new QTimer();
-    listener = new GlobalInputListener();
+    overlay = new KeyboardOverlay();
+    listener = &GlobalInputListener::instance();
     contextMenu = new QMenu(this);
     menuWidget = new MenuWidget();
-    keyLabel = new KeyLabelWidget();
     modelChatBox = new ChatBoxOnModel();
     // keyCounterTimer = new QTimer();
     main_widget = new mainWidget();
@@ -82,7 +84,7 @@ GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     int step = DataManager::instance().getBasicData().model_size; // 150;
     resize(4 * step, 3 * step);
     initContextMenu();
-    keyLabel->show();
+    overlay->show();
     BubbleBox::instance()->show();
     move(1400, 300);
     retranslateUI();
@@ -151,7 +153,6 @@ void GLCore::switchWindowTransparent(bool transparent) {
 void GLCore::initContextMenu() {
     qInfo() << "init context menu";
     // 实时显示键盘and鼠标按键状态 switch on/off
-    keyLabel->updateWindowLocation(this->x(), this->y(), width(), height());
     switchListenerButton = new QPushButton(tr("按键监听"), this);
     connect(switchListenerButton, &QPushButton::clicked, this, &GLCore::switchListener);
 
@@ -228,7 +229,6 @@ void GLCore::connectSignals() {
     // 更新频率
     connect(timer, &QTimer::timeout, this, [=]() {
         update();
-        keyLabel->updateWindowLocation(x(), y(), width(), height());
         BubbleBox::instance()->updateWindowLocation(x(), y(), width(), height());
         modelChatBox->updateWindowLocation(x(), y(), width(), height());
         if (DataManager::instance().getBasicData().isHourAlarm) {
@@ -239,25 +239,47 @@ void GLCore::connectSignals() {
         TodoNotify::instance().todoNotify();
     });
     timer->start((1.0 / DataManager::instance().getBasicData().FPS) * 1000.0); // 30fps
-    // 鼠标移动
-    connect(listener, &GlobalInputListener::mouseMoved, [&](int x, int y) { keyLabel->on_mouseMove(x, y); });
-    // 键盘按键
-    connect(listener, &GlobalInputListener::keyReleased, [&](int keyCode, ModifierKeys modifiers) {
-        QString keyName = keyCodeToKeyString(keyCode);
-        QString modifiersName = modifiersToString(modifiers);
-        // qDebug() << "Key:" << keyName << "Modifiers:" << modifiersName;
-        keyLabel->on_keyRelease(keyName, modifiersName);
-        // keyCounter.first++;
+    // 键盘事件槽连接
+    connect(listener, &GlobalInputListener::keyPressed, [&](int code, ModifierKeys mods) {
+        QString keyStr = keyCodeToKeyString(code);
+        QString modStr = modifiersToString(mods);
+
+        // 【新增逻辑】：如果当前按下的正是修饰键本身（如单独按下 Ctrl 或 Shift）
+        if (isModifierKeyCode(code)) {
+            QString currentMod = modStr;
+            // 兜底：如果系统状态还未及时更新，手动赋予对应的修饰键名称
+            if (currentMod.isEmpty()) {
+                if (code == VK_SHIFT || code == VK_LSHIFT || code == VK_RSHIFT) currentMod = "Shift";
+                else if (code == VK_CONTROL || code == VK_LCONTROL || code == VK_RCONTROL) currentMod = "Ctrl";
+                else if (code == VK_MENU || code == VK_LMENU || code == VK_RMENU) currentMod = "Alt";
+                else if (code == VK_LWIN || code == VK_RWIN) currentMod = "Win";
+            }
+            if (!currentMod.isEmpty()) {
+                overlay->onSpecialKey(currentMod); // 作为特殊键独占显示
+            }
+            return;
+        }
+
+        if (keyStr.isEmpty() && modStr.isEmpty()) return;
+
+        QString fullStr = modStr.isEmpty() ? keyStr : (modStr + (keyStr.isEmpty() ? "" : "+") + keyStr);
+
+        if (isSpecialKey(code, mods)) {
+            overlay->onSpecialKey(fullStr);
+        } else {
+            overlay->onNormalKey(fullStr);
+        }
     });
 
     // 鼠标按键
     connect(listener, &GlobalInputListener::mouseReleased,
-            [&](MouseButton button, int x, int y, ModifierKeys modifiers) {
-                QString buttonName = mouseCodeToString(button);
-                QString modifiersName = modifiersToString(modifiers);
-                // qDebug() << "Mouse button:" << buttonName << "at (" << x << "," << y << ") Modifiers:" << modifiersName;
-                keyLabel->on_keyRelease(buttonName, modifiersName);
-                // keyCounter.second++;
+            [&](MouseButton btn, int x, int y, ModifierKeys mods) {
+                Q_UNUSED(x);
+                Q_UNUSED(y); // 坐标在此项目中用于展示按键无需使用
+                QString btnStr = mouseCodeToString(btn);
+                QString modStr = modifiersToString(mods);
+                QString fullStr = modStr.isEmpty() ? btnStr : (modStr + " + " + btnStr);
+                overlay->onSpecialKey(fullStr);
             });
     // 定时检查鼠标透明度
     inputCheckTimer->setInterval(50);
@@ -341,14 +363,14 @@ void GLCore::connectSignals() {
 }
 
 void GLCore::switchListener() {
-    if (listener->isListening) {
+    if (listener->isListening()) {
         listener->stopListening();
         QString msg = "key listening disabled";
         if (!isHidden())
             BubbleBox::instance()->textSet(msg);
         qDebug() << msg;
         TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, false);
-        keyLabel->hide();
+        overlay->hide();
     } else {
         listener->startListening();
         QString msg = "key listening enabled";
@@ -356,7 +378,7 @@ void GLCore::switchListener() {
             BubbleBox::instance()->textSet(msg);
         qDebug() << msg;
         TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, true);
-        keyLabel->show();
+        overlay->show();
     }
 }
 
