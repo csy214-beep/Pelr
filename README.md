@@ -30,8 +30,9 @@
 - **智能对话** - 集成 Ollama AI，支持自然语言交互
 - **表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
 - **语音合成** - 内置讯飞 TTS 服务，提供高质量的语音反馈
-- **启动管理** - 可视化管理启动应用程序，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
+- **启动管理** - 可视化管理启动应用程序（内置功能，别于系统），启动Windows的任何文件、链接，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
 - **键盘监听** - 显示按键状态，继承自[KeyMonitor](https://github.com/Pfolg/KeyMonitor)
+- **音乐托盘** - 托盘图标随系统音量转动，继承自[Rotating Rhythm](https://gitee.com/Pfolg/Rotating-Rhythm)
 - **天气服务** - OpenWeather 集成，实时获取天气信息
 - **高度可定制** - 丰富的设置选项，满足个性化需求
 
@@ -123,7 +124,7 @@ Pelr/
 
 > [!NOTE]
 >
-> 仓库中不提供的文件请参见[necessaryParyStructure](docs/necessaryParyStructure)
+> 仓库中不提供的文件请参见[necessaryPartyStructure](docs/necessaryPartyStructure)
 
 ## 技术栈
 

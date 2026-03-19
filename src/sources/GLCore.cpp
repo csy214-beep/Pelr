@@ -410,16 +410,17 @@ void GLCore::onAskWeather() {
 }
 
 void GLCore::startRunStarIfPoweredInThread() {
+    QString title = DataManager::instance().Project_Name + " " + QTime::currentTime().toString("hh:mm:ss");
     // 如果开机时长大于20分钟，则return
     if (isSystemUptimeExceeds(20)) {
         TrayIcon::showMessage(
-            DataManager::instance().Project_Name + QTime::currentTime().toString("hh:mm:ss"),
+            title,
             tr("开机时间过长，不启动启动项"));
         return;
     }
     // 显示提示
     TrayIcon::showMessage(
-        DataManager::instance().Project_Name + QTime::currentTime().toString("hh:mm:ss"),
+        title,
         tr("将在60秒后启动启动项"));
 
     // 设置完成信号与槽的连接
