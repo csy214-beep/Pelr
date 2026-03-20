@@ -231,7 +231,7 @@ void GLCore::connectSignals() {
         update();
         BubbleBox::instance()->updateWindowLocation(x(), y(), width(), height());
         modelChatBox->updateWindowLocation(x(), y(), width(), height());
-        if (DataManager::instance().getBasicData().isHourAlarm) {
+        if (DataManager::instance().getBasicData().isHourAlarm && !isHidden()) {
             // qDebug() << "user: 开启报时功能";
             BubbleBox::instance()->showTime();
         }

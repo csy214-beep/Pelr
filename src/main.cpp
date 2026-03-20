@@ -26,7 +26,7 @@
 QTextStream out(stdout);
 out<< txt<< Qt::endl;
 #endif
-
+#define DEBUG true
 
 void initTranslator(QApplication &a, const QString &path) {
     // 初始化翻译管理器
@@ -43,17 +43,8 @@ void initTranslator(QApplication &a, const QString &path) {
     qDebug() << "Translator initialized";
 }
 
-/*
-*void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
+// 居然敢动我的屎山代码，想必你应该是做好了觉悟吧。
 
-CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt32 no, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
-
-CubismMotionQueueEntryHandle LAppModel::StartRandomMotion(const csmChar* group, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
- */
-
-/*
-  居然敢动我的屎山代码，想必你应该是做好了觉悟吧。
-*/
 int main(int argc, char *argv[]) {
     // 初始化日志
     initLogFile();
@@ -62,7 +53,7 @@ int main(int argc, char *argv[]) {
     // 确保 user 目录存在
     QDir().mkpath("user"); // 如果目录不存在则创建，包括所有必要的父目录
     // 安装自定义消息处理器
-    // qInstallMessageHandler(messageHandler);
+    if (!DEBUG) qInstallMessageHandler(messageHandler);
     //  初始化随机数生成器
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);
