@@ -38,6 +38,7 @@ public:
     void closeEvent(QCloseEvent *event) override;
 
     void initUI();
+ void showEvent(QShowEvent *event) override;
 
 private slots:
     void switch_widget(QWidget *w);

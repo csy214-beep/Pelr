@@ -77,6 +77,7 @@ TTSConfig SettingWidget::getTTSConfigValue() const {
     data.APISecret = ui->lineEdit_3->text();
     data.APIKey = ui->lineEdit_4->text();
     data.speaker = ui->lineEdit_5->text();
+    data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
     return data;
 }
 
@@ -94,6 +95,7 @@ void SettingWidget::setTTSConfig(const TTSConfig &data) const {
     ui->lineEdit_3->setText(data.APISecret);
     ui->lineEdit_4->setText(data.APPID);
     ui->lineEdit_5->setText(data.speaker);
+    ui->checkBox_13->setChecked(data.isRunTTSServerOnStartUp);
 }
 
 void SettingWidget::setOpenWeatherData(const OpenWeatherData &data) const {

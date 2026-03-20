@@ -55,6 +55,12 @@ void mainWidget::initUI() {
     Widget_chat->show();
 }
 
+void mainWidget::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event); // 保留基类调用（通常推荐）
+    raise();
+    activateWindow();
+}
+
 void mainWidget::hideAllWidget() {
     Widget_chat->hide();
     Widget_ManageStart->hide();

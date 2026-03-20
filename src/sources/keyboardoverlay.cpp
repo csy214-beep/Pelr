@@ -142,6 +142,7 @@ void KeyboardOverlay::tick() {
 
     if (needsRepaint || !m_entries.isEmpty()) {
         update();
+        raise();
     }
 }
 

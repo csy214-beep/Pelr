@@ -21,6 +21,7 @@
 #include <QCryptographicHash>
 #include <QMediaPlayer>
 #include "data.hpp"
+#include "launcher.hpp"
 
 class VoiceGenerator : public QObject {
     Q_OBJECT
@@ -116,9 +117,19 @@ private:
                 emit errorOccurred(error.isEmpty() ? "File not found" : error);
             }
         } else {
+            if (reply->error() == QNetworkReply::ConnectionRefusedError) {
+                onConnectionRefused();
+            }
             emit errorOccurred(reply->errorString());
         }
         reply->deleteLater();
+    }
+
+    void onConnectionRefused() {
+        if (!DataManager::instance().getTTSConfig().isRunTTSServerOnStartUp)
+            return;
+        qDebug() << "TTS server refused connection, trying to launch it...";
+        launchByPath(DataManager::instance().const_config_data.tts_server);
     }
 
     QNetworkAccessManager *manager;

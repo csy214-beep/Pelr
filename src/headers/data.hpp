@@ -179,6 +179,7 @@ struct TTSConfig {
     QString APISecret;
     QString APIKey;
     QString speaker = "x4_yezi";
+    bool isRunTTSServerOnStartUp = false;
 };
 
 struct OpenWeatherData {
@@ -193,6 +194,7 @@ private:
     ~DataManager() = default; // 私有析构函数
     DataManager(const DataManager &) = delete; // 删除拷贝构造函数
     DataManager &operator=(const DataManager &) = delete; // 删除赋值运算符
+
 protected:
     QList<MenuData> cached_menu_data;
     ConfigData basic_data;
@@ -266,6 +268,7 @@ public:
         json_object.insert("APISecret", ttsc.APISecret);
         json_object.insert("APIKey", ttsc.APIKey);
         json_object.insert("speaker", ttsc.speaker);
+        json_object.insert("isRunTTSServerOnStartUp", ttsc.isRunTTSServerOnStartUp);
         QFile file(TTS_CONFIG_FILE);
         if (!file.open(QIODevice::WriteOnly)) {
             // 无法打开文件进行写入
@@ -422,6 +425,8 @@ protected:
         }
 
         tts_config.speaker = json_object.value("speaker").toString("x4_yezi");
+
+        tts_config.isRunTTSServerOnStartUp = json_object.value("isRunTTSServerOnStartUp").toBool(false);
     }
 
     void readTodoNotify() {

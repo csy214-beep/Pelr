@@ -382,30 +382,24 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_14">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_10">
         <property name="text">
-         <string>获取API</string>
+         <string>APPID</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="lineEdit_2"/>
       </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_4"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_12">
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_3">
         <property name="text">
-         <string>APIKey</string>
+         <string>讯飞开放平台 在线语音合成</string>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>APPID</string>
+        <property name="icon">
+         <iconset resource="../../Resource.qrc">
+          <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
         </property>
        </widget>
       </item>
@@ -416,13 +410,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_5"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-      <item row="6" column="1">
+      <item row="7" column="1">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -435,21 +423,13 @@
         </property>
        </spacer>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>APISecret</string>
-        </property>
-       </widget>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEdit_4"/>
       </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="pushButton_3">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_12">
         <property name="text">
-         <string>讯飞开放平台 在线语音合成</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../../Resource.qrc">
-          <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+         <string>APIKey</string>
         </property>
        </widget>
       </item>
@@ -464,10 +444,37 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_3"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>获取API</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>APISecret</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_18">
         <property name="text">
          <string>启动</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_5"/>
+      </item>
+      <item row="6" column="1">
+       <widget class="QCheckBox" name="checkBox_13">
+        <property name="text">
+         <string>连接失败尝试启动TTS服务端</string>
         </property>
        </widget>
       </item>

@@ -262,7 +262,7 @@ void GLCore::connectSignals() {
 
         if (keyStr.isEmpty() && modStr.isEmpty()) return;
 
-        QString fullStr = modStr.isEmpty() ? keyStr : (modStr + (keyStr.isEmpty() ? "" : "+") + keyStr);
+        QString fullStr = modStr.isEmpty() ? keyStr : (modStr + (keyStr.isEmpty() ? "" : " + ") + keyStr);
 
         if (isSpecialKey(code, mods)) {
             overlay->onSpecialKey(fullStr);
