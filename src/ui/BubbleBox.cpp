@@ -10,13 +10,9 @@
 #include "BubbleBox.h"
 #include  <QCoreApplication>
 #include  <QApplication>
-#include <QFile>
 #include  <QScreen>
 #include  <QTime>
 #include <QDebug>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
 #include <ctime>
 #include <qmediaplayer.h>
 #include <QPainter>
@@ -29,10 +25,7 @@
 #include <QString>
 #include <QColor>
 #include "NotificationWidget.h"
-
-// 时间段语录文件
-#define TIMETEXT_FILE "assets/text/timeText.json"
-#define DAILYTEXT_FILE "assets/text/dailyText.json"
+#include "loadText.h"
 
 // 初始化静态成员变量
 BubbleBox *BubbleBox::m_instance = nullptr;
@@ -119,44 +112,7 @@ void BubbleBox::paintEvent(QPaintEvent *event) {
 }
 
 void BubbleBox::RandomSentence() {
-    QString keyName = "daily";
-    // 打开文件
-    QFile file(DAILYTEXT_FILE);
-    if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "cannot open file:" << file.errorString();
-        textSet(tr("Hello World!"));
-        return;
-    }
-    // 读取文件内容
-    QByteArray data = file.readAll();
-    file.close();
-    // 解析JSON
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-    if (doc.isNull()) {
-        qWarning() << "JSON parse failed";
-        textSet(tr("Hello World!"));
-        return;
-    }
-    // 获取根对象
-    QJsonObject root = doc.object();
-
-    // 检查key是否存在
-    if (!root.contains(keyName) || !root[keyName].isArray()) {
-        qWarning() << "JSON format error or missing 'daily'";
-        textSet(tr("Hello World!"));
-        return;
-    }
-
-    // 获取数组
-    QJsonArray targetArray = root[keyName].toArray();
-    if (targetArray.isEmpty()) {
-        qWarning() << "JSON Array is empty";
-        textSet(tr("Hello World!"));
-        return;
-    }
-
-    int index = std::rand() % targetArray.size();
-    textSet(targetArray[index].toString());
+    textSet(loadText("daily"));
 }
 
 QString BubbleBox::getPeriodText() {
@@ -176,52 +132,20 @@ QString BubbleBox::getPeriodText() {
     } else {
         keyName = "night";
     }
-
-    // 打开文件
-    QFile file(TIMETEXT_FILE);
-    if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "cannot open file:" << file.errorString();
-        return tr("Hello World!");
-    }
-
-    // 读取文件内容
-    QByteArray data = file.readAll();
-    file.close();
-
-    // 解析JSON
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-    if (doc.isNull()) {
-        qWarning() << "JSON parse failed";
-        return tr("Hello World!");
-    }
-
-    // 获取根对象
-    QJsonObject root = doc.object();
-
-    // 检查key是否存在
-    if (!root.contains(keyName) || !root[keyName].isArray()) {
-        qWarning() << "JSON format error or missing '" << keyName << "'";
-        return tr("Hello World!");
-    }
-
-    // 获取数组
-    QJsonArray targetArray = root[keyName].toArray();
-    if (targetArray.isEmpty()) {
-        return tr("Hello World!");
-    }
-
-    int index = std::rand() % targetArray.size();
-    return targetArray[index].toString();
+    return loadText(keyName);
 }
 
 void BubbleBox::showTime() {
-    QTime currentTime = QTime::currentTime();
-    QString time = currentTime.toString("hh:mm");
-    QString period = getPeriodText(); // 获取当前时间段句子
+    QString time;
+    QString period;
     if (isFirst) {
+        time = QTime::currentTime().toString("hh:mm");
+        period = getPeriodText(); // 获取当前时间段句子
         textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
         isFirst = false;
     } else if ((time.contains(":00") || time.contains(":30")) && time != this->now) {
+        time = QTime::currentTime().toString("hh:mm");
+        period = getPeriodText();
         textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
         bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {

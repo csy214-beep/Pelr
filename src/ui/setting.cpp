@@ -26,6 +26,7 @@
 #include "ollamaclient.h"
 #include "tray.h"
 #include "NotificationWidget.h"
+#include "loadText.h"
 
 ConfigData SettingWidget::getAllValues() {
     ConfigData data;
@@ -268,7 +269,7 @@ void SettingWidget::connectSignals() {
     });
     //text
     connect(ui->pushButton_12, &QPushButton::clicked, [&]() {
-        launchByPath(DataManager::instance().const_config_data.textFile);
+        initUserTextFile();
     });
     //.
     connect(ui->pushButton_13, &QPushButton::clicked, [&]() {

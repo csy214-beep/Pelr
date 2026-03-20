@@ -109,7 +109,7 @@ struct constConfigData {
     const QString team_link = "https://gitee.com/Pfolg/Pelr/contributors?ref=master";
     const QString website_link = "https://gitee.com/Pfolg/Pelr";
     const QString feedback_link = "https://gitee.com/Pfolg/Pelr/issues";
-    const QString textFile = "assets\\text"; //local path
+    const QString textFile = "user\\text.json"; //local path
     const QString VoiceFolder = "voice_files"; //local path
 };
 
