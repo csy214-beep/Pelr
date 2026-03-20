@@ -1,0 +1,63 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# IDE Settings
+.vscode
+.idea
+.venv
+
+# Build output
+cmake-build-debug
+cmake-build-release
+release/
+build/
+dist/
+*.spec
+# Documentation
+test_docs
+
+# Third-party Libraries
+thirdParty/
+lib/
+
+# Executables
+*.exe
+*.out
+*.app
+*.7z
+*.zip
+
+# log/cache files
+log
+voice_files
+
+# Resources
+Resources/
+SampleShaders/
+FrameworkShaders/
+
+
