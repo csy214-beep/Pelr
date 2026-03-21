@@ -231,15 +231,13 @@ void GLCore::connectSignals() {
         update();
         BubbleBox::instance()->updateWindowLocation(x(), y(), width(), height());
         modelChatBox->updateWindowLocation(x(), y(), width(), height());
-
         checkFocus();
+        if (DataManager::instance().getBasicData().isTop)raise(); // 提升窗口
     });
     timer->start((1.0 / DataManager::instance().getBasicData().FPS) * 1000.0); // 30fps
     connect(PermanentTimer, &QTimer::timeout, this, [&]() {
-        if (DataManager::instance().getBasicData().isHourAlarm && !isHidden()) {
-            // 报时
-            BubbleBox::instance()->showTime();
-        }
+        // 报时
+        if (DataManager::instance().getBasicData().isHourAlarm && !isHidden()) BubbleBox::instance()->showTime();
         TodoNotify::instance().todoNotify();
     });
     PermanentTimer->start(1000); // 1s

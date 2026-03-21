@@ -92,7 +92,6 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
 
     // 初始化当前时间
     now = "";
-    showTime();
 }
 
 void BubbleBox::paintEvent(QPaintEvent *event) {
