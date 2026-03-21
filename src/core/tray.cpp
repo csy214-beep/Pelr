@@ -150,16 +150,23 @@ TrayIcon::TrayIcon(QObject *parent)
     action_silentMode = new QAction(tr("静默模式"), this);
     action_switchDrag = new QAction(tr("锁定位置"), this);
     action_mediaPlayer = new QAction(tr("播放媒体"), this);
-    QAction *action_openPath = new QAction(tr("打开目录"), this);
+    QAction *action_openDirPath = new QAction(tr("打开程序文件夹"), this);
+    QAction *action_openUserPath = new QAction(tr("打开用户文件夹"), this);
     action_quit = new QAction(tr("退出程序"), this);
     action_keyListener = new QAction(tr("按键监听"), this);
 
-    // 连接信号和槽（保持原有连接不变）
-    connect(action_openPath, &QAction::triggered, []() {
-        QString appDir = QCoreApplication::applicationDirPath();
+    // 连接信号和槽
+    // 打开程序文件夹
+    connect(action_openDirPath, &QAction::triggered, []() {
+        const QString appDir = QCoreApplication::applicationDirPath();
         launchByPath(appDir);
     });
-
+    // 打开用户文件夹
+    connect(action_openUserPath, &QAction::triggered, []() {
+        QString appDir = QCoreApplication::applicationDirPath();
+        const QString userDir = appDir.append("/user");
+        launchByPath(userDir);
+    });
     connect(action_silentMode, &QAction::triggered, [this]() {
         m_silentMode = !m_silentMode;
         switchText(action_silentMode);
@@ -181,7 +188,7 @@ TrayIcon::TrayIcon(QObject *parent)
     menu->addActions({
         action_resetWinLoc, action_silentMode, action_switchDrag,
         action_keyListener,
-        action_showWin, action_mediaPlayer, action_openPath
+        action_showWin, action_mediaPlayer, action_openDirPath
     });
     menu->addSeparator();
     menu->addAction(action_quit);
