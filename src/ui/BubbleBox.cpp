@@ -136,18 +136,16 @@ QString BubbleBox::getPeriodText() {
 }
 
 void BubbleBox::showTime() {
-    QString time;
+    const QString time = QTime::currentTime().toString("hh:mm");
     QString period;
     if (isFirst) {
-        time = QTime::currentTime().toString("hh:mm");
         period = getPeriodText(); // 获取当前时间段句子
         textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
         isFirst = false;
     } else if ((time.contains(":00") || time.contains(":30")) && time != this->now) {
-        time = QTime::currentTime().toString("hh:mm");
         period = getPeriodText();
         textSet(tr("%1\n现在是%2哦~").arg(period).arg(time));
-        bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
+        const bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {
             NotificationWidget::showNotification(
                 DataManager::instance().Project_Name, tr("现在是%1").arg(time), 5000, NotificationWidget::Information);

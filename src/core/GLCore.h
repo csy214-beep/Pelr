@@ -34,6 +34,7 @@ public:
     QTimer *timer;
     QTimer *inputCheckTimer;
     QMenu *contextMenu;
+    QTimer *PermanentTimer;
     MenuWidget *menuWidget;
     KeyboardOverlay *overlay;
     QTimer *randomSentenceTimer;

@@ -43,6 +43,7 @@
 
 GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     timer = new QTimer();
+    PermanentTimer = new QTimer();
     inputCheckTimer = new QTimer();
     overlay = new KeyboardOverlay();
     listener = &GlobalInputListener::instance();
@@ -85,7 +86,6 @@ GLCore::GLCore(QWidget *parent) : QOpenGLWidget(parent) {
     resize(4 * step, 3 * step);
     initContextMenu();
     overlay->show();
-    BubbleBox::instance()->show();
     move(1400, 300);
     retranslateUI();
 }
@@ -231,14 +231,18 @@ void GLCore::connectSignals() {
         update();
         BubbleBox::instance()->updateWindowLocation(x(), y(), width(), height());
         modelChatBox->updateWindowLocation(x(), y(), width(), height());
-        if (DataManager::instance().getBasicData().isHourAlarm && !isHidden()) {
-            // qDebug() << "user: 开启报时功能";
-            BubbleBox::instance()->showTime();
-        }
+
         checkFocus();
-        TodoNotify::instance().todoNotify();
     });
     timer->start((1.0 / DataManager::instance().getBasicData().FPS) * 1000.0); // 30fps
+    connect(PermanentTimer, &QTimer::timeout, this, [&]() {
+        if (DataManager::instance().getBasicData().isHourAlarm && !isHidden()) {
+            // 报时
+            BubbleBox::instance()->showTime();
+        }
+        TodoNotify::instance().todoNotify();
+    });
+    PermanentTimer->start(1000); // 1s
     // 键盘事件槽连接
     connect(listener, &GlobalInputListener::keyPressed, [&](int code, ModifierKeys mods) {
         QString keyStr = keyCodeToKeyString(code);
@@ -299,11 +303,14 @@ void GLCore::connectSignals() {
     randomSentenceTimer = new QTimer();
     randomSentenceTimer->setSingleShot(true);
     connect(randomSentenceTimer, &QTimer::timeout, [&]() {
+        if (!isHidden()) {
+            BubbleBox::instance()->RandomSentence();
+        }
+        // 重置定时器
         int minTime = DataManager::instance().getBasicData().RandomInterval.first;
         int maxTime = DataManager::instance().getBasicData().RandomInterval.second;
         int randomTime = rand() % (maxTime - minTime + 1) + minTime; //15-25min
         qInfo() << "next random sentence in " << QString::number(randomTime * 60 * 1000) << " s";
-        BubbleBox::instance()->RandomSentence();
         randomSentenceTimer->start(randomTime * 60 * 1000);
     });
     if (DataManager::instance().getBasicData().isRandomSpeech) {

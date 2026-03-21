@@ -104,17 +104,23 @@ Pelr/
 ├── scripts/                # 脚本文件
 │   └── AUCF/               # 已弃用的模块 Archived Unused Cpp Files
 ├── src/                    # C++ 源代码
-│   ├── headers/            # 头文件
-│   ├── sources/            # 源文件
-│   └── ui/                 # UI 界面
+│   ├── core/               # 核心组件
+│   ├── ai/                 # AI 组件
+│   ├── tts/                # TTS 组件
+│   ├── keyboard/           # 键盘监听组件
+│   ├── model/              # 模型加载组件
+│   ├── utils/              # 工具组件
+│   ├── translation/        # 翻译组件
+│   ├── ui/                 # UI相关
+│   └── main.cpp            # 主入口
 ├── Resources/              # 模型资源文件
-├── lib/                    # 第三方库
+├── lib/                    # 第三方库 动态链接
 ├── LAppLive2D              # Live2D 模型加载库
 ├── assets/                 # 资源文件
 ├── repo_assets/            # 仓库相关资源
 ├── SampleShaders/          # 示例着色器
 ├── FrameworkShaders/       # 框架着色器
-├── thirdParty/             # 第三方库
+├── thirdParty/             # 第三方库 源码
 │   ├── Core/
 │   ├── Framework/
 │   ├── glew/

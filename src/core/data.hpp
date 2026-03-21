@@ -32,8 +32,6 @@
 
 #define VERSION "20260219.11b" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 // todo: 多语言支持
-// todo: 优化语句文件路径&读取逻辑&用户友好的存储与修改方式
-
 
 struct ConfigData {
     //basic
