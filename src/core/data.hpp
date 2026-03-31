@@ -31,7 +31,9 @@
 #define OPEN_WEATHER_FILE "user/openWeather.json"
 
 #define VERSION "20260219.11b" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
-// todo: 多语言支持
+// todo: 多语言支持 非紧急
+// todo:openai-edge-tts替换Pelr的默认TTS
+// todo: 音乐托盘颜色/符号设置项
 
 struct ConfigData {
     //basic

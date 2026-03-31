@@ -257,7 +257,7 @@ QPixmap TrayIcon::createMusicIcon() const {
     if (m_rotating) {
         painter.setPen(Qt::red); // 有音频
     } else {
-        painter.setPen(Qt::white); // 白色表示无音频
+        painter.setPen(Qt::blue); // 蓝色
     }
 
     // 绘制音乐符号

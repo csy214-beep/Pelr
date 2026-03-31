@@ -8,6 +8,7 @@
  * https://gnu.ac.cn/licenses/gpl-3.0.html
  */
 #include <QtWidgets/QApplication>
+#include  <QCoreApplication>
 #include "GLCore.h"
 #include "tray.h"
 #include <QFont>
@@ -28,6 +29,7 @@ out<< txt<< Qt::endl;
 #endif
 #define DEBUG true
 
+
 void initTranslator(QApplication &a, const QString &path) {
     // 初始化翻译管理器
     TranslationManager::setApplication(&a);
@@ -46,6 +48,10 @@ void initTranslator(QApplication &a, const QString &path) {
 // 居然敢动我的屎山代码，想必你应该是做好了觉悟吧。
 
 int main(int argc, char *argv[]) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
     // 初始化日志
     initLogFile();
     // 初始化日志等级

@@ -20,10 +20,8 @@ mainWidget::mainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::mainWidget
 }
 
 void mainWidget::initUI() {
-    this->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
     this->setWindowTitle("Pelr");
-    this->setMaximumSize(this->minimumSize());
     QFile styleFile(":/assets/style/flutter.qss");
     if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QString styleSheet = QLatin1String(styleFile.readAll());
@@ -34,25 +32,19 @@ void mainWidget::initUI() {
     Widget_ManageStart = new ManageStartWidget(this);
     Widget_Setting = new SettingWidget(this);
     Widget_Todo = new todoWidget(this);
-    Widget_chat->setGeometry(point_x, point_y, Widget_chat->width(), Widget_chat->height());
-    Widget_ManageStart->setGeometry(point_x, point_y, Widget_ManageStart->width(), Widget_ManageStart->height());
-    Widget_Setting->setGeometry(point_x, point_y, Widget_Setting->width(), Widget_Setting->height());
-    Widget_Todo->setGeometry(point_x, point_y, Widget_Todo->width(), Widget_Todo->height());
-
-    connect(ui->pushButton_4, &QPushButton::clicked, [=]() { switch_widget(Widget_Todo); });
-    connect(ui->pushButton_3, &QPushButton::clicked, [=]() { switch_widget(Widget_chat); });
-    connect(ui->pushButton_2, &QPushButton::clicked, [=]() { switch_widget(Widget_ManageStart); });
-    connect(ui->pushButton, &QPushButton::clicked, [=]() { switch_widget(Widget_Setting); });
-    // QSize size(72, 72);
-    // ui->pushButton_3->setIconSize(size);
-    // ui->pushButton_3->setIcon(QIcon(":/assets/Mono Icons/mi-message.png"));
-    // ui->pushButton_2->setIconSize(size);
-    // ui->pushButton_2->setIcon(QIcon(":/assets/Mono Icons/mi-three-rows.png"));
-    // ui->pushButton->setIconSize(size);
-    // ui->pushButton->setIcon(QIcon(":/assets/Mono Icons/mi-settings.png"));
-    hideAllWidget();
-    // 初始显示Chat界面
-    Widget_chat->show();
+    ui->stackedWidget->addWidget(Widget_chat);
+    ui->stackedWidget->addWidget(Widget_ManageStart);
+    ui->stackedWidget->addWidget(Widget_Setting);
+    ui->stackedWidget->addWidget(Widget_Todo);
+    // 连接信号槽，切换页面
+    connect(ui->pushButton_3, &QPushButton::clicked, [=]() { ui->stackedWidget->setCurrentWidget(Widget_chat); });
+    connect(ui->pushButton_4, &QPushButton::clicked, [=]() { ui->stackedWidget->setCurrentWidget(Widget_Todo); });
+    connect(ui->pushButton_2, &QPushButton::clicked,
+            [=]() { ui->stackedWidget->setCurrentWidget(Widget_ManageStart); });
+    connect(ui->pushButton, &QPushButton::clicked, [=]() { ui->stackedWidget->setCurrentWidget(Widget_Setting); });
+    // 设置初始页面
+    ui->stackedWidget->setCurrentWidget(Widget_chat);
+    resize(1280, 720);
 }
 
 void mainWidget::showEvent(QShowEvent *event) {
@@ -61,17 +53,6 @@ void mainWidget::showEvent(QShowEvent *event) {
     activateWindow();
 }
 
-void mainWidget::hideAllWidget() {
-    Widget_chat->hide();
-    Widget_ManageStart->hide();
-    Widget_Setting->hide();
-    Widget_Todo->hide();
-}
-
-void mainWidget::switch_widget(QWidget *w) {
-    hideAllWidget();
-    w->show();
-}
 
 mainWidget::~mainWidget() {
     delete ui;
