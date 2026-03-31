@@ -155,6 +155,7 @@ Pelr/
 - **PyInstaller** - 应用打包分发
 - **PySide6** - Qt6 跨平台 UI 框架
 - **websocket-client** - 网络通信
+- **openai-edge-tts** - 本地化的、与OpenAI TTS兼容的、采用Edge-TTS的TTS服务
 
 ## 开发构建
 
