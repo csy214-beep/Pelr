@@ -178,13 +178,17 @@ void BubbleBox::textSet(const QString &text) {
         return;
     }
     TTSConfig ttsConfig = DataManager::instance().getTTSConfig();
-    QString APPID = ttsConfig.APPID;
-    QString APIKey = ttsConfig.APIKey;
-    QString APISecret = ttsConfig.APISecret;
-    QString voice = ttsConfig.speaker;
-    if (!APPID.isEmpty() && !APIKey.isEmpty() && !APISecret.isEmpty()) {
-        qDebug() << "TTS Config is Complete, interface is used";
-        VoiceGenerator::instance()->generateVoice(APPID, APIKey, APISecret, text, voice);
+    if (ttsConfig.provider == 0 && ttsConfig.speed_openai_edge_tts && !ttsConfig.speaker_openai_edge_tts.isEmpty()) {
+        qDebug() << "TTS Config: OpenAI Edge TTS";
+        VoiceGenerator::instance()->generateVoiceOpenAI(text, ttsConfig.speaker_openai_edge_tts,
+                                                        ttsConfig.speed_openai_edge_tts);
+        setText(text);
+        adjustSize();
+    } else if (ttsConfig.provider == 1 && !ttsConfig.iFlytek_APPID.isEmpty() && !ttsConfig.iFlytek_APIKey.isEmpty() && !
+               ttsConfig.iFlytek_APISecret.isEmpty()) {
+        qDebug() << "TTS Config: iFlytek TTS";
+        VoiceGenerator::instance()->generateVoice(ttsConfig.iFlytek_APPID, ttsConfig.iFlytek_APIKey,
+                                                  ttsConfig.iFlytek_APISecret, text, voice);
         setText(text);
         adjustSize();
     } else {

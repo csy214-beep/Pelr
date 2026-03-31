@@ -188,7 +188,7 @@ TrayIcon::TrayIcon(QObject *parent)
     menu->addActions({
         action_resetWinLoc, action_silentMode, action_switchDrag,
         action_keyListener,
-        action_showWin, action_mediaPlayer, action_openDirPath
+        action_showWin, action_mediaPlayer, action_openUserPath, action_openDirPath
     });
     menu->addSeparator();
     menu->addAction(action_quit);

@@ -73,11 +73,15 @@ ConfigData SettingWidget::getAllValues() {
 
 TTSConfig SettingWidget::getTTSConfigValue() const {
     TTSConfig data;
+    data.provider = ui->comboBox_4->currentIndex();
+    qDebug() << "TTS provider: " << data.provider;
     //TTS
-    data.APPID = ui->lineEdit_2->text();
-    data.APISecret = ui->lineEdit_3->text();
-    data.APIKey = ui->lineEdit_4->text();
-    data.speaker = ui->lineEdit_5->text();
+    data.speaker_openai_edge_tts = ui->lineEdit_11->text();
+    data.speed_openai_edge_tts = ui->doubleSpinBox->value();
+    data.iFlytek_APPID = ui->lineEdit_2->text();
+    data.iFlytek_APISecret = ui->lineEdit_3->text();
+    data.iFlytek_APIKey = ui->lineEdit_4->text();
+    data.iFlytek_speaker = ui->lineEdit_5->text();
     data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
     return data;
 }
@@ -92,10 +96,15 @@ OpenWeatherData SettingWidget::getOpenWeatherDataValue() {
 
 void SettingWidget::setTTSConfig(const TTSConfig &data) const {
     //TTS
-    ui->lineEdit_2->setText(data.APIKey);
-    ui->lineEdit_3->setText(data.APISecret);
-    ui->lineEdit_4->setText(data.APPID);
-    ui->lineEdit_5->setText(data.speaker);
+    ui->comboBox_4->setCurrentIndex(data.provider);
+    // openai-edge-tts
+    ui->lineEdit_11->setText(data.speaker_openai_edge_tts);
+    ui->doubleSpinBox->setValue(data.speed_openai_edge_tts);
+    // iFlytek
+    ui->lineEdit_2->setText(data.iFlytek_APIKey);
+    ui->lineEdit_3->setText(data.iFlytek_APISecret);
+    ui->lineEdit_4->setText(data.iFlytek_APPID);
+    ui->lineEdit_5->setText(data.iFlytek_speaker);
     ui->checkBox_13->setChecked(data.isRunTTSServerOnStartUp);
 }
 
@@ -196,6 +205,10 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     for (const auto &item: logLevels) {
         ui->comboBox_3->addItem(item.text, static_cast<int>(item.value));
     }
+    ui->comboBox_4->clear();
+    for (const auto &item: TTSProviderList) {
+        ui->comboBox_4->addItem(item.first, item.second);
+    }
 
     // 连接信号槽
     connectSignals();
@@ -243,8 +256,14 @@ void SettingWidget::connectSignals() {
     });
 
     // 链接跳转
+    connect(ui->pushButton_7, &QPushButton::clicked, [&]() {
+        launchByPath(DataManager::instance().const_config_data.openai_edge_tts_Voice_Samples);
+    });
+    connect(ui->pushButton_16, &QPushButton::clicked, [&]() {
+        launchByPath(DataManager::instance().const_config_data.openai_edge_tts_github);
+    });
     connect(ui->pushButton_3, &QPushButton::clicked, [&]() {
-        launchByPath(DataManager::instance().const_config_data.tts_url);
+        launchByPath(DataManager::instance().const_config_data.iFlytek_tts_url);
     });
     connect(ui->pushButton_14, &QPushButton::clicked, [&]() {
         launchByPath(DataManager::instance().const_config_data.tts_server);
@@ -255,11 +274,11 @@ void SettingWidget::connectSignals() {
     connect(ui->pushButton_4, &QPushButton::clicked, [&]() {
         launchByPath(DataManager::instance().const_config_data.openWeather_url);
     });
-    //github
+    // git-repo
     connect(ui->pushButton_8, &QPushButton::clicked, [&]() {
         launchByPath(DataManager::instance().const_config_data.website_link);
     });
-    //author
+    // team
     connect(ui->pushButton_9, &QPushButton::clicked, [&]() {
         launchByPath(DataManager::instance().const_config_data.team_link);
     });

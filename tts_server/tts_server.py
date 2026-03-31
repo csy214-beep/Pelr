@@ -1,434 +1,300 @@
-# Pelr - Live2D Virtual Desktop Partner
-# https://gitee.com/Pfolg/Pelr
-# https://sourceforge.net/projects/pfolg-plauncher/
-# Copyright (c) 2025 SY Cheng
-#
-# GPL v3 License
-# https://gnu.ac.cn/licenses/gpl-3.0.html
-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import hashlib
 import sys
 import os
-import json
-import base64
-import hashlib
-import hmac
-import struct
 import threading
-from datetime import datetime
-from time import mktime
-from wsgiref.handlers import format_date_time
-from urllib.parse import urlencode
-import websocket
-import ssl
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import parse_qs, urlparse
 import logging
-import tempfile
+import signal
+from functools import wraps
 
-# PySide6 imports
+# Flask & gevent
+from flask import Flask, request, jsonify, send_file
+from gevent.pywsgi import WSGIServer
+
+# PySide6 (用于托盘)
 from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PySide6.QtGui import QIcon, QAction
 from PySide6.QtCore import QThread, Signal, QObject
 
+# ======================
+# 导入 Edge TTS 模块的视图函数
+# ======================
+# 注意：需要确保 server.py 中的视图函数可以独立导入
+# 原 server.py 中的 app 我们不用，只导入需要的函数
+from openai_edge_tts.server import (
+    text_to_speech,  # /v1/audio/speech 等
+    list_models,  # /v1/models
+    list_voices_formatted,  # /v1/audio/voices
+    list_voices,  # /v1/voices
+    list_all_voices,  # /v1/voices/all
+    elevenlabs_tts,  # /elevenlabs/...
+    azure_tts  # /azure/...
+)
 
-# 配置日志
-def setup_logging():
-    # 获取临时目录
-    # temp_dir = tempfile.gettempdir()
-    base_dir = "log"
-    # 创建日志目录
-    if not os.path.exists(base_dir):
-        os.makedirs(base_dir)
-    log_file = os.path.join(base_dir, "tts_server.log")
-    # 如果日志文件已存在，先删除
-    if os.path.exists(log_file):
-        os.remove(log_file)
+# 导入 Edge TTS 的辅助函数和配置（确保环境变量加载）
+from openai_edge_tts.config import DEFAULT_CONFIGS
+from openai_edge_tts.utils import require_api_key, DETAILED_ERROR_LOGGING
+from openai_edge_tts.tts_handler import generate_speech
+from openai_edge_tts.handle_text import prepare_tts_input_with_context
+from openai_edge_tts.config import DEFAULT_CONFIGS
+import shutil
+# ======================
+# 导入 Pelr TTS 核心服务
+# ======================
+from iFlytek.server import TTSService, logger as pelr_logger
 
-    # 创建日志记录器
-    logger = logging.getLogger("TTS_Server")
-    logger.setLevel(logging.INFO)
+# ======================
+# 创建统一 Flask 应用
+# ======================
+app = Flask(__name__)
 
-    # 创建文件处理器
-    file_handler = logging.FileHandler(log_file, encoding='utf-8')
-    file_handler.setLevel(logging.INFO)
+# ---------- Edge TTS 路由 ----------
+# 原 server.py 中的路由全部注册到新 app
+app.add_url_rule('/v1/audio/speech', 'text_to_speech', text_to_speech, methods=['POST'])
+app.add_url_rule('/audio/speech', 'text_to_speech_alias', text_to_speech, methods=['POST'])
+app.add_url_rule('/v1/models', 'list_models', list_models, methods=['GET', 'POST'])
+app.add_url_rule('/models', 'list_models_alias', list_models, methods=['GET', 'POST'])
+app.add_url_rule('/v1/audio/models', 'list_audio_models', list_models, methods=['GET', 'POST'])
+app.add_url_rule('/audio/models', 'list_audio_models_alias', list_models, methods=['GET', 'POST'])
+app.add_url_rule('/v1/audio/voices', 'list_voices_formatted', list_voices_formatted, methods=['GET', 'POST'])
+app.add_url_rule('/audio/voices', 'list_voices_formatted_alias', list_voices_formatted, methods=['GET', 'POST'])
+app.add_url_rule('/v1/voices', 'list_voices', list_voices, methods=['GET', 'POST'])
+app.add_url_rule('/voices', 'list_voices_alias', list_voices, methods=['GET', 'POST'])
+app.add_url_rule('/v1/voices/all', 'list_all_voices', list_all_voices, methods=['GET', 'POST'])
+app.add_url_rule('/voices/all', 'list_all_voices_alias', list_all_voices, methods=['GET', 'POST'])
+app.add_url_rule('/elevenlabs/v1/text-to-speech/<voice_id>', 'elevenlabs_tts', elevenlabs_tts, methods=['POST'])
+app.add_url_rule('/azure/cognitiveservices/v1', 'azure_tts', azure_tts, methods=['POST'])
 
-    # 创建控制台处理器（如果有终端）
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
+# ---------- Pelr TTS 路由 ----------
+# 复用 TTSService 单例
+tts_service = TTSService()
 
-    # 创建格式化器
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(formatter)
-    console_handler.setFormatter(formatter)
-
-    # 添加处理器到日志记录器
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
-
-    return logger
-
-
-# 初始化日志
-logger = setup_logging()
-
-
-# 单例装饰器
-def singleton(cls):
-    instances = {}
-
-    def get_instance(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-
-    return get_instance
-
-
-@singleton
-class TTSService:
-    def __init__(self):
-        self.connected = False
-        # 创建保存语音文件的目录
-        self.output_dir = "voice_files"
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
-        logger.info(f"TTS service initialized, output directory: {self.output_dir}")
-
-    def generate_voice(self, appid, api_key, api_secret, text, voice="x4_yezi"):
-        try:
-            # 生成文件名
-            text_hash = hashlib.sha256(text.encode()).hexdigest()
-            output_file = os.path.abspath(os.path.join(self.output_dir, f"{text_hash}.wav"))
-
-            # 如果文件已存在，直接返回路径
-            if os.path.exists(output_file):
-                logger.info(f"use existing voice file: {output_file}")
-                return output_file
-
-            logger.info(f"start generating voice: {text[:50]}...")
-            wsParam = Ws_Param(appid, api_key, api_secret, text, output_file, voice)
-            websocket.enableTrace(False)
-            wsUrl = wsParam.create_url()
-
-            ws = websocket.WebSocketApp(wsUrl,
-                                        on_message=self.on_message,
-                                        on_error=self.on_error,
-                                        on_close=self.on_close)
-            ws.output_file = output_file
-            ws.wsParam = wsParam
-            ws.audio_data = []
-
-            ws.on_open = self.on_open
-            ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
-
-            # 返回文件路径（无论成功与否）
-            if os.path.exists(output_file):
-                logger.info(f"vioce generated successfully, output file: {output_file}")
-                return output_file
-            else:
-                logger.error("vioce generation failed, no output file created")
-                return None
-        except Exception as e:
-            logger.error(f"unexpected error occurred: {str(e)}")
-            return None
-
-    def on_message(self, ws, message):
-        try:
-            # 添加对 None 消息的检查
-            if message is None:
-                logger.warning("Received None message")
-                return
-
-            message = json.loads(message)
-            code = message["code"]
-            sid = message["sid"]
-
-            # 检查是否有 data 字段
-            if "data" not in message:
-                logger.error(f"Message missing data field: {message}")
-                return
-
-            audio = message["data"]["audio"]
-            audio = base64.b64decode(audio)
-            status = message["data"]["status"]
-
-            if status == 2:
-                ws.close()
-            if code != 0:
-                errMsg = message["message"]
-                logger.error(f"Error: sid:{sid} call error:{errMsg} code is:{code}")
-            else:
-                if not hasattr(ws, 'audio_data'):
-                    ws.audio_data = []
-                ws.audio_data.append(audio)
-                if status == 2:
-                    total_audio_size = sum(len(data) for data in ws.audio_data)
-                    with open(ws.output_file, 'wb') as f:
-                        self.write_wav_header(f, total_audio_size)
-                        for data in ws.audio_data:
-                            f.write(data)
-                    logger.info(f"TTS completed. Output file: {ws.output_file}")
-        except json.JSONDecodeError as e:
-            logger.error(f"JSON parse error: {str(e)}, original message: {message}")
-        except KeyError as e:
-            logger.error(f"Message missing necessary field {str(e)}: {message}")
-        except Exception as e:
-            logger.error(f"Parse message error: {str(e)}")
-            logger.debug(f"Original message content: {message}")
-
-    def write_wav_header(self, file, audio_data_size, sample_rate=16000, num_channels=1, bits_per_sample=16):
-        file.write(b'RIFF')
-        file.write(struct.pack('<I', 36 + audio_data_size))
-        file.write(b'WAVE')
-        file.write(b'fmt ')
-        file.write(struct.pack('<I', 16))
-        file.write(struct.pack('<H', 1))
-        file.write(struct.pack('<H', num_channels))
-        file.write(struct.pack('<I', sample_rate))
-        file.write(struct.pack('<I', sample_rate * num_channels * bits_per_sample // 8))
-        file.write(struct.pack('<H', num_channels * bits_per_sample // 8))
-        file.write(struct.pack('<H', bits_per_sample))
-        file.write(b'data')
-        file.write(struct.pack('<I', audio_data_size))
-
-    def on_error(self, ws, error, *args):
-        logger.error(f"WebSocket error: {error}")
-        if args:
-            logger.debug(f"Additional error args: {args}")
-
-    def on_close(self, ws, close_status_code=None, close_msg=None, *args):
-        logger.info(
-            f"WebSocket connection closed (code: {close_status_code}, msg: {close_msg})"
-        )
-        if args:
-            logger.debug(f"Additional close args: {args}")
-
-    def on_open(self, ws):
-        def run(*args):
-            d = {"common": ws.wsParam.CommonArgs,
-                 "business": ws.wsParam.BusinessArgs,
-                 "data": ws.wsParam.Data}
-            ws.send(json.dumps(d))
-            logger.info("WebSocket connection established")
-
-        threading.Thread(target=run).start()
+# 复用 Pelr 的 voice_files 目录
+EDGE_OUTPUT_DIR = tts_service.output_dir
 
 
-class Ws_Param:
-    def __init__(self, APPID, APIKey, APISecret, Text, output_file, voice="x4_yezi"):
-        self.APPID = APPID
-        self.APIKey = APIKey
-        self.APISecret = APISecret
-        self.Text = Text
-        self.output_file = output_file
-        self.CommonArgs = {"app_id": self.APPID}
-        self.BusinessArgs = {"aue": "raw", "auf": "audio/L16;rate=16000", "vcn": voice, "tte": "utf8"}
-        self.Data = {"status": 2, "text": str(base64.b64encode(self.Text.encode('utf-8')), "UTF8")}
-        logger.debug(f"Ws_Param init: APPID={APPID}, voice={voice}")
+@app.route('/voice_edge/<filename>', methods=['GET'])
+def get_edge_voice(filename):
+    """下载 Edge TTS 生成的音频文件（支持 mp3, wav, opus, aac, flac）"""
+    # 防止路径遍历攻击
+    if '..' in filename or filename.startswith('/'):
+        return jsonify({"error": "Invalid filename"}), 400
 
-    def create_url(self):
-        url = 'wss://tts-api.xfyun.cn/v2/tts'
-        now = datetime.now()
-        date = format_date_time(mktime(now.timetuple()))
+    file_path = os.path.join(EDGE_OUTPUT_DIR, filename)
+    if not os.path.exists(file_path):
+        return jsonify({"error": "File not found"}), 404
 
-        signature_origin = "host: ws-api.xfyun.cn\ndate: " + date + "\nGET /v2/tts HTTP/1.1"
-        signature_sha = hmac.new(self.APISecret.encode('utf-8'), signature_origin.encode('utf-8'),
-                                 digestmod=hashlib.sha256).digest()
-        signature_sha = base64.b64encode(signature_sha).decode(encoding='utf-8')
+    # 根据扩展名确定 MIME 类型
+    ext = os.path.splitext(filename)[1].lower()
+    mime_map = {
+        '.mp3': 'audio/mpeg',
+        '.wav': 'audio/wav',
+        '.opus': 'audio/ogg',
+        '.aac': 'audio/aac',
+        '.flac': 'audio/flac'
+    }
+    mime_type = mime_map.get(ext, 'application/octet-stream')
 
-        authorization_origin = f'api_key="{self.APIKey}", algorithm="hmac-sha256", headers="host date request-line", signature="{signature_sha}"'
-        authorization = base64.b64encode(authorization_origin.encode('utf-8')).decode(encoding='utf-8')
-
-        v = {"authorization": authorization, "date": date, "host": "ws-api.xfyun.cn"}
-        final_url = url + '?' + urlencode(v)
-        logger.debug(f"Final url: {final_url}")
-        return final_url
+    return send_file(file_path, mimetype=mime_type)
 
 
-class TTSRequestHandler(BaseHTTPRequestHandler):
-    def log_message(self, format, *args):
-        logger.info("%s - - [%s] %s\n" % (
-            self.client_address[0],
-            self.log_date_time_string(),
-            format % args))
+@app.route('/v1/audio/speech_local', methods=['POST'])
+@app.route('/audio/speech_local', methods=['POST'])
+def text_to_speech_local():
+    """OpenAI 风格参数，但将音频保存到 voice_files 目录，并返回 JSON 格式的文件路径"""
+    try:
+        data = request.json
+        if not data or 'input' not in data:
+            return jsonify({"error": "Missing 'input' in request body"}), 400
 
-    def do_POST(self):
-        if self.path == '/generate':
-            try:
-                content_length = int(self.headers['Content-Length'])
-                post_data = self.rfile.read(content_length)
-                data = json.loads(post_data.decode('utf-8'))
+        text = data.get('input')
+        # 是否清洗文本（与原 Edge TTS 逻辑一致）
+        remove_filter = os.getenv('REMOVE_FILTER', str(DEFAULT_CONFIGS["REMOVE_FILTER"])).lower() == 'true'
+        if not remove_filter:
+            text = prepare_tts_input_with_context(text)
 
-                appid = data.get('appid', '')
-                api_key = data.get('api_key', '')
-                api_secret = data.get('api_secret', '')
-                text = data.get('text', '')
-                voice = data.get('voice', 'x4_yezi')
+        voice = data.get('voice', os.getenv('DEFAULT_VOICE', DEFAULT_CONFIGS["DEFAULT_VOICE"]))
+        response_format = data.get('response_format', DEFAULT_CONFIGS["DEFAULT_RESPONSE_FORMAT"])
+        speed = float(data.get('speed', DEFAULT_CONFIGS["DEFAULT_SPEED"]))
 
-                logger.info(f"Received TTS request: text={text[:50]}..., voice={voice}")
+        # 生成临时音频文件
+        temp_file_path = generate_speech(text, voice, response_format, speed)
+        if not temp_file_path or not os.path.exists(temp_file_path):
+            return jsonify({"error": "TTS generation failed"}), 500
 
-                if not all([appid, api_key, api_secret, text]):
-                    self.send_response(400)
-                    self.end_headers()
-                    self.wfile.write(json.dumps({'error': 'Missing parameters'}).encode())
-                    logger.warning("Lack of necessary parameters")
-                    return
+        # 生成唯一的文件名（哈希值 + 扩展名）
+        content_hash = hashlib.sha256(f"{text}_{voice}_{speed}_{response_format}".encode()).hexdigest()
+        ext = response_format if response_format != 'mp3' else 'mp3'
+        dest_filename = f"{content_hash}.{ext}"
+        dest_path = os.path.join(EDGE_OUTPUT_DIR, dest_filename)
 
-                # 使用单例TTS服务
-                tts_service = TTSService()
-                file_path = tts_service.generate_voice(appid, api_key, api_secret, text, voice)
-
-                if file_path and os.path.exists(file_path):
-                    self.send_response(200)
-                    self.send_header('Content-type', 'application/json')
-                    self.end_headers()
-                    response = {'file_path': file_path}
-                    self.wfile.write(json.dumps(response).encode())
-                    logger.info(
-                        f"Request processed successfully, output file: {file_path}"
-                    )
-                else:
-                    self.send_response(500)
-                    self.end_headers()
-                    self.wfile.write(json.dumps({'error': 'TTS generation failed'}).encode())
-                    logger.error("TTS generation failed")
-            except Exception as e:
-                self.send_response(500)
-                self.end_headers()
-                self.wfile.write(json.dumps({'error': f'Internal server error: {str(e)}'}).encode())
-                logger.error(
-                    f"An exception occurred while processing POST request: {str(e)}"
-                )
+        # 如果文件已存在（相同参数生成过），直接返回，否则移动临时文件
+        if not os.path.exists(dest_path):
+            shutil.move(temp_file_path, dest_path)
         else:
-            self.send_response(404)
-            self.end_headers()
-            logger.warning(f"Path not found: {self.path}")
+            # 临时文件不再需要，直接删除
+            os.remove(temp_file_path)
 
-    def do_GET(self):
-        if self.path.startswith('/voice/'):
-            filename = self.path[7:]  # 移除 '/voice/' 前缀
-            file_path = os.path.join(TTSService().output_dir, filename)
+        # 返回绝对路径（与 Pelr 的 /generate 返回格式一致）
+        abs_path = os.path.abspath(dest_path)
+        pelr_logger.info(f"Edge TTS generated file: {abs_path}")
+        return jsonify({
+            "file_path": abs_path,
+            "format": response_format,
+            "voice": voice
+        })
 
-            if os.path.exists(file_path):
-                self.send_response(200)
-                self.send_header('Content-type', 'audio/wav')
-                self.send_header('Content-Length', str(os.path.getsize(file_path)))
-                self.end_headers()
+    except Exception as e:
+        pelr_logger.error(f"Error in /v1/audio/speech_local: {e}")
+        return jsonify({"error": str(e)}), 500
 
-                with open(file_path, 'rb') as f:
-                    self.wfile.write(f.read())
-                logger.info(f"Voice file sent: {filename}")
-            else:
-                self.send_response(404)
-                self.end_headers()
-                logger.warning(f"Voice file not found: {filename}")
+
+@app.route('/generate', methods=['POST'])
+def generate_tts():
+    """生成语音，返回文件路径（与原始 Pelr 接口一致）"""
+    try:
+        data = request.json
+        if not data:
+            return jsonify({'error': 'Missing JSON body'}), 400
+
+        appid = data.get('appid', '')
+        api_key = data.get('api_key', '')
+        api_secret = data.get('api_secret', '')
+        text = data.get('text', '')
+        voice = data.get('voice', 'x4_yezi')
+
+        if not all([appid, api_key, api_secret, text]):
+            return jsonify({'error': 'Missing parameters (appid, api_key, api_secret, text)'}), 400
+
+        pelr_logger.info(f"Received Pelr TTS request: text={text[:50]}..., voice={voice}")
+
+        file_path = tts_service.generate_voice(appid, api_key, api_secret, text, voice)
+
+        if file_path and os.path.exists(file_path):
+            return jsonify({'file_path': file_path})
         else:
-            self.send_response(404)
-            self.end_headers()
-            logger.warning(f"Path not found: {self.path}")
+            return jsonify({'error': 'TTS generation failed'}), 500
+
+    except Exception as e:
+        pelr_logger.error(f"Error in /generate: {e}")
+        return jsonify({'error': f'Internal server error: {str(e)}'}), 500
 
 
-# HTTP服务器线程
-class HTTPServerThread(QThread):
-    def __init__(self, port=9140):
+@app.route('/voice/<filename>', methods=['GET'])
+def get_voice(filename):
+    """获取生成的音频文件"""
+    file_path = os.path.join(tts_service.output_dir, filename)
+    if not os.path.exists(file_path):
+        pelr_logger.warning(f"Voice file not found: {filename}")
+        return jsonify({'error': 'File not found'}), 404
+
+    try:
+        return send_file(file_path, mimetype='audio/wav')
+    except Exception as e:
+        pelr_logger.error(f"Error sending file {file_path}: {e}")
+        return jsonify({'error': 'File read error'}), 500
+
+
+# ======================
+# 启动服务（支持托盘）
+# ======================
+
+class FlaskServerThread(QThread):
+    """在后台线程中运行 gevent WSGI 服务器"""
+
+    def __init__(self, port):
         super().__init__()
         self.port = port
         self.server = None
+        self._stop_event = threading.Event()
 
     def run(self):
         try:
-            self.server = HTTPServer(('localhost', self.port), TTSRequestHandler)
-            logger.info(f"TTS Server started on port {self.port}")
+            # 使用 gevent 服务器（与原 Edge TTS 一致）
+            self.server = WSGIServer(('0.0.0.0', self.port), app)
+            pelr_logger.info(f"Combined TTS Server started on port {self.port}")
             self.server.serve_forever()
         except Exception as e:
-            logger.error(f"Server start failed: {str(e)}")
+            pelr_logger.error(f"Server failed: {e}")
 
     def stop(self):
         if self.server:
-            self.server.shutdown()
-            logger.info("TTS Server stopped")
+            self.server.stop()
+            pelr_logger.info("Server stopped")
 
 
-# 系统托盘类
 class TrayIcon(QSystemTrayIcon):
-    def __init__(self):
+    """系统托盘图标（整合后使用）"""
+
+    def __init__(self, server_thread):
         super().__init__()
+        self.server_thread = server_thread
 
-        # 尝试加载图标
+        # 尝试加载图标（优先使用 Pelr 图标）
         icon_paths = [
-            "assets/image/Pelr.ico",  # 优先尝试 .ico 格式
-            "assets/image/Pelr.png",  # 其次尝试 .png 格式
+            "assets/image/Pelr.ico",
+            "assets/image/Pelr.png",
         ]
-
         icon = None
         for path in icon_paths:
             if os.path.exists(path):
                 try:
                     icon = QIcon(path)
                     if not icon.isNull():
-                        logger.info(f"Icon loaded: {path}")
                         break
-                except Exception as e:
-                    logger.warning(f"load icon from {path} failed: {str(e)}")
+                except Exception:
+                    pass
 
-        # 如果所有文件都加载失败，使用内置图标
         if not icon or icon.isNull():
             from PySide6.QtWidgets import QStyle
-
-            try:
-                icon = QApplication.style().standardIcon(QStyle.SP_ComputerIcon)
-                logger.info("Load default icon")
-            except Exception as e:
-                logger.warning(f"Load default icon failed: {str(e)}")
-                icon = QIcon()
+            icon = QApplication.style().standardIcon(QStyle.SP_ComputerIcon)
 
         self.setIcon(icon)
         self.setToolTip("Pelr TTS Server")
 
         # 创建菜单
-        self.menu = QMenu()
-
-        # 添加退出动作
+        menu = QMenu()
         exit_action = QAction("Quit", self)
         exit_action.triggered.connect(self.exit_app)
-        self.menu.addAction(exit_action)
+        menu.addAction(exit_action)
+        self.setContextMenu(menu)
 
-        self.setContextMenu(self.menu)
-
-        # 显示托盘图标
         self.show()
 
     def exit_app(self):
-        logger.info("Exiting...")
-        # 停止HTTP服务器线程
-        if hasattr(self, 'server_thread'):
-            self.server_thread.stop()
-        # 退出应用程序
+        """退出应用程序"""
+        pelr_logger.info("Exiting...")
+        self.server_thread.stop()
         QApplication.quit()
 
 
-# 主应用程序
-class TTSApp(QApplication):
-    def __init__(self, argv):
-        super().__init__(argv)
-
-        # 创建托盘图标
-        self.tray_icon = TrayIcon()
-
-        # 启动HTTP服务器线程
-        self.server_thread = HTTPServerThread(port=9140)
-        self.server_thread.start()
-
-        logger.info("TTS Server started, Tray icon created")
-
-
 def main():
-    # 创建应用程序实例
-    app = TTSApp(sys.argv)
+    # 读取端口（默认 5050）
+    port = int(os.getenv('COMBINED_PORT', os.getenv('PORT', '9140')))
 
-    # 运行应用程序
-    sys.exit(app.exec())
+    # 创建 Qt 应用
+    qt_app = QApplication(sys.argv)
+
+    # 启动 Flask 服务器线程
+    server_thread = FlaskServerThread(port)
+    server_thread.start()
+
+    # 创建托盘图标
+    tray_icon = TrayIcon(server_thread)
+
+    # 优雅退出信号处理
+    def signal_handler(sig, frame):
+        pelr_logger.info("Received interrupt signal, shutting down...")
+        server_thread.stop()
+        qt_app.quit()
+
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    # 进入 Qt 事件循环
+    sys.exit(qt_app.exec())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

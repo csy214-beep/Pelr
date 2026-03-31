@@ -32,6 +32,7 @@ public:
         return &instance;
     }
 
+    // 原有讯飞 TTS 调用方式（保持不变）
     void generateVoice(const QString &appid, const QString &apiKey, const QString &apiSecret,
                        const QString &text, const QString &voice = "x4_yezi") {
         QString speaker = voice;
@@ -57,6 +58,37 @@ public:
         QNetworkReply *reply = manager->post(request, data);
         connect(reply, &QNetworkReply::finished, this, [this, reply]() {
             handleGenerateResponse(reply);
+        });
+    }
+
+    // 新增：OpenAI 风格 TTS 调用（Edge TTS），支持发言人和语速
+    // voice: 例如 "zh-CN-XiaoyiNeural", "nova" 等
+    // speed: 0.25 ~ 4.0，默认 1.0
+    void generateVoiceOpenAI(const QString &text, const QString &voice = "zh-CN-XiaoxiaoNeural",
+                             double speed = 1.0) {
+        // 参数校验
+        double finalSpeed = qBound(0.25, speed, 4.0);
+
+        // 准备JSON数据（符合 /v1/audio/speech_local 接口）
+        QJsonObject json;
+        json["input"] = text;
+        json["voice"] = voice;
+        json["response_format"] = "mp3";
+        json["speed"] = finalSpeed;
+
+        QJsonDocument doc(json);
+        QByteArray data = doc.toJson();
+
+        // 创建网络请求（注意端口与整合服务器一致，默认9140）
+        QNetworkRequest request(QUrl("http://localhost:9140/v1/audio/speech_local"));
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+        // 可选：如果需要 API Key 鉴权，取消下一行的注释并填写正确的 key
+        // request.setRawHeader("Authorization", "Bearer your_api_key_here");
+
+        QNetworkReply *reply = manager->post(request, data);
+        connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+            handleOpenAIResponse(reply);
         });
     }
 
@@ -103,6 +135,7 @@ private:
 
     VoiceGenerator &operator=(const VoiceGenerator &) = delete;
 
+    // 处理讯飞 TTS 的响应（原有逻辑）
     void handleGenerateResponse(QNetworkReply *reply) {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray response = reply->readAll();
@@ -121,6 +154,29 @@ private:
                 onConnectionRefused();
             }
             emit errorOccurred(reply->errorString());
+        }
+        reply->deleteLater();
+    }
+
+    // 处理 OpenAI 风格 TTS 的响应（新逻辑）
+    void handleOpenAIResponse(QNetworkReply *reply) {
+        if (reply->error() == QNetworkReply::NoError) {
+            QByteArray response = reply->readAll();
+            QJsonDocument doc = QJsonDocument::fromJson(response);
+            QJsonObject json = doc.object();
+            qDebug() << "OpenAI TTS response:" << json;
+            QString filePath = json["file_path"].toString();
+            if (!filePath.isEmpty() && QFile::exists(filePath)) {
+                emit voiceGenerated(filePath);
+            } else {
+                QString error = json["error"].toString();
+                emit errorOccurred(error.isEmpty() ? "File not found from OpenAI TTS" : error);
+            }
+        } else {
+            if (reply->error() == QNetworkReply::ConnectionRefusedError) {
+                onConnectionRefused();
+            }
+            emit errorOccurred(QString("OpenAI TTS error: %1").arg(reply->errorString()));
         }
         reply->deleteLater();
     }

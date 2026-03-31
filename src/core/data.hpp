@@ -32,7 +32,6 @@
 
 #define VERSION "20260219.11b" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 // todo: 多语言支持 非紧急
-// todo:openai-edge-tts替换Pelr的默认TTS
 // todo: 音乐托盘颜色/符号设置项
 
 struct ConfigData {
@@ -98,7 +97,9 @@ struct ConfigData {
 };
 
 struct constConfigData {
-    const QString tts_url = "https://console.xfyun.cn/services/tts";
+    const QString openai_edge_tts_github = "https://github.com/travisvn/openai-edge-tts";
+    const QString openai_edge_tts_Voice_Samples = "https://tts.travisvn.com/";
+    const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
     const QString tts_server = "tts_server.exe"; //local path
     const QString ollama_url = "https://ollama.com/";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
@@ -175,11 +176,22 @@ struct ToDoSettingData {
 
 struct TTSConfig {
     //TTS
-    QString APPID;
-    QString APISecret;
-    QString APIKey;
-    QString speaker = "x4_yezi";
+    int provider = 0; // 0: openai_edge_tts; 1: iFlytek
+    // openai_edge_tts
+    QString speaker_openai_edge_tts = "zh-CN-XiaoxiaoNeural";
+    double speed_openai_edge_tts = 1.0;
+    // iFlytek
+    QString iFlytek_APPID;
+    QString iFlytek_APISecret;
+    QString iFlytek_APIKey;
+    QString iFlytek_speaker = "x4_yezi";
+    // TTS server
     bool isRunTTSServerOnStartUp = false;
+};
+
+static QVector<QPair<QString, int> > TTSProviderList = {
+    {"OpenAI-Edge-TTS", 0},
+    {"iFlytek", 1}
 };
 
 struct OpenWeatherData {
@@ -264,10 +276,13 @@ public:
 
     static void writeTTSConfig(const TTSConfig &ttsc) {
         QJsonObject json_object;
-        json_object.insert("APPID", ttsc.APPID);
-        json_object.insert("APISecret", ttsc.APISecret);
-        json_object.insert("APIKey", ttsc.APIKey);
-        json_object.insert("speaker", ttsc.speaker);
+        json_object.insert("provider", ttsc.provider);
+        json_object.insert("speaker_openai_edge_tts", ttsc.speaker_openai_edge_tts);
+        json_object.insert("speed_openai_edge_tts", ttsc.speed_openai_edge_tts);
+        json_object.insert("iFlytek_APPID", ttsc.iFlytek_APPID);
+        json_object.insert("iFlytek_APISecret", ttsc.iFlytek_APISecret);
+        json_object.insert("iFlytek_APIKey", ttsc.iFlytek_APIKey);
+        json_object.insert("iFlytek_speaker", ttsc.iFlytek_speaker);
         json_object.insert("isRunTTSServerOnStartUp", ttsc.isRunTTSServerOnStartUp);
         QFile file(TTS_CONFIG_FILE);
         if (!file.open(QIODevice::WriteOnly)) {
@@ -409,23 +424,20 @@ protected:
         QJsonObject json_object = json_doc.object();
 
         // 逐个读取并验证必要字段
-        tts_config.APPID = json_object.value("APPID").toString("");
-        if (tts_config.APPID.isEmpty()) {
-            qWarning() << "APPID in Config file is empty or not exist";
+        tts_config.provider = json_object.value("provider").toInt(0);
+        if (tts_config.provider < 0 || tts_config.provider > 1) {
+            tts_config.provider = 0;
         }
-
-        tts_config.APISecret = json_object.value("APISecret").toString("");
-        if (tts_config.APISecret.isEmpty()) {
-            qWarning() << "APISecret in Config file is empty or not exist";
-        }
-
-        tts_config.APIKey = json_object.value("APIKey").toString("");
-        if (tts_config.APIKey.isEmpty()) {
-            qWarning() << "APIKey in Config file is empty or not exist";
-        }
-
-        tts_config.speaker = json_object.value("speaker").toString("x4_yezi");
-
+        tts_config.speaker_openai_edge_tts = json_object.value("speaker_openai_edge_tts").toString(
+            "zh-CN-XiaoxiaoNeural");
+        tts_config.speed_openai_edge_tts = json_object.value("speed_openai_edge_tts").toDouble(1.0);
+        tts_config.iFlytek_APPID = json_object.value("iFlytek_APPID").toString("");
+        tts_config.iFlytek_APISecret = json_object.value("iFlytek_APISecret").toString("");
+        tts_config.iFlytek_APIKey = json_object.value("iFlytek_APIKey").toString("");
+        tts_config.iFlytek_speaker = json_object.value("iFlytek_speaker").toString("x4_yezi");
+        if (tts_config.iFlytek_APPID.isEmpty() || tts_config.iFlytek_APISecret.isEmpty() || tts_config.iFlytek_APIKey.
+            isEmpty())
+            tts_config.provider = 0;
         tts_config.isRunTTSServerOnStartUp = json_object.value("isRunTTSServerOnStartUp").toBool(false);
     }
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>581</width>
-    <height>480</height>
+    <width>960</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -423,92 +423,213 @@
       <attribute name="title">
        <string>TTS</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>APPID</string>
-         </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>TTS选择</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_4"/>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>APISecret</string>
+       <item>
+        <widget class="QToolBox" name="toolBox">
+         <property name="currentIndex">
+          <number>0</number>
          </property>
+         <widget class="QWidget" name="page">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>912</width>
+            <height>224</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>OpenAI-Edge-TTS</string>
+          </attribute>
+          <layout class="QFormLayout" name="formLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_27">
+             <property name="text">
+              <string>发言人</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_11">
+             <property name="placeholderText">
+              <string>zh-CN-XiaoxiaoNeural</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_33">
+             <property name="text">
+              <string>速度</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox">
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="minimum">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>2.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton_7">
+             <property name="text">
+              <string>如何设置发言人</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../Resource.qrc">
+               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="pushButton_16">
+             <property name="text">
+              <string>TTS支持 - GitHub</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../Resource.qrc">
+               <normaloff>:/assets/IconaMoon/General/Shield Yes - 24x24.png</normaloff>:/assets/IconaMoon/General/Shield Yes - 24x24.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>-1</y>
+            <width>891</width>
+            <height>225</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>iFlytek TTS</string>
+          </attribute>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>APPID</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_2"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>APISecret</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEdit_3"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>APIKey</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEdit_4"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>发言人</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEdit_5"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>启动</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="pushButton_14">
+             <property name="text">
+              <string>启动讯飞TTS服务端</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../Resource.qrc">
+               <normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>获取API</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="text">
+              <string>讯飞开放平台 在线语音合成</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../Resource.qrc">
+               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_12">
-         <property name="text">
-          <string>APIKey</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_4"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_13">
-         <property name="text">
-          <string>发言人</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="lineEdit_5"/>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_14">
-         <property name="text">
-          <string>获取API</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>讯飞开放平台 在线语音合成</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../Resource.qrc">
-           <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_18">
-         <property name="text">
-          <string>启动</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QPushButton" name="pushButton_14">
-         <property name="text">
-          <string>启动讯飞TTS服务端</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../Resource.qrc">
-           <normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QCheckBox" name="checkBox_13">
-         <property name="text">
-          <string>连接失败尝试启动TTS服务端</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="1">
-        <spacer name="verticalSpacer">
+       <item>
+        <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -519,6 +640,32 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_13">
+            <property name="text">
+             <string>连接失败尝试启动TTS服务端</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
