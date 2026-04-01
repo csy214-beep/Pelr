@@ -1,7 +1,36 @@
 > [!TIP]
 > 通常在Gitee的Release只保留3个版本，更多过往版本请前往SourceForge查看或下载。
 
-[![sourceforge](https://img.shields.io/badge/↗-SourceForge-red.svg)](https://sourceforge.net/projects/pfolg-plauncher/)
+[![SourceForge](https://img.shields.io/badge/SourceForge-FF6600?logo=sourceforge&logoColor=white)](https://sourceforge.net/projects/pfolg-plauncher/)
+
+[//]: # ([![Release History]&#40;https://img.shields.io/badge/-Release_History-blue?logo=git&logoColor=white&#41;]&#40;https://gitee.com/Pfolg/Pelr/blob/master/docs/FullReleaseLog.md&#41;)
+
+[//]: # ([![Release History]&#40;https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white&#41;]&#40;https://gitee.com/Pfolg/Pelr/blob/master/docs/FullReleaseLog.md&#41;)
+
+## 20260219.11.17
+
+### 更新内容
+
+1. feat(setting): 音乐托盘颜色/符号设置项，优化气泡颜色设置逻辑
+1. feat(TTS): 新增openai_edge_tts语音合成引擎
+1. refactor(ui): 控制界面响应式布局
+1. feat(tray): 打开用户文件夹的选项
+1. fix(BubbleBox):启动时显示计划外的时间气泡消息
+1. feat(BubbleBox): 语句文件模块重构
+1. refactor: 重构src目录结构
+1. fix(Window): 在显示窗口时尝试提升窗口到最前
+1. feat(TTS): 【CheckBox】连接失败尝试启动TTS服务端及相关配置与逻辑
+1. fix(KeyLabel): 添加符号与键间空格
+1. refactor/feat(KeyLabel): 重构按键监听功能
+1. fix(README): 错别字修正
+1. style: 启动线程提醒弹窗标题优化
+1. fix(keyLabel): 按键提示逻辑优化
+1. feat: Star 线程启动与非启动提示
+1. fix: 检查更新弹窗逻辑优化
+1. refactor: 重命名项目为：由PLauncher改为Pelr
+
+> [!CAUTION]
+> 不兼容的文件：`configData.dat` 基本配置文件；`ttsConfig.json`虽兼容但需重新配置。
 
 ## 20260107.10.16
 
@@ -26,6 +55,9 @@
 
 > [!CAUTION]
 > 不兼容的文件：`configData.dat` 基本配置文件
+> 检查更新不可用，因为相关API已更新！
+
+**完整的更新日志**: https://gitee.com/Pfolg/Pelr/compare/ver20251118.9...20260107.10.16
 
 ## ver20251118.9
 
@@ -154,17 +186,17 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 * 添加媒体播放功能
 * 原有的**关于**功能失效（将在后续更新修复）
 
-你可以尝试访问：[GitHub上的提交](https://github.com/Pfolg/Pelr/commits/main/)（可能无效） 以获取本版本的特性
+你可以尝试访问：[GitHub上的提交](https://github.com/Pfolg/Plauncher/commits/main/)（可能无效） 以获取本版本的特性
 
 ## ver0.0.3
 
 本次更新：
 
-* 表情系统 <https://github.com/Pfolg/Pelr/commit/700c7c3d0334a98db348f398dc7776a7b4bfe212>
-* 检查更新的功能 <https://github.com/Pfolg/Pelr/commit/67c397e2adae10e9c129780edf5cf07a143429a9>
+* 表情系统 <https://github.com/Pfolg/Plauncher/commit/700c7c3d0334a98db348f398dc7776a7b4bfe212>
+* 检查更新的功能 <https://github.com/Pfolg/Plauncher/commit/67c397e2adae10e9c129780edf5cf07a143429a9>
 * 局部优化
 
-**Full Changelog**: <https://github.com/Pfolg/Pelr/compare/ver0.0.2...ver0.0.3>
+**Full Changelog**: <https://github.com/Pfolg/Plauncher/compare/ver0.0.2...ver0.0.3>
 
 ## ver0.0.2
 
@@ -176,16 +208,16 @@ ver0.0.5 已在 Windows 10 上**经测试**，可正常运行
 * 托盘功能优化
 * 第二聊天功能
 
-**基本使用方法**: <https://github.com/Pfolg/Pelr/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95>
+**基本使用方法**: <https://github.com/Pfolg/Plauncher/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95>
 
-**Full Changelog**: <https://github.com/Pfolg/Pelr/compare/ver0.0.1...ver0.0.2>
+**Full Changelog**: <https://github.com/Pfolg/Plauncher/compare/ver0.0.1...ver0.0.2>
 
 ## ver0.0.1
 
 > [!WARNING]
 > 已知问题：该版本的“随系统启动”功能无效，对基本使用无影响。
 
-如果提示缺失*.dll文件，可以下载选择性[bin_dlls](https://github.com/Pfolg/Pelr/tree/main/bin_dlls)
+如果提示缺失*.dll文件，可以下载选择性[bin_dlls](https://github.com/Pfolg/Plauncher/tree/main/bin_dlls)
 内的对应缺失文件到程序根目录，并提交相关错误信息（界面->设置->关于->问题反馈）。
 
 第一次运行提示缺失模型属于正常现象，在设置内完成初次配置后就不会提示了。

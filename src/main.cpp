@@ -27,7 +27,7 @@
 QTextStream out(stdout);
 out<< txt<< Qt::endl;
 #endif
-#define DEBUG true
+#define DEBUG false
 
 
 void initTranslator(QApplication &a, const QString &path) {
@@ -63,6 +63,8 @@ int main(int argc, char *argv[]) {
     //  初始化随机数生成器
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);
+    app.setApplicationName(DataManager::instance().const_config_data.name + " "
+                           + DataManager::instance().const_config_data.version);
     app.setFont(DataManager::instance()._font); //整个应用程序的界面都会使用这个字体
     app.setWindowIcon(QIcon(":/assets/image/Pelr.png"));
 

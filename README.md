@@ -29,7 +29,7 @@
 - **Live2D 虚拟角色** - 支持 Live2D 模型 (仅支持 model3.json 格式)，提供生动的桌面伴侣体验
 - **智能对话** - 集成 Ollama AI，支持自然语言交互
 - **表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
-- **语音合成** - 内置讯飞 TTS 服务，提供高质量的语音反馈
+- **语音合成** - 内置OpenAI-Edge-TTS、讯飞 TTS 服务，提供高质量的语音反馈
 - **启动管理** -
   可视化管理启动应用程序（内置功能，别于系统），启动Windows的任何文件、链接，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
 - **键盘监听** - 显示按键状态，继承自[KeyMonitor](https://github.com/Pfolg/KeyMonitor)

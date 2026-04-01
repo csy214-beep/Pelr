@@ -50,6 +50,7 @@ lib/
 *.app
 *.7z
 *.zip
+*.tmp
 
 # log/cache files
 log
