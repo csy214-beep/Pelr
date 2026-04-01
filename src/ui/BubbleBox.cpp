@@ -54,7 +54,7 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
     font.setWeight(50);
     // font.setItalic(true);
     setFont(font);
-    QString foreColor = DataManager::instance().getBasicData().color_bubble.second;
+    QString foreColor = DataManager::instance().getBasicData().color_bubble.forground;
     if (foreColor.isEmpty()) {
         foreColor = "rgba(255, 255, 255, 0.8)";
     }
@@ -97,7 +97,7 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
 void BubbleBox::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing); // 抗锯齿
-    QString color = DataManager::instance().getBasicData().color_bubble.first;
+    QString color = DataManager::instance().getBasicData().color_bubble.background;
     QColor backgroundColor(color);
     backgroundColor = !backgroundColor.isValid() ? QColor(37, 153, 236, 219) : backgroundColor;
     // 绘制半透明圆角矩形背景

@@ -46,8 +46,12 @@ ConfigData SettingWidget::getAllValues() {
     data.RandomInterval.first = ui->spinBox->value();
     data.RandomInterval.second = ui->spinBox_2->value();
     // basic color
-    data.color_bubble.first = ui->lineEdit_9->text();
-    data.color_bubble.second = ui->lineEdit_10->text();
+    data.color_bubble.background = ui->label_24->text(); // ARGB
+    data.color_bubble.forground = ui->label_25->text();
+    // tray
+    data.color_tray.forground = ui->label_34->text();
+    data.color_tray.background = ui->label_35->text();
+    data.music_tray_symbol = ui->lineEdit_9->text().isEmpty() ? "♫" : ui->lineEdit_9->text();
 
     //bool
     data.isStartUp = ui->checkBox->isChecked();
@@ -128,11 +132,18 @@ void SettingWidget::setAllValues(const ConfigData &data) {
     ui->spinBox_2->setValue(data.RandomInterval.second);
     ui->comboBox_3->setCurrentIndex(static_cast<int>(getLogLevel()));
     // color
-    ui->lineEdit_9->setText(data.color_bubble.first);
-    ui->label_24->setStyleSheet("background-color: " + data.color_bubble.first + ";");
-    ui->lineEdit_10->setText(data.color_bubble.second);
-    ui->label_25->setStyleSheet("color: " + data.color_bubble.second + ";");
-
+    ui->label_24->setStyleSheet(
+        QString("background-color: %1;color: %2;").arg(data.color_bubble.background).arg(data.color_bubble.forground));
+    ui->label_24->setText(data.color_bubble.background);
+    ui->label_25->setStyleSheet(
+        QString("background-color: %1;color: %2;").arg(data.color_bubble.background).arg(data.color_bubble.forground));
+    ui->label_25->setText(data.color_bubble.forground);
+    // tray
+    ui->label_34->setStyleSheet(QString("color: %1;").arg(data.color_tray.forground));
+    ui->label_35->setStyleSheet(QString("color: %1;").arg(data.color_tray.background));
+    ui->label_34->setText(data.color_tray.forground);
+    ui->label_35->setText(data.color_tray.background);
+    ui->lineEdit_9->setText(data.music_tray_symbol);
     //bool
     ui->checkBox->setChecked(data.isStartUp);
     if (checkStartupLink()) {
@@ -241,11 +252,38 @@ void SettingWidget::connectSignals() {
     });
     connect(ui->comboBox_3, &QComboBox::currentTextChanged, this, &SettingWidget::onLogLevelChanged);
     //color
-    connect(ui->lineEdit_9, &QLineEdit::returnPressed, [&]() {
-        selectColor(ui->label_24, ui->lineEdit_9);
+    connect(ui->pushButton_17, &QPushButton::clicked, [&]() {
+        //bg
+        QString color = selectColor();
+        if (color.isEmpty())return;
+        ui->label_24->setText(color);
+        ui->label_24->setStyleSheet(
+            QString("background-color: %1;color: %2;").arg(color).arg(ui->label_25->text()));
+        ui->label_25->setStyleSheet(
+            QString("background-color: %1;color: %2;").arg(color).arg(ui->label_25->text()));
     });
-    connect(ui->lineEdit_10, &QLineEdit::returnPressed, [&]() {
-        selectColor(ui->label_25, ui->lineEdit_10, false);
+    connect(ui->pushButton_18, &QPushButton::clicked, [&]() {
+        // fg
+        QString color = selectColor();
+        if (color.isEmpty())return;
+        ui->label_25->setText(color);
+        ui->label_24->setStyleSheet(
+            QString("background-color: %1;color: %2;").arg(ui->label_24->text()).arg(color));
+        ui->label_25->setStyleSheet(
+            QString("background-color: %1;color: %2;").arg(ui->label_24->text()).arg(color));
+    });
+    // tray
+    connect(ui->pushButton_19, &QPushButton::clicked, [&]() {
+        QString color = selectColor();
+        if (color.isEmpty())return;
+        ui->label_34->setText(color);
+        ui->label_34->setStyleSheet(QString("color: %1;").arg(color));
+    });
+    connect(ui->pushButton_20, &QPushButton::clicked, [&]() {
+        QString color = selectColor();
+        if (color.isEmpty())return;
+        ui->label_35->setText(color);
+        ui->label_35->setStyleSheet(QString("color: %1;").arg(color));
     });
     //bool
     connect(ui->checkBox, &QCheckBox::clicked, [&]() {
@@ -448,7 +486,7 @@ void SettingWidget::onCheckBox1Clicked(const bool flag) {
     }
 }
 
-void SettingWidget::selectColor(QLabel *label, QLineEdit *line, bool isBackground) {
+QString SettingWidget::selectColor() {
     // 创建颜色选择对话框
     QColorDialog dialog;
     dialog.setOption(QColorDialog::ShowAlphaChannel, true); // 启用透明度选项
@@ -459,13 +497,9 @@ void SettingWidget::selectColor(QLabel *label, QLineEdit *line, bool isBackgroun
         QColor selectedColor = dialog.currentColor();
         QString colorStr = selectedColor.name(QColor::HexArgb);
         qDebug() << "chose color: " << colorStr;
-        if (isBackground) {
-            label->setStyleSheet("background-color: " + colorStr + ";");
-        } else {
-            label->setStyleSheet("color: " + colorStr + ";");
-        }
-        line->setText(colorStr);
+        return colorStr;
     }
+    return "";
 }
 
 void SettingWidget::onVersionCheckCompleted(bool isMatch, const QString &message) {

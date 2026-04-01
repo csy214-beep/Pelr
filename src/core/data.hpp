@@ -19,7 +19,7 @@
 #include <QList>
 #include <QMessageBox>
 #include <QDebug>
-#include  <QFontDatabase>
+#include <QFontDatabase>
 #include "ollamaclient.h"
 #include <QJsonObject>
 #include <QJsonParseError>
@@ -32,17 +32,33 @@
 
 #define VERSION "20260219.11b" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 // todo: 多语言支持 非紧急
-// todo: 音乐托盘颜色/符号设置项
+
+struct colorPair {
+    QString forground;
+    QString background;
+
+    friend QDataStream &operator<<(QDataStream &out, const colorPair &data) {
+        out << data.forground << data.background;
+        return out;
+    }
+
+    friend QDataStream &operator>>(QDataStream &in, colorPair &data) {
+        in >> data.forground >> data.background;
+        return in;
+    }
+};
 
 struct ConfigData {
-    //basic
+    // basic
     QString model_path;
     int model_size = 150;
     int FPS = 30;
     int volume = 50;
-    QPair<QString, QString> color_bubble;
+    colorPair color_bubble = {"#FFFFFFCC", "#0c9beef3"}; // 白+蓝
+    colorPair color_tray = {"#002fff", "#ff0000"}; // 静默：蓝；活动：红
     QPair<int, int> RandomInterval = {10, 25};
-    //bool
+    QString music_tray_symbol = "♫";
+    // bool
     bool isStartUp = false;
     bool isListening = false;
     bool isLookingMouse = true;
@@ -56,18 +72,18 @@ struct ConfigData {
     bool isRecordWindowLocation = false;
     bool isMusicIcon = false;
 
-    //ollama
+    // ollama
     QString model;
     OllamaClient::Role role = OllamaClient::DefaultCoder;
     QString customRoleDesc;
-
 
     // 重载运算符以便使用QDataStream进行序列化
     friend QDataStream &operator<<(QDataStream &out, const ConfigData &data) {
         out << data.model_path << data.model_size << data.FPS << data.volume;
 
         // 分别序列化 QPair 的 first 和 second
-        out << data.color_bubble.first << data.color_bubble.second;
+        out << data.color_bubble;
+        out << data.color_tray << data.music_tray_symbol;
         out << data.RandomInterval.first << data.RandomInterval.second;
 
         out << data.isStartUp << data.isListening << data.isLookingMouse
@@ -83,13 +99,14 @@ struct ConfigData {
         in >> data.model_path >> data.model_size >> data.FPS >> data.volume;
 
         // 分别反序列化 QPair 的 first 和 second
-        in >> data.color_bubble.first >> data.color_bubble.second;
+        in >> data.color_bubble;
+        in >> data.color_tray >> data.music_tray_symbol;
         in >> data.RandomInterval.first >> data.RandomInterval.second;
 
-        in >> data.isStartUp >> data.isListening >> data.isLookingMouse
-                >> data.isStartStar >> data.isRandomSpeech >> data.isSaying
-                >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm
-                >> data.isSilentBoot >> data.isRecordWindowLocation >> data.isMusicIcon;
+        in >> data.isStartUp >> data.isListening >> data.isLookingMouse >> data.isStartStar >> data.isRandomSpeech >>
+                data.isSaying >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm >> data.isSilentBoot >> data
+                .isRecordWindowLocation >>
+                data.isMusicIcon;
 
         in >> data.model >> data.role >> data.customRoleDesc;
         return in;
@@ -100,18 +117,18 @@ struct constConfigData {
     const QString openai_edge_tts_github = "https://github.com/travisvn/openai-edge-tts";
     const QString openai_edge_tts_Voice_Samples = "https://tts.travisvn.com/";
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
-    const QString tts_server = "tts_server.exe"; //local path
+    const QString tts_server = "tts_server.exe"; // local path
     const QString ollama_url = "https://ollama.com/";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
-    //about
+    // about
     const QString version = VERSION;
     const QString name = "Pelr";
     const QString repo_owner = "Pfolg";
     const QString team_link = "https://gitee.com/Pfolg/Pelr/contributors?ref=master";
     const QString website_link = "https://gitee.com/Pfolg/Pelr";
     const QString feedback_link = "https://gitee.com/Pfolg/Pelr/issues";
-    const QString textFile = "user\\text.json"; //local path
-    const QString VoiceFolder = "voice_files"; //local path
+    const QString textFile = "user\\text.json"; // local path
+    const QString VoiceFolder = "voice_files"; // local path
 };
 
 struct TodoData {
@@ -175,7 +192,7 @@ struct ToDoSettingData {
 };
 
 struct TTSConfig {
-    //TTS
+    // TTS
     int provider = 0; // 0: openai_edge_tts; 1: iFlytek
     // openai_edge_tts
     QString speaker_openai_edge_tts = "zh-CN-XiaoxiaoNeural";
@@ -221,7 +238,6 @@ public:
     QFont _font = loadFont();
     const QString Project_Name = "Pelr";
 
-
     static DataManager &instance() {
         static DataManager instance;
         return instance;
@@ -236,7 +252,6 @@ public:
         readTTSConfig();
         return tts_config;
     }
-
 
     ToDoSettingData getTodoSetting() {
         readTodoNotify();
@@ -273,7 +288,6 @@ public:
         file.close();
     }
 
-
     static void writeTTSConfig(const TTSConfig &ttsc) {
         QJsonObject json_object;
         json_object.insert("provider", ttsc.provider);
@@ -295,7 +309,6 @@ public:
         file.write(json_doc.toJson());
         file.close();
     }
-
 
     template<typename T>
     void writeData(const T &data) {
@@ -466,7 +479,6 @@ protected:
         file.close();
         todo_data = _todo_data;
     }
-
 
     static QFont loadFont() {
         QString boldFontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";

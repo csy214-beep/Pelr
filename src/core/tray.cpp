@@ -255,13 +255,13 @@ QPixmap TrayIcon::createMusicIcon() const {
 
     // 根据旋转状态改变颜色
     if (m_rotating) {
-        painter.setPen(Qt::red); // 有音频
+        painter.setPen(QColor(DataManager::instance().getBasicData().color_tray.background)); // 有音频
     } else {
-        painter.setPen(Qt::blue); // 蓝色
+        painter.setPen(QColor(DataManager::instance().getBasicData().color_tray.forground)); // 无音频
     }
 
     // 绘制音乐符号
-    painter.drawText(pixmap.rect(), Qt::AlignCenter, "♫");
+    painter.drawText(pixmap.rect(), Qt::AlignCenter, DataManager::instance().getBasicData().music_tray_symbol);
 
     return pixmap;
 }

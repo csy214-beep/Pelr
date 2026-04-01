@@ -56,7 +56,7 @@ private slots:
 
     void selectModelPath();
 
-    void selectColor(QLabel *label, QLineEdit *line, bool isBackground = true);
+    QString selectColor();
 
     void resetSetting();
 
