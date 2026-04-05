@@ -225,6 +225,9 @@
              <property name="text">
               <string>下限</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
             </widget>
            </item>
            <item>
@@ -241,6 +244,9 @@
             <widget class="QLabel" name="label_30">
              <property name="text">
               <string>上限</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -457,7 +463,7 @@
        <item>
         <widget class="QToolBox" name="toolBox">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="geometry">
@@ -465,7 +471,7 @@
             <x>0</x>
             <y>0</y>
             <width>912</width>
-            <height>224</height>
+            <height>234</height>
            </rect>
           </property>
           <attribute name="label">
@@ -534,6 +540,19 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="1">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="page_2">
@@ -541,8 +560,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>318</width>
-            <height>221</height>
+            <width>912</width>
+            <height>261</height>
            </rect>
           </property>
           <attribute name="label">
@@ -590,31 +609,13 @@
             <widget class="QLineEdit" name="lineEdit_5"/>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_18">
-             <property name="text">
-              <string>启动</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="pushButton_14">
-             <property name="text">
-              <string>启动讯飞TTS服务端</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
             <widget class="QLabel" name="label_14">
              <property name="text">
               <string>获取API</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="4" column="1">
             <widget class="QPushButton" name="pushButton_3">
              <property name="text">
               <string>讯飞开放平台 在线语音合成</string>
@@ -625,60 +626,53 @@
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
           </layout>
          </widget>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_2" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+        <widget class="QWidget" name="widget_4" native="true">
+         <layout class="QFormLayout" name="formLayout_5">
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_14">
+            <property name="text">
+             <string>启动 TTS 服务端</string>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
+            <property name="icon">
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</iconset>
             </property>
-           </spacer>
+           </widget>
           </item>
-          <item>
+          <item row="2" column="1">
            <widget class="QCheckBox" name="checkBox_13">
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
             <property name="text">
              <string>连接失败尝试启动TTS服务端</string>
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_4"/>
         </widget>
        </item>
       </layout>
@@ -738,7 +732,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QPlainTextEdit" name="plainTextEdit"/>
+        <widget class="QPlainTextEdit" name="plainTextEdit">
+         <property name="placeholderText">
+          <string>在此输入提示词</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

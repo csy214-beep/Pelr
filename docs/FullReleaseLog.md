@@ -7,30 +7,40 @@
 
 [//]: # ([![Release History]&#40;https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white&#41;]&#40;https://gitee.com/Pfolg/Pelr/blob/master/docs/FullReleaseLog.md&#41;)
 
-## 20260219.11.17
-
-### 更新内容
-
-1. feat(setting): 音乐托盘颜色/符号设置项，优化气泡颜色设置逻辑
-1. feat(TTS): 新增openai_edge_tts语音合成引擎
-1. refactor(ui): 控制界面响应式布局
-1. feat(tray): 打开用户文件夹的选项
-1. fix(BubbleBox):启动时显示计划外的时间气泡消息
-1. feat(BubbleBox): 语句文件模块重构
-1. refactor: 重构src目录结构
-1. fix(Window): 在显示窗口时尝试提升窗口到最前
-1. feat(TTS): 【CheckBox】连接失败尝试启动TTS服务端及相关配置与逻辑
-1. fix(KeyLabel): 添加符号与键间空格
-1. refactor/feat(KeyLabel): 重构按键监听功能
-1. fix(README): 错别字修正
-1. style: 启动线程提醒弹窗标题优化
-1. fix(keyLabel): 按键提示逻辑优化
-1. feat: Star 线程启动与非启动提示
-1. fix: 检查更新弹窗逻辑优化
-1. refactor: 重命名项目为：由PLauncher改为Pelr
+## v20260219.11.17 - 2026-04-01
 
 > [!CAUTION]
-> 不兼容的文件：`configData.dat` 基本配置文件；`ttsConfig.json`虽兼容但需重新配置。
+> **不兼容变更**
+> - `configData.dat` 基本配置文件不兼容，需重新配置
+> - `ttsConfig.json` 虽兼容但建议重新配置以确保最佳体验
+
+### ✨ 新增
+
+- 音乐托盘支持颜色/符号自定义设置，优化气泡颜色逻辑
+- 新增 `openai_edge_tts` 语音合成引擎
+- 托盘菜单增加“打开用户文件夹”选项
+- TTS 连接失败时自动尝试启动服务端，并增加相关配置
+
+### 🔧 优化
+
+- 控制界面适配响应式布局
+- 重构语句文件模块，提升气泡消息稳定性
+- 重构按键监听功能，优化按键提示体验
+- 窗口显示时尝试提升至最前
+- 启动线程弹窗标题及检查更新弹窗逻辑优化
+
+### 🐛 修复
+
+- 修复启动时意外显示计划外时间气泡的问题
+- 修复按键标签中符号与键间缺少空格的问题
+- README 错别字修正
+
+### 📁 重构
+
+- 项目重命名为 **Pelr**（原 PLauncher）
+- 重构 src 目录结构
+
+**完整的更新日志**: [查看详情](https://gitee.com/Pfolg/Pelr/compare/20260107.10.16...20260219.11.17)
 
 ## 20260107.10.16
 
