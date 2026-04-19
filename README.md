@@ -1,12 +1,15 @@
-# Pelr - Live2D 虚拟桌面伙伴
+# Pelr - 工具向桌宠
 
 [![star](https://gitee.com/Pfolg/Pelr/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/Pelr/stargazers) [![fork](https://gitee.com/Pfolg/Pelr/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/Pelr/members)
 
-![LICENSE](https://img.shields.io/badge/LICENSE-GPLv3-yellow.svg) ![Live2D](https://img.shields.io/badge/Field-Live2D-pink.svg) ![OS](https://img.shields.io/badge/OS-Windows-blue.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Python/python3.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Flask/flask1.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceGPLv3/licencegplv32.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Windows/windows1.svg)
 
-**Pelr** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
-
-
+**Pelr** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动、TODO功能和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
 
 > [!NOTE]
 >
@@ -30,6 +33,7 @@
 - **智能对话** - 集成 Ollama AI，支持自然语言交互
 - **表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
 - **语音合成** - 内置OpenAI-Edge-TTS、讯飞 TTS 服务，提供高质量的语音反馈
+- **TODO功能** - 简单的TODO系统，可以添加事件，并提醒待办
 - **启动管理** -
   可视化管理启动应用程序（内置功能，别于系统），启动Windows的任何文件、链接，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
 - **键盘监听** - 显示按键状态，继承自[KeyMonitor](https://github.com/Pfolg/KeyMonitor)
@@ -39,19 +43,33 @@
 
 更多功能待开发...
 
-尚不支持的功能（未来也不一定会支持）：
+### 尚不支持的功能
+
+> 未来也不一定会支持
 
 - 唇形同步
 - 运行系统命令
 - 快捷键
 - 热加载用户配置
 
+### TODO
+
+> 时间尚不充裕，择机编写
+
+- pmx支持(计划引入：benikabocha/saba)
+- 将输出翻译成指定语言后再TTS(可能通过Qt设置，Python实现)
+- 多API检查更新支持(GitHub, Gitee, SourceForge, 自建网站)
+- 多语言支持(低优先级)
+
 ### 预览
 
+<details>
+<summary>点击预览</summary>
 <div style="display: flex; overflow-x: auto; gap: 10px; padding: 10px; background: #f5f5f5; border-radius: 8px;">
   <img src="repo_assets/preview1.png" alt="preview1" style="width: 49%; height: auto; flex-shrink: 0; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
   <img src="repo_assets/preview2.png" alt="preview2" style="width: 49%; height: auto; flex-shrink: 0; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
 </div>
+</details>
 
 ## 系统要求
 
@@ -98,6 +116,9 @@
 
 ## 项目结构
 
+<details>
+<summary>点击查看项目结构</summary>
+
 ```txt
 Pelr/
 ├── CMakeLists.txt          # C++ 项目构建配置
@@ -135,6 +156,8 @@ Pelr/
 ├── requirements.txt        # Python 依赖清单
 └── tts_server/             # Python TTS 服务端
 ```
+
+</details>
 
 > [!NOTE]
 >
@@ -226,13 +249,14 @@ Pelr/
 
 ## 致谢
 
-[wikis-IMPORTANT](https://gitee.com/Pfolg/Pelr/wikis/IMPORTANT)
+[WIKIS-IMPORTANT](https://gitee.com/Pfolg/Pelr/wikis/IMPORTANT)
 
 感谢以下项目和社区的支持：
 
 - [Live2D Cubism](https://www.live2d.com/) - 提供出色的 2D 动画技术
 - [Qt 框架](https://www.qt.io/) - 强大的跨平台开发框架
-- [Ollama](https://ollama.ai/) - 本地 AI 模型部署
+- [llama](https://github.com/ggml-org/llama.cpp) - 本地 AI 模型部署
+- [openai-edge-tts](https://github.com/travisvn/openai-edge-tts) - 以OpenAI兼容的方式调用EdgeTTS
 - 讯飞开放平台 - 高质量的语音合成服务
 - 所有贡献者和用户的支持
 
