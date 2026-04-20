@@ -27,6 +27,7 @@
 #include "tray.h"
 #include "NotificationWidget.h"
 #include "loadText.h"
+#include "UpdateDialog.h"
 
 ConfigData SettingWidget::getAllValues() {
     ConfigData data;
@@ -347,10 +348,10 @@ void SettingWidget::connectSignals() {
     connect(ui->pushButton_10, &QPushButton::clicked, [&]() {
         m_versionChecker->checkVersionMatch(DataManager::instance().const_config_data.version);
     });
-    connect(m_versionChecker, &VersionChecker::versionCheckCompleted,
-            this, &SettingWidget::onVersionCheckCompleted);
-    connect(m_versionChecker, &VersionChecker::errorOccurred,
-            this, &SettingWidget::onVersionCheckError);
+    connect(m_versionChecker, &VersionChecker::versionCheckResult, this, [this](const VersionCheckSummary &summary) {
+        UpdateDialog dialog(summary, this);
+        dialog.exec();
+    });
 }
 
 QSlider *SettingWidget::getHorizontalSlider() {
@@ -500,24 +501,6 @@ QString SettingWidget::selectColor() {
         return colorStr;
     }
     return "";
-}
-
-void SettingWidget::onVersionCheckCompleted(bool isMatch, const QString &message) {
-    NotificationWidget::MessageType type;
-    if (isMatch) {
-        // 版本一致的处理
-        type = NotificationWidget::MessageType::Information;
-    } else {
-        // 版本不一致的处理
-        type = NotificationWidget::MessageType::Warning;
-    }
-    NotificationWidget::showNotification(tr("Information"), message, 5000, type,
-                                         []() { launchByPath("https://gitee.com/Pfolg/Pelr/releases"); });
-}
-
-void SettingWidget::onVersionCheckError(const QString &errorMessage) {
-    NotificationWidget::showNotification(tr("Warning"), errorMessage, 5000, NotificationWidget::MessageType::Critical,
-                                         []() { launchByPath("https://gitee.com/Pfolg/Pelr/releases"); });
 }
 
 void SettingWidget::onLogLevelChanged() {

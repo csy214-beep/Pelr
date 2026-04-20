@@ -30,8 +30,11 @@
 #define TTS_CONFIG_FILE "user/ttsConfig.json"
 #define OPEN_WEATHER_FILE "user/openWeather.json"
 
-#define VERSION "20260405.12b" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
+#define VERSION "20260405.12-dev" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 // todo: 多语言支持 非紧急
+// todo: pmx支持
+// todo: 将输出翻译成指定语言后再TTS
+// todo: 多API检查更新支持
 
 struct colorPair {
     QString forground;
@@ -122,8 +125,10 @@ struct constConfigData {
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     // about
     const QString version = VERSION;
-    const QString name = "Pelr";
-    const QString repo_owner = "Pfolg";
+    const QString Gitee_repo_owner = "Pfolg";
+    const QString Gitee_repo_name = "Pelr";
+    const QString Github_repo_owner = "csy214-beep";
+    const QString Github_repo_name = "Pelr";
     const QString team_link = "https://gitee.com/Pfolg/Pelr/contributors?ref=master";
     const QString website_link = "https://gitee.com/Pfolg/Pelr";
     const QString feedback_link = "https://gitee.com/Pfolg/Pelr/issues";

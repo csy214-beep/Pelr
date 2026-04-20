@@ -131,7 +131,7 @@ TrayIcon::TrayIcon(QObject *parent)
     : QSystemTrayIcon(parent) {
     setIcon(m_appIcon);
     setToolTip(
-        DataManager::instance().const_config_data.name + " "
+        DataManager::instance().Project_Name + " "
         + DataManager::instance().const_config_data.version
     );
 

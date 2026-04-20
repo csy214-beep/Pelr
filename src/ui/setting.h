@@ -62,10 +62,6 @@ private slots:
 
     void onCheckBox1Clicked(bool flag = false);
 
-    void onVersionCheckCompleted(bool isMatch, const QString &message);
-
-    void onVersionCheckError(const QString &errorMessage);
-
     void onLogLevelChanged();
 
 private:
