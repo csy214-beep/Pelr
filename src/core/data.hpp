@@ -34,7 +34,6 @@
 // todo: 多语言支持 非紧急
 // todo: pmx支持
 // todo: 将输出翻译成指定语言后再TTS
-// todo: 多API检查更新支持
 
 struct colorPair {
     QString forground;

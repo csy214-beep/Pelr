@@ -7,6 +7,13 @@
 
 [//]: # ([![Release History]&#40;https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white&#41;]&#40;https://gitee.com/Pfolg/Pelr/blob/master/docs/FullReleaseLog.md&#41;)
 
+## v20260405.12-dev
+
+1. refactor: 启动菜单布局优化，避免误触
+1. feat: 多API检查更新支持
+1. refactor: 托盘样式逻辑
+1. refactor: 设置页面TTS页布局
+
 ## v20260219.11.17 - 2026-04-01
 
 > [!CAUTION]
