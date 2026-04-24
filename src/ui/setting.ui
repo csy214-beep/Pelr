@@ -470,8 +470,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>912</width>
-            <height>234</height>
+            <width>227</width>
+            <height>154</height>
            </rect>
           </property>
           <attribute name="label">
@@ -561,7 +561,7 @@
             <x>0</x>
             <y>0</y>
             <width>912</width>
-            <height>261</height>
+            <height>234</height>
            </rect>
           </property>
           <attribute name="label">
@@ -930,7 +930,7 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QTextEdit" name="textEdit">
+        <widget class="QTextBrowser" name="textBrowser">
          <property name="html">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;

@@ -195,10 +195,11 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         in.setCodec("UTF-8"); // 设置编码为 UTF-8
         QString content = in.readAll();
         file.close();
-        ui->textEdit->setMarkdown(
+        ui->textBrowser->setMarkdown(
             "### Pelr " + DataManager::instance().const_config_data.version + "\n\n" + content);
     }
-    ui->textEdit->setReadOnly(true);
+    ui->textBrowser->setReadOnly(true);
+    ui->textBrowser->setOpenExternalLinks(true);
     // 初始化日志等级选择
     struct LogLevelItem {
         QString text;

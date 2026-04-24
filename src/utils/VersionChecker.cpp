@@ -131,7 +131,6 @@ void VersionChecker::checkByGithub(const QString &owner, const QString &repo) {
 }
 
 void VersionChecker::checkByPelr() {
-    // TODO: 替换为实际自建 API URL
     SourceCheckResult result;
     result.sourceName = "Pelr";
     result.url = "https://pg25-lsae.eu.org/api/pelr/latest.json";

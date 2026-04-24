@@ -9,6 +9,7 @@
 
 ## v20260405.12-dev
 
+1. feat: 通知提示音 & refactor: About: markdown textBrowser->setOpenExternalLinks(true);
 1. refactor: 启动菜单布局优化，避免误触
 1. feat: 多API检查更新支持
 1. refactor: 托盘样式逻辑

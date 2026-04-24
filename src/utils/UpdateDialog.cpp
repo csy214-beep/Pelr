@@ -18,6 +18,7 @@
 #include <QUrl>
 #include <QMessageBox>
 #include "NotificationWidget.h"
+#include <iostream>
 
 UpdateDialog::UpdateDialog(const VersionCheckSummary &summary, QWidget *parent)
     : QDialog(parent), m_summary(summary) {
@@ -42,6 +43,8 @@ UpdateDialog::UpdateDialog(const VersionCheckSummary &summary, QWidget *parent)
         updateDetailsForSource(m_successfulSources.first());
         m_sourceComboBox->setCurrentIndex(0);
     }
+    // 提示音效
+    std::cout << "\a";
 }
 
 UpdateDialog::~UpdateDialog() {
