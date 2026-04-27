@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -61,10 +61,6 @@ private slots:
     void resetSetting();
 
     void onCheckBox1Clicked(bool flag = false);
-
-    void onVersionCheckCompleted(bool isMatch, const QString &message);
-
-    void onVersionCheckError(const QString &errorMessage);
 
     void onLogLevelChanged();
 

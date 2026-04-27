@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -146,7 +146,7 @@ void GLCore::switchWindowTransparent(bool transparent) {
     // 应用新的标志
     windowHandle->setFlags(currentFlags);
 
-    // 建议调用 update() 来请求重绘，而不是 hide()/show():cite[3]:cite[5]
+    // 建议调用 update() 来请求重绘，而不是 hide()/show()
     this->update();
 }
 
@@ -374,16 +374,16 @@ void GLCore::switchListener() {
         if (!isHidden())
             BubbleBox::instance()->textSet(msg);
         qDebug() << msg;
-        TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, false);
         overlay->hide();
+        TrayIcon::instance()->action_keyListener->setChecked(false);
     } else {
         listener->startListening();
         QString msg = "key listening enabled";
         if (!isHidden())
             BubbleBox::instance()->textSet(msg);
         qDebug() << msg;
-        TrayIcon::instance()->switchText(TrayIcon::instance()->action_keyListener, true);
         overlay->show();
+        TrayIcon::instance()->action_keyListener->setChecked(true);
     }
 }
 
@@ -409,6 +409,7 @@ void GLCore::silentMode() {
         qDebug() << "silent mode on";
         isSilentMode = true;
     }
+    TrayIcon::instance()->action_silentMode->setChecked(isSilentMode);
 }
 
 void GLCore::onAskWeather() {
@@ -485,12 +486,11 @@ void GLCore::runStarIfPowered() {
 
 void GLCore::switchDragStatus() {
     isAllowDrag = !isAllowDrag;
-    if (isAllowDrag) {
-        qDebug() << "drag enabled";
-    } else {
-        qDebug() << "drag disabled";
-        switchWindowTransparent(true);
-    }
+    QString msg;
+    msg = isAllowDrag ? "drag enabled" : "drag disabled";
+    qDebug() << msg;
+    switchWindowTransparent(isAllowDrag);
+    TrayIcon::instance()->action_switchDrag->setChecked(!isAllowDrag);
 }
 
 void GLCore::checkFocus() {

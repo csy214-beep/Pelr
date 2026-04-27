@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -131,7 +131,7 @@ TrayIcon::TrayIcon(QObject *parent)
     : QSystemTrayIcon(parent) {
     setIcon(m_appIcon);
     setToolTip(
-        DataManager::instance().const_config_data.name + " "
+        DataManager::instance().Project_Name + " "
         + DataManager::instance().const_config_data.version
     );
 
@@ -150,11 +150,18 @@ TrayIcon::TrayIcon(QObject *parent)
     action_silentMode = new QAction(tr("静默模式"), this);
     action_switchDrag = new QAction(tr("锁定位置"), this);
     action_mediaPlayer = new QAction(tr("播放媒体"), this);
-    QAction *action_openDirPath = new QAction(tr("打开程序文件夹"), this);
-    QAction *action_openUserPath = new QAction(tr("打开用户文件夹"), this);
+
     action_quit = new QAction(tr("退出程序"), this);
     action_keyListener = new QAction(tr("按键监听"), this);
 
+    action_silentMode->setCheckable(true);
+    action_switchDrag->setCheckable(true);
+    action_keyListener->setCheckable(true);
+
+    QMenu *MenuOpen = new CustomMenu(tr("打开"), menu);
+
+    QAction *action_openDirPath = new QAction(tr("程序文件夹"), MenuOpen);
+    QAction *action_openUserPath = new QAction(tr("用户文件夹"), MenuOpen);
     // 连接信号和槽
     // 打开程序文件夹
     connect(action_openDirPath, &QAction::triggered, []() {
@@ -167,14 +174,6 @@ TrayIcon::TrayIcon(QObject *parent)
         const QString userDir = appDir.append("/user");
         launchByPath(userDir);
     });
-    connect(action_silentMode, &QAction::triggered, [this]() {
-        m_silentMode = !m_silentMode;
-        switchText(action_silentMode);
-    });
-
-    connect(action_switchDrag, &QAction::triggered, [this]() {
-        switchText(action_switchDrag);
-    });
 
     QAction *action_startApp = new QAction("启动项目", this);
     action_startApp->setMenu(launcherMenu::instance());
@@ -184,12 +183,14 @@ TrayIcon::TrayIcon(QObject *parent)
         menu->addAction(action_startApp);
         menu->addSeparator();
     }
-
     menu->addActions({
-        action_resetWinLoc, action_silentMode, action_switchDrag,
+        action_silentMode, action_switchDrag,
         action_keyListener,
-        action_showWin, action_mediaPlayer, action_openUserPath, action_openDirPath
+        action_showWin, action_resetWinLoc, action_mediaPlayer
     });
+    MenuOpen->addActions({action_openUserPath, action_openDirPath});
+    menu->addSeparator();
+    menu->addMenu(MenuOpen);
     menu->addSeparator();
     menu->addAction(action_quit);
 
@@ -200,26 +201,6 @@ TrayIcon::TrayIcon(QObject *parent)
     // 显示托盘图标
     this->show();
     switchMusicIcon(DataManager::instance().getBasicData().isMusicIcon);
-}
-
-void TrayIcon::switchText(QAction *action) {
-    QString text = action->text();
-    if (text.contains("* ")) {
-        action->setText(text.replace("* ", ""));
-    } else {
-        action->setText("* " + text);
-    }
-}
-
-void TrayIcon::switchText(QAction *action, bool flag) {
-    QString text = action->text();
-    const bool st = text.contains("* ");
-    if (st && !flag) {
-        action->setText(text.replace("* ", ""));
-    }
-    if (!st && flag) {
-        action->setText("* " + text);
-    }
 }
 
 void TrayIcon::initializeAudioDetector() {

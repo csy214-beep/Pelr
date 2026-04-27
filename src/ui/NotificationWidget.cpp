@@ -225,6 +225,7 @@ void NotificationWidget::showNotificationInternal(
     update();
 
     // 显示窗口（无动画）
+    std::cout << "\a"; // 提示音效
     show();
     raise();
     activateWindow();
@@ -233,9 +234,6 @@ void NotificationWidget::showNotificationInternal(
     if (duration > 0) {
         m_hideTimer->start(duration);
     }
-
-    // 提示音效
-    std::cout << "\a";
 }
 
 void NotificationWidget::paintEvent(QPaintEvent *event) {

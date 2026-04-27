@@ -1,6 +1,6 @@
 # Pelr - 工具向桌宠
 
-[![star](https://gitee.com/Pfolg/Pelr/badge/star.svg?theme=gray)](https://gitee.com/Pfolg/Pelr/stargazers) [![fork](https://gitee.com/Pfolg/Pelr/badge/fork.svg?theme=gray)](https://gitee.com/Pfolg/Pelr/members)
+[![star](https://github.com/csy214-beep/Pelr/badge/star.svg?theme=gray)](https://github.com/csy214-beep/Pelr/stargazers) [![fork](https://github.com/csy214-beep/Pelr/badge/fork.svg?theme=gray)](https://github.com/csy214-beep/Pelr/members)
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
@@ -58,8 +58,9 @@
 
 - pmx支持(计划引入：benikabocha/saba)
 - 将输出翻译成指定语言后再TTS(可能通过Qt设置，Python实现)
-- 多API检查更新支持(GitHub, Gitee, SourceForge, 自建网站)
 - 多语言支持(低优先级)
+- 系统音频提取(重构)，选择一个第三方库(kissfft)
+- 摆脱ollama依赖，采用OpenAI兼容的自定义AI接口
 
 ### 预览
 
@@ -88,11 +89,15 @@
 
 ### 下载安装
 
-1. 前往 [Release 页面](https://gitee.com/Pfolg/Pelr/releases) 下载最新版本
+1. 前往 [Release 页面](https://github.com/csy214-beep/Pelr/releases) 下载最新版本
 2. 解压压缩包到任意目录
 3. 运行 `Pelr.exe` 即可启动应用
 
 另外，囿于Gitee的release限制，您可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
+
+### 更新
+
+推荐只保留`user`文件夹，其余文件删除。
 
 ### 首次运行配置
 
@@ -108,11 +113,10 @@
 2. **配置 TTS 服务** (可选)
     - 申请[讯飞开放平台](https://www.xfyun.cn/)账号
     - 在设置 → TTS配置中填写 API 凭证
-    - 点击`启动讯飞TTS服务端`或手动运行目录下的 `tts_server.exe`
+    - 点击`启动TTS服务端`或手动运行目录下的 `tts_server.exe`
 
 3. **设置 AI 服务** (可选)
-    - 安装 [Ollama](https://ollama.ai/)
-    - 在设置 → Ollama集成中选择模型和角色
+    - 选择 OpenAI 兼容的 AI 服务 （将未来支持）
 
 ## 项目结构
 
@@ -197,7 +201,9 @@ Pelr/
 
 > [!TIP]
 >
-> 可参考[构建流程](docs/构建流程.md)
+> ~~可参考[构建流程](docs/构建流程.md)~~
+>
+> VSCode 构建正在施工中
 
 ## 使用指南
 
@@ -207,7 +213,7 @@ Pelr/
 
 > [!NOTE]
 >
->详细功能说明请参阅 [Wiki](https://gitee.com/Pfolg/Pelr/wikis)
+>详细功能说明请参阅 [Wiki](https://github.com/csy214-beep/Pelr/wikis)
 
 ### 基本操作
 
@@ -219,13 +225,13 @@ Pelr/
 
 我们欢迎各种形式的贡献！
 
-- [报告 Bug](https://gitee.com/Pfolg/Pelr/issues/new?template=bug.yml)
-- [提出新特性](https://gitee.com/Pfolg/Pelr/issues/new?template=feature.yml)
-- [编写代码](https://gitee.com/Pfolg/Pelr/pulls)
-- [提供反馈](https://gitee.com/Pfolg/Pelr/issues)
-- [问题反馈](https://gitee.com/Pfolg/Pelr/issues)
+- [报告 Bug](https://github.com/csy214-beep/Pelr/issues/new?template=bug_report.yml)
+- [提出新特性](https://github.com/csy214-beep/Pelr/issues/new?template=feature_request.yml)
+- [编写代码](https://github.com/csy214-beep/Pelr/pulls)
+- [提供反馈](https://github.com/csy214-beep/Pelr/issues)
+- [问题反馈](https://github.com/csy214-beep/Pelr/issues)
 - [项目文档](docs)
-- [帮助中心](https://help.gitee.com/)
+- [帮助中心](https://support.github.com)
 
 ## 许可证
 
@@ -234,22 +240,17 @@ Pelr/
 > 本项目基于 [GNU General Public License v3.0](https://gnu.ac.cn/licenses/gpl-3.0.html) 许可证发布。
 >
 > 详见 [LICENSE](LICENSE.md) 文件。
->
->
-
-[//]: # (> edited by Pfolg 2025.10.28)
-> 过往版本的发行版（Release）仍然遵循原许可证（MIT），但其源代码（由本项目开发者编写的部分）则采用GPLv3许可证。
 
 **注意**: 部分组件使用不同许可证：
 
 - Live2D Cubism SDK 使用[专有许可证](https://www.live2d.com/zh-CHS/sdk/download/native/)
 - Qt 框架使用 [LGPL/GPL 许可证](https://www.qt.io/development/download)
-- 其他第三方库详见 [第三方库清单](https://gitee.com/Pfolg/Pelr/wikis)
+- 其他第三方库详见 [第三方库清单](https://github.com/csy214-beep/Pelr/wikis)
 - src 文件夹内由本项目开发者编写的部分采用 GPLv3 许可证
 
 ## 致谢
 
-[WIKIS-IMPORTANT](https://gitee.com/Pfolg/Pelr/wikis/IMPORTANT)
+[WIKIS-IMPORTANT](https://github.com/csy214-beep/Pelr/wikis/IMPORTANT)
 
 感谢以下项目和社区的支持：
 
@@ -262,7 +263,7 @@ Pelr/
 
 ## 技术支持
 
-- [问题反馈](https://gitee.com/Pfolg/Pelr/issues)
-- [Wiki 文档](https://gitee.com/Pfolg/Pelr/wikis)
+- [问题反馈](https://github.com/csy214-beep/Pelr/issues)
+- [Wiki 文档](https://github.com/csy214-beep/Pelr/wikis)
 - [SUPPORT](SUPPORT.md)
 - [Security Policy](SECURITY.md)

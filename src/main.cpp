@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -27,10 +27,10 @@
 QTextStream out(stdout);
 out<< txt<< Qt::endl;
 #endif
-#define DEBUG false
+#define DEBUG true
 
-
-void initTranslator(QApplication &a, const QString &path) {
+void initTranslator(QApplication &a, const QString &path)
+{
     // 初始化翻译管理器
     TranslationManager::setApplication(&a);
 
@@ -47,13 +47,16 @@ void initTranslator(QApplication &a, const QString &path) {
 
 // 居然敢动我的屎山代码，想必你应该是做好了觉悟吧。
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
     // 初始化日志
     initLogFile();
+    // 设置控制台输出的代码页为UTF-8
+    SetConsoleOutputCP(CP_UTF8);
     // 初始化日志等级
     setLogLevel(read_log_level());
     // 确保 user 目录存在
@@ -63,8 +66,7 @@ int main(int argc, char *argv[]) {
     //  初始化随机数生成器
     std::srand(std::time(nullptr));
     QApplication app(argc, argv);
-    app.setApplicationName(DataManager::instance().const_config_data.name + " "
-                           + DataManager::instance().const_config_data.version);
+    app.setApplicationName(DataManager::instance().Project_Name + " " + DataManager::instance().const_config_data.version);
     app.setFont(DataManager::instance()._font); //整个应用程序的界面都会使用这个字体
     app.setWindowIcon(QIcon(":/assets/image/Pelr.png"));
 

@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -31,8 +31,6 @@ public:
                             QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information,
                             int timeout = 10000);
 
-    void switchText(QAction *action, bool flag);
-
     QAction *action_resetWinLoc;
     QAction *action_showWin;
     QAction *action_silentMode;
@@ -47,9 +45,6 @@ private:
     TrayIcon(QObject *parent = nullptr);
 
     ~TrayIcon();
-
-    void switchText(QAction *action);
-
 
     // 单例实例指针
     static TrayIcon *m_instance;

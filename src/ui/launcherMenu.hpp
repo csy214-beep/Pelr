@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -117,12 +117,13 @@ public:
             action_LaunchAll_Star, action_LaunchAll_App, action_LaunchAll_Link, action_LaunchAll_Scripts
         });
         //------
-        addMenu(menu_LaunchAll);
-        addSeparator();
+
         addMenu(menu_Star);
         addMenu(menu_App);
         addMenu(menu_Link);
         addMenu(menu_Scripts);
+        addSeparator();
+        addMenu(menu_LaunchAll);
         qDebug() << "menu loaded";
         hasContent = (star_count + app_count + link_count + scripts_count != 0);
     }

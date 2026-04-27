@@ -37,11 +37,18 @@ release/
 build/
 dist/
 *.spec
+*.pyc
+
 # Documentation
 test_docs
 
 # Third-party Libraries
-thirdParty/
+thirdParty/Core
+thirdParty/Framework
+thirdParty/glew
+thirdParty/glfw
+thirdParty/stb
+
 lib/
 
 # Executables
@@ -57,8 +64,8 @@ log
 voice_files
 
 # Resources
-Resources/
-SampleShaders/
-FrameworkShaders/
+Resources/*
+SampleShaders/*
+FrameworkShaders/*
 
 

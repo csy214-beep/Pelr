@@ -1,7 +1,7 @@
 # Pelr - Live2D Virtual Desktop Partner
 
-repo site: https://gitee.com/Pfolg/Pelr
-release log: https://gitee.com/Pfolg/Pelr/blob/master/docs/FullReleaseLog.md
+repo site: https://github.com/csy214-beep/Pelr
+release log: https://github.com/csy214-beep/Pelr/blob/master/docs/FullReleaseLog.md
 
 Pelr is an intelligent desktop virtual assistant based on Live2D technology, integrating AI dialogue, speech synthesis, quick launch, and personalized desktop companion features, providing you with an immersive desktop experience.
 
@@ -135,7 +135,7 @@ Pelr/
 
 **Developed using CLion, the effectiveness of the following commands is not guaranteed**
 
-git clone https://gitee.com/Pfolg/Pelr.git
+git clone https://github.com/csy214-beep/Pelr.git
 cd Pelr
 
 mkdir build && cd build
@@ -189,7 +189,7 @@ Note: Some components use different licenses:
 
 ## Acknowledgments
 
-https://gitee.com/Pfolg/Pelr/wikis/IMPORTANT
+https://github.com/csy214-beep/Pelr/wikis/IMPORTANT
 
 Thanks to the following projects and communities for their support:
 
