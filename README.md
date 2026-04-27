@@ -3,7 +3,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr)
-![GitHub license](https://img.shields.io/github/license/csy214-beep/pelr)
+[![Sync to Gitee](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml/badge.svg?branch=master)](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml)
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
