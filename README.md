@@ -225,8 +225,7 @@ Pelr/
 
 我们欢迎各种形式的贡献！
 
-- [报告 Bug](https://github.com/csy214-beep/Pelr/issues/new?template=bug_report.yml)
-- [提出新特性](https://github.com/csy214-beep/Pelr/issues/new?template=feature_request.yml)
+- [报告 Bug & 提出新特性](https://github.com/csy214-beep/Pelr/issues)
 - [编写代码](https://github.com/csy214-beep/Pelr/pulls)
 - [提供反馈](https://github.com/csy214-beep/Pelr/issues)
 - [问题反馈](https://github.com/csy214-beep/Pelr/issues)
