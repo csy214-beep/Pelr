@@ -8,7 +8,6 @@
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Python/python3.svg)
-![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Flask/flask1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceGPLv3/licencegplv32.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Windows/windows1.svg)
 
