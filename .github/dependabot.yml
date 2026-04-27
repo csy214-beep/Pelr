@@ -16,6 +16,3 @@ updates:
       - "dependencies"
     commit-message:
       prefix: "chore(deps)"
-    # 自动合并配置（需要仓库开启 auto-merge）
-    automerge: true
-    automerge-strategy: "rebase"       # 可选 merge, squash, rebase
