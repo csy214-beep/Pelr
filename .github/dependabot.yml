@@ -2,16 +2,20 @@ version: 2
 updates:
   # Python 依赖更新（使用 requirements.txt）
   - package-ecosystem: "pip"
-    directory: "/"           # requirements.txt 位于仓库根目录
+    directory: "/"                     # requirements.txt 位于仓库根目录
     schedule:
-      interval: "weekly"     # 每周检查一次更新（可选 daily, weekly, monthly）
-    groups:
-    pyside6:
-      patterns:
-        - "PySide6*"
-        - "shiboken6"
-    open-pull-requests-limit: 10   # 最多同时打开 10 个更新 PR
+      interval: "weekly"               # 每周检查一次更新
+    target-branch: "dev"               # 🔁 PR 目标分支改为 dev
+    groups:                            # 分组更新（修正缩进）
+      pyside6:
+        patterns:
+          - "PySide6*"
+          - "shiboken6"
+    open-pull-requests-limit: 10
     labels:
-      - "dependencies"       # 给 PR 打上标签，便于分类
+      - "dependencies"
     commit-message:
-      prefix: "chore(deps)"  # 提交信息前缀
+      prefix: "chore(deps)"
+    # 自动合并配置（需要仓库开启 auto-merge）
+    automerge: true
+    automerge-strategy: "rebase"       # 可选 merge, squash, rebase
