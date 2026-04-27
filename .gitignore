@@ -59,13 +59,15 @@ lib/
 *.zip
 *.tmp
 
-# log/cache files
-log
-voice_files
+
 
 # Resources
 Resources/*
 SampleShaders/*
 FrameworkShaders/*
 
+# log/cache files
+log
+voice_files
+user
 

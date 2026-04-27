@@ -321,6 +321,6 @@
     <file>assets/image/Pelr.png</file>
   </qresource>
   <qresource>
-    <file>assets/text/thirdParty.md</file>
+    <file>assets/text/CREDITS.md</file>
   </qresource>
 </RCC>

@@ -189,14 +189,14 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         ui->comboBox->addItem(item.text, static_cast<int>(item.role));
     }
     //说明
-    QFile file(":/assets/text/thirdParty.md");
+    QFile file(":/assets/text/CREDITS.md");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
         in.setCodec("UTF-8"); // 设置编码为 UTF-8
         QString content = in.readAll();
         file.close();
         ui->textBrowser->setMarkdown(
-            "### Pelr " + DataManager::instance().const_config_data.version + "\n\n" + content);
+            "# Pelr " + DataManager::instance().const_config_data.version + "\n\n" + content);
     }
     ui->textBrowser->setReadOnly(true);
     ui->textBrowser->setOpenExternalLinks(true);
