@@ -1,6 +1,9 @@
 # Pelr - 工具向桌宠
 
-[![star](https://github.com/csy214-beep/Pelr/badge/star.svg?theme=gray)](https://github.com/csy214-beep/Pelr/stargazers) [![fork](https://github.com/csy214-beep/Pelr/badge/fork.svg?theme=gray)](https://github.com/csy214-beep/Pelr/members)
+![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
+![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
+![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr)
+![GitHub license](https://img.shields.io/github/license/csy214-beep/pelr)
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
@@ -225,8 +228,7 @@ Pelr/
 
 我们欢迎各种形式的贡献！
 
-- [报告 Bug](https://github.com/csy214-beep/Pelr/issues/new?template=bug_report.yml)
-- [提出新特性](https://github.com/csy214-beep/Pelr/issues/new?template=feature_request.yml)
+- [报告 Bug & 提出新特性](https://github.com/csy214-beep/Pelr/issues)
 - [编写代码](https://github.com/csy214-beep/Pelr/pulls)
 - [提供反馈](https://github.com/csy214-beep/Pelr/issues)
 - [问题反馈](https://github.com/csy214-beep/Pelr/issues)
