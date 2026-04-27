@@ -5,7 +5,11 @@ updates:
     directory: "/"           # requirements.txt 位于仓库根目录
     schedule:
       interval: "weekly"     # 每周检查一次更新（可选 daily, weekly, monthly）
-    # 以下为推荐配置（非必需但建议添加）
+    groups:
+    pyside6:
+      patterns:
+        - "PySide6*"
+        - "shiboken6"
     open-pull-requests-limit: 10   # 最多同时打开 10 个更新 PR
     labels:
       - "dependencies"       # 给 PR 打上标签，便于分类
