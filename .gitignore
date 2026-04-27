@@ -37,6 +37,7 @@ release/
 build/
 dist/
 *.spec
+*.pyc
 
 # Documentation
 test_docs

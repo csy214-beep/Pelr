@@ -56,7 +56,7 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
     setFont(font);
     QString foreColor = DataManager::instance().getBasicData().color_bubble.forground;
     if (foreColor.isEmpty()) {
-        foreColor = "rgba(255, 255, 255, 0.8)";
+        foreColor = "#ffffffff";
     }
     setStyleSheet(
         "color: " + foreColor + ";"
@@ -99,7 +99,7 @@ void BubbleBox::paintEvent(QPaintEvent *event) {
     painter.setRenderHint(QPainter::Antialiasing); // 抗锯齿
     QString color = DataManager::instance().getBasicData().color_bubble.background;
     QColor backgroundColor(color);
-    backgroundColor = !backgroundColor.isValid() ? QColor(37, 153, 236, 219) : backgroundColor;
+    backgroundColor = !backgroundColor.isValid() ? QColor("#62afef") : backgroundColor;
     // 绘制半透明圆角矩形背景
     QRect rect = this->rect();
     painter.setBrush(backgroundColor);
