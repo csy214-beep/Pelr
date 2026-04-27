@@ -1,6 +1,9 @@
 # Pelr - 工具向桌宠
 
-[![star](https://github.com/csy214-beep/Pelr/badge/star.svg?theme=gray)](https://github.com/csy214-beep/Pelr/stargazers) [![fork](https://github.com/csy214-beep/Pelr/badge/fork.svg?theme=gray)](https://github.com/csy214-beep/Pelr/members)
+![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
+![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
+![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr)
+![GitHub license](https://img.shields.io/github/license/csy214-beep/pelr)
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
