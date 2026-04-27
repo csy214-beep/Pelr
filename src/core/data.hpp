@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -137,9 +137,9 @@ struct constConfigData
     const QString Gitee_repo_name = "Pelr";
     const QString Github_repo_owner = "csy214-beep";
     const QString Github_repo_name = "Pelr";
-    const QString team_link = "https://gitee.com/Pfolg/Pelr/contributors?ref=master";
-    const QString website_link = "https://gitee.com/Pfolg/Pelr";
-    const QString feedback_link = "https://gitee.com/Pfolg/Pelr/issues";
+    const QString team_link = "https://github.com/csy214-beep/Pelr/contributors?ref=master";
+    const QString website_link = "https://github.com/csy214-beep/Pelr";
+    const QString feedback_link = "https://github.com/csy214-beep/Pelr/issues";
     const QString textFile = "user\\text.json"; // local path
     const QString VoiceFolder = "voice_files";  // local path
 };

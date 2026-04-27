@@ -1,6 +1,6 @@
 /*
-* Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * Pelr - Live2D Virtual Desktop Partner
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *

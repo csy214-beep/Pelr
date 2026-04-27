@@ -1,6 +1,6 @@
 /*
  * Pelr - Live2D Virtual Desktop Partner
- * https://gitee.com/Pfolg/Pelr
+ * https://github.com/csy214-beep/Pelr
  * https://sourceforge.net/projects/pfolg-plauncher/
  * Copyright (c) 2025 SY Cheng
  *
@@ -30,7 +30,7 @@ public:
     static void showMessage(const QString &title, const QString &msg,
                             QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information,
                             int timeout = 10000);
-    
+
     QAction *action_resetWinLoc;
     QAction *action_showWin;
     QAction *action_silentMode;
