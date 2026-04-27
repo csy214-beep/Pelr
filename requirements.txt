@@ -6,7 +6,7 @@ attrs==26.1.0
 blinker==1.9.0
 certifi==2026.4.22
 cffi==2.0.0
-click==8.3.1
+click==8.3.3
 colorama==0.4.6
 edge-tts==7.2.8
 emoji==2.15.0
