@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Python 依赖更新（使用 requirements.txt）
+  - package-ecosystem: "pip"
+    directory: "/"           # requirements.txt 位于仓库根目录
+    schedule:
+      interval: "weekly"     # 每周检查一次更新（可选 daily, weekly, monthly）
+    # 以下为推荐配置（非必需但建议添加）
+    open-pull-requests-limit: 10   # 最多同时打开 10 个更新 PR
+    labels:
+      - "dependencies"       # 给 PR 打上标签，便于分类
+    commit-message:
+      prefix: "chore(deps)"  # 提交信息前缀
