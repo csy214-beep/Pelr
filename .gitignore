@@ -1,0 +1,17 @@
+.venv
+dist
+log
+build
+Resources
+release
+thirdParty
+SampleShaders
+tts_server
+test_docs
+voice_files
+
+FrameworkShaders
+
+lib
+gitlogue.exe
+*.spec
