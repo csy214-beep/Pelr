@@ -59,3 +59,26 @@ set(CONSOLE OFF)               # ON: 显示控制台, OFF: 隐藏控制台（GUI
 src\main.cpp：
 
 确保第30行为`#define DEBUG false`，以禁用debug模式，使得日志系统可以将日志写入文件。
+
+### Python 包管理
+
+```shell
+pip install pip-review
+# 查看可更新的包
+pip-review
+# 自动更新所有包
+pip-review --auto
+```
+
+导出所有包
+
+```shell
+pip freeze > requirements.txt
+```
+
+似乎可以导出依赖包
+
+```shell
+pip install pigar
+pigar generate
+```
