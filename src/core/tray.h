@@ -14,7 +14,10 @@
 #include <QMenu>
 #include <QAction>
 
-class TrayIcon : public QSystemTrayIcon {
+class AudioSpectrumDetector;
+
+class TrayIcon : public QSystemTrayIcon
+{
     Q_OBJECT
 
 public:
@@ -52,26 +55,22 @@ private:
     QMenu *menu;
     bool m_silentMode = false;
 
-
     QPixmap createMusicIcon() const;
 
     void initializeAudioDetector();
-
 
     bool m_rotating = false;
     int m_angle = 0;
     QTimer *m_rotateTimer;
     QTimer *m_audioCheckTimer;
     // Audio detection members
-    class AudioActivityDetector;
-    AudioActivityDetector *m_audioDetector = nullptr;
+    AudioSpectrumDetector *m_audioDetector = nullptr;
 
 public:
     void switchMusicIcon(bool flag);
 
 private slots:
     void rotateNote();
-
 
     void checkAudioActivity();
 };

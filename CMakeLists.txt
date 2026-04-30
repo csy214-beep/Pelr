@@ -93,6 +93,13 @@ qt5_create_translation(QM_FILES
         ${TRANSLATION_FILES}
 )
 
+# kissfft 库
+add_library(kissfft STATIC
+    thirdParty/kissfft/kiss_fft.c
+    thirdParty/kissfft/kiss_fftr.c
+)
+target_include_directories(kissfft PUBLIC thirdParty/kissfft)
+
 # ============================================================================
 # 头文件包含路径
 # ============================================================================
@@ -114,6 +121,7 @@ include_directories(
         thirdParty/glfw/include
         thirdParty/glfw/include/GLFW
         thirdParty/stb
+        thirdParty/kissfft
         ${CMAKE_CURRENT_BINARY_DIR}      # 存放生成的 ui_*.h 文件
 )
 
@@ -153,13 +161,14 @@ target_link_libraries(${PROJECT_NAME}
         Live2DCubismCore_d
         opengl32
         glu32
+        kissfft
+        ksuser
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
         Qt5::Network
         Qt5::OpenGL
         Qt5::SerialPort
-        Qt5::Sql
         Qt5::Svg
         Qt5::WebChannel
         Qt5::WebSockets

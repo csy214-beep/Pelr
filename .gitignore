@@ -43,13 +43,14 @@ dist/
 test_docs
 
 # Third-party Libraries
-thirdParty/Core
-thirdParty/Framework
-thirdParty/glew
-thirdParty/glfw
-thirdParty/stb
+thirdParty/Core/**
+thirdParty/Framework/**
+thirdParty/glew/**
+thirdParty/glfw/**
+thirdParty/stb/**
+thirdParty/kissfft/**
 
-lib/
+lib/**
 
 # Executables
 *.exe
@@ -62,9 +63,9 @@ lib/
 
 
 # Resources
-Resources/*
-SampleShaders/*
-FrameworkShaders/*
+Resources/**
+SampleShaders/**
+FrameworkShaders/**
 
 # log/cache files
 log

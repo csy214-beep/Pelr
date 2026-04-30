@@ -70,13 +70,13 @@ pip-review
 pip-review --auto
 ```
 
-导出所有包
+导出所有包（不推荐）
 
 ```shell
 pip freeze > requirements.txt
 ```
 
-似乎可以导出依赖包
+导出依赖包到requirements.txt
 
 ```shell
 pip install pigar
