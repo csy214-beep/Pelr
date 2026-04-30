@@ -27,7 +27,7 @@
 QTextStream out(stdout);
 out<< txt<< Qt::endl;
 #endif
-#define DEBUG false
+#define DEBUG true
 
 void initTranslator(QApplication &a, const QString &path)
 {

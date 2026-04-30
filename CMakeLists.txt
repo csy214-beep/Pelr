@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.3)
 project(Pelr)
 
 # 配置选项
-set(D_OR_R OFF)                # ON: Debug, OFF: Release
-set(CONSOLE OFF)               # ON: 显示控制台, OFF: 隐藏控制台（GUI模式）
+set(D_OR_R ON)                # ON: Debug, OFF: Release
+set(CONSOLE ON)               # ON: 显示控制台, OFF: 隐藏控制台（GUI模式）
 
 # 平台与标准设置
 if (WIN32)
