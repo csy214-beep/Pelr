@@ -64,8 +64,6 @@
 - pmx支持(计划引入：benikabocha/saba)
 - 将输出翻译成指定语言后再TTS(可能通过Qt设置，Python实现)
 - 多语言支持(低优先级)
-- 系统音频提取(重构)，选择一个第三方库(kissfft)
-- 摆脱ollama依赖，采用OpenAI兼容的自定义AI接口
 
 ### 预览
 

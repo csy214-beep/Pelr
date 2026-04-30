@@ -9,6 +9,8 @@
 
 ## v20260405.12-dev
 
+1. feat: 采用OpenAI兼容的自定义AI接口，用户可接入自己的API
+1. dependence: 引入 kissfft 替代原有的系统音频提取
 1. 更新CREDITS.md和THANKS.md
 1. 重构文档，移除wiki
 1. 仓库issue/pr模板添加

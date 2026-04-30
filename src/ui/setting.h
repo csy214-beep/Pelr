@@ -14,17 +14,18 @@
 #include "data.hpp"
 #include <QWidget>
 #include "DoubleClickableLabel.h"
-#include  "VersionChecker.h"
+#include "VersionChecker.h"
 #include <QtWidgets/QSlider>
 
 #include "ui_setting.h"
 
-
-namespace Ui {
+namespace Ui
+{
     class setting;
 }
 
-class SettingWidget : public QWidget {
+class SettingWidget : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -37,10 +38,12 @@ public:
     void setAllValues(const ConfigData &data);
 
     void setTTSConfig(const TTSConfig &data) const;
+    void setLlamaData(const LlamaData &llm) const;
 
     void setOpenWeatherData(const OpenWeatherData &data) const;
 
     TTSConfig getTTSConfigValue() const;
+    LlamaData getLlamaDataValue() const;
 
     OpenWeatherData getOpenWeatherDataValue();
 
@@ -48,7 +51,7 @@ public:
 
     bool checkStartupLink();
 
-    //horizontalSlider
+    // horizontalSlider
     QSlider *getHorizontalSlider();
 
 private slots:
@@ -68,4 +71,3 @@ private:
     VersionChecker *m_versionChecker;
     Ui::setting *ui;
 };
-

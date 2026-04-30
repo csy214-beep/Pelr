@@ -11,7 +11,7 @@
 #define CHAT_H
 
 #include <QWidget>
-#include "ollamaclient.h"
+#include "llamaclient.h"
 
 namespace Ui {
     class chat;
@@ -21,8 +21,6 @@ class ChatWidget : public QWidget {
 Q_OBJECT
 
 public:
-    OllamaClient client;
-
     void addMessage(const QString &message, const bool &isAI); // type must be 0 or 1
 
     explicit ChatWidget(QWidget *parent = nullptr);
@@ -35,13 +33,12 @@ private slots:
 
     void on_sendMsg();
 
-    void onTextGenerated(const QString &text);
+    void onTextGenerated(const QString &text, const int &id);
 
-
-    void onErrorOccurred(const QString &error);
+    void onErrorOccurred(const QString &error, const int &id);
 
 private:
-
+    int ai_id = 2;
     Ui::chat *ui;
     int currentY;
     int standardHeight;

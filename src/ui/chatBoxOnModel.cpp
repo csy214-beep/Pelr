@@ -39,9 +39,9 @@ ChatBoxOnModel::ChatBoxOnModel(QLineEdit *parent)
     // font.setBold(true);
     setFont(font);
     //信号槽
-    connect(&client, &OllamaClient::textGenerated,
+    connect(LlamaClient::instance(), &LlamaClient::textGenerated,
             this, &ChatBoxOnModel::onTextGenerated);
-    connect(&client, &OllamaClient::errorOccurred,
+    connect(LlamaClient::instance(), &LlamaClient::errorOccurred,
             this, &ChatBoxOnModel::onErrorOccurred);
     connect(this, &ChatBoxOnModel::returnPressed, this, &ChatBoxOnModel::on_sendMsg);
 }
@@ -66,38 +66,23 @@ void ChatBoxOnModel::on_sendMsg() {
         BubbleBox::instance()->textSet(tr("Message can not be empty!"));
         return;
     };
-    QString model = DataManager::instance().getBasicData().model;
-    if (model.isEmpty()) {
-        // QMessageBox::warning(this, tr("警告"), tr("请先选择模型！"));
-        BubbleBox::instance()->textSet(tr("Please select model first!"));
-        return;
-    }
-    OllamaClient::Role role = DataManager::instance().getBasicData().role;
-    if (role == OllamaClient::Role::CustomRole) {
-        QString customPrompt = DataManager::instance().getBasicData().customRoleDesc;
-        if (customPrompt.isEmpty()) {
-            // QMessageBox::warning(this, tr("警告"), tr("请先设置自定义角色描述！"));
-            BubbleBox::instance()->textSet(tr("Please set custom role description first!"));
-            return;
-        }
-        client.setCustomRolePrompt(OllamaClient::Roles.at(role).text, customPrompt);
-    }
-    //  发送消息到服务器(ollama)
-    client.generateTextAsync(
-        message, model, false,
-        role, // 使用自定义角色
-        OllamaClient::Roles.at(role).text // 指定自定义角色名称
-    );
+    LlamaClient::instance()->generateTextAsync(message, ai_id);
     BubbleBox::instance()->setThinkingText();
 }
 
-void ChatBoxOnModel::onTextGenerated(const QString &text) {
+void ChatBoxOnModel::onTextGenerated(const QString &text, const int &id)
+{
+    if (id != ai_id)
+        return;
     qDebug() << "text:" << text;
     // 处理生成的文本
     BubbleBox::instance()->textSet(text);
 }
 
-void ChatBoxOnModel::onErrorOccurred(const QString &error) {
+void ChatBoxOnModel::onErrorOccurred(const QString &error, const int &id)
+{
+    if (id != ai_id)
+        return;
     qDebug() << "error:" << error;
     // 处理错误
     BubbleBox::instance()->textSet(tr("错误：%1").arg(error));
