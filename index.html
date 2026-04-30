@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Pelr - 智能桌面虚拟伙伴 | Live2D · AI 对话 · 语音合成</title>
+    <meta name="title" content="Pelr - 智能桌面虚拟伙伴">
+    <meta name="description"
+        content="Pelr 是一款基于 Live2D 技术的开源桌面伴侣，集成 AI 对话、语音合成、快捷启动与 TODO 功能，让桌面充满温度与效率。支持 Windows，免费使用。">
+    <meta name="keywords" content="Pelr, 桌宠, Live2D, 桌面虚拟伙伴, AI 对话, 语音合成, TTS, 快捷启动, 开源, Windows 桌面工具">
+    <meta name="author" content="Pelr Project">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://github.com/csy214-beep/pelr">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/csy214-beep/pelr">
+    <meta property="og:title" content="Pelr - 智能桌面虚拟伙伴">
+    <meta property="og:description" content="基于 Live2D 的开源桌面伴侣，集成 AI 对话、语音合成、快捷启动与 TODO，让桌面从此拥有温度。">
+    <meta property="og:image" content="index/Pelr.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://github.com/csy214-beep/pelr">
+    <meta property="twitter:title" content="Pelr - 智能桌面虚拟伙伴">
+    <meta property="twitter:description" content="基于 Live2D 的开源桌面伴侣，集成 AI 对话、语音合成、快捷启动与 TODO，让桌面从此拥有温度。">
+    <meta property="twitter:image" content="index/Pelr.png">
+
+    <!-- Favicon / Icons -->
+    <link rel="icon" type="image/png" href="index/Pelr.png">
+    <link rel="apple-touch-icon" href="index/Pelr.png">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="index/a.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <!-- Logo SVG: a stylized companion character / star -->
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="22" fill="#FFF9E0" stroke="#F5C518" stroke-width="2.5" />
+                    <circle cx="17" cy="20" r="3.5" fill="#2D2A1F" />
+                    <circle cx="31" cy="20" r="3.5" fill="#2D2A1F" />
+                    <circle cx="16" cy="19" r="1.2" fill="#FFF" />
+                    <circle cx="30" cy="19" r="1.2" fill="#FFF" />
+                    <path d="M17 30 Q24 36 31 30" stroke="#2D2A1F" stroke-width="2.5" stroke-linecap="round"
+                        fill="none" />
+                    <circle cx="24" cy="26" r="2" fill="#F5C518" opacity="0.7" />
+                </svg>
+                <span>Pelr</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">特性</a></li>
+                <li><a href="#tech">技术栈</a></li>
+                <li><a href="#quickstart">快速开始</a></li>
+                <li><a href="https://github.com/csy214-beep/pelr" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="#download" class="nav-cta">下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-decor hero-decor-1"></div>
+        <div class="hero-decor hero-decor-2"></div>
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span> 项目重构中 · v20260405.12 开发中
+        </div>
+        <h1>
+            你的桌面<br><span class="highlight">智能虚拟伙伴</span>
+        </h1>
+        <p class="hero-subtitle">
+            基于 Live2D 技术，集成 AI 对话、语音合成、快捷启动与 TODO 功能，
+            让桌面从此充满温度与效率。
+        </p>
+        <div class="hero-actions">
+            <a href="https://github.com/csy214-beep/Pelr/releases" class="btn btn-primary" target="_blank"
+                rel="noopener">
+                <!-- Download SVG -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                下载 Pelr
+            </a>
+            <a href="https://github.com/csy214-beep/pelr" class="btn btn-outline" target="_blank" rel="noopener">
+                <!-- GitHub SVG -->
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                查看源码
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section-header">
+            <span class="section-tag">核心特性</span>
+            <h2>一切为了更好的桌面体验</h2>
+            <p>Pelr 将 Live2D 动画、AI 对话与实用工具融为一体，打造独一无二的桌面伴侣。</p>
+        </div>
+        <div class="features-grid">
+            <!-- Feature 1: Live2D -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                        <circle cx="8.5" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                        <circle cx="15.5" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                        <path d="M8 15 Q12 18 16 15" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                </div>
+                <h3>Live2D 虚拟角色</h3>
+                <p>支持 model3.json 格式的 Live2D 模型，生动灵动的桌面伴侣，支持丰富的表情与动作切换。</p>
+            </div>
+
+            <!-- Feature 2: AI Chat -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 20c0-4 4-7 8-7s8 3 8 7" />
+                        <path d="M16 4l2 2-2 2" />
+                        <path d="M8 4L6 6l2 2" />
+                    </svg>
+                </div>
+                <h3>智能 AI 对话</h3>
+                <p>支持 OpenAI 兼容的 AI 服务，自然语言交互，让桌面角色真正「活」起来。</p>
+            </div>
+
+            <!-- Feature 3: TTS -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                </div>
+                <h3>语音合成</h3>
+                <p>内置 OpenAI-Edge-TTS 与讯飞 TTS 服务，高质量的语音反馈，让交互更加自然。</p>
+            </div>
+
+            <!-- Feature 4: TODO -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                    </svg>
+                </div>
+                <h3>TODO 功能</h3>
+                <p>简洁的待办系统，添加事件并设置提醒，桌面伙伴帮你记住每一件小事。</p>
+            </div>
+
+            <!-- Feature 5: Launcher -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                    </svg>
+                </div>
+                <h3>启动管理</h3>
+                <p>可视化管理应用程序，一键启动 Windows 上的文件与链接，继承自 QuickTray。</p>
+            </div>
+
+            <!-- Feature 6: Keyboard Monitor -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <line x1="6" y1="10" x2="6" y2="14" />
+                        <line x1="10" y1="10" x2="10" y2="14" />
+                        <line x1="14" y1="10" x2="14" y2="14" />
+                        <line x1="18" y1="10" x2="18" y2="14" />
+                    </svg>
+                </div>
+                <h3>键盘监听</h3>
+                <p>实时显示按键状态，继承自 KeyMonitor，让每一次敲击都清晰可见。</p>
+            </div>
+
+            <!-- Feature 7: Weather -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </div>
+                <h3>天气服务</h3>
+                <p>集成 OpenWeather，实时获取天气信息，桌面伙伴随时告知你天气变化。</p>
+            </div>
+
+            <!-- Feature 8: Music Tray -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="5" cy="17" r="2" />
+                        <circle cx="17" cy="15" r="2" />
+                        <path d="M7 17V6l10-2v11" />
+                    </svg>
+                </div>
+                <h3>音乐托盘</h3>
+                <p>托盘图标随系统音量旋转，继承自 Rotating Rhythm，让系统托盘也有了生气。</p>
+            </div>
+
+            <!-- Feature 9: Customizable -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M12 1v2" />
+                        <path d="M12 21v2" />
+                        <path d="M4.22 4.22l1.42 1.42" />
+                        <path d="M18.36 18.36l1.42 1.42" />
+                        <path d="M1 12h2" />
+                        <path d="M21 12h2" />
+                        <path d="M4.22 19.78l1.42-1.42" />
+                        <path d="M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </div>
+                <h3>高度可定制</h3>
+                <p>丰富的设置选项，从模型到 TTS、从快捷键到主题，满足你的个性化需求。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-section" id="tech">
+        <div class="section">
+            <div class="section-header">
+                <span class="section-tag">技术栈</span>
+                <h2>坚实的技术基石</h2>
+                <p>Pelr 采用 C++ 核心与 Python 工具链，兼顾性能与灵活性。</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <!-- C++ icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.18l7 3.9v7.84l-7 3.9-7-3.9V8.08l7-3.9z" />
+                        <text x="12" y="16" text-anchor="middle" font-size="7" font-weight="700"
+                            fill="currentColor">C++</text>
+                    </svg>
+                    <span>C++ 核心</span>
+                    <small>高性能引擎</small>
+                </div>
+                <div class="tech-item">
+                    <!-- Qt icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor"
+                            stroke-width="2" />
+                        <text x="12" y="16" text-anchor="middle" font-size="8" font-weight="700"
+                            fill="currentColor">Qt</text>
+                    </svg>
+                    <span>Qt 5.15</span>
+                    <small>跨平台框架</small>
+                </div>
+                <div class="tech-item">
+                    <!-- OpenGL icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+                        <polygon points="12,4 19,16 5,16" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <span>OpenGL</span>
+                    <small>图形渲染</small>
+                </div>
+                <div class="tech-item">
+                    <!-- Live2D icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+                        <ellipse cx="9" cy="9" rx="1.3" ry="1.8" fill="currentColor" />
+                        <ellipse cx="15" cy="9" rx="1.3" ry="1.8" fill="currentColor" />
+                        <path d="M7 13 Q12 18 17 13" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" />
+                    </svg>
+                    <span>Live2D Cubism</span>
+                    <small>2D 动画引擎</small>
+                </div>
+                <div class="tech-item">
+                    <!-- Python icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <text x="12" y="16" text-anchor="middle" font-size="10" font-weight="700"
+                            fill="currentColor">Py</text>
+                    </svg>
+                    <span>Python 3.11</span>
+                    <small>TTS 服务端</small>
+                </div>
+                <div class="tech-item">
+                    <!-- TTS / audio wave icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <polyline points="2,15 6,9 10,14 14,4 18,10 22,6" />
+                    </svg>
+                    <span>Edge-TTS</span>
+                    <small>语音合成</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="section" id="quickstart">
+        <div class="section-header">
+            <span class="section-tag">快速开始</span>
+            <h2>三步开启桌面伙伴</h2>
+            <p>简单配置，即刻拥有属于你的 Live2D 虚拟伴侣。</p>
+        </div>
+        <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:0 auto;">
+            <!-- Step 1 -->
+            <div
+                style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px 24px;text-align:center;box-shadow:var(--shadow-sm);">
+                <div
+                    style="width:48px;height:48px;background:var(--yellow-200);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.3rem;color:var(--yellow-700);">
+                    1</div>
+                <h3 style="font-weight:700;margin-bottom:8px;">下载解压</h3>
+                <p style="color:var(--text-secondary);font-size:0.92rem;">前往 Release 页面下载最新版本，解压到任意目录。</p>
+            </div>
+            <!-- Step 2 -->
+            <div
+                style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px 24px;text-align:center;box-shadow:var(--shadow-sm);">
+                <div
+                    style="width:48px;height:48px;background:var(--yellow-200);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.3rem;color:var(--yellow-700);">
+                    2</div>
+                <h3 style="font-weight:700;margin-bottom:8px;">配置模型</h3>
+                <p style="color:var(--text-secondary);font-size:0.92rem;">设置 Live2D 模型路径，支持 model3.json 格式。</p>
+            </div>
+            <!-- Step 3 -->
+            <div
+                style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px 24px;text-align:center;box-shadow:var(--shadow-sm);">
+                <div
+                    style="width:48px;height:48px;background:var(--yellow-200);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:1.3rem;color:var(--yellow-700);">
+                    3</div>
+                <h3 style="font-weight:700;margin-bottom:8px;">运行体验</h3>
+                <p style="color:var(--text-secondary);font-size:0.92rem;">运行 Pelr.exe，开启你的智能桌面虚拟伙伴之旅。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="download">
+        <h2>准备好迎接你的桌面伙伴了吗？</h2>
+        <p>Pelr 完全开源免费，基于 GPLv3 许可证发布。现在就下载，让桌面充满温度。</p>
+        <a href="https://github.com/csy214-beep/Pelr/releases" class="btn btn-primary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round" width="20" height="20">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            立即下载
+        </a>
+        <p style="margin-top:20px;font-size:0.88rem;color:var(--text-muted);">
+            也欢迎前往
+            <a href="https://github.com/csy214-beep/pelr" target="_blank" rel="noopener">GitHub</a>
+            查看源码或参与贡献。
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/csy214-beep/pelr" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/csy214-beep/Pelr/issues" target="_blank" rel="noopener">问题反馈</a>
+            <a href="https://github.com/csy214-beep/Pelr/blob/master/CREDITS.md" target="_blank" rel="noopener">致谢</a>
+            <a href="https://gnu.ac.cn/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPLv3 许可证</a>
+        </div>
+        <p>© 2024 Pelr 项目 · 基于兴趣开发的开源桌面伙伴 · 免费使用</p>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile nav when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Nav scroll shadow
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
