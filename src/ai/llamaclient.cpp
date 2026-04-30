@@ -113,25 +113,27 @@ void LlamaClient::setSystemPrompt(const QString &prompt)
     }
 }
 
-void LlamaClient::loadSystemPromptFromFile(const QString &filePath)
+bool LlamaClient::loadSystemPromptFromFile(const QString &filePath)
 {
     if (filePath.isEmpty())
-        return;
+        return false;
     QFile file(filePath);
     if (!file.exists())
     {
         qDebug() << "File does not exist: " << filePath;
-        return;
+        return false;
     }
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qWarning() << "Cannot open file:" << filePath;
-        return;
+        return false;
     }
     QString content = QString::fromUtf8(file.readAll());
     file.close();
-    if (!content.isEmpty())
-        setSystemPrompt(content);
+    if (content.isEmpty())
+        return false;
+    setSystemPrompt(content);
+    return true;
 }
 
 void LlamaClient::setMaxContextMessages(int count)

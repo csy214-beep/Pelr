@@ -78,6 +78,8 @@ TrayIcon::TrayIcon(QObject *parent)
 
     QAction *action_openDirPath = new QAction(tr("程序文件夹"), MenuOpen);
     QAction *action_openUserPath = new QAction(tr("用户文件夹"), MenuOpen);
+    QAction *action_openLogPath = new QAction(tr("日志文件夹"), MenuOpen);
+    QAction *action_openTTSServer = new QAction(tr("TTS Server"), MenuOpen);
     // 连接信号和槽
     // 打开程序文件夹
     connect(action_openDirPath, &QAction::triggered, []()
@@ -90,6 +92,14 @@ TrayIcon::TrayIcon(QObject *parent)
         QString appDir = QCoreApplication::applicationDirPath();
         const QString userDir = appDir.append("/user");
         launchByPath(userDir); });
+    // 打开日志文件夹
+    connect(action_openLogPath, &QAction::triggered, []()
+            {
+        QString appDir = QCoreApplication::applicationDirPath();
+        const QString logDir = appDir.append("/log");
+        launchByPath(logDir); });
+    connect(action_openTTSServer, &QAction::triggered, []()
+            { launchByPath(DataManager::instance().const_config_data.tts_server); });
 
     QAction *action_startApp = new QAction("启动项目", this);
     action_startApp->setMenu(launcherMenu::instance());
@@ -103,7 +113,7 @@ TrayIcon::TrayIcon(QObject *parent)
     menu->addActions({action_silentMode, action_switchDrag,
                       action_keyListener,
                       action_showWin, action_resetWinLoc, action_mediaPlayer});
-    MenuOpen->addActions({action_openUserPath, action_openDirPath});
+    MenuOpen->addActions({action_openUserPath, action_openDirPath, action_openLogPath, action_openTTSServer});
     menu->addSeparator();
     menu->addMenu(MenuOpen);
     menu->addSeparator();

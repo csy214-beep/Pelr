@@ -335,7 +335,11 @@ void SettingWidget::connectSignals()
                     return; // 用户取消
                 ui->lineEdit_13->setText(path);
                 // 直接调用单例方法加载
-                LlamaClient::instance()->loadSystemPromptFromFile(path); });
+                bool x = LlamaClient::instance()->loadSystemPromptFromFile(path);
+                if (x)
+                    NotificationWidget::showNotification(tr("Information"), tr("Loaded prompt from [%1] successfully.").arg(path));
+                else
+                    NotificationWidget::showNotification(tr("Warning"), tr("Failed to load prompt from [%1].").arg(path)); });
     // 链接跳转
     connect(ui->pushButton_7, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.openai_edge_tts_Voice_Samples); });

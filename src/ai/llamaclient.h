@@ -28,7 +28,7 @@ public:
     void setApiKey(const QString &apiKey);
     void setModel(const QString &model);
     void setSystemPrompt(const QString &prompt);
-    void loadSystemPromptFromFile(const QString &filePath);
+    bool loadSystemPromptFromFile(const QString &filePath);
     void setMaxContextMessages(int count);
     void clearHistory();
 
