@@ -222,7 +222,7 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->horizontalSlider_3->setRange(0, 100);  // volume
 
     // 说明
-    QFile file(":/assets/text/CREDITS.md");
+    QFile file(":/CREDITS.md");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream in(&file);

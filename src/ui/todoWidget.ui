@@ -109,7 +109,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -135,7 +135,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/public/IconaMoon/Interface/Check Square - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -161,7 +161,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/General/Trash - 24x24.png</normaloff>:/public/IconaMoon/General/Trash - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -187,7 +187,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -269,7 +269,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -295,7 +295,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Interface/History - 24x24.png</normaloff>:/assets/IconaMoon/Interface/History - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Interface/History - 24x24.png</normaloff>:/public/IconaMoon/Interface/History - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -321,7 +321,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/General/Trash - 24x24.png</normaloff>:/public/IconaMoon/General/Trash - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -347,7 +347,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</iconset>
             </property>
             <property name="iconSize">
              <size>

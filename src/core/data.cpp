@@ -164,7 +164,7 @@ void DataManager::readBasicData()
 }
 QFont DataManager::loadFont()
 {
-    QString boldFontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";
+    QString boldFontPath = ":/public/font/MapleMono-NF-CN-Medium.ttf";
     if (QFile::exists(boldFontPath))
     {
         int boldFontId = QFontDatabase::addApplicationFont(boldFontPath);

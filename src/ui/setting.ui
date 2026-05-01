@@ -531,7 +531,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -542,7 +542,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/General/Shield Yes - 24x24.png</normaloff>:/assets/IconaMoon/General/Shield Yes - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/General/Shield Yes - 24x24.png</normaloff>:/public/IconaMoon/General/Shield Yes - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -640,7 +640,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -717,7 +717,7 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../Resource.qrc">
-                     <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+                     <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -742,7 +742,7 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../Resource.qrc">
-                     <normaloff>:/assets/IconaMoon/Files/Cloud - 24x24.png</normaloff>:/assets/IconaMoon/Files/Cloud - 24x24.png</iconset>
+                     <normaloff>:/public/IconaMoon/Files/Cloud - 24x24.png</normaloff>:/public/IconaMoon/Files/Cloud - 24x24.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -753,7 +753,7 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../Resource.qrc">
-                     <normaloff>:/assets/IconaMoon/Interface/Synchronize - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Synchronize - 24x24.png</iconset>
+                     <normaloff>:/public/IconaMoon/Interface/Synchronize - 24x24.png</normaloff>:/public/IconaMoon/Interface/Synchronize - 24x24.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -771,7 +771,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../Resource.qrc">
-              <normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link - 24x24.png</iconset>
+              <normaloff>:/public/IconaMoon/Interface/Link - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link - 24x24.png</iconset>
             </property>
            </widget>
           </item>
@@ -935,7 +935,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../Resource.qrc">
-           <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+           <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
          </property>
         </widget>
        </item>
@@ -989,7 +989,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1000,7 +1000,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Link External - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1011,7 +1011,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Files/File Document - 24x24.png</normaloff>:/assets/IconaMoon/Files/File Document - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Files/File Document - 24x24.png</normaloff>:/public/IconaMoon/Files/File Document - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1022,7 +1022,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Files/Folder - 24x24.png</normaloff>:/public/IconaMoon/Files/Folder - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1037,7 +1037,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Synchronize - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Synchronize - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Synchronize - 24x24.png</normaloff>:/public/IconaMoon/Interface/Synchronize - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1048,7 +1048,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Attention Circle - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Attention Circle - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Attention Circle - 24x24.png</normaloff>:/public/IconaMoon/Interface/Attention Circle - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1059,7 +1059,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</normaloff>:/assets/IconaMoon/Files/Folder - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Files/Folder - 24x24.png</normaloff>:/public/IconaMoon/Files/Folder - 24x24.png</iconset>
              </property>
             </widget>
            </item>
@@ -1070,7 +1070,7 @@
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
-               <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
+               <normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</iconset>
              </property>
             </widget>
            </item>

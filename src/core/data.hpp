@@ -254,7 +254,7 @@ protected:
     QList<MenuData> cached_menu_data;
     ConfigData basic_data;
     ToDoSettingData todo_setting_data;
-    QString fontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";
+    QString fontPath = ":/public/font/MapleMono-NF-CN-Medium.ttf";
     TTSConfig tts_config;
     OpenWeatherData openWeather_data;
     LlamaData llama_data;

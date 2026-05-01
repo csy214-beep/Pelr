@@ -81,7 +81,7 @@
         </property>
         <property name="icon">
          <iconset resource="../Resource.qrc">
-          <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
+          <normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -191,7 +191,7 @@
         </property>
         <property name="icon">
          <iconset resource="../Resource.qrc">
-          <normaloff>:/assets/IconaMoon/Communication/Send - 24x24.png</normaloff>:/assets/IconaMoon/Communication/Send - 24x24.png</iconset>
+          <normaloff>:/public/IconaMoon/Communication/Send - 24x24.png</normaloff>:/public/IconaMoon/Communication/Send - 24x24.png</iconset>
         </property>
         <property name="iconSize">
          <size>
