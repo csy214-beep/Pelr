@@ -469,15 +469,15 @@
        <item>
         <widget class="QToolBox" name="toolBox">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>852</width>
-            <height>217</height>
+            <width>227</width>
+            <height>154</height>
            </rect>
           </property>
           <attribute name="label">
@@ -567,7 +567,7 @@
             <x>0</x>
             <y>0</y>
             <width>852</width>
-            <height>217</height>
+            <height>210</height>
            </rect>
           </property>
           <attribute name="label">
@@ -678,7 +678,7 @@
                   <x>0</x>
                   <y>0</y>
                   <width>776</width>
-                  <height>217</height>
+                  <height>216</height>
                  </rect>
                 </property>
                 <layout class="QFormLayout" name="formLayout_6">
@@ -856,7 +856,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_15">
          <property name="text">
-          <string>AI模型</string>
+          <string>AI Model</string>
          </property>
         </widget>
        </item>
@@ -985,7 +985,7 @@
            <item>
             <widget class="QPushButton" name="pushButton_8">
              <property name="text">
-              <string>Gitee</string>
+              <string>GitHub</string>
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
@@ -996,7 +996,7 @@
            <item>
             <widget class="QPushButton" name="pushButton_9">
              <property name="text">
-              <string>Team</string>
+              <string>Contributors</string>
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">
@@ -1044,7 +1044,7 @@
            <item>
             <widget class="QPushButton" name="pushButton_6">
              <property name="text">
-              <string>问题反馈</string>
+              <string>Issue</string>
              </property>
              <property name="icon">
               <iconset resource="../../Resource.qrc">

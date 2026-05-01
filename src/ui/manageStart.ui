@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>manageStart</class>
  <widget class="QWidget" name="manageStart">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>716</width>
+    <height>643</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>启动项管理</string>
   </property>
@@ -28,105 +36,107 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</iconset>
-        </property>
-        <property name="iconSize">
+       <widget class="QWidget" name="widget" native="true">
+        <property name="minimumSize">
          <size>
-          <width>24</width>
-          <height>24</height>
+          <width>400</width>
+          <height>0</height>
          </size>
         </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="text">
+            <string>编辑</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../Resource.qrc">
+             <normaloff>:/assets/IconaMoon/General/Edit - 24x24.png</normaloff>:/assets/IconaMoon/General/Edit - 24x24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>保存</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../Resource.qrc">
+             <normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="text">
+            <string>删除</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../Resource.qrc">
+             <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="toolTipDuration">
+            <number>-1</number>
+           </property>
+           <property name="text">
+            <string>添加</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../Resource.qrc">
+             <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Square - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Square - 24x24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="toolTipDuration">
-         <number>-1</number>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Square - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Square - 24x24.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>:/assets/IconaMoon/General/Edit - 24x24.png</normaloff>:/assets/IconaMoon/General/Edit - 24x24.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
          <string>启动项编辑</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -146,7 +156,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
  </resources>
  <connections/>
 </ui>
