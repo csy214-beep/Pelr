@@ -28,6 +28,7 @@
 #include "NotificationWidget.h"
 #include "loadText.h"
 #include "UpdateDialog.h"
+using MessageType = NotificationWidget::MessageType;
 
 ConfigData SettingWidget::getAllValues()
 {
@@ -88,6 +89,8 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     data.iFlytek_APIKey = ui->lineEdit_4->text();
     data.iFlytek_speaker = ui->lineEdit_5->text();
     data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
+    data.tr_lang = ui->comboBox_5->currentText();
+    data.tr_provider = ui->comboBox->currentText();
     return data;
 }
 
@@ -128,6 +131,9 @@ void SettingWidget::setTTSConfig(const TTSConfig &data) const
     ui->lineEdit_4->setText(data.iFlytek_APPID);
     ui->lineEdit_5->setText(data.iFlytek_speaker);
     ui->checkBox_13->setChecked(data.isRunTTSServerOnStartUp);
+    // translate
+    ui->comboBox_5->setCurrentText(data.tr_lang);
+    ui->comboBox->setCurrentText(data.tr_provider);
 }
 void SettingWidget::setLlamaData(const LlamaData &llm) const
 {
@@ -208,15 +214,12 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->setupUi(this);
     // 检查更新
     m_versionChecker = new VersionChecker(this);
+    // 语言获取
+    m_langClient = new PyLang(this);
     // basic
     ui->horizontalSlider->setRange(80, 600);   // size
     ui->horizontalSlider_2->setRange(15, 120); // FPS
     ui->horizontalSlider_3->setRange(0, 100);  // volume
-    // 保密
-    // ui->lineEdit_2->setEchoMode(QLineEdit::Password);
-    // ui->lineEdit_3->setEchoMode(QLineEdit::Password);
-    // ui->lineEdit_4->setEchoMode(QLineEdit::Password);
-    // ui->lineEdit_8->setEchoMode(QLineEdit::Password);
 
     // 说明
     QFile file(":/assets/text/CREDITS.md");
@@ -226,8 +229,7 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         in.setCodec("UTF-8"); // 设置编码为 UTF-8
         QString content = in.readAll();
         file.close();
-        ui->textBrowser->setMarkdown(
-            "# Pelr " + DataManager::instance().const_config_data.version + "\n\n" + content);
+        ui->textBrowser->setMarkdown(content);
     }
     ui->textBrowser->setReadOnly(true);
     ui->textBrowser->setOpenExternalLinks(true);
@@ -321,6 +323,48 @@ void SettingWidget::connectSignals()
             { onCheckBox1Clicked(!ui->checkBox->isChecked()); });
     connect(ui->checkBox_12, &QCheckBox::clicked, [&]()
             { TrayIcon::instance()->switchMusicIcon(ui->checkBox_12->isChecked()); });
+    // TTS
+    connect(ui->pushButton_21, &QPushButton::clicked, [&]()
+            {
+                m_langClient->fetchProviders();
+                m_langClient->fetchLanguages(); });
+    connect(ui->pushButton_22, &QPushButton::clicked, [&]()
+            { launchByPath(DataManager::instance().const_config_data.support_languages); });
+    connect(ui->pushButton_23, &QPushButton::clicked, [&]()
+            {
+        QString provider = ui->comboBox->currentText();
+        QString language = ui->comboBox_5->currentText();
+        QString text = ui->lineEdit_14->text();
+        if (provider.isEmpty() || language.isEmpty() || text.isEmpty())
+        {
+            qDebug() << "translate test value is empty";
+            NotificationWidget::showNotification(tr("Warning"), tr("Please fill in all fields first."), 5000, MessageType::Warning);
+        }
+        else
+        {
+            m_langClient->testTranslation(text, language, provider);
+        } });
+    connect(m_langClient, &PyLang::languagesReady, m_langClient, [this](const QList<QString> &langs)
+            {
+        qDebug() << "Languages fetch successfully";
+        ui->comboBox_5->clear();
+        int index = 0;
+        for (const auto &lang : langs)
+        {
+            ui->comboBox_5->addItem(lang, index);
+            index++;
+        } });
+
+    connect(m_langClient, &PyLang::providersReady, m_langClient, [this](const QList<QString> &providers)
+            {
+        qDebug() << "Providers fetch successfully";
+        ui->comboBox->clear();
+        int index = 0;
+        for (const auto &provider : providers)
+        {
+            ui->comboBox->addItem(provider, index);
+            index++;
+        } });
     // llama
     connect(ui->pushButton_15, &QPushButton::clicked, [&]()
             {
@@ -339,7 +383,7 @@ void SettingWidget::connectSignals()
                 if (x)
                     NotificationWidget::showNotification(tr("Information"), tr("Loaded prompt from [%1] successfully.").arg(path));
                 else
-                    NotificationWidget::showNotification(tr("Warning"), tr("Failed to load prompt from [%1].").arg(path)); });
+                    NotificationWidget::showNotification(tr("Warning"), tr("Failed to load prompt from [%1].").arg(path), 5000, MessageType::Warning); });
     // 链接跳转
     connect(ui->pushButton_7, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.openai_edge_tts_Voice_Samples); });
@@ -499,7 +543,7 @@ void SettingWidget::onCheckBox1Clicked(const bool flag)
         if (!success)
         {
             qWarning() << "cannot remove shortcut: " << shortcutPath;
-            NotificationWidget::showNotification(tr("Warning"), tr("移除快捷方式失败！"));
+            NotificationWidget::showNotification(tr("Warning"), tr("移除快捷方式失败！"), 5000, MessageType::Warning);
             return;
         }
         qDebug() << "remove shortcut success: " << shortcutPath;
@@ -534,7 +578,7 @@ void SettingWidget::onCheckBox1Clicked(const bool flag)
         if (FAILED(hr))
         {
             qWarning() << "cannot create shortcut: " << shortcutPath;
-            NotificationWidget::showNotification(tr("Warning"), tr("创建快捷方式失败！"));
+            NotificationWidget::showNotification(tr("Warning"), tr("创建快捷方式失败！"), 5000, MessageType::Warning);
         }
         else
         {

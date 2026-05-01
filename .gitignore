@@ -49,6 +49,7 @@ thirdParty/glew/**
 thirdParty/glfw/**
 thirdParty/stb/**
 thirdParty/kissfft/**
+thirdParty/QSS/**
 
 lib/**
 
@@ -59,6 +60,9 @@ lib/**
 *.7z
 *.zip
 *.tmp
+
+# test
+test**
 
 
 

@@ -20,8 +20,10 @@
 #include <QJsonObject>
 #include <QCryptographicHash>
 #include <QMediaPlayer>
+#include <QDebug>
 #include "data.hpp"
 #include "launcher.hpp"
+#include "translator.h"
 
 class VoiceGenerator : public QObject {
     Q_OBJECT
@@ -32,14 +34,36 @@ public:
         return &instance;
     }
 
+    /**
+     * @brief 主语音生成入口，根据配置自动处理翻译（如果需要）然后TTS
+     * @param config TTS及翻译配置（不再需要包含 text）
+     * @param text   待合成（或待翻译）的原始文本
+     */
+    void generateVoice(const TTSConfig &config, const QString &text)
+    {
+        // 判断是否需要翻译
+        if (!config.tr_provider.isEmpty() && !config.tr_lang.isEmpty())
+        {
+            // 暂存配置和原文，翻译完成后再生成
+            m_pendingConfig = config;
+            m_pendingText = text;
+            Translator::instance()->translate(text, config.tr_lang, config.tr_provider);
+        }
+        else
+        {
+            // 不需要翻译，直接生成
+            doGenerateVoice(config, text);
+        }
+    }
+
     // 原有讯飞 TTS 调用方式（保持不变）
-    void generateVoice(const QString &appid, const QString &apiKey, const QString &apiSecret,
-                       const QString &text, const QString &voice = "x4_yezi") {
+    void generateVoiceIFlytek(const QString &appid, const QString &apiKey, const QString &apiSecret,
+                              const QString &text, const QString &voice = "x4_yezi")
+    {
         QString speaker = voice;
         if (speaker.isEmpty()) {
             speaker = "x4_yezi";
         }
-        // 准备JSON数据
         QJsonObject json;
         json["appid"] = appid;
         json["api_key"] = apiKey;
@@ -50,26 +74,21 @@ public:
         QJsonDocument doc(json);
         QByteArray data = doc.toJson();
 
-        // 创建网络请求
         QNetworkRequest request(QUrl("http://localhost:9140/generate"));
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-        // 发送POST请求
-        QNetworkReply *reply = manager->post(request, data);
+        QNetworkReply *reply = m_manager->post(request, data);
         connect(reply, &QNetworkReply::finished, this, [this, reply]() {
             handleGenerateResponse(reply);
         });
     }
 
-    // 新增：OpenAI 风格 TTS 调用（Edge TTS），支持发言人和语速
-    // voice: 例如 "zh-CN-XiaoyiNeural", "nova" 等
-    // speed: 0.25 ~ 4.0，默认 1.0
+    // 新增：OpenAI 风格 TTS 调用（Edge TTS）
     void generateVoiceOpenAI(const QString &text, const QString &voice = "zh-CN-XiaoxiaoNeural",
-                             double speed = 1.0) {
-        // 参数校验
+                             double speed = 1.0)
+    {
         double finalSpeed = qBound(0.25, speed, 4.0);
 
-        // 准备JSON数据（符合 /v1/audio/speech_local 接口）
         QJsonObject json;
         json["input"] = text;
         json["voice"] = voice;
@@ -79,63 +98,93 @@ public:
         QJsonDocument doc(json);
         QByteArray data = doc.toJson();
 
-        // 创建网络请求（注意端口与整合服务器一致，默认9140）
         QNetworkRequest request(QUrl("http://localhost:9140/v1/audio/speech_local"));
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-        // 可选：如果需要 API Key 鉴权，取消下一行的注释并填写正确的 key
-        // request.setRawHeader("Authorization", "Bearer your_api_key_here");
-
-        QNetworkReply *reply = manager->post(request, data);
+        QNetworkReply *reply = m_manager->post(request, data);
         connect(reply, &QNetworkReply::finished, this, [this, reply]() {
             handleOpenAIResponse(reply);
         });
     }
 
     void playVoice(const QString &filePath) {
-        if (player) {
-            //volume
-            player->setVolume(DataManager::instance().getBasicData().volume);
-            // 在 Qt5 中使用 setMedia 而不是 setSource
-            player->setMedia(QUrl::fromLocalFile(filePath));
-            player->play();
+        if (m_player)
+        {
+            m_player->setVolume(DataManager::instance().getBasicData().volume);
+            m_player->setMedia(QUrl::fromLocalFile(filePath));
+            m_player->play();
         }
     }
 
     void stopVoice() {
-        if (player) {
-            player->stop();
+        if (m_player)
+        {
+            m_player->stop();
         }
     }
 
 signals:
     void voiceGenerated(const QString &filePath);
-
     void errorOccurred(const QString &errorMessage);
+    void playbackFinished();
 
-    void playbackFinished(); // 添加这个信号
+private slots:
+    // 翻译成功后的处理
+    void onTranslationFinished(const QString &translatedText)
+    {
+        qDebug() << "Translation successful:" << translatedText;
+        // 使用翻译后的文本生成语音
+        doGenerateVoice(m_pendingConfig, translatedText);
+    }
+
+    void onTranslationError(const QString &errorMessage)
+    {
+        qWarning() << "Translation failed:" << errorMessage;
+        // 回退到原文生成语音，并通知调用方
+        emit errorOccurred("Translation failed: " + errorMessage);
+        doGenerateVoice(m_pendingConfig, m_pendingText);
+    }
 
 private:
     VoiceGenerator(QObject *parent = nullptr) : QObject(parent) {
-        manager = new QNetworkAccessManager(this);
+        m_manager = new QNetworkAccessManager(this);
 
-        // 初始化音频播放器
-        player = new QMediaPlayer(this);
-        player->setVolume(50);
+        m_player = new QMediaPlayer(this);
+        m_player->setVolume(50);
 
-        // 连接播放器信号 - 使用 Qt5 的 API
-        connect(player, &QMediaPlayer::stateChanged, this, [this](QMediaPlayer::State state) {
+        connect(m_player, &QMediaPlayer::stateChanged, this, [this](QMediaPlayer::State state)
+                {
             if (state == QMediaPlayer::StoppedState) {
                 emit playbackFinished();
-            }
-        });
+            } });
+
+        // 连接翻译信号
+        Translator *trans = Translator::instance();
+        connect(trans, &Translator::translationFinished, this, &VoiceGenerator::onTranslationFinished);
+        connect(trans, &Translator::translationError, this, &VoiceGenerator::onTranslationError);
     }
 
     VoiceGenerator(const VoiceGenerator &) = delete;
-
     VoiceGenerator &operator=(const VoiceGenerator &) = delete;
 
-    // 处理讯飞 TTS 的响应（原有逻辑）
+    // 统一执行 TTS 生成
+    void doGenerateVoice(const TTSConfig &config, const QString &text)
+    {
+        if (config.provider == 0)
+        {
+            generateVoiceOpenAI(text, config.speaker_openai_edge_tts, config.speed_openai_edge_tts);
+        }
+        else if (config.provider == 1)
+        {
+            generateVoiceIFlytek(config.iFlytek_APPID, config.iFlytek_APIKey, config.iFlytek_APISecret,
+                                 text, config.iFlytek_speaker);
+        }
+        else
+        {
+            emit errorOccurred("Unknown TTS provider");
+        }
+    }
+
     void handleGenerateResponse(QNetworkReply *reply) {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray response = reply->readAll();
@@ -158,7 +207,6 @@ private:
         reply->deleteLater();
     }
 
-    // 处理 OpenAI 风格 TTS 的响应（新逻辑）
     void handleOpenAIResponse(QNetworkReply *reply) {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray response = reply->readAll();
@@ -188,6 +236,8 @@ private:
         launchByPath(DataManager::instance().const_config_data.tts_server);
     }
 
-    QNetworkAccessManager *manager;
-    QMediaPlayer *player;
+    QNetworkAccessManager *m_manager;
+    QMediaPlayer *m_player;
+    TTSConfig m_pendingConfig; // 暂存等待翻译完成的配置
+    QString m_pendingText;     // 暂存待翻译的原始文本
 };

@@ -22,7 +22,7 @@ mainWidget::mainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::mainWidget
 void mainWidget::initUI() {
     this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
     this->setWindowTitle("Pelr");
-    QFile styleFile(":/assets/style/flutter.qss");
+    QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
     if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QString styleSheet = QLatin1String(styleFile.readAll());
         this->setStyleSheet(styleSheet);

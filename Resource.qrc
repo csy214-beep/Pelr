@@ -314,8 +314,17 @@
   </qresource>
   <qresource>
     <file>assets/style/menu.qss</file>
-    <file>assets/style/style.qss</file>
-    <file>assets/style/flutter.qss</file>
+  </qresource>
+  <qresource>
+    <file>thirdParty/QSS/AMOLED.qss</file>
+    <file>thirdParty/QSS/Aqua.qss</file>
+    <file>thirdParty/QSS/ConsoleStyle.qss</file>
+    <file>thirdParty/QSS/ElegantDark.qss</file>
+    <file>thirdParty/QSS/MacOS.qss</file>
+    <file>thirdParty/QSS/ManjaroMix.qss</file>
+    <file>thirdParty/QSS/MaterialDark.qss</file>
+    <file>thirdParty/QSS/NeonButtons.qss</file>
+    <file>thirdParty/QSS/Ubuntu.qss</file>
   </qresource>
   <qresource>
     <file>assets/image/Pelr.png</file>

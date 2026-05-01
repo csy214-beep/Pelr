@@ -119,13 +119,14 @@ struct constConfigData
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
     const QString tts_server = "tts_server.exe"; // local path
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
+    const QString support_languages = "https://github.com/csy214-beep/Pelr/tree/master/docs/assets/languages.txt";
     // about
     const QString version = VERSION;
     const QString Gitee_repo_owner = "Pfolg";
     const QString Gitee_repo_name = "Pelr";
     const QString Github_repo_owner = "csy214-beep";
     const QString Github_repo_name = "Pelr";
-    const QString team_link = "https://github.com/csy214-beep/Pelr/contributors?ref=master";
+    const QString team_link = "https://github.com/csy214-beep/Pelr/graphs/contributors";
     const QString website_link = "https://github.com/csy214-beep/Pelr";
     const QString feedback_link = "https://github.com/csy214-beep/Pelr/issues";
     const QString textFile = "user\\text.json"; // local path
@@ -225,6 +226,9 @@ struct TTSConfig
     QString iFlytek_speaker = "x4_yezi";
     // TTS server
     bool isRunTTSServerOnStartUp = false;
+    // Translate
+    QString tr_provider;
+    QString tr_lang;
 };
 
 static QVector<QPair<QString, int>> TTSProviderList = {

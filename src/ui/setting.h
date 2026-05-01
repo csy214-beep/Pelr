@@ -16,7 +16,7 @@
 #include "DoubleClickableLabel.h"
 #include "VersionChecker.h"
 #include <QtWidgets/QSlider>
-
+#include "pyLang.h"
 #include "ui_setting.h"
 
 namespace Ui
@@ -68,6 +68,7 @@ private slots:
     void onLogLevelChanged();
 
 private:
+    PyLang *m_langClient;
     VersionChecker *m_versionChecker;
     Ui::setting *ui;
 };

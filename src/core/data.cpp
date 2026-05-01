@@ -48,6 +48,8 @@ void DataManager::writeTTSConfig(const TTSConfig &ttsc)
     json_object.insert("iFlytek_APIKey", ttsc.iFlytek_APIKey);
     json_object.insert("iFlytek_speaker", ttsc.iFlytek_speaker);
     json_object.insert("isRunTTSServerOnStartUp", ttsc.isRunTTSServerOnStartUp);
+    json_object.insert("tr_provider", ttsc.tr_provider);
+    json_object.insert("tr_lang", ttsc.tr_lang);
     QFile file(TTS_CONFIG_FILE);
     if (!file.open(QIODevice::WriteOnly))
     {
@@ -226,6 +228,8 @@ void DataManager::readTTSConfig()
     if (tts_config.iFlytek_APPID.isEmpty() || tts_config.iFlytek_APISecret.isEmpty() || tts_config.iFlytek_APIKey.isEmpty())
         tts_config.provider = 0;
     tts_config.isRunTTSServerOnStartUp = json_object.value("isRunTTSServerOnStartUp").toBool(false);
+    tts_config.tr_provider = json_object.value("tr_provider").toString("");
+    tts_config.tr_lang = json_object.value("tr_lang").toString("");
 }
 void DataManager::readOpenWeatherData()
 {

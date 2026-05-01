@@ -39,10 +39,15 @@ from openai_edge_tts.tts_handler import generate_speech
 from openai_edge_tts.handle_text import prepare_tts_input_with_context
 from openai_edge_tts.config import DEFAULT_CONFIGS
 import shutil
+
+
 # ======================
 # 导入 Pelr TTS 核心服务
 # ======================
 from iFlytek.server import TTSService, logger as pelr_logger
+# 导入翻译
+from translate.returnLanguages import *
+from translate.translator import translate_text
 
 # ======================
 # 创建统一 Flask 应用
@@ -65,6 +70,114 @@ app.add_url_rule('/v1/voices/all', 'list_all_voices', list_all_voices, methods=[
 app.add_url_rule('/voices/all', 'list_all_voices_alias', list_all_voices, methods=['GET', 'POST'])
 app.add_url_rule('/elevenlabs/v1/text-to-speech/<voice_id>', 'elevenlabs_tts', elevenlabs_tts, methods=['POST'])
 app.add_url_rule('/azure/cognitiveservices/v1', 'azure_tts', azure_tts, methods=['POST'])
+
+
+# 翻译部分的路由
+@app.route('/languages', methods=['GET'])
+def api_get_languages():
+    """返回 translators 支持的语言列表"""
+    try:
+        langs = get_languages()
+        return jsonify({"languages": langs})
+    except Exception as e:
+        pelr_logger.error(f"Error in /languages: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/providers', methods=['GET'])
+def api_get_providers():
+    """返回可用的翻译服务提供者列表"""
+    try:
+        providers = get_providers()
+        return jsonify({"providers": providers})
+    except Exception as e:
+        pelr_logger.error(f"Error in /providers: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/test_translation', methods=['POST'])
+def api_test_translation():
+    """
+    测试指定供应商的翻译能力
+    请求 JSON: {
+        "text": "需要翻译的文本",
+        "target_lang": "目标语言代码",
+        "provider": "供应商名称"
+    }
+    返回: {"success": true/false}
+    """
+    try:
+        data = request.get_json(force=True)
+        text = data.get('text', '').strip()
+        target_lang = data.get('target_lang', '').strip()
+        provider = data.get('provider', '').strip()
+
+        # 参数校验
+        if not text or not target_lang or not provider:
+            return (
+                jsonify({"error": "Missing 'text', 'target_lang' or 'provider'"}),
+                400,
+            )
+
+        # 防止滥用（可根据需要调整长度）
+        if len(text) > 500:
+            return jsonify({"error": "Text too long (max 500 characters)"}), 400
+
+        # 可选：校验 supplier 是否在已知列表中
+        if provider not in get_providers():
+            return (
+                jsonify({"error": f"Unknown provider '{provider}'", "success": False}),
+                400,
+            )
+
+        success = test_translation(text, target_lang, provider)
+        return jsonify({"success": success})
+
+    except Exception as e:
+        pelr_logger.error(f"Error in /test_translation: {e}")
+        return jsonify({"error": "Internal server error"}), 500
+
+
+@app.route('/translate', methods=['POST'])
+def api_translate():
+    """
+    执行翻译
+    请求 JSON: {
+        "text": "需要翻译的文本",
+        "target_lang": "目标语言代码",
+        "provider": "供应商名称"
+    }
+    成功返回: {"translated_text": "翻译结果"}
+    失败返回: {"error": "翻译失败"}，状态码 500
+    """
+    try:
+        data = request.get_json(force=True)
+        text = data.get('text', '').strip()
+        target_lang = data.get('target_lang', '').strip()
+        provider = data.get('provider', '').strip()
+
+        # 参数校验
+        if not text or not target_lang or not provider:
+            return (
+                jsonify({"error": "Missing 'text', 'target_lang' or 'provider'"}),
+                400,
+            )
+
+        # 文本长度限制（可选，防止滥用）
+        if len(text) > 5000:
+            return jsonify({"error": "Text too long (max 5000 characters)"}), 400
+
+        # 调用翻译
+        result = translate_text(text, target_lang, provider)
+        if result:
+            return jsonify({"translated_text": result})
+        else:
+            return jsonify({"error": "Translation failed"}), 500
+
+    except Exception as e:
+        pelr_logger.error(f"Error in /translate: {e}")
+        return jsonify({"error": "Internal server error"}), 500
+
 
 # ---------- Pelr TTS 路由 ----------
 # 复用 TTSService 单例

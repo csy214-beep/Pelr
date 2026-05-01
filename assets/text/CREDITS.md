@@ -33,3 +33,4 @@
 | IconaMoon                  | 项目中使用的图标集。                                          | <https://github.com/dariushhpg1/IconaMoon>           |
 | Maple Font                 | 项目中使用的开源字体。                                        | <https://github.com/subframe7536/Maple-font>         |
 | Live2D Cubism SDK 附加资源 | 包含 SDK 提供的示例模型、动作及演示数据，受各自版权条款保护。 | <https://www.live2d.com/zh-CHS/sdk/download/native/> |
+| QSS (Qt StyleSheet templates) | Qt 应用程序的样式表主题集合（MIT 许可证），包含 Ubuntu、ElegantDark 等 9 种主题。 | <https://github.com/GTRONICK/QSS> |
