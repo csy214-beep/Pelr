@@ -5,4 +5,5 @@ emoji==2.15.0
 gevent==26.4.0
 PySide6==6.11.0
 python-dotenv==1.2.2
+translators==6.0.4
 websocket-client==1.9.0

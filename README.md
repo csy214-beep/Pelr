@@ -62,8 +62,8 @@
 > 时间尚不充裕，择机编写
 
 - pmx支持(计划引入：benikabocha/saba)
-- 将输出翻译成指定语言后再TTS(可能通过Qt设置，Python实现)
 - 多语言支持(低优先级)
+- 新TTS服务支持(voicevox)
 
 ### 预览
 

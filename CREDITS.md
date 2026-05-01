@@ -18,13 +18,14 @@
 
 | 库名               | 版本       | 描述                                                         | 许可协议     | 官方链接                                            |
 | :------------------: | :---------: | :------------------------------------------------------------: | :-----------: | :--------------------------------------------------: |
-| edge-tts           | 7.2.8      | 使用 Microsoft Edge 的文本转语音服务，提供命令行和 Python API。 | GPL-3.0      | <https://github.com/rany2/edge-tts>                 |
+| edge-tts           | 7.2.8      | 使用 Microsoft Edge 的文本转语音服务，提供命令行和 Python API。 | MIT       | <https://github.com/rany2/edge-tts>                 |
 | emoji              | 2.15.0     | 在 Python 中处理 emoji 字符，支持搜索、替换和语义识别。         | BSD-3-Clause | <https://pypi.org/project/emoji>                    |
-| gevent             | 26.4.0     | 基于 greenlet 的协程并发网络库，提供高层次的同步 API。          | MIT          | <http://www.gevent.org>                             |
+| gevent             | 26.4.0     | 基于 greenlet 的协程并发网络库，提供高层次的同步 API。          | MIT          | <https://pypi.org/project/gevent>                             |
 | openai-edge-tts    | Git 仓库   | Free, high-quality text-to-speech API endpoint to replace OpenAI, Azure, or ElevenLabs    |  GPL-3.0 license          | <https://github.com/travisvn/openai-edge-tts>       |
 | PySide6            | 6.11.0     | Qt for Python 的主要绑定，提供全面的 Qt 6 API 访问。            | LGPL         | <https://doc.qt.io/qtforpython/>                    |
 | python-dotenv      | 1.2.2      | 从 .env 文件加载键值对环境变量到 os.environ。                   | BSD-3-Clause | <https://pypi.org/project/python-dotenv>            |
 | websocket-client   | 1.9.0      | 纯 Python 实现的 WebSocket 客户端。                             | LGPL         | <https://github.com/websocket-client/websocket-client> |
+| translators        | 6.0.4      | 统一调用 Google、Bing、DeepL 等多种翻译服务的 Python 库。      | GPL-3.0          | <https://github.com/UlionTse/translators>           |
 
 ## 其他使用的资源
 
