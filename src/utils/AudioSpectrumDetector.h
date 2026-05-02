@@ -46,7 +46,7 @@ private:
     // 频谱能量处理
     float m_smoothedEnergy = 0.0f;
     float m_smoothingFactor = 0.3f;      // 指数平滑系数
-    float m_noiseGateThreshold = 0.001f; // 噪声门阈值（可根据需要调整）
+    float m_noiseGateThreshold = 0.1f;   // 噪声门阈值（可根据需要调整）
     std::atomic<bool> m_isActive{false};
     std::atomic<float> m_currentEnergy{0.0f};
 

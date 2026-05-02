@@ -289,7 +289,7 @@ void AudioSpectrumDetector::processWindowAndFFT()
     m_smoothedEnergy = m_smoothedEnergy * (1.0f - m_smoothingFactor) + energy * m_smoothingFactor;
 
     m_currentEnergy.store(m_smoothedEnergy);
-    m_isActive.store(m_smoothedEnergy > 0.0001f); // 激活阈值
+    m_isActive.store(m_smoothedEnergy > 0.01f); // 激活阈值
 
     // 移动滑动窗口
     for (int i = 0; i < FFT_SIZE - HOP_SIZE; ++i)
