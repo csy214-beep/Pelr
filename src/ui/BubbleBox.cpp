@@ -73,6 +73,8 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
                 qDebug() << "Voice generated:" << filePath;
                 // 可以直接播放
                 VoiceGenerator::instance()->playVoice(filePath);
+                setText(m_text);
+                adjustSize();
                 show();
                 resetFadeTimer();
             });
@@ -80,6 +82,8 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
     connect(VoiceGenerator::instance(), &VoiceGenerator::errorOccurred,
             this, [&](const QString &error) {
                 qDebug() << "Error:" << error;
+                setText(m_text);
+                adjustSize();
                 show();
                 resetFadeTimer();
             });
@@ -168,19 +172,18 @@ void BubbleBox::setThinkingText() {
 
 
 void BubbleBox::textSet(const QString &text) {
+    m_text = text;
     if (!DataManager::instance().getBasicData().isSaying) {
         qDebug() << "No text-to-speech interface is used";
-        setText(text);
-        qInfo() << "BubbleBox:" << text; // 日志记录
+        setText(m_text);
+        qInfo() << "BubbleBox:" << m_text; // 日志记录
         adjustSize();
         show();
         resetFadeTimer();
         return;
     }
 
-    VoiceGenerator::instance()->generateVoice(DataManager::instance().getTTSConfig(), text);
-    setText(text);
-    adjustSize();
+    VoiceGenerator::instance()->generateVoice(DataManager::instance().getTTSConfig(), m_text);
 }
 
 void BubbleBox::resetFadeTimer() {

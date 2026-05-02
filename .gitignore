@@ -50,6 +50,8 @@ thirdParty/glfw/**
 thirdParty/stb/**
 thirdParty/kissfft/**
 thirdParty/QSS/**
+thirdParty/voicevox_core/**
+
 
 lib/**
 

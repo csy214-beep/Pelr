@@ -49,6 +49,7 @@ private:
     // 静态单例实例指针
     static BubbleBox *m_instance;
     bool isFirst = true;
+    QString m_text;
 
     QString getPeriodText();
 
