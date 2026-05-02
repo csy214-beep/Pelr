@@ -1,8 +1,8 @@
 name: Sync master to Gitee
 
 on:
-  push:
-    branches: ["master"] # 仅在 master 分支变动时触发
+  # push:
+  #  branches: ["master"] # 仅在 master 分支变动时触发
   workflow_dispatch: # 允许手动触发
 
 jobs:
