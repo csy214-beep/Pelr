@@ -54,9 +54,13 @@ void DataManager::writeTTSConfig(const TTSConfig &ttsc)
     json_object.insert("voicevox_model", ttsc.voicevox_model);
     json_object.insert("voicevox_style_id", ttsc.voicevox_style_id);
     json_object.insert("voicevox_speed", ttsc.voicevox_speed);
-
+    // Translate
+    json_object.insert("tr_point", ttsc.tr_point);
+    json_object.insert("tr_libretranslate_port", ttsc.tr_libretranslate_port);
     json_object.insert("tr_provider", ttsc.tr_provider);
-    json_object.insert("tr_lang", ttsc.tr_lang);
+    json_object.insert("tr_lang_translators", ttsc.tr_lang_translators);
+    json_object.insert("tr_lang_libretranslate", ttsc.tr_lang_libretranslate);
+
     QFile file(TTS_CONFIG_FILE);
     if (!file.open(QIODevice::WriteOnly))
     {
@@ -244,9 +248,12 @@ void DataManager::readTTSConfig()
     tts_config.voicevox_model = json_object.value("voicevox_model").toString("");
     tts_config.voicevox_style_id = json_object.value("voicevox_style_id").toInt(0);
     tts_config.voicevox_speed = json_object.value("voicevox_speed").toDouble(1.0);
-
+    // Translate
+    tts_config.tr_point = json_object.value("tr_point").toInt(1);
+    tts_config.tr_lang_libretranslate = json_object.value("tr_lang_libretranslate").toString("");
+    tts_config.tr_libretranslate_port = json_object.value("tr_libretranslate_port").toString("");
     tts_config.tr_provider = json_object.value("tr_provider").toString("");
-    tts_config.tr_lang = json_object.value("tr_lang").toString("");
+    tts_config.tr_lang_translators = json_object.value("tr_lang_translators").toString("");
 }
 void DataManager::readOpenWeatherData()
 {

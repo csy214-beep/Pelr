@@ -7,6 +7,7 @@
 - [托盘](app-tray.md)
 - [TTS 服务程序](app-tts.md)
 - [voicevox 配置指引](app-voicevox.md)
+- [LibreTranslate 配置指引](app-LibreTranslate.md)
 
 ## 开发者
 

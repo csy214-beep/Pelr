@@ -68,6 +68,7 @@ private slots:
     void onLogLevelChanged();
 
     void onTTSProviderChanged();
+    void onTranslatorsChanged();
     void onChooseVoicevoxModel();
     void refreshVoicevoxStyles();
     void onChooseVoicevoxDict();

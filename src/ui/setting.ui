@@ -519,7 +519,7 @@
             <x>0</x>
             <y>0</y>
             <width>907</width>
-            <height>1020</height>
+            <height>1207</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -797,9 +797,25 @@
             </widget>
            </item>
            <item>
+            <widget class="QWidget" name="widget_4" native="true">
+             <layout class="QFormLayout" name="formLayout_5">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_46">
+                <property name="text">
+                 <string>翻译选择</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBox_7"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <widget class="QGroupBox" name="groupBox">
              <property name="title">
-              <string>TTS 前翻译 - 通用 云端</string>
+              <string>TTS Server - 通用 云端 (translators)</string>
              </property>
              <layout class="QFormLayout" name="formLayout_3">
               <item row="1" column="0">
@@ -874,6 +890,46 @@
                 <property name="icon">
                  <iconset resource="../../Resource.qrc">
                   <normaloff>:/public/IconaMoon/Interface/Synchronize - 24x24.png</normaloff>:/public/IconaMoon/Interface/Synchronize - 24x24.png</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="title">
+              <string>libretranslate - 本地 自定义 </string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_6">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_47">
+                <property name="text">
+                 <string>端口</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_17"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_48">
+                <property name="text">
+                 <string>语言</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEdit_18"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QPushButton" name="pushButton_28">
+                <property name="text">
+                 <string>配置指引</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resource.qrc">
+                  <normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link External - 24x24.png</iconset>
                 </property>
                </widget>
               </item>

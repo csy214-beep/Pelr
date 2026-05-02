@@ -31,7 +31,7 @@
 #define OPEN_WEATHER_FILE "user/openWeather.json"
 #define LLAMA_DATA_FILE "user/llamaConfig.json"
 
-#define VERSION "20260405.12.18" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
+#define VERSION "20260503.13-dev" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 
 struct colorPair
 {
@@ -123,6 +123,7 @@ struct constConfigData
     const QString voicevox_help = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-voicevox.md";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     const QString support_languages = "https://github.com/csy214-beep/Pelr/tree/master/docs/assets/languages.txt";
+    const QString libretranslate_guide = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-LibreTranslate.md";
     // about
     const QString version = VERSION;
     const QString Gitee_repo_owner = "Pfolg";
@@ -235,14 +236,22 @@ struct TTSConfig
     // TTS server
     bool isRunTTSServerOnStartUp = false;
     // Translate
-    QString tr_provider;
-    QString tr_lang;
+    int tr_point;                // 0 libretranslate; 1 translators;
+    QString tr_provider;         // translators
+    QString tr_lang_translators; // translators
+    QString tr_lang_libretranslate;
+    QString tr_libretranslate_port = "5000";
 };
 
 static QVector<QPair<QString, int>> TTSProviderList = {
     {"OpenAI-Edge-TTS", 0},
     {"iFlytek", 1},
     {"voicevox", 2},
+};
+
+static QVector<QPair<QString, int>> Translators = {
+    {"libretranslate", 0},
+    {"translators", 1},
 };
 
 struct OpenWeatherData

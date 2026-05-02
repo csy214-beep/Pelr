@@ -84,6 +84,8 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     TTSConfig data;
     data.provider = ui->comboBox_4->currentIndex();
     qDebug() << "TTS provider: " << data.provider;
+    data.tr_point = ui->comboBox_7->currentIndex();
+    qDebug() << "TRA provider: " << data.tr_point;
     // openai_edge_tts
     data.speaker_openai_edge_tts = ui->lineEdit_11->text();
     data.speed_openai_edge_tts = ui->doubleSpinBox->value();
@@ -99,8 +101,11 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     data.voicevox_speed = ui->doubleSpinBox_2->value();
     // translate
     data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
-    data.tr_lang = ui->comboBox_5->currentText();
+    data.tr_lang_translators = ui->comboBox_5->currentText();
     data.tr_provider = ui->comboBox->currentText();
+    data.tr_libretranslate_port = ui->lineEdit_17->text();
+    data.tr_lang_libretranslate = ui->lineEdit_18->text();
+
     return data;
 }
 
@@ -131,9 +136,10 @@ LlamaData SettingWidget::getLlamaDataValue() const
 void SettingWidget::setTTSConfig(const TTSConfig &data) const
 {
     // TTS
-    qDebug() << "data.provider: " << data.provider;
+    qDebug() << " TTS provider " << data.provider;
     ui->comboBox_4->setCurrentIndex(static_cast<int>(data.provider));
-    qDebug() << "ui->comboBox_4 CurrentIndex: " << ui->comboBox_4->currentIndex();
+    qDebug() << " TRA point " << data.tr_point;
+    ui->comboBox_7->setCurrentIndex(static_cast<int>(data.tr_point));
     // openai-edge-tts
     ui->lineEdit_11->setText(data.speaker_openai_edge_tts);
     ui->doubleSpinBox->setValue(data.speed_openai_edge_tts);
@@ -161,8 +167,10 @@ void SettingWidget::setTTSConfig(const TTSConfig &data) const
             ui->comboBox_6->setCurrentIndex(0);
     }
     // translate
-    ui->comboBox_5->setCurrentText(data.tr_lang);
+    ui->comboBox_5->setCurrentText(data.tr_lang_translators);
     ui->comboBox->setCurrentText(data.tr_provider);
+    ui->lineEdit_17->setText(data.tr_libretranslate_port);
+    ui->lineEdit_18->setText(data.tr_lang_libretranslate);
 }
 void SettingWidget::setLlamaData(const LlamaData &llm) const
 {
@@ -287,6 +295,11 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     {
         ui->comboBox_4->addItem(item.first, item.second);
     }
+    ui->comboBox_7->clear();
+    for (const auto &item : Translators)
+    {
+        ui->comboBox_7->addItem(item.first, item.second);
+    }
 
     // 连接信号槽
     connectSignals();
@@ -355,6 +368,7 @@ void SettingWidget::connectSignals()
             { TrayIcon::instance()->switchMusicIcon(ui->checkBox_12->isChecked()); });
     // TTS
     connect(ui->comboBox_4, &QComboBox::currentTextChanged, this, &SettingWidget::onTTSProviderChanged);
+    connect(ui->comboBox_7, &QComboBox::currentTextChanged, this, &SettingWidget::onTranslatorsChanged);
     connect(ui->pushButton_21, &QPushButton::clicked, [&]()
             {
                 m_langClient->fetchProviders();
@@ -402,6 +416,8 @@ void SettingWidget::connectSignals()
     connect(ui->pushButton_26, &QPushButton::clicked, this, &SettingWidget::onTestVoicevox);
     connect(ui->pushButton_27, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.voicevox_help); });
+    connect(ui->pushButton_28, &QPushButton::clicked, [&]()
+            { launchByPath(DataManager::instance().const_config_data.libretranslate_guide); });
 
     // llama
     connect(ui->pushButton_15, &QPushButton::clicked, [&]()
@@ -643,6 +659,27 @@ QString SettingWidget::selectColor()
     }
     return "";
 }
+void SettingWidget::onTranslatorsChanged()
+{
+    int index = ui->comboBox_7->currentIndex();
+    qDebug() << "Translator changed to " << index;
+    QList<QGroupBox *> groupBoxes = {
+        ui->groupBox_5, // libretranslate
+        ui->groupBox,   // translators
+    };
+    for (int i = 0; i < groupBoxes.size(); i++)
+    {
+        if (i == index)
+        {
+            groupBoxes[i]->setVisible(true);
+        }
+        else
+        {
+            groupBoxes[i]->setVisible(false);
+        }
+    }
+};
+
 void SettingWidget::onTTSProviderChanged()
 {
     int index = ui->comboBox_4->currentIndex();

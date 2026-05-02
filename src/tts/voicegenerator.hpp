@@ -24,6 +24,7 @@
 #include "data.hpp"
 #include "launcher.hpp"
 #include "translator.h"
+#include "trmanager.h"
 #include "voicevox_tts.h"
 
 class VoiceGenerator : public QObject {
@@ -42,17 +43,27 @@ public:
      */
     void generateVoice(const TTSConfig &config, const QString &text)
     {
-        // 判断是否需要翻译
-        if (!config.tr_provider.isEmpty() && !config.tr_lang.isEmpty())
+        // 判断是否需要翻译：根据 tr_point 是否有效以及目标语言配置是否非空
+        // 注意：TranslationManager 内部会使用 tr_point 选择后端，这里只需判断是否有翻译需求
+        bool needTranslate = false;
+        if (config.tr_point == 0 && !config.tr_lang_libretranslate.isEmpty())
         {
-            // 暂存配置和原文，翻译完成后再生成
+            needTranslate = true;
+        }
+        else if (config.tr_point == 1 && !config.tr_lang_translators.isEmpty() && !config.tr_provider.isEmpty())
+        {
+            needTranslate = true;
+        }
+
+        if (needTranslate)
+        {
             m_pendingConfig = config;
             m_pendingText = text;
-            Translator::instance()->translate(text, config.tr_lang, config.tr_provider);
+            TrManager::instance()->setConfig(config);
+            TrManager::instance()->translate(text);
         }
         else
         {
-            // 不需要翻译，直接生成
             doGenerateVoice(config, text);
         }
     }
@@ -144,14 +155,12 @@ private slots:
     void onTranslationFinished(const QString &translatedText)
     {
         qDebug() << "Translation successful:" << translatedText;
-        // 使用翻译后的文本生成语音
         doGenerateVoice(m_pendingConfig, translatedText);
     }
 
     void onTranslationError(const QString &errorMessage)
     {
         qWarning() << "Translation failed:" << errorMessage;
-        // 回退到原文生成语音，并通知调用方
         emit errorOccurred("Translation failed: " + errorMessage);
         doGenerateVoice(m_pendingConfig, m_pendingText);
     }
@@ -176,9 +185,11 @@ private:
             } });
 
         // 连接翻译信号
-        Translator *trans = Translator::instance();
-        connect(trans, &Translator::translationFinished, this, &VoiceGenerator::onTranslationFinished);
-        connect(trans, &Translator::translationError, this, &VoiceGenerator::onTranslationError);
+        TrManager *transMgr = TrManager::instance();
+        connect(transMgr, &TrManager::translationFinished,
+                this, &VoiceGenerator::onTranslationFinished);
+        connect(transMgr, &TrManager::translationError,
+                this, &VoiceGenerator::onTranslationError);
     }
 
     VoiceGenerator(const VoiceGenerator &) = delete;
