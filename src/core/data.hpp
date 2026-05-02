@@ -75,6 +75,7 @@ struct ConfigData
     bool isSilentBoot = false;
     bool isRecordWindowLocation = false;
     bool isMusicIcon = false;
+    bool isShowThinkingBubble = false;
 
     // 重载运算符以便使用QDataStream进行序列化
     friend QDataStream &operator<<(QDataStream &out, const ConfigData &data)
@@ -89,7 +90,8 @@ struct ConfigData
         out << data.isStartUp << data.isListening << data.isLookingMouse
             << data.isStartStar << data.isRandomSpeech << data.isSaying
             << data.isHourAlarm << data.isTop << data.isTrayHourAlarm
-            << data.isSilentBoot << data.isRecordWindowLocation << data.isMusicIcon;
+            << data.isSilentBoot << data.isRecordWindowLocation
+            << data.isMusicIcon << data.isShowThinkingBubble;
 
         return out;
     }
@@ -106,7 +108,7 @@ struct ConfigData
         in >> data.isStartUp >> data.isListening >> data.isLookingMouse >> data.isStartStar >> data.isRandomSpeech >>
             data.isSaying >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm >> data.isSilentBoot >> data
                                                                                                                 .isRecordWindowLocation >>
-            data.isMusicIcon;
+            data.isMusicIcon >> data.isShowThinkingBubble;
 
         return in;
     }
@@ -118,6 +120,7 @@ struct constConfigData
     const QString openai_edge_tts_Voice_Samples = "https://tts.travisvn.com/";
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
     const QString tts_server = "tts_server.exe"; // local path
+    const QString voicevox_help = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-voicevox.md";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     const QString support_languages = "https://github.com/csy214-beep/Pelr/tree/master/docs/assets/languages.txt";
     // about
@@ -215,7 +218,7 @@ struct ToDoSettingData
 struct TTSConfig
 {
     // TTS
-    int provider = 0; // 0: openai_edge_tts; 1: iFlytek
+    int provider = 0; // 0: openai_edge_tts; 1: iFlytek 2: voicevox
     // openai_edge_tts
     QString speaker_openai_edge_tts = "zh-CN-XiaoxiaoNeural";
     double speed_openai_edge_tts = 1.0;
@@ -224,6 +227,11 @@ struct TTSConfig
     QString iFlytek_APISecret;
     QString iFlytek_APIKey;
     QString iFlytek_speaker = "x4_yezi";
+    // voicevox
+    QString voicevox_dict_dir;
+    QString voicevox_model;
+    int voicevox_style_id;
+    double voicevox_speed = 1.0;
     // TTS server
     bool isRunTTSServerOnStartUp = false;
     // Translate
@@ -233,7 +241,9 @@ struct TTSConfig
 
 static QVector<QPair<QString, int>> TTSProviderList = {
     {"OpenAI-Edge-TTS", 0},
-    {"iFlytek", 1}};
+    {"iFlytek", 1},
+    {"voicevox", 2},
+};
 
 struct OpenWeatherData
 {

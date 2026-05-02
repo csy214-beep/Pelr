@@ -22,6 +22,8 @@
 #include "TranslationManager.h"
 #include "logger.hpp"
 #include "NotificationWidget.h"
+#include "initFileSys.h"
+#include "voicevox_tts.h"
 // 输出到控制台（如果启用）
 #ifdef CONSOLE
 QTextStream out(stdout);
@@ -53,14 +55,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
+    // 确保 必要 目录存在
+    initFileSys();
     // 初始化日志
     initLogFile();
     // 设置控制台输出的代码页为UTF-8
     SetConsoleOutputCP(CP_UTF8);
     // 初始化日志等级
     setLogLevel(read_log_level());
-    // 确保 user 目录存在
-    QDir().mkpath("user"); // 如果目录不存在则创建，包括所有必要的父目录
+
     // 安装自定义消息处理器
     if (!DEBUG) qInstallMessageHandler(messageHandler);
     //  初始化随机数生成器
@@ -83,6 +86,11 @@ int main(int argc, char *argv[])
 
     TrayIcon::instance()->show();
 
+    // 初始化 ONNX Runtime（onnxruntime.dll 已复制到 exe 目录，传空字符串自动查找）
+    if (!VoicevoxTTS::initializeOnnxRuntime())
+    {
+        qWarning() << "Failed to initialize OnnxRuntime";
+    }
     // 初始化翻译管理器
     initTranslator(app, ":/translations");
 

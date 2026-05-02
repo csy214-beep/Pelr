@@ -37,7 +37,7 @@
 - **Live2D 虚拟角色** - 支持 Live2D 模型 (仅支持 model3.json 格式)，提供生动的桌面伴侣体验
 - **智能对话** - 支持 OpenAI 兼容的 AI 服务，支持自然语言交互
 - **表情动作** - 支持模型（如果模型支持）自带的表情动作，提供丰富的表情切换
-- **语音合成** - 内置OpenAI-Edge-TTS、讯飞 TTS 服务，提供高质量的语音反馈
+- **语音合成** - 内置OpenAI-Edge-TTS、讯飞 TTS 和 voicevox 服务，提供高质量的语音反馈
 - **TODO功能** - 简单的TODO系统，可以添加事件，并提醒待办
 - **启动管理** -
   可视化管理启动应用程序（内置功能，别于系统），启动Windows的任何文件、链接，继承自[QuickTray](https://github.com/Pfolg/QuickTray)
@@ -205,6 +205,7 @@
 - [llama](https://github.com/ggml-org/llama.cpp) - 本地 AI 模型部署
 - [openai-edge-tts](https://github.com/travisvn/openai-edge-tts) - 以OpenAI兼容的方式调用EdgeTTS
 - 讯飞开放平台 - 高质量的语音合成服务
+- [voicevox](https://github.com/VOICEVOX/voicevox_core) - VOICEVOX 的核心 ，一款免费、中等质量的文本转语音软件
 - 所有贡献者和用户的支持
 
 ## 技术支持

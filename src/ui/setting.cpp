@@ -28,6 +28,8 @@
 #include "NotificationWidget.h"
 #include "loadText.h"
 #include "UpdateDialog.h"
+#include "voicevox_tts.h"
+#include "voicegenerator.hpp"
 using MessageType = NotificationWidget::MessageType;
 
 ConfigData SettingWidget::getAllValues()
@@ -72,6 +74,7 @@ ConfigData SettingWidget::getAllValues()
     data.isSilentBoot = ui->checkBox_10->isChecked();
     data.isRecordWindowLocation = ui->checkBox_11->isChecked();
     data.isMusicIcon = ui->checkBox_12->isChecked();
+    data.isShowThinkingBubble = ui->checkBox_14->isChecked();
 
     return data;
 }
@@ -81,13 +84,20 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     TTSConfig data;
     data.provider = ui->comboBox_4->currentIndex();
     qDebug() << "TTS provider: " << data.provider;
-    // TTS
+    // openai_edge_tts
     data.speaker_openai_edge_tts = ui->lineEdit_11->text();
     data.speed_openai_edge_tts = ui->doubleSpinBox->value();
+    // iFlytek
     data.iFlytek_APPID = ui->lineEdit_2->text();
     data.iFlytek_APISecret = ui->lineEdit_3->text();
     data.iFlytek_APIKey = ui->lineEdit_4->text();
     data.iFlytek_speaker = ui->lineEdit_5->text();
+    // voicevox
+    data.voicevox_dict_dir = ui->lineEdit_15->text();
+    data.voicevox_model = ui->lineEdit_16->text();
+    data.voicevox_style_id = ui->comboBox_6->currentData().toInt(); // 固定使用 userData 中的 ID
+    data.voicevox_speed = ui->doubleSpinBox_2->value();
+    // translate
     data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
     data.tr_lang = ui->comboBox_5->currentText();
     data.tr_provider = ui->comboBox->currentText();
@@ -121,7 +131,9 @@ LlamaData SettingWidget::getLlamaDataValue() const
 void SettingWidget::setTTSConfig(const TTSConfig &data) const
 {
     // TTS
-    ui->comboBox_4->setCurrentIndex(data.provider);
+    qDebug() << "data.provider: " << data.provider;
+    ui->comboBox_4->setCurrentIndex(static_cast<int>(data.provider));
+    qDebug() << "ui->comboBox_4 CurrentIndex: " << ui->comboBox_4->currentIndex();
     // openai-edge-tts
     ui->lineEdit_11->setText(data.speaker_openai_edge_tts);
     ui->doubleSpinBox->setValue(data.speed_openai_edge_tts);
@@ -131,6 +143,23 @@ void SettingWidget::setTTSConfig(const TTSConfig &data) const
     ui->lineEdit_4->setText(data.iFlytek_APPID);
     ui->lineEdit_5->setText(data.iFlytek_speaker);
     ui->checkBox_13->setChecked(data.isRunTTSServerOnStartUp);
+    // voicevox
+    ui->lineEdit_15->setText(data.voicevox_dict_dir);
+    ui->lineEdit_16->setText(data.voicevox_model);
+    ui->doubleSpinBox_2->setValue(data.voicevox_speed); // 改用 doubleSpinBox_2
+
+    // 根据 style ID 选中风格
+    int idx = ui->comboBox_6->findData(data.voicevox_style_id);
+    if (idx >= 0)
+    {
+        ui->comboBox_6->setCurrentIndex(idx);
+    }
+    else
+    {
+        // 如果 ID 不存在（例如模型未加载），保留空白或第一个
+        if (ui->comboBox_6->count() > 0)
+            ui->comboBox_6->setCurrentIndex(0);
+    }
     // translate
     ui->comboBox_5->setCurrentText(data.tr_lang);
     ui->comboBox->setCurrentText(data.tr_provider);
@@ -207,6 +236,7 @@ void SettingWidget::setAllValues(const ConfigData &data)
     ui->checkBox_10->setChecked(data.isSilentBoot);
     ui->checkBox_11->setChecked(data.isRecordWindowLocation);
     ui->checkBox_12->setChecked(data.isMusicIcon);
+    ui->checkBox_14->setChecked(data.isShowThinkingBubble);
 }
 
 SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::setting)
@@ -324,6 +354,7 @@ void SettingWidget::connectSignals()
     connect(ui->checkBox_12, &QCheckBox::clicked, [&]()
             { TrayIcon::instance()->switchMusicIcon(ui->checkBox_12->isChecked()); });
     // TTS
+    connect(ui->comboBox_4, &QComboBox::currentTextChanged, this, &SettingWidget::onTTSProviderChanged);
     connect(ui->pushButton_21, &QPushButton::clicked, [&]()
             {
                 m_langClient->fetchProviders();
@@ -365,6 +396,13 @@ void SettingWidget::connectSignals()
             ui->comboBox->addItem(provider, index);
             index++;
         } });
+
+    connect(ui->pushButton_24, &QPushButton::clicked, this, &SettingWidget::onChooseVoicevoxDict);
+    connect(ui->pushButton_25, &QPushButton::clicked, this, &SettingWidget::onChooseVoicevoxModel);
+    connect(ui->pushButton_26, &QPushButton::clicked, this, &SettingWidget::onTestVoicevox);
+    connect(ui->pushButton_27, &QPushButton::clicked, [&]()
+            { launchByPath(DataManager::instance().const_config_data.voicevox_help); });
+
     // llama
     connect(ui->pushButton_15, &QPushButton::clicked, [&]()
             {
@@ -605,7 +643,23 @@ QString SettingWidget::selectColor()
     }
     return "";
 }
-
+void SettingWidget::onTTSProviderChanged()
+{
+    int index = ui->comboBox_4->currentIndex();
+    qDebug() << "TTS provider changed to " << index;
+    QList<QGroupBox *> groupBoxes = {
+        ui->groupBox_2,
+        ui->groupBox_3,
+        ui->groupBox_4,
+    };
+    for (int i = 0; i < groupBoxes.size(); i++)
+    {
+        if (i == index)
+            groupBoxes[i]->setVisible(true);
+        else
+            groupBoxes[i]->setVisible(false);
+    }
+}
 void SettingWidget::onLogLevelChanged()
 {
     LogLevel level = static_cast<LogLevel>(ui->comboBox_3->currentData().toInt());
@@ -633,7 +687,140 @@ void SettingWidget::selectModelPath()
         saveData();
     }
 }
+// 用户点击“浏览”模型文件按钮
+void SettingWidget::onChooseVoicevoxModel()
+{
+    QString filePath = QFileDialog::getOpenFileName(
+        this,
+        tr("选择音声模型文件"),
+        "Resources/voicevox_core",
+        tr("VVM 文件 (*.vvm);;所有文件 (*)"));
+    if (filePath.isEmpty())
+        return;
 
+    ui->lineEdit_16->setText(filePath);
+
+    // 通过单例加载模型
+    if (!VoicevoxTTS::instance().loadModel(filePath))
+    {
+        NotificationWidget::showNotification(
+            tr("Warning"),
+            tr("模型加载失败，请检查模型文件是否正确，并重新加载。"), 5000, MessageType::Warning);
+        qDebug() << "model load failed" << filePath;
+        return;
+    }
+
+    refreshVoicevoxStyles();
+}
+
+// 刷新风格下拉框（comboBox_6）
+void SettingWidget::refreshVoicevoxStyles()
+{
+    const QString previousStyleText = ui->comboBox_6->currentText();
+
+    ui->comboBox_6->blockSignals(true);
+    ui->comboBox_6->clear();
+
+    const auto speakers = VoicevoxTTS::instance().getSpeakers();
+    if (speakers.isEmpty())
+    {
+        ui->comboBox_6->addItem(tr("(无可用风格)"), -1);
+        ui->comboBox_6->blockSignals(false);
+        return;
+    }
+
+    int indexToSelect = -1;
+    int currentIdx = 0;
+
+    for (const auto &speaker : speakers)
+    {
+        for (const auto &style : speaker.styles)
+        {
+            const QString itemText = QStringLiteral("%1 - %2").arg(speaker.name, style.name);
+            ui->comboBox_6->addItem(itemText, style.id);
+
+            if (!previousStyleText.isEmpty() && itemText == previousStyleText)
+            {
+                indexToSelect = currentIdx;
+            }
+            ++currentIdx;
+        }
+    }
+
+    if (indexToSelect >= 0)
+    {
+        ui->comboBox_6->setCurrentIndex(indexToSelect);
+    }
+    else if (ui->comboBox_6->count() > 0)
+    {
+        ui->comboBox_6->setCurrentIndex(0);
+    }
+
+    ui->comboBox_6->blockSignals(false);
+}
+
+// 实际加载辞书：更新UI并调用单例初始化
+void SettingWidget::loadVoicevoxDict(const QString &dir)
+{
+    ui->lineEdit_15->setText(dir); // 显示路径
+
+    if (!VoicevoxTTS::instance().initialize(dir))
+    {
+        qWarning() << "Failed to initialize VoicevoxTTS: " << dir;
+        NotificationWidget::showNotification(tr("Warning"), tr("辞书加载失败，请检查路径是否正确，并确保该路径下有有效的字典文件"), 5000, NotificationWidget::Warning);
+    }
+    else
+    {
+        qDebug() << "[SettingWidget] Voicevox dictionary initialized successfully:" << dir;
+        // 如果已加载模型，辞书重新初始化后合成器会重建，可能需要重新加载模型才能合成。
+        // 可根据需求在此处自动重新加载模型或提示用户。
+    }
+}
+
+// 浏览按钮槽：选择目录后调用 loadVoicevoxDict
+void SettingWidget::onChooseVoicevoxDict()
+{
+    QString dir = QFileDialog::getExistingDirectory(
+        this,
+        tr("选择辞书目录"),
+        "Resources/voicevox_core",
+        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    if (!dir.isEmpty())
+    {
+        loadVoicevoxDict(dir);
+    }
+}
+void SettingWidget::onTestVoicevox()
+{
+    // 1. 直接获取当前界面的完整 TTS 配置
+    TTSConfig cfg = getTTSConfigValue();
+    cfg.provider = 2; // 强制使用 VOICEVOX，即使当前界面选择的是其他引擎
+
+    // 2. 调用带配置的测试合成
+    QByteArray wav = VoicevoxTTS::instance().testSynthesis(cfg);
+    if (wav.isEmpty())
+    {
+        NotificationWidget::showNotification(tr("Warning"), tr("测试失败，请检查配置是否正确！"), 5000, MessageType ::Warning);
+        return;
+    }
+
+    // 3. 保存到临时文件并播放
+    QString testFile = QDir::tempPath() + "/voicevox_test.wav";
+    QFile file(testFile);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        file.write(wav);
+        file.close();
+    }
+    else
+    {
+        NotificationWidget::showNotification(tr("Warning"), tr("保存失败，无法保存测试音频。"), 5000, MessageType::Warning);
+        return;
+    }
+
+    VoiceGenerator::instance()->playVoice(testFile);
+}
 SettingWidget::~SettingWidget()
 {
     delete ui;

@@ -24,6 +24,7 @@
 #include "data.hpp"
 #include "launcher.hpp"
 #include "translator.h"
+#include "voicevox_tts.h"
 
 class VoiceGenerator : public QObject {
     Q_OBJECT
@@ -108,12 +109,22 @@ public:
     }
 
     void playVoice(const QString &filePath) {
-        if (m_player)
+        if (!m_player)
+            return;
+
+        // 如果有正在播放的旧文件，先停止播放并删除旧文件
+        if (!m_currentPlayFile.isEmpty())
         {
-            m_player->setVolume(DataManager::instance().getBasicData().volume);
-            m_player->setMedia(QUrl::fromLocalFile(filePath));
-            m_player->play();
+            m_player->stop();                 // 停止旧播放
+            QFile::remove(m_currentPlayFile); // 删除旧文件
+            m_currentPlayFile.clear();
         }
+
+        m_currentPlayFile = filePath; // 记录新文件路径
+
+        m_player->setVolume(DataManager::instance().getBasicData().volume);
+        m_player->setMedia(QUrl::fromLocalFile(filePath));
+        m_player->play();
     }
 
     void stopVoice() {
@@ -155,6 +166,12 @@ private:
         connect(m_player, &QMediaPlayer::stateChanged, this, [this](QMediaPlayer::State state)
                 {
             if (state == QMediaPlayer::StoppedState) {
+                // 播放完毕后自动删除临时文件
+                if (!m_currentPlayFile.isEmpty())
+                {
+                    QFile::remove(m_currentPlayFile);
+                    m_currentPlayFile.clear();
+                }
                 emit playbackFinished();
             } });
 
@@ -170,18 +187,34 @@ private:
     // 统一执行 TTS 生成
     void doGenerateVoice(const TTSConfig &config, const QString &text)
     {
-        if (config.provider == 0)
+        switch (config.provider)
         {
+        case 0:
             generateVoiceOpenAI(text, config.speaker_openai_edge_tts, config.speed_openai_edge_tts);
-        }
-        else if (config.provider == 1)
-        {
+            break;
+        case 1:
             generateVoiceIFlytek(config.iFlytek_APPID, config.iFlytek_APIKey, config.iFlytek_APISecret,
                                  text, config.iFlytek_speaker);
-        }
-        else
+            break;
+        case 2:
         {
+            int styleId = config.voicevox_style_id;
+            double speed = config.voicevox_speed;
+            QtConcurrent::run([this, config, text, styleId, speed]()
+                              {
+            QString filePath = VoicevoxTTS::instance().synthesizeToFile(config, text, styleId, speed);
+            if (filePath.isEmpty()) {
+                emit errorOccurred("VOICEVOX synthesis or save failed");
+            } else {
+                QMetaObject::invokeMethod(this, [this, filePath]() {
+                    emit voiceGenerated(filePath);
+                }, Qt::QueuedConnection);
+            } });
+            break;
+        }
+        default:
             emit errorOccurred("Unknown TTS provider");
+            break;
         }
     }
 
@@ -240,4 +273,5 @@ private:
     QMediaPlayer *m_player;
     TTSConfig m_pendingConfig; // 暂存等待翻译完成的配置
     QString m_pendingText;     // 暂存待翻译的原始文本
+    QString m_currentPlayFile; // 当前正在播放（或刚播完）的文件路径
 };

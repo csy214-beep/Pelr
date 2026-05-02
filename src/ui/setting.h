@@ -67,6 +67,13 @@ private slots:
 
     void onLogLevelChanged();
 
+    void onTTSProviderChanged();
+    void onChooseVoicevoxModel();
+    void refreshVoicevoxStyles();
+    void onChooseVoicevoxDict();
+    void loadVoicevoxDict(const QString &dir);
+    void onTestVoicevox();
+
 private:
     PyLang *m_langClient;
     VersionChecker *m_versionChecker;

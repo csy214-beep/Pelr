@@ -9,6 +9,7 @@
 
 ## v20260405.12-dev
 
+1. feat: voicevox TTS
 1. docs: CREDITS.md + translators==6.0.4
 1. feat: 将输出翻译成指定语言后再TTS(通过Qt设置，Python实现)
 1. feat: 采用OpenAI兼容的自定义AI接口，用户可接入自己的API

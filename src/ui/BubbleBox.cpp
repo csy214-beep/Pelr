@@ -165,6 +165,8 @@ QString BubbleBox::GetSystemTime() {
 
 void BubbleBox::setThinkingText() {
     fadeTimer->stop();
+    if (!DataManager::instance().getBasicData().isShowThinkingBubble)
+        return;
     setText(tr("In response..."));
     adjustSize();
     show();

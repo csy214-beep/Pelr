@@ -43,11 +43,18 @@ void DataManager::writeTTSConfig(const TTSConfig &ttsc)
     json_object.insert("provider", ttsc.provider);
     json_object.insert("speaker_openai_edge_tts", ttsc.speaker_openai_edge_tts);
     json_object.insert("speed_openai_edge_tts", ttsc.speed_openai_edge_tts);
+
     json_object.insert("iFlytek_APPID", ttsc.iFlytek_APPID);
     json_object.insert("iFlytek_APISecret", ttsc.iFlytek_APISecret);
     json_object.insert("iFlytek_APIKey", ttsc.iFlytek_APIKey);
     json_object.insert("iFlytek_speaker", ttsc.iFlytek_speaker);
     json_object.insert("isRunTTSServerOnStartUp", ttsc.isRunTTSServerOnStartUp);
+
+    json_object.insert("voicevox_dict_dir", ttsc.voicevox_dict_dir);
+    json_object.insert("voicevox_model", ttsc.voicevox_model);
+    json_object.insert("voicevox_style_id", ttsc.voicevox_style_id);
+    json_object.insert("voicevox_speed", ttsc.voicevox_speed);
+
     json_object.insert("tr_provider", ttsc.tr_provider);
     json_object.insert("tr_lang", ttsc.tr_lang);
     QFile file(TTS_CONFIG_FILE);
@@ -215,8 +222,9 @@ void DataManager::readTTSConfig()
 
     // 逐个读取并验证必要字段
     tts_config.provider = json_object.value("provider").toInt(0);
-    if (tts_config.provider < 0 || tts_config.provider > 1)
+    if (tts_config.provider < 0 || tts_config.provider >= TTSProviderList.length())
     {
+        qDebug() << "Invalid TTS provider:" << tts_config.provider << ", reset to 0";
         tts_config.provider = 0;
     }
     tts_config.speaker_openai_edge_tts = json_object.value("speaker_openai_edge_tts").toString("zh-CN-XiaoxiaoNeural");
@@ -225,9 +233,18 @@ void DataManager::readTTSConfig()
     tts_config.iFlytek_APISecret = json_object.value("iFlytek_APISecret").toString("");
     tts_config.iFlytek_APIKey = json_object.value("iFlytek_APIKey").toString("");
     tts_config.iFlytek_speaker = json_object.value("iFlytek_speaker").toString("x4_yezi");
-    if (tts_config.iFlytek_APPID.isEmpty() || tts_config.iFlytek_APISecret.isEmpty() || tts_config.iFlytek_APIKey.isEmpty())
+    if (tts_config.provider == 1 && (tts_config.iFlytek_APPID.isEmpty() || tts_config.iFlytek_APISecret.isEmpty() || tts_config.iFlytek_APIKey.isEmpty()))
+    {
+        qDebug() << "iFlytek credentials missing, fallback to OpenAI TTS";
         tts_config.provider = 0;
+    }
     tts_config.isRunTTSServerOnStartUp = json_object.value("isRunTTSServerOnStartUp").toBool(false);
+
+    tts_config.voicevox_dict_dir = json_object.value("voicevox_dict_dir").toString("");
+    tts_config.voicevox_model = json_object.value("voicevox_model").toString("");
+    tts_config.voicevox_style_id = json_object.value("voicevox_style_id").toInt(0);
+    tts_config.voicevox_speed = json_object.value("voicevox_speed").toDouble(1.0);
+
     tts_config.tr_provider = json_object.value("tr_provider").toString("");
     tts_config.tr_lang = json_object.value("tr_lang").toString("");
 }
