@@ -73,6 +73,8 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
                 qDebug() << "Voice generated:" << filePath;
                 // 可以直接播放
                 VoiceGenerator::instance()->playVoice(filePath);
+                setText(m_text);
+                adjustSize();
                 show();
                 resetFadeTimer();
             });
@@ -80,6 +82,8 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
     connect(VoiceGenerator::instance(), &VoiceGenerator::errorOccurred,
             this, [&](const QString &error) {
                 qDebug() << "Error:" << error;
+                setText(m_text);
+                adjustSize();
                 show();
                 resetFadeTimer();
             });
@@ -147,7 +151,7 @@ void BubbleBox::showTime() {
         const bool fg = DataManager::instance().getBasicData().isTrayHourAlarm;
         if (fg) {
             NotificationWidget::showNotification(
-                DataManager::instance().Project_Name, tr("现在是%1").arg(time), 5000, NotificationWidget::Information);
+                DataManager::instance().Project_Name, tr("现在是%1").arg(time));
         }
         qDebug() << "now:" << time << "isTrayHourAlarm：" << fg;
         this->now = time;
@@ -161,6 +165,8 @@ QString BubbleBox::GetSystemTime() {
 
 void BubbleBox::setThinkingText() {
     fadeTimer->stop();
+    if (!DataManager::instance().getBasicData().isShowThinkingBubble)
+        return;
     setText(tr("In response..."));
     adjustSize();
     show();
@@ -168,36 +174,18 @@ void BubbleBox::setThinkingText() {
 
 
 void BubbleBox::textSet(const QString &text) {
+    m_text = text;
     if (!DataManager::instance().getBasicData().isSaying) {
         qDebug() << "No text-to-speech interface is used";
-        setText(text);
-        qInfo() << "BubbleBox:" << text; // 日志记录
+        setText(m_text);
+        qInfo() << "BubbleBox:" << m_text; // 日志记录
         adjustSize();
         show();
         resetFadeTimer();
         return;
     }
-    TTSConfig ttsConfig = DataManager::instance().getTTSConfig();
-    if (ttsConfig.provider == 0 && ttsConfig.speed_openai_edge_tts && !ttsConfig.speaker_openai_edge_tts.isEmpty()) {
-        qDebug() << "TTS Config: OpenAI Edge TTS";
-        VoiceGenerator::instance()->generateVoiceOpenAI(text, ttsConfig.speaker_openai_edge_tts,
-                                                        ttsConfig.speed_openai_edge_tts);
-        setText(text);
-        adjustSize();
-    } else if (ttsConfig.provider == 1 && !ttsConfig.iFlytek_APPID.isEmpty() && !ttsConfig.iFlytek_APIKey.isEmpty() && !
-               ttsConfig.iFlytek_APISecret.isEmpty()) {
-        qDebug() << "TTS Config: iFlytek TTS";
-        VoiceGenerator::instance()->generateVoice(ttsConfig.iFlytek_APPID, ttsConfig.iFlytek_APIKey,
-                                                  ttsConfig.iFlytek_APISecret, text, voice);
-        setText(text);
-        adjustSize();
-    } else {
-        qDebug() << "TTS Config is incomplete, interface is not used";
-        setText(text);
-        adjustSize();
-        show();
-        resetFadeTimer();
-    }
+
+    VoiceGenerator::instance()->generateVoice(DataManager::instance().getTTSConfig(), m_text);
 }
 
 void BubbleBox::resetFadeTimer() {

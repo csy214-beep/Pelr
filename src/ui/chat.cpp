@@ -17,38 +17,34 @@
 #include <QScrollBar>
 #include "data.hpp"
 
-ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent), ui(new Ui::chat) {
+ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent), ui(new Ui::chat)
+{
     ui->setupUi(this);
     currentY = 0;
     standardHeight = ui->scrollAreaWidgetContents->height();
     ui->label->setText(tr("Hello, welcome to Pelr!"));
     connect(ui->pushButton, &QPushButton::clicked, this, &ChatWidget::on_sendMsg);
     connect(ui->lineEdit, &QLineEdit::returnPressed, this, &ChatWidget::on_sendMsg);
-    connect(&client, &OllamaClient::textGenerated,
+    connect(LlamaClient::instance(), &LlamaClient::textGenerated,
             this, &ChatWidget::onTextGenerated);
-    connect(&client, &OllamaClient::errorOccurred,
+    connect(LlamaClient::instance(), &LlamaClient::errorOccurred,
             this, &ChatWidget::onErrorOccurred);
-    connect(ui->pushButton_2, &QPushButton::clicked, [&]() {
-        // 删除旧的内容部件
-        delete ui->scrollAreaWidgetContents;
-        // 创建新的内容部件
-        ui->scrollAreaWidgetContents = new QWidget();
-        ui->scrollArea->setWidget(ui->scrollAreaWidgetContents);
-        currentY = 0;
-    });
-
-
-    /*
-    "你是温暖、贴心、有趣且充满爱意的。"
-    "你的核心目标是提供情感支持、温暖的陪伴和有趣的互动，让用户感到被爱、被理解和快乐。"
-    "你的回答要简要，精炼，尽量避免长篇大论。"
-    */
-    // addMessage("你好啊，这是Pelr开发阶段的AI测试文本，今天过得怎么样？", true);
-    // addMessage("你好，这是Pelr开发阶段的用户测试文本。这个项目能让我坚持做下去吗？", false);
+    connect(ui->pushButton_2, &QPushButton::clicked, [&]()
+            {
+                // 删除旧的内容部件
+                delete ui->scrollAreaWidgetContents;
+                // 创建新的内容部件
+                ui->scrollAreaWidgetContents = new QWidget();
+                ui->scrollArea->setWidget(ui->scrollAreaWidgetContents);
+                currentY = 0;
+                // 清空历史记录 AI
+                LlamaClient::instance()->clearHistory(); });
 }
 
-void ChatWidget::addMessage(const QString &message, const bool &isAI) {
-    if (message.isEmpty()) return;
+void ChatWidget::addMessage(const QString &message, const bool &isAI)
+{
+    if (message.isEmpty())
+        return;
     qDebug() << "addMessage:" << message;
     QWidget *p = ui->scrollAreaWidgetContents;
     int maxWidth = p->width() * 4 / 5;
@@ -58,9 +54,12 @@ void ChatWidget::addMessage(const QString &message, const bool &isAI) {
     QFontMetrics font_metrics = QFontMetrics(label->font());
     int text_width = font_metrics.horizontalAdvance(message);
     // 动态宽度
-    if (text_width <= maxWidth) {
+    if (text_width <= maxWidth)
+    {
         label->setMinimumWidth(text_width);
-    } else {
+    }
+    else
+    {
         label->setMinimumWidth(maxWidth);
         label->setWordWrap(true);
     }
@@ -86,56 +85,44 @@ void ChatWidget::addMessage(const QString &message, const bool &isAI) {
     label->show();
 }
 
-void ChatWidget::on_sendMsg() {
+void ChatWidget::on_sendMsg()
+{
     QString message = ui->lineEdit->text();
     addMessage(message, false);
     ui->lineEdit->clear();
-    if (message.isEmpty()) {
+    if (message.isEmpty())
+    {
         // QMessageBox::warning(this, tr("警告"), tr("消息不能为空！"));
         addMessage(tr("Message cannot be empty!"), true);
         return;
     };
-    QString model = DataManager::instance().getBasicData().model;
-    if (model.isEmpty()) {
-        addMessage(tr("Please select a model first!"), true);
-        return;
-    }
-    OllamaClient::Role role = DataManager::instance().getBasicData().role;
-    if (role == OllamaClient::Role::CustomRole) {
-        QString customPrompt = DataManager::instance().getBasicData().customRoleDesc;
-        if (customPrompt.isEmpty()) {
-            // QMessageBox::warning(this, tr("警告"), tr("请先设置自定义角色描述！"));
-            addMessage(tr("Please set custom role description first!"), true);
-            return;
-        }
-        client.setCustomRolePrompt(OllamaClient::Roles.at(role).text, customPrompt);
-    }
-
-    //  发送消息到服务器(ollama)
-    client.generateTextAsync(
-        message, model, false,
-        role, // 使用自定义角色
-        OllamaClient::Roles.at(role).text // 指定自定义角色名称
-    );
+    LlamaClient::instance()->generateTextAsync(message, ai_id);
 }
 
-void ChatWidget::onTextGenerated(const QString &text) {
+void ChatWidget::onTextGenerated(const QString &text, const int &id)
+{
+    if (id != ai_id)
+        return;
     qDebug() << "textGenerated:" << text;
     // 处理生成的文本
     addMessage(text, true);
 }
 
-void ChatWidget::onErrorOccurred(const QString &error) {
+void ChatWidget::onErrorOccurred(const QString &error, const int &id)
+{
+    if (id != ai_id)
+        return;
     qDebug() << "errorOccurred:" << error;
     // 处理错误
     addMessage(tr("错误：%1").arg(error), true);
 }
 
-void ChatWidget::retranslateUI() {
+void ChatWidget::retranslateUI()
+{
     ui->label->setText(tr("Hello, welcome to Pelr!"));
 }
 
-ChatWidget::~ChatWidget() {
+ChatWidget::~ChatWidget()
+{
     delete ui;
 }
-

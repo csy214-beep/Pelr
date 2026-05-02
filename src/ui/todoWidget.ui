@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>todoWidget</class>
  <widget class="QWidget" name="todoWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>718</width>
+    <height>738</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>待办事项</string>
   </property>
@@ -61,7 +69,6 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <!-- 待办事项 选项卡 -->
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>TODO</string>
@@ -78,14 +85,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="rightWidget_todo" native="true">
-         <property name="maximumSize">
+        <widget class="QWidget" name="widget" native="true">
+         <property name="minimumSize">
           <size>
-           <width>100</width>
-           <height>16777215</height>
+           <width>160</width>
+           <height>0</height>
           </size>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_todo">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QPushButton" name="pushButton">
             <property name="minimumSize">
@@ -101,16 +108,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_2">
@@ -127,16 +134,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Check Square - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/Interface/Check Square - 24x24.png</normaloff>:/public/IconaMoon/Interface/Check Square - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_3">
@@ -153,16 +160,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/General/Trash - 24x24.png</normaloff>:/public/IconaMoon/General/Trash - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_4">
@@ -179,16 +186,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer">
@@ -198,7 +205,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>314</height>
              </size>
             </property>
            </spacer>
@@ -222,7 +229,6 @@
        </item>
       </layout>
      </widget>
-     <!-- DONE 选项卡 -->
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>DONE</string>
@@ -239,14 +245,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="rightWidget_done" native="true">
-         <property name="maximumSize">
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="minimumSize">
           <size>
-           <width>100</width>
-           <height>16777215</height>
+           <width>160</width>
+           <height>0</height>
           </size>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_done">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QPushButton" name="pushButton_5">
             <property name="minimumSize">
@@ -262,16 +268,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/assets/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</normaloff>:/public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_6">
@@ -288,16 +294,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/Interface/History - 24x24.png</normaloff>:/assets/IconaMoon/Interface/History - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/Interface/History - 24x24.png</normaloff>:/public/IconaMoon/Interface/History - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_7">
@@ -314,16 +320,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</normaloff>:/assets/IconaMoon/General/Trash - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/General/Trash - 24x24.png</normaloff>:/public/IconaMoon/General/Trash - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_8">
@@ -340,16 +346,16 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/assets/IconaMoon/Interface/Restart - 24x24.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-            </widget>
+             <iconset resource="../../Resource.qrc">
+              <normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</normaloff>:/public/IconaMoon/Interface/Restart - 24x24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer_2">
@@ -374,7 +380,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
  </resources>
  <connections/>
 </ui>

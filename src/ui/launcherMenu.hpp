@@ -44,11 +44,11 @@ public:
         int star_count = 0, app_count = 0, link_count = 0, scripts_count = 0;
         menu_data = DataManager::instance().getMenuData();
         QString p1, p2, p3, p4, p5;
-        p1 = ":/assets/IconaMoon/General/Star - 24x24.png";
-        p2 = ":/assets/IconaMoon/General/Apps - 24x24.png";
-        p3 = ":/assets/IconaMoon/Interface/Link External - 24x24.png";
-        p4 = ":/assets/IconaMoon/Files/File - 24x24.png";
-        p5 = ":/assets/IconaMoon/Media/Player -  Play - 24x24.png";
+        p1 = ":/public/IconaMoon/General/Star - 24x24.png";
+        p2 = ":/public/IconaMoon/General/Apps - 24x24.png";
+        p3 = ":/public/IconaMoon/Interface/Link External - 24x24.png";
+        p4 = ":/public/IconaMoon/Files/File - 24x24.png";
+        p5 = ":/public/IconaMoon/Media/Player -  Play - 24x24.png";
         menu_Star = new CustomMenu("Star", this);
         menu_App = new CustomMenu("App", this);
         menu_Link = new CustomMenu("Link", this);

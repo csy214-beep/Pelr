@@ -11,13 +11,22 @@
 #include  "ui_editor.h"
 #include  <QFileDialog>
 #include <QMessageBox>
+#include "NotificationWidget.h"
+using MessageType = NotificationWidget::MessageType;
 
 EditorWidget::EditorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::editor) {
     ui->setupUi(this);
-    setWindowIcon(QIcon(":/assets/image/live_2d.png"));
-    connect(ui->pushButton_2, &QPushButton::clicked, [&]() {
-        selectFile(ui->lineEdit_2);
-    });
+
+    this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
+    QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
+    if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QString styleSheet = QLatin1String(styleFile.readAll());
+        this->setStyleSheet(styleSheet);
+        styleFile.close();
+    }
+    connect(ui->pushButton_2, &QPushButton::clicked, [&]()
+            { selectFile(ui->lineEdit_2); });
     connect(ui->pushButton_3, &QPushButton::clicked, [&]() {
         selectFile(ui->lineEdit_3);
     });
@@ -31,7 +40,7 @@ QPair<QList<QString>, QList<QString> > EditorWidget::getAllInfo() {
     QString desc = ui->textEdit->toPlainText();
     QList<QString> category;
     if (name.isEmpty() || path.isEmpty()) {
-        QMessageBox::warning(this, tr("Warning"), tr("名称和路径不能为空"));
+        NotificationWidget::showNotification(tr("Warning"), tr("名称和路径不能为空"), 5000, MessageType::Warning);
         return {};
     }
     if (ui->checkBox->isChecked()) {
@@ -47,7 +56,7 @@ QPair<QList<QString>, QList<QString> > EditorWidget::getAllInfo() {
         category.append("Scripts");
     }
     if (category.isEmpty()) {
-        QMessageBox::warning(this, tr("Warning"), tr("至少选择一个分类"));
+        NotificationWidget::showNotification(tr("Warning"), tr("至少选择一个分类"), 5000, MessageType::Warning);
         return {};
     }
     return {category, {name, path, icon, desc}};

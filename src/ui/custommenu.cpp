@@ -90,7 +90,7 @@ void CustomMenu::initStyle() {
 }
 
 void CustomMenu::applyStyle() {
-    QFile styleFile(":/assets/style/menu.qss");
+    QFile styleFile(":/public/style/menu.qss");
     if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QString styleSheet = QLatin1String(styleFile.readAll());
         setStyleSheet(styleSheet);

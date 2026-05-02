@@ -93,6 +93,14 @@ qt5_create_translation(QM_FILES
         ${TRANSLATION_FILES}
 )
 
+# kissfft 库
+add_library(kissfft STATIC
+    thirdParty/kissfft/kiss_fft.c
+    thirdParty/kissfft/kiss_fftr.c
+)
+target_include_directories(kissfft PUBLIC thirdParty/kissfft)
+# 库搜索路径（添加 voicevox_core.lib 所在文件夹）
+link_directories("${CMAKE_SOURCE_DIR}/thirdParty/voicevox_core/c_api/lib")
 # ============================================================================
 # 头文件包含路径
 # ============================================================================
@@ -114,6 +122,8 @@ include_directories(
         thirdParty/glfw/include
         thirdParty/glfw/include/GLFW
         thirdParty/stb
+        thirdParty/kissfft
+        thirdParty/voicevox_core/c_api/include
         ${CMAKE_CURRENT_BINARY_DIR}      # 存放生成的 ui_*.h 文件
 )
 
@@ -153,13 +163,15 @@ target_link_libraries(${PROJECT_NAME}
         Live2DCubismCore_d
         opengl32
         glu32
+        kissfft
+        ksuser
+        voicevox_core
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
         Qt5::Network
         Qt5::OpenGL
         Qt5::SerialPort
-        Qt5::Sql
         Qt5::Svg
         Qt5::WebChannel
         Qt5::WebSockets
@@ -260,6 +272,23 @@ if (WIN32)
             message(WARNING "Custom DLL path does not exist: ${CUSTOM_DLL_PATH}")
         endif ()
     endif ()
+
+    # 单独复制 voicevox_core.dll（如果没有放入 lib/Debug）
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/thirdParty/voicevox_core/c_api/lib/voicevox_core.dll"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+            COMMENT "Copying voicevox_core DLL: voicevox_core.dll"
+
+        )
+    # 新增：复制 voicevox_onnxruntime.dll 到 exe 同目录
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/thirdParty/voicevox_core/onnxruntime/lib/voicevox_onnxruntime.dll"
+        "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+    COMMENT "Copying voicevox_core DLL: voicevox_onnxruntime.dll"
+
+)
 
     # 复制资源文件夹
     set(RESOURCE_FOLDERS

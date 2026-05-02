@@ -43,13 +43,17 @@ dist/
 test_docs
 
 # Third-party Libraries
-thirdParty/Core
-thirdParty/Framework
-thirdParty/glew
-thirdParty/glfw
-thirdParty/stb
+thirdParty/Core/**
+thirdParty/Framework/**
+thirdParty/glew/**
+thirdParty/glfw/**
+thirdParty/stb/**
+thirdParty/kissfft/**
+thirdParty/QSS/**
+thirdParty/voicevox_core/**
 
-lib/
+
+lib/**
 
 # Executables
 *.exe
@@ -59,13 +63,17 @@ lib/
 *.zip
 *.tmp
 
+# test
+test**
+
+
+
+# Resources
+Resources/**
+SampleShaders/**
+FrameworkShaders/**
+
 # log/cache files
 log
 voice_files
-
-# Resources
-Resources/*
-SampleShaders/*
-FrameworkShaders/*
-
 user

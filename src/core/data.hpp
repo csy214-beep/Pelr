@@ -20,7 +20,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QFontDatabase>
-#include "ollamaclient.h"
+#include "llamaclient.h"
 #include <QJsonObject>
 #include <QJsonParseError>
 #define MENU_DATA_FILE "user/menuData.dat"
@@ -29,13 +29,9 @@
 #define TODO_NOTIFY_FILE "user/todoNotify.dat"
 #define TTS_CONFIG_FILE "user/ttsConfig.json"
 #define OPEN_WEATHER_FILE "user/openWeather.json"
+#define LLAMA_DATA_FILE "user/llamaConfig.json"
 
-#define VERSION "20260405.12-dev" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
-// todo: 多语言支持 非紧急
-// todo: pmx支持
-// todo: 将输出翻译成指定语言后再TTS
-// todo: 系统音频提取（重构），选择一个第三方库
-// todo: pelr摆脱ollama依赖，采用OpenAI兼容的自定义接口
+#define VERSION "20260405.12.18" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 
 struct colorPair
 {
@@ -79,11 +75,7 @@ struct ConfigData
     bool isSilentBoot = false;
     bool isRecordWindowLocation = false;
     bool isMusicIcon = false;
-
-    // ollama
-    QString model;
-    OllamaClient::Role role = OllamaClient::DefaultCoder;
-    QString customRoleDesc;
+    bool isShowThinkingBubble = false;
 
     // 重载运算符以便使用QDataStream进行序列化
     friend QDataStream &operator<<(QDataStream &out, const ConfigData &data)
@@ -98,9 +90,9 @@ struct ConfigData
         out << data.isStartUp << data.isListening << data.isLookingMouse
             << data.isStartStar << data.isRandomSpeech << data.isSaying
             << data.isHourAlarm << data.isTop << data.isTrayHourAlarm
-            << data.isSilentBoot << data.isRecordWindowLocation << data.isMusicIcon;
+            << data.isSilentBoot << data.isRecordWindowLocation
+            << data.isMusicIcon << data.isShowThinkingBubble;
 
-        out << data.model << data.role << data.customRoleDesc;
         return out;
     }
 
@@ -116,9 +108,8 @@ struct ConfigData
         in >> data.isStartUp >> data.isListening >> data.isLookingMouse >> data.isStartStar >> data.isRandomSpeech >>
             data.isSaying >> data.isHourAlarm >> data.isTop >> data.isTrayHourAlarm >> data.isSilentBoot >> data
                                                                                                                 .isRecordWindowLocation >>
-            data.isMusicIcon;
+            data.isMusicIcon >> data.isShowThinkingBubble;
 
-        in >> data.model >> data.role >> data.customRoleDesc;
         return in;
     }
 };
@@ -129,19 +120,30 @@ struct constConfigData
     const QString openai_edge_tts_Voice_Samples = "https://tts.travisvn.com/";
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
     const QString tts_server = "tts_server.exe"; // local path
-    const QString ollama_url = "https://ollama.com/";
+    const QString voicevox_help = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-voicevox.md";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
+    const QString support_languages = "https://github.com/csy214-beep/Pelr/tree/master/docs/assets/languages.txt";
     // about
     const QString version = VERSION;
     const QString Gitee_repo_owner = "Pfolg";
     const QString Gitee_repo_name = "Pelr";
     const QString Github_repo_owner = "csy214-beep";
     const QString Github_repo_name = "Pelr";
-    const QString team_link = "https://github.com/csy214-beep/Pelr/contributors?ref=master";
+    const QString team_link = "https://github.com/csy214-beep/Pelr/graphs/contributors";
     const QString website_link = "https://github.com/csy214-beep/Pelr";
     const QString feedback_link = "https://github.com/csy214-beep/Pelr/issues";
     const QString textFile = "user\\text.json"; // local path
     const QString VoiceFolder = "voice_files";  // local path
+};
+
+struct LlamaData
+{
+    QString model;
+    QString systemPrompt;
+    QString baseUrl;
+    QString apiKey;
+    QString promptFilePath;
+    int maxContextMessages;
 };
 
 struct TodoData
@@ -216,7 +218,7 @@ struct ToDoSettingData
 struct TTSConfig
 {
     // TTS
-    int provider = 0; // 0: openai_edge_tts; 1: iFlytek
+    int provider = 0; // 0: openai_edge_tts; 1: iFlytek 2: voicevox
     // openai_edge_tts
     QString speaker_openai_edge_tts = "zh-CN-XiaoxiaoNeural";
     double speed_openai_edge_tts = 1.0;
@@ -225,13 +227,23 @@ struct TTSConfig
     QString iFlytek_APISecret;
     QString iFlytek_APIKey;
     QString iFlytek_speaker = "x4_yezi";
+    // voicevox
+    QString voicevox_dict_dir;
+    QString voicevox_model;
+    int voicevox_style_id;
+    double voicevox_speed = 1.0;
     // TTS server
     bool isRunTTSServerOnStartUp = false;
+    // Translate
+    QString tr_provider;
+    QString tr_lang;
 };
 
 static QVector<QPair<QString, int>> TTSProviderList = {
     {"OpenAI-Edge-TTS", 0},
-    {"iFlytek", 1}};
+    {"iFlytek", 1},
+    {"voicevox", 2},
+};
 
 struct OpenWeatherData
 {
@@ -252,9 +264,10 @@ protected:
     QList<MenuData> cached_menu_data;
     ConfigData basic_data;
     ToDoSettingData todo_setting_data;
-    QString fontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";
+    QString fontPath = ":/public/font/MapleMono-NF-CN-Medium.ttf";
     TTSConfig tts_config;
     OpenWeatherData openWeather_data;
+    LlamaData llama_data;
 
 public:
     QList<TodoData> todo_data;
@@ -273,7 +286,11 @@ public:
         readOpenWeatherData();
         return openWeather_data;
     }
-
+    LlamaData getLlamaData()
+    {
+        readLlamaData();
+        return llama_data;
+    }
     TTSConfig getTTSConfig()
     {
         readTTSConfig();
@@ -304,46 +321,11 @@ public:
         return todo_data;
     }
 
-    static void writeOpenWeatherData(const OpenWeatherData &opwdt)
-    {
-        QJsonObject json_object;
-        json_object.insert("city", opwdt.city);
-        json_object.insert("api_key", opwdt.api_key);
-        QFile file(OPEN_WEATHER_FILE);
-        if (!file.open(QIODevice::WriteOnly))
-        {
-            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(OPEN_WEATHER_FILE));
-            qCritical() << "write OpenWeather Config failed: can not open file";
-            return; // 无法打开文件进行写入
-        }
-        QJsonDocument json_doc(json_object);
-        file.write(json_doc.toJson());
-        file.close();
-    }
+    static void writeOpenWeatherData(const OpenWeatherData &opwdt);
 
-    static void writeTTSConfig(const TTSConfig &ttsc)
-    {
-        QJsonObject json_object;
-        json_object.insert("provider", ttsc.provider);
-        json_object.insert("speaker_openai_edge_tts", ttsc.speaker_openai_edge_tts);
-        json_object.insert("speed_openai_edge_tts", ttsc.speed_openai_edge_tts);
-        json_object.insert("iFlytek_APPID", ttsc.iFlytek_APPID);
-        json_object.insert("iFlytek_APISecret", ttsc.iFlytek_APISecret);
-        json_object.insert("iFlytek_APIKey", ttsc.iFlytek_APIKey);
-        json_object.insert("iFlytek_speaker", ttsc.iFlytek_speaker);
-        json_object.insert("isRunTTSServerOnStartUp", ttsc.isRunTTSServerOnStartUp);
-        QFile file(TTS_CONFIG_FILE);
-        if (!file.open(QIODevice::WriteOnly))
-        {
-            // 无法打开文件进行写入
-            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败: %1").arg(TTS_CONFIG_FILE));
-            qCritical() << "write tts config failed: can not open file";
-            return;
-        }
-        QJsonDocument json_doc(json_object);
-        file.write(json_doc.toJson());
-        file.close();
-    }
+    static void writeTTSConfig(const TTSConfig &ttsc);
+
+    static void writeLlamaData(const LlamaData &llm);
 
     template <typename T>
     void writeData(const T &data)
@@ -396,203 +378,24 @@ public:
         }
     }
 
-    void writeData(ToDoSettingData setting)
-    {
-        QFile file(TODO_NOTIFY_FILE);
-        if (!file.open(QIODevice::WriteOnly))
-        {
-            // 无法打开文件进行写入
-            QMessageBox::critical(nullptr, "Error", "写入数据失败！");
-            qCritical() << "write todo setting data failed: can not open file";
-            return;
-        }
-
-        QDataStream out(&file);
-        out.setVersion(QDataStream::Qt_5_15); // 设置流版本以确保兼容性
-
-        // 写入数据
-        out << setting;
-        file.close();
-        // 更新缓存
-        todo_setting_data = setting;
-    }
+    void writeData(ToDoSettingData setting);
 
 protected:
-    void readOpenWeatherData()
-    {
-        QFile file(OPEN_WEATHER_FILE);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            qWarning() << "Cannot open file:" << OPEN_WEATHER_FILE << "error:" << file.errorString();
-            return; // 文件不存在或无法打开
-        }
-        QByteArray fileData = file.readAll();
-        file.close();
+    QJsonObject readJsonFile(const QString &filePath);
 
-        if (fileData.isEmpty())
-        {
-            qWarning() << "OpenWeather Config file is empty:" << OPEN_WEATHER_FILE;
-            return; // 空文件
-        }
+    void readLlamaData();
 
-        QJsonParseError parseError;
-        QJsonDocument json_doc = QJsonDocument::fromJson(fileData, &parseError);
+    void readOpenWeatherData();
 
-        if (parseError.error != QJsonParseError::NoError)
-        {
-            qCritical() << "JSON Parse Error:" << parseError.errorString()
-                        << "at offset:" << parseError.offset;
-            return; // JSON格式错误
-        }
+    void readTTSConfig();
 
-        if (!json_doc.isObject())
-        {
-            qWarning() << "OpenWeather Config file root element is not an object";
-            return; // 根元素必须是对象
-        }
+    void readTodoNotify();
 
-        QJsonObject json_object = json_doc.object();
+    void readTodoData();
 
-        // 逐个读取并验证必要字段
-        openWeather_data.api_key = json_object.value("api_key").toString("");
-        if (openWeather_data.api_key.isEmpty())
-        {
-            qWarning() << "api_key in Config file is empty or not exist";
-        }
-        openWeather_data.city = json_object.value("city").toString("");
-    }
+    static QFont loadFont();
 
-    void readTTSConfig()
-    {
-        QFile file(TTS_CONFIG_FILE);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            qWarning() << "Cannot open file:" << TTS_CONFIG_FILE << "错误:" << file.errorString();
-            return; // 文件不存在或无法打开
-        }
+    void readMenuData();
 
-        QByteArray fileData = file.readAll();
-        file.close();
-
-        if (fileData.isEmpty())
-        {
-            qWarning() << "TTS Config file is empty:" << TTS_CONFIG_FILE;
-            return; // 空文件
-        }
-
-        QJsonParseError parseError;
-        QJsonDocument json_doc = QJsonDocument::fromJson(fileData, &parseError);
-
-        if (parseError.error != QJsonParseError::NoError)
-        {
-            qCritical() << "JSON Parse Error:" << parseError.errorString()
-                        << "at offset:" << parseError.offset;
-            return; // JSON格式错误
-        }
-
-        if (!json_doc.isObject())
-        {
-            qWarning() << "TTS Config file root element is not an object";
-            return; // 根元素必须是对象
-        }
-
-        QJsonObject json_object = json_doc.object();
-
-        // 逐个读取并验证必要字段
-        tts_config.provider = json_object.value("provider").toInt(0);
-        if (tts_config.provider < 0 || tts_config.provider > 1)
-        {
-            tts_config.provider = 0;
-        }
-        tts_config.speaker_openai_edge_tts = json_object.value("speaker_openai_edge_tts").toString("zh-CN-XiaoxiaoNeural");
-        tts_config.speed_openai_edge_tts = json_object.value("speed_openai_edge_tts").toDouble(1.0);
-        tts_config.iFlytek_APPID = json_object.value("iFlytek_APPID").toString("");
-        tts_config.iFlytek_APISecret = json_object.value("iFlytek_APISecret").toString("");
-        tts_config.iFlytek_APIKey = json_object.value("iFlytek_APIKey").toString("");
-        tts_config.iFlytek_speaker = json_object.value("iFlytek_speaker").toString("x4_yezi");
-        if (tts_config.iFlytek_APPID.isEmpty() || tts_config.iFlytek_APISecret.isEmpty() || tts_config.iFlytek_APIKey.isEmpty())
-            tts_config.provider = 0;
-        tts_config.isRunTTSServerOnStartUp = json_object.value("isRunTTSServerOnStartUp").toBool(false);
-    }
-
-    void readTodoNotify()
-    {
-        QFile file(TODO_NOTIFY_FILE);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            // qDebug() <<__func__<< "读取菜单数据失败";
-            return; // 文件不存在或无法打开，返回空列表
-        }
-        QDataStream in(&file);
-        in.setVersion(QDataStream::Qt_5_11); // 设置流版本以确保兼容性
-        in >> todo_setting_data;
-        file.close();
-    }
-
-    void readTodoData()
-    {
-        QList<TodoData> _todo_data;
-        QFile file(TODO_DATA_FILE);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            // qDebug() <<__func__<< "读取菜单数据失败";
-            return; // 文件不存在或无法打开，返回空列表
-        }
-        QDataStream in(&file);
-        in.setVersion(QDataStream::Qt_5_11); // 设置流版本以确保兼容性
-        in >> _todo_data;
-        file.close();
-        todo_data = _todo_data;
-    }
-
-    static QFont loadFont()
-    {
-        QString boldFontPath = ":/assets/font/MapleMono-NF-CN-Medium.ttf";
-        if (QFile::exists(boldFontPath))
-        {
-            int boldFontId = QFontDatabase::addApplicationFont(boldFontPath);
-            if (boldFontId != -1)
-            {
-                QStringList boldFamilies = QFontDatabase::applicationFontFamilies(boldFontId);
-                if (!boldFamilies.isEmpty())
-                {
-                    qInfo() << "load font success:" << boldFamilies.at(0);
-                    return QFont(boldFamilies.at(0));
-                }
-            }
-        }
-        return QFont();
-    }
-
-    void readMenuData()
-    {
-        QList<MenuData> menu_data;
-        QFile file(MENU_DATA_FILE);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            qDebug() << "menu data file not exist or can not open, return empty list";
-            return; // 文件不存在或无法打开，返回空列表
-        }
-        QDataStream in(&file);
-        in.setVersion(QDataStream::Qt_5_11); // 设置流版本以确保兼容性
-        in >> menu_data;
-        file.close();
-        cached_menu_data = menu_data;
-    }
-
-    void readBasicData()
-    {
-        ConfigData _basic_data;
-        QFile file(CONFIG_DATA_FILE);
-        if (!file.open(QIODevice::ReadOnly))
-        {
-            // qDebug() <<__func__<< "读取菜单数据失败";
-            return; // 文件不存在或无法打开，返回空列表
-        }
-        QDataStream in(&file);
-        in.setVersion(QDataStream::Qt_5_11); // 设置流版本以确保兼容性
-        in >> _basic_data;
-        file.close();
-        basic_data = _basic_data;
-    }
+    void readBasicData();
 };

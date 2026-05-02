@@ -15,35 +15,23 @@
 #include <QFileInfo>
 #include <launcherMenu.hpp>
 #include "NotificationWidget.h"
-
-ManageStartWidget::ManageStartWidget(QWidget *parent) : QWidget(parent), ui(new Ui::manageStart),
-                                                        editorWidget(nullptr), isSaved(true) {
+using MessageType = NotificationWidget::MessageType;
+ManageStartWidget::ManageStartWidget(QWidget *parent) : QWidget(parent),
+                                                        ui(new Ui::manageStart),
+                                                        editorWidget(nullptr), isSaved(true)
+{
     ui->setupUi(this);
     initWidget();
 }
 
-void ManageStartWidget::initWidget() {
-    //设置按钮文字
-    ui->pushButton->setText("保存"); //保存
-    ui->pushButton_2->setText("添加"); //添加
-    ui->pushButton_3->setText("编辑"); //编辑
-    ui->pushButton_4->setText("删除"); //删除
-    // ui->pushButton->setIcon(QIcon());
-    // ui->pushButton_2->setIcon(QIcon());
-    // ui->pushButton_3->setIcon(QIcon());
-    // ui->pushButton_4->setIcon(QIcon());
-
+void ManageStartWidget::initWidget()
+{
 
     connect(ui->pushButton, &QPushButton::clicked, this, &ManageStartWidget::saveMenuData); //保存
     connect(ui->pushButton_2, &QPushButton::clicked, this, &ManageStartWidget::showEditor); //添加
     connect(ui->pushButton_3, &QPushButton::clicked, this, &ManageStartWidget::editObj); //编辑
-    connect(ui->pushButton_4, &QPushButton::clicked, this, &ManageStartWidget::deleteSelectedItem); //删除
-    //按钮宽度
-    ui->pushButton->setMaximumWidth(60);
-    ui->pushButton_2->setMaximumWidth(60);
-    ui->pushButton_3->setMaximumWidth(60);
-    ui->pushButton_4->setMaximumWidth(60);
-    //treeView初始化
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &ManageStartWidget::deleteSelectedItem); // 删除
+    // treeView初始化
     dataModel = new QStandardItemModel(ui->treeView);
     QStringList header;
     header << "Category" << "Name" << "Path" << "Icon" << "Description";
@@ -78,12 +66,15 @@ void ManageStartWidget::initWidget() {
         ui->treeView->header()->setSectionResizeMode(i, QHeaderView::Interactive); // 可交互
     }
     loadMenuData();
+
+    qDebug() << "manageStartWidget init";
 }
 
 void ManageStartWidget::deleteSelectedItem() {
     QModelIndex currentIndex = ui->treeView->currentIndex();
     if (!currentIndex.isValid()) {
-        // QMessageBox::warning(this, "警告", "请先选择一个项目!");
+        NotificationWidget::showNotification(tr("Warning"), tr("请先选择一个项目!"), 5000, MessageType::Warning);
+        qWarning() << "index is invalid";
         return;
     }
 
@@ -96,7 +87,7 @@ void ManageStartWidget::deleteSelectedItem() {
     // 检查是否是顶级节点（分类节点）
     QModelIndex parentIndex = currentIndex.parent();
     if (!parentIndex.isValid()) {
-        // QMessageBox::warning(this, "警告", "不能删除分类节点!");
+        qWarning() << "can't delete root item";
         return;
     }
 
@@ -111,7 +102,7 @@ void ManageStartWidget::deleteSelectedItem() {
         if (parentItem) {
             // 删除选中的行
             parentItem->removeRow(currentIndex.row());
-            // QMessageBox::information(this, "信息", "删除成功!");
+            qDebug() << "Delete data:" << selectedItem->text();
         }
     }
     isSaved = false;
@@ -120,7 +111,11 @@ void ManageStartWidget::deleteSelectedItem() {
 
 void ManageStartWidget::loadMenuData() {
     QList<MenuData> data = DataManager::instance().getMenuData();
-    if (data.isEmpty()) return; // 如果数据为空，则不加载
+    if (data.isEmpty())
+    {
+        qDebug() << "No data to load";
+        return;
+    }; // 如果数据为空，则不加载
     for (MenuData item: data) {
         QList<QStandardItem *> items;
         QStandardItem *iconItem = new QStandardItem(item.icon);
@@ -143,8 +138,8 @@ void ManageStartWidget::saveMenuData() {
     for (int i = 0; i < data.size(); ++i) {
         QFileInfo fileInfo(data[i].path);
         if (!fileInfo.exists() && data[i].category != "Link")
-            QMessageBox::warning(
-                this, tr("Warning"), tr("项目 %1 \n的路径不存在：%2").arg(data[i].name).arg(data[i].path));
+            NotificationWidget::showNotification(
+                tr("Warning"), tr("项目 %1 \n的路径不存在：%2").arg(data[i].name).arg(data[i].path), 5000, MessageType::Warning);
         qDebug() << "Save data:" << data[i].category << " " << data[i].name << " " << data[i].path << " "
                 << data[i].icon << " " << data[i].description;
     }
@@ -204,7 +199,7 @@ void ManageStartWidget::showEditor() {
         delete editorWidget;
         editorWidget = nullptr;
     }
-    editorWidget = new EditorWidget();
+    editorWidget = new EditorWidget(nullptr); // 不能是子部件 除非是模态窗口
     connect(editorWidget, &EditorWidget::accepted, this, &ManageStartWidget::onEditorAccepted);
     editorWidget->show();
 }
@@ -250,20 +245,20 @@ void ManageStartWidget::addItemToList(QStandardItem *parent, QList<QString> &ite
 void ManageStartWidget::editObj() {
     QModelIndex currentIndex = ui->treeView->currentIndex();
     if (!currentIndex.isValid()) {
-        qDebug() << "Invalid index";
+        qWarning() << "Invalid index";
         return;
     }
 
     // 检查是否是顶级节点（分类节点）
     QModelIndex parentIndex = currentIndex.parent();
     if (!parentIndex.isValid()) {
-        qDebug() << "Invalid parent";
+        qWarning() << "Invalid parent";
         return;
     }
     // 获取父项（分类节点）
     QStandardItem *parentItem = dataModel->itemFromIndex(parentIndex);
     if (!parentItem) {
-        qDebug() << "Invalid parent";
+        qWarning() << "Invalid parent";
         return;
     }
 
@@ -277,7 +272,7 @@ void ManageStartWidget::editObj() {
     QStandardItem *iconItem = parentItem->child(currentRow, 3);
     QStandardItem *descItem = parentItem->child(currentRow, 4);
     if (!nameItem || !pathItem) {
-        qDebug() << "Error: name or path is null";
+        qWarning() << "Error: name or path is null";
         return;
     }
     currentName = nameItem->text();

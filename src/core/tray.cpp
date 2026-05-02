@@ -22,118 +22,34 @@
 #include <audioclient.h>
 #include <endpointvolume.h>
 #include <iostream>
-// 定义 IAudioMeterInformation 接口的 GUID
-static const IID IID_IAudioMeterInformation =
-        {0xC02216F6, 0x8C67, 0x4B5B, {0x9D, 0x00, 0xD0, 0x08, 0xE7, 0x3E, 0x00, 0x64}};
-
-// 手动定义 IAudioMeterInformation 接口
-class IAudioMeterInformation : public IUnknown {
-public:
-    virtual HRESULT STDMETHODCALLTYPE GetPeakValue(float *pfPeak) = 0;
-
-    virtual HRESULT STDMETHODCALLTYPE GetMeteringChannelCount(UINT32 *pnChannelCount) = 0;
-
-    virtual HRESULT STDMETHODCALLTYPE GetChannelsPeakValues(UINT32 u32ChannelCount, float *afPeakValues) = 0;
-
-    virtual HRESULT STDMETHODCALLTYPE QueryHardwareSupport(DWORD *pdwHardwareSupportMask) = 0;
-};
-
-class TrayIcon::AudioActivityDetector {
-private:
-    IMMDeviceEnumerator *pEnumerator = nullptr;
-    IMMDevice *pDevice = nullptr;
-    IAudioMeterInformation *pMeterInfo = nullptr;
-
-public:
-    ~AudioActivityDetector() {
-        Cleanup();
-    }
-
-    bool Initialize() {
-        HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
-        if (FAILED(hr) && hr != RPC_E_CHANGED_MODE) {
-            return false;
-        }
-
-        // 创建设备枚举器
-        hr = CoCreateInstance(
-            __uuidof(MMDeviceEnumerator), NULL,
-            CLSCTX_ALL, __uuidof(IMMDeviceEnumerator),
-            (void **) &pEnumerator);
-        if (FAILED(hr)) return false;
-
-        // 获取默认音频端点
-        hr = pEnumerator->GetDefaultAudioEndpoint(
-            eRender, eConsole, &pDevice);
-        if (FAILED(hr)) return false;
-
-        // 激活音频计量信息接口
-        hr = pDevice->Activate(
-            IID_IAudioMeterInformation, CLSCTX_ALL,
-            NULL, (void **) &pMeterInfo);
-
-        return SUCCEEDED(hr);
-    }
-
-    // 检测是否有音频活动（返回峰值电平）
-    float GetPeakValue() {
-        if (!pMeterInfo) return 0.0f;
-
-        float peak = 0.0f;
-        HRESULT hr = pMeterInfo->GetPeakValue(&peak);
-        if (SUCCEEDED(hr)) {
-            return peak;
-        }
-        return 0.0f;
-    }
-
-    // 检测是否正在播放音频
-    bool IsAudioPlaying(float threshold = 0.01f) {
-        return GetPeakValue() > threshold;
-    }
-
-private:
-    void Cleanup() {
-        if (pMeterInfo) {
-            pMeterInfo->Release();
-            pMeterInfo = nullptr;
-        }
-        if (pDevice) {
-            pDevice->Release();
-            pDevice = nullptr;
-        }
-        if (pEnumerator) {
-            pEnumerator->Release();
-            pEnumerator = nullptr;
-        }
-        CoUninitialize();
-    }
-};
-
+#include "AudioSpectrumDetector.h"
 // 初始化静态成员变量
 TrayIcon *TrayIcon::m_instance = nullptr;
 
-TrayIcon *TrayIcon::instance() {
-    if (!m_instance) {
+TrayIcon *TrayIcon::instance()
+{
+    if (!m_instance)
+    {
         m_instance = new TrayIcon();
     }
     return m_instance;
 }
 
 void TrayIcon::showMessage(const QString &title, const QString &msg,
-                           QSystemTrayIcon::MessageIcon icon, int timeout) {
-    if (m_instance && !m_instance->m_silentMode) {
+                           QSystemTrayIcon::MessageIcon icon, int timeout)
+{
+    if (m_instance && !m_instance->m_silentMode)
+    {
         m_instance->QSystemTrayIcon::showMessage(title, msg, icon, timeout);
     }
 }
 
 TrayIcon::TrayIcon(QObject *parent)
-    : QSystemTrayIcon(parent) {
+    : QSystemTrayIcon(parent)
+{
     setIcon(m_appIcon);
     setToolTip(
-        DataManager::instance().Project_Name + " "
-        + DataManager::instance().const_config_data.version
-    );
+        DataManager::instance().Project_Name + " " + DataManager::instance().const_config_data.version);
 
     m_rotateTimer = new QTimer(this);
     connect(m_rotateTimer, &QTimer::timeout, this, &TrayIcon::rotateNote);
@@ -162,33 +78,42 @@ TrayIcon::TrayIcon(QObject *parent)
 
     QAction *action_openDirPath = new QAction(tr("程序文件夹"), MenuOpen);
     QAction *action_openUserPath = new QAction(tr("用户文件夹"), MenuOpen);
+    QAction *action_openLogPath = new QAction(tr("日志文件夹"), MenuOpen);
+    QAction *action_openTTSServer = new QAction(tr("TTS Server"), MenuOpen);
     // 连接信号和槽
     // 打开程序文件夹
-    connect(action_openDirPath, &QAction::triggered, []() {
+    connect(action_openDirPath, &QAction::triggered, []()
+            {
         const QString appDir = QCoreApplication::applicationDirPath();
-        launchByPath(appDir);
-    });
+        launchByPath(appDir); });
     // 打开用户文件夹
-    connect(action_openUserPath, &QAction::triggered, []() {
+    connect(action_openUserPath, &QAction::triggered, []()
+            {
         QString appDir = QCoreApplication::applicationDirPath();
         const QString userDir = appDir.append("/user");
-        launchByPath(userDir);
-    });
+        launchByPath(userDir); });
+    // 打开日志文件夹
+    connect(action_openLogPath, &QAction::triggered, []()
+            {
+        QString appDir = QCoreApplication::applicationDirPath();
+        const QString logDir = appDir.append("/log");
+        launchByPath(logDir); });
+    connect(action_openTTSServer, &QAction::triggered, []()
+            { launchByPath(DataManager::instance().const_config_data.tts_server); });
 
     QAction *action_startApp = new QAction("启动项目", this);
     action_startApp->setMenu(launcherMenu::instance());
     // 如果有内容就添加到菜单
-    if (launcherMenu::instance()->hasContent) {
+    if (launcherMenu::instance()->hasContent)
+    {
         // 添加菜单项到菜单
         menu->addAction(action_startApp);
         menu->addSeparator();
     }
-    menu->addActions({
-        action_silentMode, action_switchDrag,
-        action_keyListener,
-        action_showWin, action_resetWinLoc, action_mediaPlayer
-    });
-    MenuOpen->addActions({action_openUserPath, action_openDirPath});
+    menu->addActions({action_silentMode, action_switchDrag,
+                      action_keyListener,
+                      action_showWin, action_resetWinLoc, action_mediaPlayer});
+    MenuOpen->addActions({action_openUserPath, action_openDirPath, action_openLogPath, action_openTTSServer});
     menu->addSeparator();
     menu->addMenu(MenuOpen);
     menu->addSeparator();
@@ -203,17 +128,24 @@ TrayIcon::TrayIcon(QObject *parent)
     switchMusicIcon(DataManager::instance().getBasicData().isMusicIcon);
 }
 
-void TrayIcon::initializeAudioDetector() {
-    m_audioDetector = new AudioActivityDetector();
-    if (m_audioDetector->Initialize()) {
+void TrayIcon::initializeAudioDetector()
+{
+    m_audioDetector = new AudioSpectrumDetector();
+    if (m_audioDetector->start())
+    {
         m_audioCheckTimer->start();
-        qDebug() << "Audio detector initialized";
-    } else {
-        qDebug() << "Audio detector initialization failed";
+        qDebug() << "Spectrum-based audio detector initialized";
+    }
+    else
+    {
+        qDebug() << "Audio spectrum detector initialization failed";
+        delete m_audioDetector;
+        m_audioDetector = nullptr;
     }
 }
 
-QPixmap TrayIcon::createMusicIcon() const {
+QPixmap TrayIcon::createMusicIcon() const
+{
     QPixmap pixmap(64, 64);
     pixmap.fill(Qt::transparent);
 
@@ -222,7 +154,8 @@ QPixmap TrayIcon::createMusicIcon() const {
     painter.setRenderHint(QPainter::TextAntialiasing);
 
     // 应用旋转
-    if (m_rotating) {
+    if (m_rotating)
+    {
         painter.translate(32, 32);
         painter.rotate(m_angle);
         painter.translate(-32, -32);
@@ -235,9 +168,12 @@ QPixmap TrayIcon::createMusicIcon() const {
     painter.setFont(font);
 
     // 根据旋转状态改变颜色
-    if (m_rotating) {
+    if (m_rotating)
+    {
         painter.setPen(QColor(DataManager::instance().getBasicData().color_tray.background)); // 有音频
-    } else {
+    }
+    else
+    {
         painter.setPen(QColor(DataManager::instance().getBasicData().color_tray.forground)); // 无音频
     }
 
@@ -247,21 +183,29 @@ QPixmap TrayIcon::createMusicIcon() const {
     return pixmap;
 }
 
-void TrayIcon::rotateNote() {
+void TrayIcon::rotateNote()
+{
     m_angle = (m_angle + 30) % 360;
     setIcon(QIcon(createMusicIcon()));
 }
 
-void TrayIcon::checkAudioActivity() {
-    if (!m_audioDetector) return;
+void TrayIcon::checkAudioActivity()
+{
+    if (!m_audioDetector)
+        return;
 
-    bool isAudioPlaying = m_audioDetector->IsAudioPlaying();
+    bool isAudioPlaying = m_audioDetector->isAudioPlaying();
+    float energy = m_audioDetector->currentEnergy();
+    // qDebug() << "Energy:" << energy << "Active:" << isAudioPlaying;
     // 根据音频状态控制旋转
-    if (isAudioPlaying && !m_rotating) {
+    if (isAudioPlaying && !m_rotating)
+    {
         // 开始旋转
         m_rotating = true;
         m_rotateTimer->start(100); // 固定速度：100ms
-    } else if (!isAudioPlaying && m_rotating) {
+    }
+    else if (!isAudioPlaying && m_rotating)
+    {
         // 停止旋转
         m_rotating = false;
         m_rotateTimer->stop();
@@ -271,23 +215,38 @@ void TrayIcon::checkAudioActivity() {
     setIcon(QIcon(createMusicIcon()));
 }
 
-void TrayIcon::switchMusicIcon(const bool flag) {
-    if (flag) {
-        // flag = true; 启用旋转
+void TrayIcon::switchMusicIcon(const bool flag)
+{
+    qDebug() << "switchMusicIcon called with flag:" << flag;
+    if (flag)
+    {
         initializeAudioDetector();
         qDebug() << "music icon enabled";
-    } else {
-        // flag = false; 禁用旋转
+    }
+    else
+    {
         m_audioCheckTimer->stop();
         m_rotateTimer->stop();
         m_rotating = false;
         setIcon(m_appIcon);
+
+        if (m_audioDetector)
+        {
+            m_audioDetector->stop();
+            delete m_audioDetector;
+            m_audioDetector = nullptr;
+        }
         qDebug() << "music icon disabled";
     }
 }
 
-TrayIcon::~TrayIcon() {
+TrayIcon::~TrayIcon()
+{
     delete menu;
     m_instance = nullptr;
-    delete m_audioDetector;
+    if (m_audioDetector)
+    {
+        m_audioDetector->stop();
+        delete m_audioDetector;
+    }
 }

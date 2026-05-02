@@ -9,14 +9,12 @@
  */
 #pragma once
 #include <QLineEdit>
-#include "ollamaclient.h"
+#include "llamaclient.h"
 
 class ChatBoxOnModel : public QLineEdit {
     Q_OBJECT
 
 public:
-    OllamaClient client;
-
     ChatBoxOnModel(QLineEdit *parent = nullptr);
 
     void updateWindowLocation(int f_x, int f_y, int f_w, int f_h);
@@ -25,7 +23,10 @@ public:
 
     void on_sendMsg();
 
-    void onTextGenerated(const QString &text);
+    void onTextGenerated(const QString &text, const int &id);
 
-    void onErrorOccurred(const QString &error);
+    void onErrorOccurred(const QString &error, const int &id);
+
+private:
+    int ai_id = 1;
 };
