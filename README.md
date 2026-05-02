@@ -63,7 +63,6 @@
 
 - pmx支持(计划引入：benikabocha/saba)
 - 多语言支持(低优先级)
-- 新TTS服务支持(voicevox)
 
 ### 预览
 
