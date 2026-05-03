@@ -7,6 +7,15 @@
 
 [//]: # "[![Release History](https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white)](https://github.com/csy214-beep/Pelr/blob/master/docs/ChangeLog.md)"
 
+## v20260503.13.5 - 2026-05-03
+
+### 更新内容
+
+- **文档更新**：更新用户文档，提升使用指引的准确性与完整性。
+- **TTS 设置页面**：优化页面显示逻辑，改善界面交互体验。
+- **VoiceVox 模型**：优化模型加载时 StyleID 的载入逻辑，提高稳定性和正确性。
+- **翻译功能**：新增腾讯云翻译能力，并补充相关配置说明与文档支持。
+- **翻译功能**：libretranslate 简单支持
 
 ## v20260405.12.18 - 2026-05-02
 
@@ -54,6 +63,8 @@
 - 开发工具由 CLion 替换为 VSCode，相关配置更新。
 
 ---
+
+**Full Changelog**: <https://github.com/csy214-beep/Pelr/compare/20260219.11.17...20260405.12.18>
 
 ## v20260219.11.17 - 2026-04-01
 

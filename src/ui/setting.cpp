@@ -30,6 +30,8 @@
 #include "UpdateDialog.h"
 #include "voicevox_tts.h"
 #include "voicegenerator.hpp"
+#include <QProcess>
+#include <QStandardPaths>
 using MessageType = NotificationWidget::MessageType;
 
 ConfigData SettingWidget::getAllValues()
@@ -84,6 +86,8 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     TTSConfig data;
     data.provider = ui->comboBox_4->currentIndex();
     qDebug() << "TTS provider: " << data.provider;
+    data.tr_point = ui->comboBox_7->currentIndex();
+    qDebug() << "TRA provider: " << data.tr_point;
     // openai_edge_tts
     data.speaker_openai_edge_tts = ui->lineEdit_11->text();
     data.speed_openai_edge_tts = ui->doubleSpinBox->value();
@@ -99,8 +103,18 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     data.voicevox_speed = ui->doubleSpinBox_2->value();
     // translate
     data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
-    data.tr_lang = ui->comboBox_5->currentText();
+    data.tr_lang_translators = ui->comboBox_5->currentText();
     data.tr_provider = ui->comboBox->currentText();
+    data.tr_libretranslate_port = ui->lineEdit_17->text();
+    data.tr_lang_libretranslate = ui->lineEdit_18->text();
+    // Tencent
+    data.tr_tx_secret_id = ui->lineEdit_19->text();
+    data.tr_tx_secret_key = ui->lineEdit_20->text();
+    data.tr_tx_region = ui->lineEdit_21->text();
+    data.tr_tx_project_id = ui->spinBox_4->value();
+    data.tr_tx_source_lang = ui->lineEdit_22->text();
+    data.tr_tx_target_lang = ui->lineEdit_23->text();
+
     return data;
 }
 
@@ -131,9 +145,10 @@ LlamaData SettingWidget::getLlamaDataValue() const
 void SettingWidget::setTTSConfig(const TTSConfig &data) const
 {
     // TTS
-    qDebug() << "data.provider: " << data.provider;
+    qDebug() << " TTS provider " << data.provider;
     ui->comboBox_4->setCurrentIndex(static_cast<int>(data.provider));
-    qDebug() << "ui->comboBox_4 CurrentIndex: " << ui->comboBox_4->currentIndex();
+    qDebug() << " TRA point " << data.tr_point;
+    ui->comboBox_7->setCurrentIndex(static_cast<int>(data.tr_point));
     // openai-edge-tts
     ui->lineEdit_11->setText(data.speaker_openai_edge_tts);
     ui->doubleSpinBox->setValue(data.speed_openai_edge_tts);
@@ -161,8 +176,18 @@ void SettingWidget::setTTSConfig(const TTSConfig &data) const
             ui->comboBox_6->setCurrentIndex(0);
     }
     // translate
-    ui->comboBox_5->setCurrentText(data.tr_lang);
+    ui->comboBox_5->setCurrentText(data.tr_lang_translators);
     ui->comboBox->setCurrentText(data.tr_provider);
+    ui->lineEdit_17->setText(data.tr_libretranslate_port);
+    ui->lineEdit_18->setText(data.tr_lang_libretranslate);
+
+    // Tencent
+    ui->lineEdit_19->setText(data.tr_tx_secret_id);
+    ui->lineEdit_20->setText(data.tr_tx_secret_key);
+    ui->lineEdit_21->setText(data.tr_tx_region);
+    ui->spinBox_4->setValue(data.tr_tx_project_id);
+    ui->lineEdit_22->setText(data.tr_tx_source_lang);
+    ui->lineEdit_23->setText(data.tr_tx_target_lang);
 }
 void SettingWidget::setLlamaData(const LlamaData &llm) const
 {
@@ -287,6 +312,11 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     {
         ui->comboBox_4->addItem(item.first, item.second);
     }
+    ui->comboBox_7->clear();
+    for (const auto &item : Translators)
+    {
+        ui->comboBox_7->addItem(item.first, item.second);
+    }
 
     // 连接信号槽
     connectSignals();
@@ -295,6 +325,9 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     setTTSConfig(DataManager::instance().getTTSConfig());
     setOpenWeatherData(DataManager::instance().getOpenWeatherData());
     setLlamaData(DataManager::instance().getLlamaData());
+
+    onTTSProviderChanged();
+    onTranslatorsChanged();
 }
 
 void SettingWidget::connectSignals()
@@ -350,11 +383,12 @@ void SettingWidget::connectSignals()
         ui->label_35->setStyleSheet(QString("color: %1;").arg(color)); });
     // bool
     connect(ui->checkBox, &QCheckBox::clicked, [&]()
-            { onCheckBox1Clicked(!ui->checkBox->isChecked()); });
+            { startupSwitch(!ui->checkBox->isChecked()); });
     connect(ui->checkBox_12, &QCheckBox::clicked, [&]()
             { TrayIcon::instance()->switchMusicIcon(ui->checkBox_12->isChecked()); });
     // TTS
     connect(ui->comboBox_4, &QComboBox::currentTextChanged, this, &SettingWidget::onTTSProviderChanged);
+    connect(ui->comboBox_7, &QComboBox::currentTextChanged, this, &SettingWidget::onTranslatorsChanged);
     connect(ui->pushButton_21, &QPushButton::clicked, [&]()
             {
                 m_langClient->fetchProviders();
@@ -402,7 +436,21 @@ void SettingWidget::connectSignals()
     connect(ui->pushButton_26, &QPushButton::clicked, this, &SettingWidget::onTestVoicevox);
     connect(ui->pushButton_27, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.voicevox_help); });
-
+    connect(ui->pushButton_28, &QPushButton::clicked, [&]()
+            { launchByPath(DataManager::instance().const_config_data.libretranslate_guide); });
+    // test Tencent
+    connect(ui->pushButton_29, &QPushButton::clicked, [&]()
+            {
+                if(ui->lineEdit_24->text().isEmpty())
+                {
+                    NotificationWidget::showNotification(tr("Warning"), tr("Please fill in all fields first."), 5000, MessageType::Warning);
+                }
+                TTSConfig cfg = getTTSConfigValue();
+                QString msg;
+                TencentTranslator::testTranslate(cfg, ui->lineEdit_24->text(), &msg);
+                ui->label_56->setText(msg); });
+    connect(ui->pushButton_30, &QPushButton::clicked, [&]()
+            { launchByPath(DataManager::instance().const_config_data.tx_tr_guide); });
     // llama
     connect(ui->pushButton_15, &QPushButton::clicked, [&]()
             {
@@ -523,24 +571,75 @@ bool SettingWidget::checkStartupLink()
     }
     return true;
 }
-
 void SettingWidget::resetSetting()
 {
+    // 第一次确认
     const auto re = QMessageBox::question(
-        this, tr("Confirmation"), tr("确定要重置设置吗？\n重置后将恢复默认设置！"),
+        this, tr("Confirmation"),
+        tr("确定要重置设置吗？\n这将恢复所有选项为默认值。"),
         QMessageBox::Yes | QMessageBox::No);
     if (re == QMessageBox::No)
         return;
-    const ConfigData new_data = ConfigData();
-    setAllValues(new_data);
-    DataManager::instance().writeData<ConfigData>(new_data);
-    // 重置启动项（移除）
-    onCheckBox1Clicked(true);
-    qDebug() << "reset setting success";
-    NotificationWidget::showNotification(tr("Information"), tr("重置设置成功！"));
+
+    // 第二次确认：是否删除所有用户数据
+    const auto re2 = QMessageBox::question(
+        this, tr("Confirmation"),
+        tr("是否同时删除所有用户数据（包括日志、缓存、用户文件夹等）？\n\n"
+           "选择“是”将彻底清理并重启程序，所有数据将永久丢失。\n"
+           "选择“否”将仅重置配置为默认值。"),
+        QMessageBox::Yes | QMessageBox::No);
+
+    // 无论哪种情况，都移除启动项
+    startupSwitch(true);
+
+    if (re2 == QMessageBox::Yes)
+    {
+        // 删除程序目录下的 user、log 和 voice_files 文件夹
+        const QString appDir = QApplication::applicationDirPath();
+        QDir userDir(appDir + "/user");
+        QDir logDir(appDir + "/log");
+        QDir voiceDir(appDir + "/voice_files");
+
+        bool success = true;
+        if (userDir.exists())
+            success &= userDir.removeRecursively();
+        if (logDir.exists())
+            success &= logDir.removeRecursively();
+        if (voiceDir.exists())
+            success &= voiceDir.removeRecursively();
+
+        // 删除 AppData 中的程序数据文件夹
+        const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        QDir appDataDir(dataDir);
+        if (appDataDir.exists())
+            success &= appDataDir.removeRecursively();
+
+        if (!success)
+        {
+            qWarning() << "Failed to delete some user data folders";
+            NotificationWidget::showNotification(
+                tr("Error"),
+                tr("部分数据文件夹无法删除，请手动清理后重启程序。"),
+                5000, NotificationWidget::Warning);
+            return;
+        }
+
+        // 重启程序
+        QProcess::startDetached(QApplication::applicationFilePath(), QStringList());
+        QApplication::quit();
+    }
+    else
+    {
+        // 仅重置配置文件
+        const ConfigData new_data = ConfigData();
+        setAllValues(new_data);
+        DataManager::instance().writeData<ConfigData>(new_data);
+        qDebug() << "Reset setting to defaults";
+        NotificationWidget::showNotification(tr("Information"), tr("设置已重置！"));
+    }
 }
 
-void SettingWidget::onCheckBox1Clicked(const bool flag)
+void SettingWidget::startupSwitch(const bool flag)
 {
     // 获取启动文件夹路径
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
@@ -643,6 +742,28 @@ QString SettingWidget::selectColor()
     }
     return "";
 }
+void SettingWidget::onTranslatorsChanged()
+{
+    int index = ui->comboBox_7->currentIndex();
+    qDebug() << "Translator changed to " << index;
+    QList<QGroupBox *> groupBoxes = {
+        ui->groupBox_5, // libretranslate
+        ui->groupBox,   // translators
+        ui->groupBox_6, // Tencent
+    };
+    for (int i = 0; i < groupBoxes.size(); i++)
+    {
+        if (i == index)
+        {
+            groupBoxes[i]->setVisible(true);
+        }
+        else
+        {
+            groupBoxes[i]->setVisible(false);
+        }
+    }
+};
+
 void SettingWidget::onTTSProviderChanged()
 {
     int index = ui->comboBox_4->currentIndex();

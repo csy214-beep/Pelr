@@ -1,8 +1,5 @@
 # Pelr - 工具向桌宠
 
-> [!CAUTION]
-> 项目重构中...
-
 ![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr?style=social)
@@ -29,8 +26,7 @@
 >
 > 本项目为非盈利性开源项目，作者出于个人兴趣开发，任何人均可免费使用。
 >
-> This is a non-profit, open-source project, developed out of personal interest by the author. It is free for anyone to
-> use.
+> This is a non-profit, open-source project, developed out of personal interest by the author. It is free for anyone to use.
 
 ## 主要特性
 
@@ -95,11 +91,11 @@
 2. 解压压缩包到任意目录
 3. 运行 `Pelr.exe` 即可启动应用
 
-另外，囿于Gitee的release限制，您可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
+另外，您还可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
 
 ### 更新
 
-推荐只保留`user`文件夹，其余文件删除。
+推荐只保留`user`和`Resources`文件夹，其余文件删除。
 
 ### 首次运行配置
 
@@ -113,12 +109,14 @@
    - 模型下载：[Booth](https://booth.pm) | [模之屋](https://www.aplaybox.com/)
 
 2. **配置 TTS 服务** (可选)
+   > 推荐使用免费简单的OpenAI-Edge-TTS
+
    - 申请[讯飞开放平台](https://www.xfyun.cn/)账号
    - 在设置 → TTS配置中填写 API 凭证
    - 点击`启动TTS服务端`或手动运行目录下的 `tts_server.exe`
 
 3. **设置 AI 服务** (可选)
-   - 选择 OpenAI 兼容的 AI 服务 （将在未来支持）
+   - 选择 OpenAI 兼容的 AI 服务
 
 ## 项目结构
 

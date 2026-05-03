@@ -24,6 +24,7 @@
 #include "data.hpp"
 #include "launcher.hpp"
 #include "translator.h"
+#include "trmanager.h"
 #include "voicevox_tts.h"
 
 class VoiceGenerator : public QObject {
@@ -42,19 +43,11 @@ public:
      */
     void generateVoice(const TTSConfig &config, const QString &text)
     {
-        // 判断是否需要翻译
-        if (!config.tr_provider.isEmpty() && !config.tr_lang.isEmpty())
-        {
-            // 暂存配置和原文，翻译完成后再生成
-            m_pendingConfig = config;
-            m_pendingText = text;
-            Translator::instance()->translate(text, config.tr_lang, config.tr_provider);
-        }
-        else
-        {
-            // 不需要翻译，直接生成
-            doGenerateVoice(config, text);
-        }
+
+        m_pendingConfig = config;
+        m_pendingText = text;
+        TrManager::instance()->setConfig(config);
+        TrManager::instance()->translate(text);
     }
 
     // 原有讯飞 TTS 调用方式（保持不变）
@@ -144,16 +137,14 @@ private slots:
     void onTranslationFinished(const QString &translatedText)
     {
         qDebug() << "Translation successful:" << translatedText;
-        // 使用翻译后的文本生成语音
         doGenerateVoice(m_pendingConfig, translatedText);
     }
 
     void onTranslationError(const QString &errorMessage)
     {
         qWarning() << "Translation failed:" << errorMessage;
-        // 回退到原文生成语音，并通知调用方
         emit errorOccurred("Translation failed: " + errorMessage);
-        doGenerateVoice(m_pendingConfig, m_pendingText);
+        doGenerateVoice(m_pendingConfig, m_pendingText); // 回退原文合成
     }
 
 private:
@@ -176,9 +167,11 @@ private:
             } });
 
         // 连接翻译信号
-        Translator *trans = Translator::instance();
-        connect(trans, &Translator::translationFinished, this, &VoiceGenerator::onTranslationFinished);
-        connect(trans, &Translator::translationError, this, &VoiceGenerator::onTranslationError);
+        TrManager *transMgr = TrManager::instance();
+        connect(transMgr, &TrManager::translationFinished,
+                this, &VoiceGenerator::onTranslationFinished);
+        connect(transMgr, &TrManager::translationError,
+                this, &VoiceGenerator::onTranslationError);
     }
 
     VoiceGenerator(const VoiceGenerator &) = delete;

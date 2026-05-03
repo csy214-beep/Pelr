@@ -141,6 +141,14 @@ bool VoicevoxTTS::loadModel(const QString &modelPath)
         qWarning() << "[VoicevoxTTS] Model file not found:" << modelPath;
         return false;
     }
+
+    // 相同模型已加载，直接视为成功
+    if (d->ready && d->currentModelPath == modelPath)
+    {
+        qDebug() << "[VoicevoxTTS] Model already loaded:" << modelPath;
+        return true;
+    }
+
     d->unloadModel();
     QByteArray modelPathBytes = modelPath.toUtf8();
     VoicevoxResultCode rc = voicevox_voice_model_file_open(modelPathBytes.constData(), &d->model);
@@ -223,6 +231,21 @@ bool VoicevoxTTS::applyConfig(const TTSConfig &config)
         }
     }
     return isReady();
+}
+
+// 在 synthesizeToFile 实现之后追加
+QVector<int> VoicevoxTTS::getStyleIds() const
+{
+    QVector<int> ids;
+    const auto speakers = getSpeakers();
+    for (const auto &speaker : speakers)
+    {
+        for (const auto &style : speaker.styles)
+        {
+            ids.append(style.id);
+        }
+    }
+    return ids;
 }
 
 // 原有公共方法保持不变（synthesis, getSpeakers 等）
