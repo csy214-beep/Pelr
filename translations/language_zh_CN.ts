@@ -417,104 +417,107 @@ Battery State: %3</source>
 <context>
     <name>SettingWidget</name>
     <message>
-        <location filename="../src/ui/setting.cpp" line="299"/>
+        <location filename="../src/ui/setting.cpp" line="302"/>
         <source>调试信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="300"/>
+        <location filename="../src/ui/setting.cpp" line="303"/>
         <source>普通信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="301"/>
+        <location filename="../src/ui/setting.cpp" line="304"/>
         <source>警告</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="302"/>
+        <location filename="../src/ui/setting.cpp" line="305"/>
         <source>严重错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="303"/>
+        <location filename="../src/ui/setting.cpp" line="306"/>
         <source>致命错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="460"/>
+        <location filename="../src/ui/setting.cpp" line="463"/>
         <source>选择提示词文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="462"/>
+        <location filename="../src/ui/setting.cpp" line="465"/>
         <source>文本文件 (*.txt *.md *.json);;所有文件 (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="508"/>
+        <location filename="../src/ui/setting.cpp" line="511"/>
         <source>保存成功！
 下次应用启动生效。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="470"/>
-        <location filename="../src/ui/setting.cpp" line="508"/>
-        <location filename="../src/ui/setting.cpp" line="638"/>
-        <location filename="../src/ui/setting.cpp" line="676"/>
-        <location filename="../src/ui/setting.cpp" line="687"/>
-        <location filename="../src/ui/setting.cpp" line="723"/>
+        <location filename="../src/ui/setting.cpp" line="473"/>
+        <location filename="../src/ui/setting.cpp" line="511"/>
+        <location filename="../src/ui/setting.cpp" line="641"/>
+        <location filename="../src/ui/setting.cpp" line="679"/>
+        <location filename="../src/ui/setting.cpp" line="690"/>
+        <location filename="../src/ui/setting.cpp" line="726"/>
+        <location filename="../src/ui/setting.cpp" line="846"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="578"/>
-        <location filename="../src/ui/setting.cpp" line="586"/>
+        <location filename="../src/ui/setting.cpp" line="581"/>
+        <location filename="../src/ui/setting.cpp" line="589"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="676"/>
+        <location filename="../src/ui/setting.cpp" line="679"/>
         <source>快捷方式已不存在！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="406"/>
-        <location filename="../src/ui/setting.cpp" line="446"/>
-        <location filename="../src/ui/setting.cpp" line="472"/>
-        <location filename="../src/ui/setting.cpp" line="683"/>
-        <location filename="../src/ui/setting.cpp" line="718"/>
-        <location filename="../src/ui/setting.cpp" line="828"/>
-        <location filename="../src/ui/setting.cpp" line="891"/>
-        <location filename="../src/ui/setting.cpp" line="925"/>
-        <location filename="../src/ui/setting.cpp" line="939"/>
+        <location filename="../src/ui/setting.cpp" line="409"/>
+        <location filename="../src/ui/setting.cpp" line="449"/>
+        <location filename="../src/ui/setting.cpp" line="475"/>
+        <location filename="../src/ui/setting.cpp" line="686"/>
+        <location filename="../src/ui/setting.cpp" line="721"/>
+        <location filename="../src/ui/setting.cpp" line="830"/>
+        <location filename="../src/ui/setting.cpp" line="903"/>
+        <location filename="../src/ui/setting.cpp" line="952"/>
+        <location filename="../src/ui/setting.cpp" line="964"/>
+        <location filename="../src/ui/setting.cpp" line="971"/>
+        <location filename="../src/ui/setting.cpp" line="984"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="406"/>
-        <location filename="../src/ui/setting.cpp" line="446"/>
+        <location filename="../src/ui/setting.cpp" line="409"/>
+        <location filename="../src/ui/setting.cpp" line="449"/>
         <source>Please fill in all fields first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="470"/>
+        <location filename="../src/ui/setting.cpp" line="473"/>
         <source>Loaded prompt from [%1] successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="472"/>
+        <location filename="../src/ui/setting.cpp" line="475"/>
         <source>Failed to load prompt from [%1].</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="579"/>
+        <location filename="../src/ui/setting.cpp" line="582"/>
         <source>确定要重置设置吗？
 这将恢复所有选项为默认值。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="587"/>
+        <location filename="../src/ui/setting.cpp" line="590"/>
         <source>是否同时删除所有用户数据（包括日志、缓存、用户文件夹等）？
 
 选择“是”将彻底清理并重启程序，所有数据将永久丢失。
@@ -522,83 +525,103 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="621"/>
+        <location filename="../src/ui/setting.cpp" line="624"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="622"/>
+        <location filename="../src/ui/setting.cpp" line="625"/>
         <source>部分数据文件夹无法删除，请手动清理后重启程序。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="638"/>
+        <location filename="../src/ui/setting.cpp" line="641"/>
         <source>设置已重置！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="683"/>
+        <location filename="../src/ui/setting.cpp" line="686"/>
         <source>移除快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="687"/>
+        <location filename="../src/ui/setting.cpp" line="690"/>
         <source>快捷方式已移除！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="718"/>
+        <location filename="../src/ui/setting.cpp" line="721"/>
         <source>创建快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="723"/>
+        <location filename="../src/ui/setting.cpp" line="726"/>
         <source>快捷方式已创建！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="798"/>
+        <location filename="../src/ui/setting.cpp" line="801"/>
         <source>选择模型文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="816"/>
+        <location filename="../src/ui/setting.cpp" line="819"/>
         <source>选择音声模型文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="818"/>
+        <location filename="../src/ui/setting.cpp" line="821"/>
         <source>VVM 文件 (*.vvm);;所有文件 (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="829"/>
+        <location filename="../src/ui/setting.cpp" line="831"/>
         <source>模型加载失败，请检查模型文件是否正确，并重新加载。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="848"/>
+        <location filename="../src/ui/setting.cpp" line="846"/>
+        <source>模型加载成功，风格列表已更新。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/setting.cpp" line="859"/>
         <source>(无可用风格)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="891"/>
+        <location filename="../src/ui/setting.cpp" line="903"/>
         <source>辞书加载失败，请检查路径是否正确，并确保该路径下有有效的字典文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="906"/>
+        <location filename="../src/ui/setting.cpp" line="929"/>
         <source>选择辞书目录</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="925"/>
-        <source>测试失败，请检查配置是否正确！</source>
+        <location filename="../src/ui/setting.cpp" line="953"/>
+        <source>应用配置失败，请检查辞书目录和模型文件是否正确。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="939"/>
-        <source>保存失败，无法保存测试音频。</source>
+        <location filename="../src/ui/setting.cpp" line="961"/>
+        <source>当前选中的风格无效（ID: %1），可用风格: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/setting.cpp" line="963"/>
+        <source>无</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/setting.cpp" line="971"/>
+        <source>语音合成失败，请检查日志。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/setting.cpp" line="984"/>
+        <source>无法写入临时文件。</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -825,6 +848,14 @@ Battery State: %3</source>
     <message>
         <location filename="../src/utils/UpdateDialog.cpp" line="161"/>
         <source>Failed to open download URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VoiceGenerator</name>
+    <message>
+        <location filename="../src/tts/voicegenerator.hpp" line="132"/>
+        <source>音频文件不存在: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

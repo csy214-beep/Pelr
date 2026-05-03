@@ -31,6 +31,8 @@
 #include "voicevox_tts.h"
 #include "voicegenerator.hpp"
 #include <QProcess>
+#include <QRandomGenerator>
+#include <QDateTime>
 #include <QStandardPaths>
 using MessageType = NotificationWidget::MessageType;
 
@@ -102,7 +104,6 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     data.voicevox_style_id = ui->comboBox_6->currentData().toInt(); // 固定使用 userData 中的 ID
     data.voicevox_speed = ui->doubleSpinBox_2->value();
     // translate
-    data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
     data.tr_lang_translators = ui->comboBox_5->currentText();
     data.tr_provider = ui->comboBox->currentText();
     data.tr_libretranslate_port = ui->lineEdit_17->text();
@@ -114,6 +115,8 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     data.tr_tx_project_id = ui->spinBox_4->value();
     data.tr_tx_source_lang = ui->lineEdit_22->text();
     data.tr_tx_target_lang = ui->lineEdit_23->text();
+
+    data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
 
     return data;
 }
@@ -821,24 +824,32 @@ void SettingWidget::onChooseVoicevoxModel()
 
     ui->lineEdit_16->setText(filePath);
 
-    // 通过单例加载模型
     if (!VoicevoxTTS::instance().loadModel(filePath))
     {
         NotificationWidget::showNotification(
             tr("Warning"),
             tr("模型加载失败，请检查模型文件是否正确，并重新加载。"), 5000, MessageType::Warning);
-        qDebug() << "model load failed" << filePath;
+        qDebug() << "[SettingWidget] Model load failed:" << filePath;
         return;
     }
 
     refreshVoicevoxStyles();
+
+    // 强制选中第一个有效风格（如果当前选中的无效）
+    if (ui->comboBox_6->count() > 0 && ui->comboBox_6->currentData().toInt() < 0)
+    {
+        ui->comboBox_6->setCurrentIndex(0);
+        qDebug() << "[SettingWidget] Forced selection to first style, id="
+                 << ui->comboBox_6->currentData().toInt();
+    }
+
+    NotificationWidget::showNotification(tr("Information"), tr("模型加载成功，风格列表已更新。"), 2000);
 }
 
 // 刷新风格下拉框（comboBox_6）
 void SettingWidget::refreshVoicevoxStyles()
 {
     const QString previousStyleText = ui->comboBox_6->currentText();
-
     ui->comboBox_6->blockSignals(true);
     ui->comboBox_6->clear();
 
@@ -847,23 +858,21 @@ void SettingWidget::refreshVoicevoxStyles()
     {
         ui->comboBox_6->addItem(tr("(无可用风格)"), -1);
         ui->comboBox_6->blockSignals(false);
+        qWarning() << "[SettingWidget] No speakers/styles available after loading model";
         return;
     }
 
     int indexToSelect = -1;
     int currentIdx = 0;
-
     for (const auto &speaker : speakers)
     {
         for (const auto &style : speaker.styles)
         {
             const QString itemText = QStringLiteral("%1 - %2").arg(speaker.name, style.name);
             ui->comboBox_6->addItem(itemText, style.id);
-
+            qDebug() << "[SettingWidget] Added style:" << itemText << "id=" << style.id;
             if (!previousStyleText.isEmpty() && itemText == previousStyleText)
-            {
                 indexToSelect = currentIdx;
-            }
             ++currentIdx;
         }
     }
@@ -871,10 +880,13 @@ void SettingWidget::refreshVoicevoxStyles()
     if (indexToSelect >= 0)
     {
         ui->comboBox_6->setCurrentIndex(indexToSelect);
+        qDebug() << "[SettingWidget] Restored previous style selection:" << previousStyleText;
     }
     else if (ui->comboBox_6->count() > 0)
     {
         ui->comboBox_6->setCurrentIndex(0);
+        int firstId = ui->comboBox_6->currentData().toInt();
+        qDebug() << "[SettingWidget] No previous style match, selected first style with id:" << firstId;
     }
 
     ui->comboBox_6->blockSignals(false);
@@ -883,18 +895,29 @@ void SettingWidget::refreshVoicevoxStyles()
 // 实际加载辞书：更新UI并调用单例初始化
 void SettingWidget::loadVoicevoxDict(const QString &dir)
 {
-    ui->lineEdit_15->setText(dir); // 显示路径
+    ui->lineEdit_15->setText(dir);
 
     if (!VoicevoxTTS::instance().initialize(dir))
     {
         qWarning() << "Failed to initialize VoicevoxTTS: " << dir;
         NotificationWidget::showNotification(tr("Warning"), tr("辞书加载失败，请检查路径是否正确，并确保该路径下有有效的字典文件"), 5000, NotificationWidget::Warning);
+        return;
     }
-    else
+
+    qDebug() << "[SettingWidget] Voicevox dictionary initialized successfully:" << dir;
+
+    QString currentModel = ui->lineEdit_16->text();
+    if (!currentModel.isEmpty() && QFile::exists(currentModel))
     {
-        qDebug() << "[SettingWidget] Voicevox dictionary initialized successfully:" << dir;
-        // 如果已加载模型，辞书重新初始化后合成器会重建，可能需要重新加载模型才能合成。
-        // 可根据需求在此处自动重新加载模型或提示用户。
+        if (VoicevoxTTS::instance().loadModel(currentModel))
+        {
+            refreshVoicevoxStyles();
+            qDebug() << "[SettingWidget] Model reloaded after dict change:" << currentModel;
+        }
+        else
+        {
+            qWarning() << "[SettingWidget] Failed to reload model after dict change:" << currentModel;
+        }
     }
 }
 
@@ -914,33 +937,58 @@ void SettingWidget::onChooseVoicevoxDict()
 }
 void SettingWidget::onTestVoicevox()
 {
-    // 1. 直接获取当前界面的完整 TTS 配置
     TTSConfig cfg = getTTSConfigValue();
-    cfg.provider = 2; // 强制使用 VOICEVOX，即使当前界面选择的是其他引擎
+    cfg.provider = 2; // 强制使用 VOICEVOX
 
-    // 2. 调用带配置的测试合成
+    qDebug() << "[SettingWidget] Testing Voicevox with:"
+             << "model=" << cfg.voicevox_model
+             << "dict=" << cfg.voicevox_dict_dir
+             << "styleId=" << cfg.voicevox_style_id;
+
+    // 应用配置并检查风格有效性
+    if (!VoicevoxTTS::instance().applyConfig(cfg))
+    {
+        NotificationWidget::showNotification(
+            tr("Warning"),
+            tr("应用配置失败，请检查辞书目录和模型文件是否正确。"),
+            5000, MessageType::Warning);
+        return;
+    }
+
+    QVector<int> validIds = VoicevoxTTS::instance().getStyleIds();
+    if (!validIds.contains(cfg.voicevox_style_id))
+    {
+        QString msg = tr("当前选中的风格无效（ID: %1），可用风格: %2")
+                          .arg(cfg.voicevox_style_id)
+                          .arg(validIds.isEmpty() ? tr("无") : QString::number(validIds.first()));
+        NotificationWidget::showNotification(tr("Warning"), msg, 5000, MessageType::Warning);
+        return;
+    }
+
     QByteArray wav = VoicevoxTTS::instance().testSynthesis(cfg);
     if (wav.isEmpty())
     {
-        NotificationWidget::showNotification(tr("Warning"), tr("测试失败，请检查配置是否正确！"), 5000, MessageType ::Warning);
+        NotificationWidget::showNotification(tr("Warning"), tr("语音合成失败，请检查日志。"), 5000, MessageType::Warning);
         return;
     }
 
-    // 3. 保存到临时文件并播放
-    QString testFile = QDir::tempPath() + "/voicevox_test.wav";
+    // 生成唯一临时文件名（时间戳 + 随机数）
+    QString testFile = QDir::tempPath() + "/voicevox_test_" +
+                       QString::number(QDateTime::currentMSecsSinceEpoch()) +
+                       "_" + QString::number(QRandomGenerator::global()->generate()) +
+                       ".wav";
+
     QFile file(testFile);
-    if (file.open(QIODevice::WriteOnly))
+    if (!file.open(QIODevice::WriteOnly))
     {
-        file.write(wav);
-        file.close();
-    }
-    else
-    {
-        NotificationWidget::showNotification(tr("Warning"), tr("保存失败，无法保存测试音频。"), 5000, MessageType::Warning);
+        NotificationWidget::showNotification(tr("Warning"), tr("无法写入临时文件。"), 5000, MessageType::Warning);
         return;
     }
+    file.write(wav);
+    file.close();
 
     VoiceGenerator::instance()->playVoice(testFile);
+    qDebug() << "[SettingWidget] Test synthesis and playback completed.";
 }
 SettingWidget::~SettingWidget()
 {

@@ -101,19 +101,37 @@ public:
         });
     }
 
-    void playVoice(const QString &filePath) {
+    void playVoice(const QString &filePath)
+    {
         if (!m_player)
             return;
 
-        // 如果有正在播放的旧文件，先停止播放并删除旧文件
-        if (!m_currentPlayFile.isEmpty())
+        // 如果新文件与当前播放文件相同，且正在播放，则停止并从头播放（不删除）
+        if (m_currentPlayFile == filePath)
         {
-            m_player->stop();                 // 停止旧播放
-            QFile::remove(m_currentPlayFile); // 删除旧文件
-            m_currentPlayFile.clear();
+            if (m_player->state() == QMediaPlayer::PlayingState)
+            {
+                m_player->stop();
+            }
+            m_player->setMedia(QUrl::fromLocalFile(filePath));
+            m_player->play();
+            return;
         }
 
-        m_currentPlayFile = filePath; // 记录新文件路径
+        // 清理旧文件（仅当与新文件不同）
+        if (!m_currentPlayFile.isEmpty())
+        {
+            m_player->stop();
+            QFile::remove(m_currentPlayFile);
+        }
+
+        m_currentPlayFile = filePath;
+        if (!QFile::exists(filePath))
+        {
+            qWarning() << "[VoiceGenerator] File does not exist:" << filePath;
+            emit errorOccurred(tr("音频文件不存在: %1").arg(filePath));
+            return;
+        }
 
         m_player->setVolume(DataManager::instance().getBasicData().volume);
         m_player->setMedia(QUrl::fromLocalFile(filePath));

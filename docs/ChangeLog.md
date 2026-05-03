@@ -7,6 +7,10 @@
 
 [//]: # "[![Release History](https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white)](https://github.com/csy214-beep/Pelr/blob/master/docs/ChangeLog.md)"
 
+## v20260503.14-dev
+
+1. docs: CREDITS.md
+
 ## v20260503.13.5 - 2026-05-03
 
 ### 更新内容

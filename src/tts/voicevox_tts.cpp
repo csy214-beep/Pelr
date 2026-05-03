@@ -52,9 +52,10 @@ struct VoicevoxTTS::Impl
     VoicevoxVoiceModelFile *model = nullptr;
     bool ready = false;
 
-    // 当前应用的配置（用于对比）
     QString currentDictDir;
     QString currentModelPath;
+    uint8_t currentModelId[16] = {0};
+    bool hasModelId = false;
 
     ~Impl()
     {
@@ -70,17 +71,35 @@ struct VoicevoxTTS::Impl
             openJtalk = nullptr;
         }
     }
+
     void unloadModel()
     {
+        if (synthesizer && hasModelId)
+        {
+            // 正确转换为 VoicevoxVoiceModelId (const uint8_t(*)[16])
+            auto modelIdPtr = const_cast<const uint8_t (*)[16]>(&currentModelId);
+            VoicevoxResultCode rc = voicevox_synthesizer_unload_voice_model(
+                synthesizer,
+                reinterpret_cast<VoicevoxVoiceModelId>(modelIdPtr));
+            if (rc != VOICEVOX_RESULT_OK)
+            {
+                qWarning() << "[VoicevoxTTS] Failed to unload voice model, code:" << rc;
+            }
+            else
+            {
+                qDebug() << "[VoicevoxTTS] Unloaded previous model successfully";
+            }
+            hasModelId = false;
+        }
         if (model)
         {
             voicevox_voice_model_file_delete(model);
             model = nullptr;
         }
         ready = false;
+        currentModelPath.clear();
     }
 };
-
 VoicevoxTTS::VoicevoxTTS() : d(std::make_unique<Impl>()) {}
 VoicevoxTTS::~VoicevoxTTS() = default;
 
@@ -128,12 +147,11 @@ bool VoicevoxTTS::initialize(const QString &dictDir)
     qDebug() << "[VoicevoxTTS] Synthesizer created with dict:" << dictDir;
     return true;
 }
-
 bool VoicevoxTTS::loadModel(const QString &modelPath)
 {
     if (!d->synthesizer)
     {
-        qWarning() << "[VoicevoxTTS] Synthesizer not ready";
+        qWarning() << "[VoicevoxTTS] Synthesizer not ready, call initialize() first";
         return false;
     }
     if (modelPath.isEmpty() || !QFileInfo::exists(modelPath))
@@ -142,14 +160,16 @@ bool VoicevoxTTS::loadModel(const QString &modelPath)
         return false;
     }
 
-    // 相同模型已加载，直接视为成功
+    // 如果已加载相同路径的模型，直接成功（但可加选项强制重载，此处保持原行为）
     if (d->ready && d->currentModelPath == modelPath)
     {
         qDebug() << "[VoicevoxTTS] Model already loaded:" << modelPath;
         return true;
     }
 
-    d->unloadModel();
+    qDebug() << "[VoicevoxTTS] Unloading current model (if any) before loading new one";
+    d->unloadModel(); // 卸载旧模型（包括从合成器中移除）
+
     QByteArray modelPathBytes = modelPath.toUtf8();
     VoicevoxResultCode rc = voicevox_voice_model_file_open(modelPathBytes.constData(), &d->model);
     if (rc != VOICEVOX_RESULT_OK || !d->model)
@@ -157,17 +177,25 @@ bool VoicevoxTTS::loadModel(const QString &modelPath)
         qWarning() << "[VoicevoxTTS] Open model failed, code:" << rc;
         return false;
     }
+
+    // 获取新模型的唯一ID（用于将来卸载）
+    voicevox_voice_model_file_id(d->model, &d->currentModelId);
+    d->hasModelId = true;
+    qDebug() << "[VoicevoxTTS] New model ID obtained";
+
     rc = voicevox_synthesizer_load_voice_model(d->synthesizer, d->model);
     if (rc != VOICEVOX_RESULT_OK)
     {
         qWarning() << "[VoicevoxTTS] Load voice model failed, code:" << rc;
         voicevox_voice_model_file_delete(d->model);
         d->model = nullptr;
+        d->hasModelId = false;
         return false;
     }
+
     d->ready = true;
     d->currentModelPath = modelPath;
-    qDebug() << "[VoicevoxTTS] Model loaded:" << modelPath;
+    qDebug() << "[VoicevoxTTS] Model loaded successfully:" << modelPath;
     return true;
 }
 
