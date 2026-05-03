@@ -17,6 +17,9 @@
 - **翻译功能**：新增腾讯云翻译能力，并补充相关配置说明与文档支持。
 - **翻译功能**：libretranslate 简单支持
 
+---
+**Full Changelog**: <https://github.com/csy214-beep/Pelr/compare/20260405.12.18...20260503.13.5>
+
 ## v20260405.12.18 - 2026-05-02
 
 > [!CAUTION]
