@@ -13,8 +13,7 @@
 |                       stb_image_resize2                        |   2.12   |                  单头文件高质量图像缩放库。                  | MIT / Public Domain |    <https://github.com/nothings/stb>     |
 |                             stb_ds                             |   0.67   |            单头文件 C 语言动态数组和哈希表实现。             | MIT / Public Domain |    <https://github.com/nothings/stb>     |
 |                            kissfft                             |    -     |     轻量级快速傅里叶变换库，用于实时频谱分析与音频检测。     |    BSD-3-Clause     | <https://github.com/mborgerding/kissfft> |
-|                         voicevox_core                          |  0.16.4  |
-| VOICEVOX 语音合成核心库，提供 C API 动态库，用于日语音声合成。 |   MIT    |         <https://github.com/VOICEVOX/voicevox_core>          |
+|                         voicevox_core                          |  0.16.4| VOICEVOX 语音合成核心库，提供 C API 动态库，用于日语音声合成。 |   MIT    |         <https://github.com/VOICEVOX/voicevox_core>          |
 
 ## Python 依赖
 
