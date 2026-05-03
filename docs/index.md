@@ -8,6 +8,7 @@
 - [TTS 服务程序](app-tts.md)
 - [voicevox 配置指引](app-voicevox.md)
 - [LibreTranslate 配置指引](app-LibreTranslate.md)
+- [腾讯云翻译功能配置指引](app-txTr.md)
 
 ## 开发者
 

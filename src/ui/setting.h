@@ -63,7 +63,7 @@ private slots:
 
     void resetSetting();
 
-    void onCheckBox1Clicked(bool flag = false);
+    void startupSwitch(bool flag = false);
 
     void onLogLevelChanged();
 

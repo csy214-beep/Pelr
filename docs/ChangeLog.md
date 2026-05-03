@@ -9,6 +9,9 @@
 
 ## v20260503.13-dev
 
+1. fix: 优化TTS设置页面显示逻辑
+1. fix: 优化 voiceVox 模型加载时载入StyleID逻辑
+1. feat: 腾讯云翻译功能及其相关配置、文档
 1. feat: src/tts/libretranslateclient.h
 
 ## v20260405.12.18 - 2026-05-02

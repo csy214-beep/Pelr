@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 #include "data.hpp"
-
+#include "tencenttranslator.h"
 // 前置声明
 class Translator;
 class LibreTranslateClient;
@@ -38,6 +38,7 @@ private:
 
     Translator *m_legacyTranslator;
     LibreTranslateClient *m_libreClient;
+    TencentTranslator *m_tencentClient;
 
     TTSConfig m_config;
     bool m_configValid = false;

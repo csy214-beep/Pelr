@@ -43,29 +43,11 @@ public:
      */
     void generateVoice(const TTSConfig &config, const QString &text)
     {
-        // 判断是否需要翻译：根据 tr_point 是否有效以及目标语言配置是否非空
-        // 注意：TranslationManager 内部会使用 tr_point 选择后端，这里只需判断是否有翻译需求
-        bool needTranslate = false;
-        if (config.tr_point == 0 && !config.tr_lang_libretranslate.isEmpty())
-        {
-            needTranslate = true;
-        }
-        else if (config.tr_point == 1 && !config.tr_lang_translators.isEmpty() && !config.tr_provider.isEmpty())
-        {
-            needTranslate = true;
-        }
 
-        if (needTranslate)
-        {
-            m_pendingConfig = config;
-            m_pendingText = text;
-            TrManager::instance()->setConfig(config);
-            TrManager::instance()->translate(text);
-        }
-        else
-        {
-            doGenerateVoice(config, text);
-        }
+        m_pendingConfig = config;
+        m_pendingText = text;
+        TrManager::instance()->setConfig(config);
+        TrManager::instance()->translate(text);
     }
 
     // 原有讯飞 TTS 调用方式（保持不变）
@@ -162,7 +144,7 @@ private slots:
     {
         qWarning() << "Translation failed:" << errorMessage;
         emit errorOccurred("Translation failed: " + errorMessage);
-        doGenerateVoice(m_pendingConfig, m_pendingText);
+        doGenerateVoice(m_pendingConfig, m_pendingText); // 回退原文合成
     }
 
 private:

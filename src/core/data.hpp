@@ -124,6 +124,7 @@ struct constConfigData
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     const QString support_languages = "https://github.com/csy214-beep/Pelr/tree/master/docs/assets/languages.txt";
     const QString libretranslate_guide = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-LibreTranslate.md";
+    const QString tx_tr_guide = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-txTr.md";
     // about
     const QString version = VERSION;
     const QString Gitee_repo_owner = "Pfolg";
@@ -241,6 +242,13 @@ struct TTSConfig
     QString tr_lang_translators; // translators
     QString tr_lang_libretranslate;
     QString tr_libretranslate_port = "5000";
+    // 腾讯云机器翻译配置
+    QString tr_tx_secret_id;   // SecretId
+    QString tr_tx_secret_key;  // SecretKey
+    QString tr_tx_region;      // 地域，默认 ap-guangzhou
+    int tr_tx_project_id = 0;  // 项目 ID，默认 0
+    QString tr_tx_source_lang; // 源语言，默认 "auto"
+    QString tr_tx_target_lang; // 目标语言（tr_point == 2 时使用）
 };
 
 static QVector<QPair<QString, int>> TTSProviderList = {
@@ -252,6 +260,7 @@ static QVector<QPair<QString, int>> TTSProviderList = {
 static QVector<QPair<QString, int>> Translators = {
     {"libretranslate", 0},
     {"translators", 1},
+    {"Tencent", 2},
 };
 
 struct OpenWeatherData

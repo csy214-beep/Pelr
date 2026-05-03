@@ -53,6 +53,9 @@ public:
      */
     QString synthesizeToFile(const TTSConfig &config, const QString &text, int styleId, double speed);
 
+    /** 返回当前已加载模型的所有风格 ID（纯工具方法） */
+    QVector<int> getStyleIds() const;
+
 private:
     VoicevoxTTS();
     ~VoicevoxTTS();
