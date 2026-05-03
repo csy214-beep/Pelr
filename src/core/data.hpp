@@ -31,7 +31,7 @@
 #define OPEN_WEATHER_FILE "user/openWeather.json"
 #define LLAMA_DATA_FILE "user/llamaConfig.json"
 
-#define VERSION "20260503.13-dev" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
+#define VERSION "20260503.13.5" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 
 struct colorPair
 {
