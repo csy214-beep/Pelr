@@ -9,6 +9,7 @@
 
 ## v20260503.14-dev
 
+1. fix: voicevox test
 1. docs: CREDITS.md
 
 ## v20260503.13.5 - 2026-05-03

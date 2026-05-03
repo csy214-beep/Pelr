@@ -136,6 +136,8 @@
 - **OpenGL** - 图形渲染 (GLEW + GLFW)
 - **Live2D Cubism** - 2D 动画渲染引擎 (仅支持 model3.json 格式)
 - **STB 库** - 图像处理功能
+- **voicevox** - VOICEVOX 的核心 ，一款免费、中等质量的TTS
+- **kissfft** - 实时频谱分析与音频检测
 
 ### Python 工具链
 
