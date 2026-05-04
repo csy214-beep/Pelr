@@ -116,15 +116,11 @@ struct ConfigData
 
 struct constConfigData
 {
-    const QString openai_edge_tts_github = "https://github.com/travisvn/openai-edge-tts";
     const QString openai_edge_tts_Voice_Samples = "https://tts.travisvn.com/";
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
     const QString tts_server = "tts_server.exe"; // local path
-    const QString voicevox_help = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-voicevox.md";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
-    const QString support_languages = "https://github.com/csy214-beep/Pelr/tree/master/docs/assets/languages.txt";
-    const QString libretranslate_guide = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-LibreTranslate.md";
-    const QString tx_tr_guide = "https://github.com/csy214-beep/Pelr/tree/master/docs/app-txTr.md";
+    const QString docs_link = "https://github.com/csy214-beep/Pelr/tree/master/docs";
     // about
     const QString version = VERSION;
     const QString Gitee_repo_owner = "Pfolg";

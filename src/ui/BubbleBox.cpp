@@ -49,6 +49,8 @@ BubbleBox::BubbleBox(QLabel *parent) : QLabel(parent) {
     // 设置透明背景属性
     setAttribute(Qt::WA_TranslucentBackground);
     setAlignment(Qt::AlignCenter);
+    // 设置“显示时不激活”属性
+    setAttribute(Qt::WA_ShowWithoutActivating, true);
     QFont font = DataManager::instance()._font;
     font.setPointSize((int) 12 * (DataManager::instance().getBasicData().model_size / 150));
     font.setWeight(50);

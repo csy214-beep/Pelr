@@ -87,7 +87,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/public/IconaMoon/Communication/Comment Dots - 24x24.png</normaloff>:/public/IconaMoon/Communication/Comment Dots - 24x24.png</iconset>
         </property>
         <property name="iconSize">
@@ -135,7 +135,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/public/IconaMoon/General/Calendar 1 - 24x24.png</normaloff>:/public/IconaMoon/General/Calendar 1 - 24x24.png</iconset>
         </property>
         <property name="iconSize">
@@ -177,7 +177,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/public/IconaMoon/General/Apps - 24x24.png</normaloff>:/public/IconaMoon/General/Apps - 24x24.png</iconset>
         </property>
         <property name="iconSize">
@@ -219,7 +219,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../../Resource.qrc">
           <normaloff>:/public/IconaMoon/General/Settings - 24x24.png</normaloff>:/public/IconaMoon/General/Settings - 24x24.png</iconset>
         </property>
         <property name="iconSize">
@@ -230,6 +230,13 @@
         </property>
         <property name="flat">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>
@@ -262,7 +269,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
  </resources>
  <connections/>
 </ui>

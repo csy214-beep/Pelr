@@ -279,16 +279,26 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->horizontalSlider_2->setRange(15, 120); // FPS
     ui->horizontalSlider_3->setRange(0, 100);  // volume
 
-    // 说明
-    QFile file(":/CREDITS.md");
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    // CREDITS
+    QFile CREDITS(":/CREDITS.md");
+    QString content_CREDITS;
+    if (CREDITS.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QTextStream in(&file);
+        QTextStream in(&CREDITS);
         in.setCodec("UTF-8"); // 设置编码为 UTF-8
-        QString content = in.readAll();
-        file.close();
-        ui->textBrowser->setMarkdown(content);
+        content_CREDITS = in.readAll();
+        CREDITS.close();
     }
+    QFile THANBKS(":/THANBKS.md");
+    QString content_THANBKS;
+    if (THANBKS.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&THANBKS);
+        in.setCodec("UTF-8"); // 设置编码为 UTF-8
+        content_THANBKS = in.readAll();
+        THANBKS.close();
+    }
+    ui->textBrowser->setMarkdown(QString("%1\n%2").arg(content_CREDITS).arg(content_THANBKS));
     ui->textBrowser->setReadOnly(true);
     ui->textBrowser->setOpenExternalLinks(true);
     // 初始化日志等级选择
@@ -396,8 +406,6 @@ void SettingWidget::connectSignals()
             {
                 m_langClient->fetchProviders();
                 m_langClient->fetchLanguages(); });
-    connect(ui->pushButton_22, &QPushButton::clicked, [&]()
-            { launchByPath(DataManager::instance().const_config_data.support_languages); });
     connect(ui->pushButton_23, &QPushButton::clicked, [&]()
             {
         QString provider = ui->comboBox->currentText();
@@ -437,10 +445,7 @@ void SettingWidget::connectSignals()
     connect(ui->pushButton_24, &QPushButton::clicked, this, &SettingWidget::onChooseVoicevoxDict);
     connect(ui->pushButton_25, &QPushButton::clicked, this, &SettingWidget::onChooseVoicevoxModel);
     connect(ui->pushButton_26, &QPushButton::clicked, this, &SettingWidget::onTestVoicevox);
-    connect(ui->pushButton_27, &QPushButton::clicked, [&]()
-            { launchByPath(DataManager::instance().const_config_data.voicevox_help); });
-    connect(ui->pushButton_28, &QPushButton::clicked, [&]()
-            { launchByPath(DataManager::instance().const_config_data.libretranslate_guide); });
+
     // test Tencent
     connect(ui->pushButton_29, &QPushButton::clicked, [&]()
             {
@@ -452,8 +457,7 @@ void SettingWidget::connectSignals()
                 QString msg;
                 TencentTranslator::testTranslate(cfg, ui->lineEdit_24->text(), &msg);
                 ui->label_56->setText(msg); });
-    connect(ui->pushButton_30, &QPushButton::clicked, [&]()
-            { launchByPath(DataManager::instance().const_config_data.tx_tr_guide); });
+
     // llama
     connect(ui->pushButton_15, &QPushButton::clicked, [&]()
             {
@@ -476,8 +480,6 @@ void SettingWidget::connectSignals()
     // 链接跳转
     connect(ui->pushButton_7, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.openai_edge_tts_Voice_Samples); });
-    connect(ui->pushButton_16, &QPushButton::clicked, [&]()
-            { launchByPath(DataManager::instance().const_config_data.openai_edge_tts_github); });
     connect(ui->pushButton_3, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.iFlytek_tts_url); });
     connect(ui->pushButton_14, &QPushButton::clicked, [&]()
@@ -487,9 +489,14 @@ void SettingWidget::connectSignals()
     // git-repo
     connect(ui->pushButton_8, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.website_link); });
-    // team
+    // Contributors
     connect(ui->pushButton_9, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.team_link); });
+
+    // docs
+    connect(ui->pushButton_16, &QPushButton::clicked, [&]()
+            { launchByPath(DataManager::instance().const_config_data.docs_link); });
+
     // issues
     connect(ui->pushButton_6, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.feedback_link); });
