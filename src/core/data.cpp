@@ -5,10 +5,10 @@ void DataManager::writeOpenWeatherData(const OpenWeatherData &opwdt)
     QJsonObject json_object;
     json_object.insert("city", opwdt.city);
     json_object.insert("api_key", opwdt.api_key);
-    QFile file(OPEN_WEATHER_FILE);
+    QFile file(FilePaths.openWeatherFile);
     if (!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(OPEN_WEATHER_FILE));
+        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(FilePaths.openWeatherFile));
         qCritical() << "write OpenWeather Config failed: can not open file";
         return; // 无法打开文件进行写入
     }
@@ -25,10 +25,10 @@ void DataManager::writeLlamaData(const LlamaData &llm)
     json_object.insert("baseUrl", llm.baseUrl);
     json_object.insert("apiKey", llm.apiKey);
     json_object.insert("promptFilePath", llm.promptFilePath);
-    QFile file(LLAMA_DATA_FILE);
+    QFile file(FilePaths.llamaConfigFile);
     if (!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(OPEN_WEATHER_FILE));
+        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(FilePaths.openWeatherFile));
         qCritical() << "write OpenWeather Config failed: can not open file";
         return; // 无法打开文件进行写入
     }
@@ -68,11 +68,11 @@ void DataManager::writeTTSConfig(const TTSConfig &ttsc)
     json_object.insert("tr_tx_source_lang", ttsc.tr_tx_source_lang);
     json_object.insert("tr_tx_target_lang", ttsc.tr_tx_target_lang);
 
-    QFile file(TTS_CONFIG_FILE);
+    QFile file(FilePaths.ttsConfigFile);
     if (!file.open(QIODevice::WriteOnly))
     {
         // 无法打开文件进行写入
-        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败: %1").arg(TTS_CONFIG_FILE));
+        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败: %1").arg(FilePaths.ttsConfigFile));
         qCritical() << "write tts config failed: can not open file";
         return;
     }
@@ -94,7 +94,7 @@ QJsonObject DataManager::readJsonFile(const QString &filePath)
 
     if (fileData.isEmpty())
     {
-        qWarning() << "file is empty:" << LLAMA_DATA_FILE;
+        qWarning() << "file is empty:" << FilePaths.llamaConfigFile;
         return {}; // 空文件
     }
 
@@ -118,7 +118,7 @@ QJsonObject DataManager::readJsonFile(const QString &filePath)
 }
 void DataManager::readLlamaData()
 {
-    QJsonObject json_obj = readJsonFile(LLAMA_DATA_FILE);
+    QJsonObject json_obj = readJsonFile(FilePaths.llamaConfigFile);
 
     // 逐个读取
     llama_data.maxContextMessages = json_obj.value("maxContextMessages").toInt(10);
@@ -131,7 +131,7 @@ void DataManager::readLlamaData()
 
 void DataManager::writeData(ToDoSettingData setting)
 {
-    QFile file(TODO_NOTIFY_FILE);
+    QFile file(FilePaths.todoNotifyFile);
     if (!file.open(QIODevice::WriteOnly))
     {
         // 无法打开文件进行写入
@@ -153,7 +153,7 @@ void DataManager::writeData(ToDoSettingData setting)
 void DataManager::readMenuData()
 {
     QList<MenuData> menu_data;
-    QFile file(MENU_DATA_FILE);
+    QFile file(FilePaths.menuDataFile);
     if (!file.open(QIODevice::ReadOnly))
     {
         qDebug() << "menu data file not exist or can not open, return empty list";
@@ -168,7 +168,7 @@ void DataManager::readMenuData()
 void DataManager::readBasicData()
 {
     ConfigData _basic_data;
-    QFile file(CONFIG_DATA_FILE);
+    QFile file(FilePaths.configDataFile);
     if (!file.open(QIODevice::ReadOnly))
     {
         // qDebug() <<__func__<< "读取菜单数据失败";
@@ -202,7 +202,7 @@ QFont DataManager::loadFont()
 void DataManager::readTodoData()
 {
     QList<TodoData> _todo_data;
-    QFile file(TODO_DATA_FILE);
+    QFile file(FilePaths.todoDataFile);
     if (!file.open(QIODevice::ReadOnly))
     {
         // qDebug() <<__func__<< "读取菜单数据失败";
@@ -216,7 +216,7 @@ void DataManager::readTodoData()
 }
 void DataManager::readTodoNotify()
 {
-    QFile file(TODO_NOTIFY_FILE);
+    QFile file(FilePaths.todoNotifyFile);
     if (!file.open(QIODevice::ReadOnly))
     {
         // qDebug() <<__func__<< "读取菜单数据失败";
@@ -229,7 +229,7 @@ void DataManager::readTodoNotify()
 }
 void DataManager::readTTSConfig()
 {
-    QJsonObject json_object = readJsonFile(TTS_CONFIG_FILE);
+    QJsonObject json_object = readJsonFile(FilePaths.ttsConfigFile);
 
     // 逐个读取并验证必要字段
     tts_config.provider = json_object.value("provider").toInt(0);
@@ -272,7 +272,7 @@ void DataManager::readTTSConfig()
 void DataManager::readOpenWeatherData()
 {
 
-    QJsonObject json_object = readJsonFile(OPEN_WEATHER_FILE);
+    QJsonObject json_object = readJsonFile(FilePaths.openWeatherFile);
 
     // 逐个读取并验证必要字段
     openWeather_data.api_key = json_object.value("api_key").toString("");

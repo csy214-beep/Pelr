@@ -46,19 +46,15 @@ pyinstaller -w tts_server\tts_server.py
 
 ---
 
-在打包发布前，需要确保`CMakeLists.txt`的这两个选项为 OFF
+在打包发布前，需要确保`CMakeLists.txt`的这里配置为Release: `OFF`
 
 ```txt
 # 配置选项
-set(D_OR_R OFF)                # ON: Debug, OFF: Release
-set(CONSOLE OFF)               # ON: 显示控制台, OFF: 隐藏控制台（GUI模式）
+# ====================== 全局配置开关 ======================
+set(DEBUG_MODE OFF)           # ON: Debug, OFF: Release
 ```
 
 ---
-
-src\main.cpp：
-
-确保第30行为`#define DEBUG false`，以禁用debug模式，使得日志系统可以将日志写入文件。
 
 ### Python 包管理
 

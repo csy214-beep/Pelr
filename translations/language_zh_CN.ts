@@ -383,7 +383,7 @@ Battery State: %3</source>
     <message>
         <location filename="../src/core/launcher.hpp" line="89"/>
         <location filename="../src/core/launcher.hpp" line="99"/>
-        <location filename="../src/core/data.hpp" line="369"/>
+        <location filename="../src/core/data.hpp" line="376"/>
         <location filename="../src/core/data.cpp" line="11"/>
         <location filename="../src/core/data.cpp" line="31"/>
         <location filename="../src/core/data.cpp" line="75"/>
@@ -408,7 +408,7 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/data.hpp" line="369"/>
+        <location filename="../src/core/data.hpp" line="376"/>
         <location filename="../src/core/data.cpp" line="75"/>
         <source>写入数据失败: %1</source>
         <translation type="unfinished"></translation>

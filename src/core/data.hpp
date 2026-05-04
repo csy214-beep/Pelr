@@ -23,16 +23,22 @@
 #include "llamaclient.h"
 #include <QJsonObject>
 #include <QJsonParseError>
-#define MENU_DATA_FILE "user/menuData.dat"
-#define CONFIG_DATA_FILE "user/configData.dat"
-#define TODO_DATA_FILE "user/todoData.dat"
-#define TODO_NOTIFY_FILE "user/todoNotify.dat"
-#define TTS_CONFIG_FILE "user/ttsConfig.json"
-#define OPEN_WEATHER_FILE "user/openWeather.json"
-#define LLAMA_DATA_FILE "user/llamaConfig.json"
 
 #define VERSION "20260503.14-dev" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
 
+struct filePaths
+{
+    QString menuDataFile = "user/menuData.dat";
+    QString configDataFile = "user/configData.dat";
+    QString todoDataFile = "user/todoData.dat";
+    QString todoNotifyFile = "user/todoNotify.dat";
+    QString ttsConfigFile = "user/ttsConfig.json";
+    QString openWeatherFile = "user/openWeather.json";
+    QString llamaConfigFile = "user/llamaConfig.json";
+    QString defaultTextFile = "assets/text/text.json";
+    QString userTextFile = "user/text.json";
+};
+inline filePaths FilePaths;
 struct colorPair
 {
     QString forground;
@@ -130,8 +136,9 @@ struct constConfigData
     const QString team_link = "https://github.com/csy214-beep/Pelr/graphs/contributors";
     const QString website_link = "https://github.com/csy214-beep/Pelr";
     const QString feedback_link = "https://github.com/csy214-beep/Pelr/issues";
-    const QString textFile = "user\\text.json"; // local path
     const QString VoiceFolder = "voice_files";  // local path
+    const QString userFolder = "user";          // local path
+    const QString logFolder = "log";            // local path
 };
 
 struct LlamaData
@@ -347,15 +354,15 @@ public:
         QString filename;
         if constexpr (std::is_same_v<T, QList<MenuData>>)
         {
-            filename = MENU_DATA_FILE;
+            filename = FilePaths.menuDataFile;
         }
         else if constexpr (std::is_same_v<T, ConfigData>)
         {
-            filename = CONFIG_DATA_FILE;
+            filename = FilePaths.configDataFile;
         }
         else if constexpr (std::is_same_v<T, QList<TodoData>>)
         {
-            filename = TODO_DATA_FILE;
+            filename = FilePaths.todoDataFile;
         }
         else
         {

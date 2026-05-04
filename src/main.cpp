@@ -1,55 +1,25 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
-#include <QtWidgets/QApplication>
-#include  <QCoreApplication>
+#include <QApplication>
+#include <QCoreApplication>
+#include <QStyleFactory>
+#include <QIcon>
+#include <QDebug>
+#include <ctime>
+#include <cstdlib>
+
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 #include "GLCore.h"
 #include "tray.h"
-#include <QFont>
-#include <QFile>
-#include <QTextStream>
-#include <QDateTime>
-#include <iostream>
-#include <QString>
-#include <QDir>
-#include <QStyleFactory>
-#include <QString>
-#include  "CheckApplication.h"
+#include "CheckApplication.h"
 #include "TranslationManager.h"
 #include "logger.hpp"
 #include "NotificationWidget.h"
 #include "initFileSys.h"
 #include "voicevox_tts.h"
-// 输出到控制台（如果启用）
-#ifdef CONSOLE
-QTextStream out(stdout);
-out<< txt<< Qt::endl;
-#endif
-#define DEBUG true
 
-void initTranslator(QApplication &a, const QString &path)
-{
-    // 初始化翻译管理器
-    TranslationManager::setApplication(&a);
-
-    // 设置自定义翻译路径
-    TranslationManager::instance()->addTranslationPath(path);
-
-    // 自动检测并设置系统语言
-    QString sysLang = TranslationManager::instance()->detectSystemLanguage();
-    TranslationManager::instance()->setLanguage("en_US");
-
-    qDebug() << "System language: " << sysLang;
-    qDebug() << "Translator initialized";
-}
-
-// 居然敢动我的屎山代码，想必你应该是做好了觉悟吧。
+void initTranslator(QApplication &a, const QString &path);
 
 int main(int argc, char *argv[])
 {
@@ -57,61 +27,78 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
-    // 确保 必要 目录存在
+
+    // ---- 基础初始化（应在 QApplication 之前完成，但注意不要依赖 QSettings 等） ----
     initFileSys();
-    // 初始化日志
     initLogFile();
-    // 设置控制台输出的代码页为UTF-8
+
+#ifdef Q_OS_WIN
     SetConsoleOutputCP(CP_UTF8);
-    // 初始化日志等级
+#endif
+
     setLogLevel(read_log_level());
 
-    // 安装自定义消息处理器
-    if (!DEBUG) qInstallMessageHandler(messageHandler);
-    //  初始化随机数生成器
-    std::srand(std::time(nullptr));
+#ifndef CONSOLE // Release 模式（无控制台）才安装消息处理器
+    qInstallMessageHandler(messageHandler);
+#endif
+
+    // 随机数种子
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
+
     QApplication app(argc, argv);
+
+    // 尽早初始化翻译，让后续对话框可使用 tr()
+    initTranslator(app, ":/translations");
+
     app.setApplicationName(DataManager::instance().Project_Name + " " + DataManager::instance().const_config_data.version);
-    app.setFont(DataManager::instance()._font); //整个应用程序的界面都会使用这个字体
+    app.setFont(DataManager::instance()._font); // 确保 DataManager 已加载字体
     app.setWindowIcon(QIcon(":/assets/image/Pelr.png"));
+
+    // 样式设置
     QStringList styles = QStyleFactory::keys();
+    if (styles.contains("Fusion", Qt::CaseInsensitive))
+        app.setStyle("Fusion");
 
-    qDebug() << "Available styles:" << styles;
-
-    QString preferredStyle = "Fusion"; // Windows all platforms
-
-    if (styles.contains(preferredStyle, Qt::CaseInsensitive))
+    // 许可证检查
+    if (!CheckApplication::hasValidLicense())
     {
-        app.setStyle(preferredStyle);
-    }
-
-    if (!CheckApplication::hasValidLicense()) {
         CheckApplication licenseDialog;
-        if (!(licenseDialog.exec() == QDialog::Accepted && licenseDialog.isLicenseAccepted())) {
+        if (licenseDialog.exec() != QDialog::Accepted || !licenseDialog.isLicenseAccepted())
+        {
             qDebug() << "License not accepted, exit";
-            return 0;
+            return 1; // 非零退出码表示异常
         }
         qDebug() << "License accepted";
     }
 
-    GLCore w;
-
     TrayIcon::instance()->show();
 
-    // 初始化 ONNX Runtime（onnxruntime.dll 已复制到 exe 目录，传空字符串自动查找）
+    // ONNX 初始化（如可能耗时，可考虑异步，此处保持简单）
     if (!VoicevoxTTS::initializeOnnxRuntime())
     {
         qWarning() << "Failed to initialize OnnxRuntime";
     }
-    // 初始化翻译管理器
-    initTranslator(app, ":/translations");
 
-    // boot by silent mode
-    if (DataManager::instance().getBasicData().isSilentBoot) {
+    // 根据静默启动选项决定是否显示主窗口
+    GLCore w;
+    if (DataManager::instance().getBasicData().isSilentBoot)
+    {
         TrayIcon::instance()->action_silentMode->triggered();
-    } else {
+    }
+    else
+    {
         w.show();
     }
 
     return app.exec();
+}
+
+void initTranslator(QApplication &a, const QString &path)
+{
+    TranslationManager::setApplication(&a);
+    TranslationManager::instance()->addTranslationPath(path);
+    QString sysLang = TranslationManager::instance()->detectSystemLanguage();
+    TranslationManager::instance()->setLanguage("en_US");
+    qDebug() << "System language:" << sysLang;
+    qDebug() << "Translator initialized";
 }

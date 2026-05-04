@@ -4,9 +4,17 @@
 cmake_minimum_required(VERSION 3.3)
 project(Pelr)
 
-# 配置选项
-set(D_OR_R ON)                # ON: Debug, OFF: Release
-set(CONSOLE ON)               # ON: 显示控制台, OFF: 隐藏控制台（GUI模式）
+# ====================== 全局配置开关 ======================
+set(DEBUG_MODE ON)           # ON: Debug, OFF: Release
+
+# 根据 DEBUG_MODE 设置构建类型和子系统
+if(DEBUG_MODE)
+    set(CMAKE_BUILD_TYPE Debug)
+    add_compile_definitions(CONSOLE)                # 启用控制台输出
+    # Debug 模式不安装自定义消息处理器，消息直接输出到调试器/控制台
+else()
+    set(CMAKE_BUILD_TYPE Release)
+endif()
 
 # 平台与标准设置
 if (WIN32)
@@ -139,13 +147,14 @@ link_directories("${CMAKE_SOURCE_DIR}/lib/Debug")
 # 可执行文件
 # ============================================================================
 
-# 根据 CONSOLE 选项决定是否显示控制台
-if (NOT CONSOLE)
-    set(CON WIN32)
-endif ()
+if(DEBUG_MODE)
+    set(EXE_WIN32)
+else()
+    set(EXE_WIN32 WIN32)
+endif()
 
 add_executable(${PROJECT_NAME}
-        ${CON}                     # WIN32 或空
+        ${EXE_WIN32}                    # WIN32 或空
         ${ALL_CPP_SOURCES}         # 所有 .cpp 源文件
         ${MOC_SOURCES}             # MOC 生成的文件
         ${UI_HEADERS}              # UI 生成的头文件
@@ -190,11 +199,11 @@ if (WIN32)
     if (EXISTS ${APP_ICON_FILE} AND EXISTS ${APP_RC_FILE})
         target_sources(${PROJECT_NAME} PRIVATE ${APP_RC_FILE})
         # 根据 CONSOLE 设置是否显示控制台
-        if (NOT CONSOLE)
-            set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
-        else ()
-            set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE FALSE)
-        endif ()
+        if(DEBUG_MODE)
+             set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE FALSE)
+         else()
+             set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
+         endif()
     else ()
         message(WARNING "Program icon file or RC script is missing, default icon will be used!")
     endif ()

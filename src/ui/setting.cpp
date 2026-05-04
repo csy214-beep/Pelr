@@ -606,9 +606,9 @@ void SettingWidget::resetSetting()
     {
         // 删除程序目录下的 user、log 和 voice_files 文件夹
         const QString appDir = QApplication::applicationDirPath();
-        QDir userDir(appDir + "/user");
-        QDir logDir(appDir + "/log");
-        QDir voiceDir(appDir + "/voice_files");
+        QDir userDir(DataManager::instance().const_config_data.userFolder);
+        QDir logDir(DataManager::instance().const_config_data.logFolder);
+        QDir voiceDir(DataManager::instance().const_config_data.VoiceFolder);
 
         bool success = true;
         if (userDir.exists())
