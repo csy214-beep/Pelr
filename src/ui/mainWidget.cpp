@@ -22,12 +22,12 @@ mainWidget::mainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::mainWidget
 void mainWidget::initUI() {
     this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
     this->setWindowTitle("Pelr");
-    QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
-    if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QString styleSheet = QLatin1String(styleFile.readAll());
-        this->setStyleSheet(styleSheet);
-        styleFile.close();
-    }
+    // QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
+    // if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    //     QString styleSheet = QLatin1String(styleFile.readAll());
+    //     this->setStyleSheet(styleSheet);
+    //     styleFile.close();
+    // }
     Widget_chat = new ChatWidget(this);
     Widget_ManageStart = new ManageStartWidget(this);
     Widget_Setting = new SettingWidget(this);

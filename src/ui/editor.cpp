@@ -18,13 +18,13 @@ EditorWidget::EditorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::editor
     ui->setupUi(this);
 
     this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
-    QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
-    if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        QString styleSheet = QLatin1String(styleFile.readAll());
-        this->setStyleSheet(styleSheet);
-        styleFile.close();
-    }
+    // QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
+    // if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    // {
+    //     QString styleSheet = QLatin1String(styleFile.readAll());
+    //     this->setStyleSheet(styleSheet);
+    //     styleFile.close();
+    // }
     connect(ui->pushButton_2, &QPushButton::clicked, [&]()
             { selectFile(ui->lineEdit_2); });
     connect(ui->pushButton_3, &QPushButton::clicked, [&]() {

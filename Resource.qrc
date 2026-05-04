@@ -315,21 +315,12 @@
     <qresource>
         <file>public/style/menu.qss</file>
     </qresource>
-    <qresource>
-        <file>thirdParty/QSS/AMOLED.qss</file>
-        <file>thirdParty/QSS/Aqua.qss</file>
-        <file>thirdParty/QSS/ConsoleStyle.qss</file>
-        <file>thirdParty/QSS/ElegantDark.qss</file>
-        <file>thirdParty/QSS/MacOS.qss</file>
-        <file>thirdParty/QSS/ManjaroMix.qss</file>
-        <file>thirdParty/QSS/MaterialDark.qss</file>
-        <file>thirdParty/QSS/NeonButtons.qss</file>
-        <file>thirdParty/QSS/Ubuntu.qss</file>
-    </qresource>
+    <qresource/>
     <qresource>
         <file>assets/image/Pelr.png</file>
     </qresource>
     <qresource>
         <file>CREDITS.md</file>
+        <file>THANBKS.md</file>
     </qresource>
 </RCC>

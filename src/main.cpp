@@ -18,6 +18,8 @@
 #include <iostream>
 #include <QString>
 #include <QDir>
+#include <QStyleFactory>
+#include <QString>
 #include  "CheckApplication.h"
 #include "TranslationManager.h"
 #include "logger.hpp"
@@ -72,6 +74,16 @@ int main(int argc, char *argv[])
     app.setApplicationName(DataManager::instance().Project_Name + " " + DataManager::instance().const_config_data.version);
     app.setFont(DataManager::instance()._font); //整个应用程序的界面都会使用这个字体
     app.setWindowIcon(QIcon(":/assets/image/Pelr.png"));
+    QStringList styles = QStyleFactory::keys();
+
+    qDebug() << "Available styles:" << styles;
+
+    QString preferredStyle = "Fusion"; // Windows all platforms
+
+    if (styles.contains(preferredStyle, Qt::CaseInsensitive))
+    {
+        app.setStyle(preferredStyle);
+    }
 
     if (!CheckApplication::hasValidLicense()) {
         CheckApplication licenseDialog;
