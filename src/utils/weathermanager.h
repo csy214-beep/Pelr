@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QObject>
@@ -17,18 +9,21 @@
 #include <QString>
 
 // 定义返回的天气数据结构体
-struct WeatherData {
-    QString city; // 城市名称
-    double temperature; // 温度（摄氏度）
+struct WeatherData
+{
+    QString city;        // 城市名称
+    double temperature;  // 温度（摄氏度）
     QString description; // 天气描述
-    double humidity; // 湿度（%）
-    QString error; // 错误信息（若为空表示成功）
+    double humidity;     // 湿度（%）
+    QString error;       // 错误信息（若为空表示成功）
 
-    WeatherData() : temperature(0), humidity(0) {
+    WeatherData() : temperature(0), humidity(0)
+    {
     }
 };
 
-class WeatherManager : public QObject {
+class WeatherManager : public QObject
+{
     Q_OBJECT
 
 public:

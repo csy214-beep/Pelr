@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QWidget>
@@ -17,13 +9,14 @@
 #include <QObject>
 #include <QTableView>
 
-
-namespace Ui {
+namespace Ui
+{
     class todoWidget;
 }
 
-class todoWidget : public QWidget {
-Q_OBJECT
+class todoWidget : public QWidget
+{
+    Q_OBJECT
 
 public:
     QStandardItemModel *model_todo;

@@ -1,14 +1,5 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
-#pragma once
 
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -17,7 +8,8 @@
 #include <QVector>
 #include "CubismFramework.hpp"
 
-class ExtraFileManager : public QObject {
+class ExtraFileManager : public QObject
+{
     Q_OBJECT
 
 public:
@@ -52,7 +44,6 @@ private:
 
 private:
     QMap<QString, QByteArray> _extraExpressions; // 额外表情文件数据
-    QMap<QString, QByteArray> _extraMotions; // 额外动作文件数据
+    QMap<QString, QByteArray> _extraMotions;     // 额外动作文件数据
     QString _modelHomeDir;
 };
-

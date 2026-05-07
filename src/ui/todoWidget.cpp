@@ -1,42 +1,42 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "todoWidget.h"
 #include "ui_todoWidget.h"
 #include <QStandardItem>
 #include <QList>
-#include  <QDebug>
-#include  <QMessageBox>
+#include <QDebug>
+#include <QMessageBox>
 #include <QDateTimeEdit>
 #include "datetimepickerdialog.h"
 #include "data.hpp"
 
-todoWidget::todoWidget(QWidget *parent) : QWidget(parent), ui(new Ui::todoWidget) {
+todoWidget::todoWidget(QWidget *parent) : QWidget(parent), ui(new Ui::todoWidget)
+{
     ui->setupUi(this);
     initWidget();
 }
 
-void todoWidget::onTableViewDoubleClicked(const QModelIndex &index) {
+void todoWidget::onTableViewDoubleClicked(const QModelIndex &index)
+{
     // deadline列是第3列（索引为2）
-    if (index.column() == 2) {
+    if (index.column() == 2)
+    {
         // 获取当前单元格的值
         QString currentText = index.data(Qt::DisplayRole).toString();
         QDateTime currentDateTime = QDateTime::currentDateTime();
 
         // 尝试解析当前值
-        if (!currentText.isEmpty()) {
+        if (!currentText.isEmpty())
+        {
             QDateTime parsed = QDateTime::fromString(currentText, "yyyy-MM-dd HH:mm");
-            if (parsed.isValid()) {
+            if (parsed.isValid())
+            {
                 currentDateTime = parsed;
-            } else {
+            }
+            else
+            {
                 parsed = QDateTime::fromString(currentText, "yyyy-MM-dd");
-                if (parsed.isValid()) {
+                if (parsed.isValid())
+                {
                     currentDateTime = parsed;
                 }
             }
@@ -47,7 +47,8 @@ void todoWidget::onTableViewDoubleClicked(const QModelIndex &index) {
         QDateTime selectedDateTime = DateTimePickerDialog::getDateTime(
             this, currentDateTime, &ok);
 
-        if (ok) {
+        if (ok)
+        {
             // 更新模型数据
             QAbstractItemModel *model = ui->tableView->model();
             model->setData(index, selectedDateTime.toString("yyyy-MM-dd HH:mm"), Qt::EditRole);
@@ -55,7 +56,8 @@ void todoWidget::onTableViewDoubleClicked(const QModelIndex &index) {
     }
 }
 
-void todoWidget::initWidget() {
+void todoWidget::initWidget()
+{
     model_todo = new QStandardItemModel(ui->tableView);
     model_done = new QStandardItemModel(ui->tableView_2);
 
@@ -68,7 +70,8 @@ void todoWidget::initWidget() {
     ui->tableView->setModel(model_todo);
     ui->tableView_2->setModel(model_done);
     // 设置表格属性
-    for (QTableView *tv: {ui->tableView, ui->tableView_2}) {
+    for (QTableView *tv : {ui->tableView, ui->tableView_2})
+    {
         tv->setSelectionBehavior(QAbstractItemView::SelectRows);
         tv->setAlternatingRowColors(true);
         tv->setEditTriggers(QAbstractItemView::DoubleClicked);
@@ -80,29 +83,37 @@ void todoWidget::initWidget() {
         tv->setColumnWidth(1, 200); // 内容
         tv->setColumnWidth(2, 240); // 截止时间
         tv->setColumnWidth(3, 200); // 备注
-        tv->setColumnWidth(4, 16); // 提醒
+        tv->setColumnWidth(4, 16);  // 提醒
         // 设置所有行的统一高度
         tv->verticalHeader()->setDefaultSectionSize(50);
         // tv->resizeRowsToContents();
         // tv->resizeColumnsToContents();
     }
-    //加载数据
+    // 加载数据
     loadAllData();
 
     // connect信号槽函数
     // +
-    connect(ui->pushButton, &QPushButton::clicked, [&]() { addTodoItem(model_todo); });
-    connect(ui->pushButton_5, &QPushButton::clicked, [&]() { addTodoItem(model_done); });
+    connect(ui->pushButton, &QPushButton::clicked, [&]()
+            { addTodoItem(model_todo); });
+    connect(ui->pushButton_5, &QPushButton::clicked, [&]()
+            { addTodoItem(model_done); });
 
     // move
-    connect(ui->pushButton_2, &QPushButton::clicked, [&]() { moveItem(ui->tableView); });
-    connect(ui->pushButton_6, &QPushButton::clicked, [&]() { moveItem(ui->tableView_2); });
+    connect(ui->pushButton_2, &QPushButton::clicked, [&]()
+            { moveItem(ui->tableView); });
+    connect(ui->pushButton_6, &QPushButton::clicked, [&]()
+            { moveItem(ui->tableView_2); });
     //-
-    connect(ui->pushButton_3, &QPushButton::clicked, [&]() { deleteSelectedItem(ui->tableView); });
-    connect(ui->pushButton_7, &QPushButton::clicked, [&]() { deleteSelectedItem(ui->tableView_2); });
+    connect(ui->pushButton_3, &QPushButton::clicked, [&]()
+            { deleteSelectedItem(ui->tableView); });
+    connect(ui->pushButton_7, &QPushButton::clicked, [&]()
+            { deleteSelectedItem(ui->tableView_2); });
     // 清除数据
-    connect(ui->pushButton_4, &QPushButton::clicked, [&]() { clearModelData(model_todo); });
-    connect(ui->pushButton_8, &QPushButton::clicked, [&]() { clearModelData(model_done); });
+    connect(ui->pushButton_4, &QPushButton::clicked, [&]()
+            { clearModelData(model_todo); });
+    connect(ui->pushButton_8, &QPushButton::clicked, [&]()
+            { clearModelData(model_done); });
     // 连接表格的双击事件
     connect(ui->tableView, &QTableView::doubleClicked,
             this, &todoWidget::onTableViewDoubleClicked);
@@ -113,7 +124,8 @@ void todoWidget::initWidget() {
     connect(ui->checkBox_2, &QCheckBox::clicked, this, &todoWidget::onCheckBoxClicked);
 }
 
-void todoWidget::onCheckBoxClicked() {
+void todoWidget::onCheckBoxClicked()
+{
     ToDoSettingData setting;
     setting.is_show_todo = ui->checkBox->isChecked();
     setting.is_notify_tray = ui->checkBox_2->isChecked();
@@ -121,20 +133,23 @@ void todoWidget::onCheckBoxClicked() {
     qDebug() << "todoNotySetting changed and saved.";
 }
 
-void todoWidget::moveItem(QTableView *view) {
+void todoWidget::moveItem(QTableView *view)
+{
     // 获取选择模型
     QItemSelectionModel *selectionModel = view->selectionModel();
 
     // 获取所有选中的行（按行号去重）
     QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
-    if (selectedIndexes.isEmpty()) {
+    if (selectedIndexes.isEmpty())
+    {
         qWarning() << "请先选择一个项目";
         return;
     }
 
     // 提取不重复的行号
     QSet<int> selectedRows;
-    for (const QModelIndex &index: selectedIndexes) {
+    for (const QModelIndex &index : selectedIndexes)
+    {
         selectedRows.insert(index.row());
     }
     QMessageBox::StandardButton reply;
@@ -213,7 +228,8 @@ void todoWidget::deleteSelectedItem(QTableView *view)
                                       .arg(selectedRows.size()),
                                   QMessageBox::Yes | QMessageBox::No);
 
-    if (reply != QMessageBox::Yes) {
+    if (reply != QMessageBox::Yes)
+    {
         return;
     }
 
@@ -224,7 +240,8 @@ void todoWidget::deleteSelectedItem(QTableView *view)
     QStandardItemModel *model = view == ui->tableView ? model_todo : model_done;
 
     // 删除所有选中的行
-    for (int row: rows) {
+    for (int row : rows)
+    {
         // 获取整行数据
         QList<QStandardItem *> rowItems = model->takeRow(row);
         model->removeRow(row);
@@ -236,7 +253,8 @@ void todoWidget::deleteSelectedItem(QTableView *view)
     saveAllData();
 }
 
-void todoWidget::loadAllData() {
+void todoWidget::loadAllData()
+{
     clearModelData(model_todo, false);
     clearModelData(model_done, false);
     // 读取数据
@@ -244,10 +262,13 @@ void todoWidget::loadAllData() {
     ui->checkBox->setChecked(DataManager::instance().getTodoSetting().is_show_todo);
     ui->checkBox_2->setChecked(DataManager::instance().getTodoSetting().is_notify_tray);
     // 加载数据到模型
-    for (QTableView *tv: {ui->tableView, ui->tableView_2}) {
+    for (QTableView *tv : {ui->tableView, ui->tableView_2})
+    {
         QStandardItemModel *model = tv == ui->tableView ? model_todo : model_done;
-        for (const TodoData &data: todo_data) {
-            if (data.category == (tv == ui->tableView ? 1 : 0)) {
+        for (const TodoData &data : todo_data)
+        {
+            if (data.category == (tv == ui->tableView ? 1 : 0))
+            {
                 // 1为待办，0为已完成
                 QStandardItem *title = new QStandardItem(data.title);
                 QStandardItem *content = new QStandardItem(data.content);
@@ -257,7 +278,8 @@ void todoWidget::loadAllData() {
                 remind->setCheckable(true);
                 remind->setEditable(false);
                 remind->setTextAlignment(Qt::AlignCenter);
-                if (data.isNotify) {
+                if (data.isNotify)
+                {
                     remind->setCheckState(Qt::Checked);
                 }
                 model->appendRow({title, content, deadline, remark, remind});
@@ -266,32 +288,37 @@ void todoWidget::loadAllData() {
     }
 }
 
-void todoWidget::saveAllData() {
+void todoWidget::saveAllData()
+{
     QList<TodoData> todo_data;
-    for (QTableView *tv: {ui->tableView, ui->tableView_2}) {
+    for (QTableView *tv : {ui->tableView, ui->tableView_2})
+    {
         QStandardItemModel *model = tv == ui->tableView ? model_todo : model_done;
-        for (int i = 0; i < model->rowCount(); i++) {
+        for (int i = 0; i < model->rowCount(); i++)
+        {
             TodoData data;
             data.category = model == model_todo ? 1 : 0; // 1为待办，0为已完成
             data.title = model->item(i, 0)->text();
-            data.content = model->item(i, 1)->text(); //可选
+            data.content = model->item(i, 1)->text(); // 可选
             data.deadline = model->item(i, 2)->text();
-            data.remarks = model->item(i, 3)->text(); //可选
+            data.remarks = model->item(i, 3)->text(); // 可选
             data.isNotify = model->item(i, 4)->checkState() == Qt::Checked;
-            if (data.title.isEmpty() && data.deadline.isEmpty()) {
+            if (data.title.isEmpty() && data.deadline.isEmpty())
+            {
                 qWarning() << "item" << i << "is empty, skip it.";
                 continue;
-            } //如果标题、截止日期为空，则不保存
+            } // 如果标题、截止日期为空，则不保存
             todo_data.append(data);
         }
     }
     qDebug() << "count of saved items:" << todo_data.size();
     // 保存数据到文件
-    DataManager::instance().writeData<QList<TodoData> >(todo_data);
+    DataManager::instance().writeData<QList<TodoData>>(todo_data);
     qDebug() << "data saved successfully.";
 }
 
-void todoWidget::addTodoItem(QStandardItemModel *model) {
+void todoWidget::addTodoItem(QStandardItemModel *model)
+{
     QList<QStandardItem *> items;
     QStandardItem *title = new QStandardItem();
     QStandardItem *content = new QStandardItem();
@@ -309,7 +336,7 @@ void todoWidget::addTodoItem(QStandardItemModel *model) {
     model->appendRow(items);
 }
 
-
-todoWidget::~todoWidget() {
+todoWidget::~todoWidget()
+{
     delete ui;
 }

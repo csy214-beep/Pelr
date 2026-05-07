@@ -1,5 +1,8 @@
 # Pelr - 工具向桌宠
 
+> [!WARNING]
+> 由于开源合规问题，项目正在进行颠覆性重构！
+
 ![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr?style=social)
@@ -7,8 +10,7 @@
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
-![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Python/python3.svg)
-![](https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceGPLv3/licencegplv32.svg)
+![](https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceMIT/licencemit1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Windows/windows1.svg)
 
 **Pelr** 是一款基于 Live2D 技术的智能桌面虚拟伙伴，集成了 AI 对话、语音合成、快捷启动、TODO功能和个性化桌面伴侣等功能，为您提供沉浸式的桌面体验。
@@ -19,10 +21,6 @@
 >
 > This project is still in the development phase, and its functionality and stability may not be fully optimized. Please
 > use with caution.
->
-> 这是一个 **C++** 项目，Python仅用于 TTS 服务端。
->
-> This is a **C++** project; Python is only used for the TTS server-side component.
 >
 > 本项目为非盈利性开源项目，作者出于个人兴趣开发，任何人均可免费使用。
 >
@@ -91,6 +89,12 @@
 2. 解压压缩包到任意目录
 3. 运行 `Pelr.exe` 即可启动应用
 
+### TTS Server
+
+<https://github.com/csy214-beep/Pelr_tts_tr>
+
+根据开源许可规范，不提供该程序的打包版本，请参考该仓库的使用方法。
+
 另外，您还可以前往[sourceforge](https://sourceforge.net/projects/pfolg-plauncher/)查看或下载历史版本。
 
 ### 更新
@@ -128,7 +132,7 @@
 
 ## 技术栈
 
-[CREDITS.md](CREDITS.md)
+[NOTICE](NOTICE)
 
 ### C++ 核心组件
 
@@ -141,11 +145,7 @@
 
 ### Python 工具链
 
-- **Python 3.11** - 开发环境
-- **PyInstaller** - 应用打包分发
-- **PySide6** - Qt6 跨平台 UI 框架
-- **websocket-client** - 网络通信
-- **openai-edge-tts** - 本地化的、与OpenAI TTS兼容的、采用Edge-TTS的TTS服务
+<https://github.com/csy214-beep/Pelr_tts_tr/blob/main/requirements.txt>
 
 ## 开发构建
 
@@ -184,28 +184,37 @@
 
 > [!NOTE]
 >
-> 本项目基于 [GNU General Public License v3.0](https://gnu.ac.cn/licenses/gpl-3.0.html) 许可证发布。
+> 本项目基于 MIT 许可证发布。
 
 **注意**: 部分组件使用不同许可证：
 
 - Live2D Cubism SDK 使用[专有许可证](https://www.live2d.com/zh-CHS/sdk/download/native/)
 - Qt 框架使用 [LGPL/GPL 许可证](https://www.qt.io/development/download)
-- 其他第三方库详见 [CREDITS.md](CREDITS.md)
-- src 文件夹内由本项目开发者编写的部分采用 GPLv3 许可证
+- 其他第三方库详见 [NOTICE](NOTICE)
+- src 文件夹内由本项目开发者编写的部分采用 MIT 许可证
 
 ## 致谢
 
-[THANBKS.md](THANBKS.md)
+本项目基于以下出色的第三方库和服务构建，特此致谢：
 
-感谢以下项目和社区的支持：
+- [Live2D Cubism](https://www.live2d.com/) - 提供 Cubism Native Framework 与 Cubism Core，实现生动的 2D 动画表现
+- [Qt 框架](https://www.qt.io/) - 跨平台 C++ 开发框架
+- [GLEW](http://glew.sourceforge.net/) - OpenGL 扩展加载库
+- [GLFW](https://www.glfw.org/) - 用于创建窗口和处理 OpenGL 上下文的轻量库
+- [kissfft](https://github.com/mborgerding/kissfft) - 快速傅里叶变换库
+- [stb](https://github.com/nothings/stb) - 单头文件图像/音频处理库
+- [VOICEVOX CORE](https://github.com/VOICEVOX/voicevox_core) - 免费中高质量的文本转语音引擎
+- [ONNX Runtime](https://onmicrosoft.com/) - 跨平台机器学习推理引擎（随 voicevox_core 集成）
+- [llama.cpp](https://github.com/ggml-org/llama.cpp) - 本地 AI 模型部署
+- [openai-edge-tts](https://github.com/travisvn/openai-edge-tts) - OpenAI 兼容的 Edge TTS 接口
+- 讯飞开放平台 - 高质量语音合成服务
 
-- [Live2D Cubism](https://www.live2d.com/) - 提供出色的 2D 动画技术
-- [Qt 框架](https://www.qt.io/) - 强大的跨平台开发框架
-- [llama](https://github.com/ggml-org/llama.cpp) - 本地 AI 模型部署
-- [openai-edge-tts](https://github.com/travisvn/openai-edge-tts) - 以OpenAI兼容的方式调用EdgeTTS
-- 讯飞开放平台 - 高质量的语音合成服务
-- [voicevox](https://github.com/VOICEVOX/voicevox_core) - VOICEVOX 的核心 ，一款免费、中等质量的文本转语音软件
-- 所有贡献者和用户的支持
+同时感谢以下社区与项目创始者的贡献：
+
+- [Hiroshiba Kazuyuki](https://github.com/Hiroshiba) - VOICEVOX 创始人
+- Live2D Inc. - Cubism 技术提供方
+- Qt 公司及 Qt 开源社区
+- 所有贡献者和使用者的支持与反馈
 
 ## 技术支持
 

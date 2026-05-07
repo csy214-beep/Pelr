@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QObject>
@@ -27,11 +19,13 @@
 #include "trmanager.h"
 #include "voicevox_tts.h"
 
-class VoiceGenerator : public QObject {
+class VoiceGenerator : public QObject
+{
     Q_OBJECT
 
 public:
-    static VoiceGenerator *instance() {
+    static VoiceGenerator *instance()
+    {
         static VoiceGenerator instance;
         return &instance;
     }
@@ -55,7 +49,8 @@ public:
                               const QString &text, const QString &voice = "x4_yezi")
     {
         QString speaker = voice;
-        if (speaker.isEmpty()) {
+        if (speaker.isEmpty())
+        {
             speaker = "x4_yezi";
         }
         QJsonObject json;
@@ -72,9 +67,8 @@ public:
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
         QNetworkReply *reply = m_manager->post(request, data);
-        connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-            handleGenerateResponse(reply);
-        });
+        connect(reply, &QNetworkReply::finished, this, [this, reply]()
+                { handleGenerateResponse(reply); });
     }
 
     // 新增：OpenAI 风格 TTS 调用（Edge TTS）
@@ -96,9 +90,8 @@ public:
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
         QNetworkReply *reply = m_manager->post(request, data);
-        connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-            handleOpenAIResponse(reply);
-        });
+        connect(reply, &QNetworkReply::finished, this, [this, reply]()
+                { handleOpenAIResponse(reply); });
     }
 
     void playVoice(const QString &filePath)
@@ -138,7 +131,8 @@ public:
         m_player->play();
     }
 
-    void stopVoice() {
+    void stopVoice()
+    {
         if (m_player)
         {
             m_player->stop();
@@ -166,7 +160,8 @@ private slots:
     }
 
 private:
-    VoiceGenerator(QObject *parent = nullptr) : QObject(parent) {
+    VoiceGenerator(QObject *parent = nullptr) : QObject(parent)
+    {
         m_manager = new QNetworkAccessManager(this);
 
         m_player = new QMediaPlayer(this);
@@ -229,21 +224,29 @@ private:
         }
     }
 
-    void handleGenerateResponse(QNetworkReply *reply) {
-        if (reply->error() == QNetworkReply::NoError) {
+    void handleGenerateResponse(QNetworkReply *reply)
+    {
+        if (reply->error() == QNetworkReply::NoError)
+        {
             QByteArray response = reply->readAll();
             QJsonDocument doc = QJsonDocument::fromJson(response);
             QJsonObject json = doc.object();
             qDebug() << "voice generate response:" << json;
             QString filePath = json["file_path"].toString();
-            if (!filePath.isEmpty() && QFile::exists(filePath)) {
+            if (!filePath.isEmpty() && QFile::exists(filePath))
+            {
                 emit voiceGenerated(filePath);
-            } else {
+            }
+            else
+            {
                 QString error = json["error"].toString();
                 emit errorOccurred(error.isEmpty() ? "File not found" : error);
             }
-        } else {
-            if (reply->error() == QNetworkReply::ConnectionRefusedError) {
+        }
+        else
+        {
+            if (reply->error() == QNetworkReply::ConnectionRefusedError)
+            {
                 onConnectionRefused();
             }
             emit errorOccurred(reply->errorString());
@@ -251,21 +254,29 @@ private:
         reply->deleteLater();
     }
 
-    void handleOpenAIResponse(QNetworkReply *reply) {
-        if (reply->error() == QNetworkReply::NoError) {
+    void handleOpenAIResponse(QNetworkReply *reply)
+    {
+        if (reply->error() == QNetworkReply::NoError)
+        {
             QByteArray response = reply->readAll();
             QJsonDocument doc = QJsonDocument::fromJson(response);
             QJsonObject json = doc.object();
             qDebug() << "OpenAI TTS response:" << json;
             QString filePath = json["file_path"].toString();
-            if (!filePath.isEmpty() && QFile::exists(filePath)) {
+            if (!filePath.isEmpty() && QFile::exists(filePath))
+            {
                 emit voiceGenerated(filePath);
-            } else {
+            }
+            else
+            {
                 QString error = json["error"].toString();
                 emit errorOccurred(error.isEmpty() ? "File not found from OpenAI TTS" : error);
             }
-        } else {
-            if (reply->error() == QNetworkReply::ConnectionRefusedError) {
+        }
+        else
+        {
+            if (reply->error() == QNetworkReply::ConnectionRefusedError)
+            {
                 onConnectionRefused();
             }
             emit errorOccurred(QString("OpenAI TTS error: %1").arg(reply->errorString()));
@@ -273,7 +284,8 @@ private:
         reply->deleteLater();
     }
 
-    void onConnectionRefused() {
+    void onConnectionRefused()
+    {
         if (!DataManager::instance().getTTSConfig().isRunTTSServerOnStartUp)
             return;
         qDebug() << "TTS server refused connection, trying to launch it...";

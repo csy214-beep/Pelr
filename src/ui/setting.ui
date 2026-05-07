@@ -517,9 +517,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-750</y>
+            <y>0</y>
             <width>907</width>
-            <height>1361</height>
+            <height>1356</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1060,7 +1060,7 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>llama</string>
+       <string>llm</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="2">

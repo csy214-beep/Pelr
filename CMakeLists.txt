@@ -55,7 +55,7 @@ set(TRANSLATION_FILES
 set(FRAMEWORK_SOURCE OpenGL)
 
 # Live2D SDK 源文件
-file(GLOB LAPP_2D_SRC "LAppLive2D/src/*.cpp")
+file(GLOB LAPP_2D_SRC "thirdParty/LAppLive2D/src/*.cpp")
 
 # 各功能模块源文件
 file(GLOB AI_SRC "src/ai/*.cpp" "src/ai/*.h" "src/ai/*.hpp")
@@ -122,7 +122,7 @@ include_directories(
         src/tts
         src/ui
         src/utils
-        LAppLive2D/inc
+        thirdParty/LAppLive2D/inc
         thirdParty/Core/include
         thirdParty/Framework/src
         thirdParty/glew/include

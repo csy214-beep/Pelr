@@ -1,23 +1,16 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "editor.h"
-#include  "ui_editor.h"
-#include  <QFileDialog>
+#include "ui_editor.h"
+#include <QFileDialog>
 #include <QMessageBox>
 #include "NotificationWidget.h"
 using MessageType = NotificationWidget::MessageType;
 
-EditorWidget::EditorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::editor) {
+EditorWidget::EditorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::editor)
+{
     ui->setupUi(this);
 
-    this->setWindowIcon(QIcon(":/assets/image/Pelr.png"));
+    this->setWindowIcon(QIcon(":/public/image/Pelr.png"));
     // QFile styleFile(":/thirdParty/QSS/Ubuntu.qss");
     // if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
     // {
@@ -27,51 +20,60 @@ EditorWidget::EditorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::editor
     // }
     connect(ui->pushButton_2, &QPushButton::clicked, [&]()
             { selectFile(ui->lineEdit_2); });
-    connect(ui->pushButton_3, &QPushButton::clicked, [&]() {
-        selectFile(ui->lineEdit_3);
-    });
+    connect(ui->pushButton_3, &QPushButton::clicked, [&]()
+            { selectFile(ui->lineEdit_3); });
     connect(ui->pushButton, &QPushButton::clicked, this, &EditorWidget::accepted);
 }
 
-QPair<QList<QString>, QList<QString> > EditorWidget::getAllInfo() {
+QPair<QList<QString>, QList<QString>> EditorWidget::getAllInfo()
+{
     QString name = ui->lineEdit->text();
     QString path = ui->lineEdit_2->text();
     QString icon = ui->lineEdit_3->text();
     QString desc = ui->textEdit->toPlainText();
     QList<QString> category;
-    if (name.isEmpty() || path.isEmpty()) {
+    if (name.isEmpty() || path.isEmpty())
+    {
         NotificationWidget::showNotification(tr("Warning"), tr("名称和路径不能为空"), 5000, MessageType::Warning);
         return {};
     }
-    if (ui->checkBox->isChecked()) {
+    if (ui->checkBox->isChecked())
+    {
         category.append("Star");
     }
-    if (ui->checkBox_2->isChecked()) {
+    if (ui->checkBox_2->isChecked())
+    {
         category.append("App");
     }
-    if (ui->checkBox_3->isChecked()) {
+    if (ui->checkBox_3->isChecked())
+    {
         category.append("Link");
     }
-    if (ui->checkBox_4->isChecked()) {
+    if (ui->checkBox_4->isChecked())
+    {
         category.append("Scripts");
     }
-    if (category.isEmpty()) {
+    if (category.isEmpty())
+    {
         NotificationWidget::showNotification(tr("Warning"), tr("至少选择一个分类"), 5000, MessageType::Warning);
         return {};
     }
     return {category, {name, path, icon, desc}};
 }
 
-void EditorWidget::selectFile(QLineEdit *lineEdit) {
+void EditorWidget::selectFile(QLineEdit *lineEdit)
+{
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"));
-    if (fileName.isEmpty()) {
+    if (fileName.isEmpty())
+    {
         return;
     }
     lineEdit->setText(fileName);
 }
 
 void EditorWidget::setData(const QString &category, const QString &name,
-                           const QString &path, const QString &icon, const QString &description) {
+                           const QString &path, const QString &icon, const QString &description)
+{
     ui->lineEdit->setText(name);
     ui->lineEdit_2->setText(path);
     ui->lineEdit_3->setText(icon);
@@ -84,6 +86,7 @@ void EditorWidget::setData(const QString &category, const QString &name,
     ui->checkBox_4->setChecked(category == "Scripts");
 }
 
-EditorWidget::~EditorWidget() {
+EditorWidget::~EditorWidget()
+{
     delete ui;
 }

@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QDialog>
@@ -19,8 +11,9 @@
 #include <QLabel>
 #include <QPushButton>
 
-class DateTimePickerDialog : public QDialog {
-Q_OBJECT
+class DateTimePickerDialog : public QDialog
+{
+    Q_OBJECT
 
 public:
     explicit DateTimePickerDialog(QWidget *parent = nullptr,
@@ -56,4 +49,3 @@ private:
     QTimeEdit *m_timeEdit;
     QDateTime m_selectedDateTime;
 };
-

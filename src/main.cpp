@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
     app.setApplicationName(DataManager::instance().Project_Name + " " + DataManager::instance().const_config_data.version);
     app.setFont(DataManager::instance()._font); // 确保 DataManager 已加载字体
-    app.setWindowIcon(QIcon(":/assets/image/Pelr.png"));
+    app.setWindowIcon(QIcon(":/public/image/Pelr.png"));
 
     // 样式设置
     QStringList styles = QStyleFactory::keys();

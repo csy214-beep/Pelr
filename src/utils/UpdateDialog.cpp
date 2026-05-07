@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "UpdateDialog.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -21,24 +13,30 @@
 #include <iostream>
 
 UpdateDialog::UpdateDialog(const VersionCheckSummary &summary, QWidget *parent)
-    : QDialog(parent), m_summary(summary) {
+    : QDialog(parent), m_summary(summary)
+{
     setWindowTitle(tr("Check for Updates"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     resize(600, 450);
 
     // 收集成功的源
-    for (const auto &res: summary.results) {
-        if (res.success) {
+    for (const auto &res : summary.results)
+    {
+        if (res.success)
+        {
             m_successfulSources.append(res);
         }
     }
 
     setupUi();
 
-    if (m_successfulSources.isEmpty()) {
+    if (m_successfulSources.isEmpty())
+    {
         m_statusLabel->setText(tr("Unable to retrieve update information."));
         m_downloadButton->setEnabled(false);
-    } else {
+    }
+    else
+    {
         // 默认选择第一个源
         updateDetailsForSource(m_successfulSources.first());
         m_sourceComboBox->setCurrentIndex(0);
@@ -47,10 +45,12 @@ UpdateDialog::UpdateDialog(const VersionCheckSummary &summary, QWidget *parent)
     std::cout << "\a";
 }
 
-UpdateDialog::~UpdateDialog() {
+UpdateDialog::~UpdateDialog()
+{
 }
 
-void UpdateDialog::setupUi() {
+void UpdateDialog::setupUi()
+{
     m_mainLayout = new QVBoxLayout(this);
 
     // 本地版本信息
@@ -65,12 +65,17 @@ void UpdateDialog::setupUi() {
     // 状态标签
     m_statusLabel = new QLabel();
     m_statusLabel->setWordWrap(true);
-    if (m_summary.anyNewerVersion) {
+    if (m_summary.anyNewerVersion)
+    {
         m_statusLabel->setText(tr("New version available!"));
         m_statusLabel->setStyleSheet("color: green; font-weight: bold;");
-    } else if (m_summary.anySuccess) {
+    }
+    else if (m_summary.anySuccess)
+    {
         m_statusLabel->setText(tr("You are using the latest version."));
-    } else {
+    }
+    else
+    {
         m_statusLabel->setText(tr("Check failed. Please try again later."));
         m_statusLabel->setStyleSheet("color: red;");
     }
@@ -80,12 +85,14 @@ void UpdateDialog::setupUi() {
     QHBoxLayout *sourceLayout = new QHBoxLayout();
     sourceLayout->addWidget(new QLabel(tr("Source:")));
     m_sourceComboBox = new QComboBox();
-    for (const auto &src: m_successfulSources) {
+    for (const auto &src : m_successfulSources)
+    {
         QString display = QString("%1 (%2)").arg(src.sourceName, src.latestVersion);
         m_sourceComboBox->addItem(display);
     }
     // 如果所有源都失败，添加一个占位项
-    if (m_successfulSources.isEmpty()) {
+    if (m_successfulSources.isEmpty())
+    {
         m_sourceComboBox->addItem(tr("No successful source"));
     }
     sourceLayout->addWidget(m_sourceComboBox);
@@ -119,28 +126,33 @@ void UpdateDialog::setupUi() {
     m_mainLayout->addLayout(buttonLayout);
 }
 
-void UpdateDialog::onSourceSelectionChanged(int index) {
+void UpdateDialog::onSourceSelectionChanged(int index)
+{
     if (index < 0 || index >= m_successfulSources.size())
         return;
     updateDetailsForSource(m_successfulSources.at(index));
 }
 
-void UpdateDialog::updateDetailsForSource(const SourceCheckResult &result) {
+void UpdateDialog::updateDetailsForSource(const SourceCheckResult &result)
+{
     // 显示发布说明（Markdown 纯文本，QTextBrowser 可渲染部分富文本）
     m_bodyBrowser->setMarkdown(result.body.isEmpty() ? tr("No release notes provided.") : result.body);
 
     // 可选的：在状态栏附近显示具体版本
     QString status = QString("%1 version: %2").arg(result.sourceName, result.latestVersion);
-    if (!result.publishedAt.isEmpty()) {
+    if (!result.publishedAt.isEmpty())
+    {
         status += QString(" (%1)").arg(result.publishedAt);
     }
     // 可以在某处显示，这里不重复添加控件，仅通过标题或tooltip
     setToolTip(status);
 }
 
-void UpdateDialog::onDownloadClicked() {
+void UpdateDialog::onDownloadClicked()
+{
     int index = m_sourceComboBox->currentIndex();
-    if (index < 0 || index >= m_successfulSources.size()) {
+    if (index < 0 || index >= m_successfulSources.size())
+    {
         NotificationWidget::showNotification(
             tr("Download"), tr("No download source available."),
             5000, NotificationWidget::Warning);
@@ -148,7 +160,8 @@ void UpdateDialog::onDownloadClicked() {
     }
 
     const SourceCheckResult &result = m_successfulSources.at(index);
-    if (result.downloadUrl.isEmpty()) {
+    if (result.downloadUrl.isEmpty())
+    {
         NotificationWidget::showNotification(
             tr("Download"), tr("No download URL provided by this source."),
             5000, NotificationWidget::Warning);
@@ -156,7 +169,8 @@ void UpdateDialog::onDownloadClicked() {
     }
 
     bool success = QDesktopServices::openUrl(QUrl(result.downloadUrl));
-    if (!success) {
+    if (!success)
+    {
         NotificationWidget::showNotification(
             tr("Download"), tr("Failed to open download URL."),
             5000, NotificationWidget::Warning);

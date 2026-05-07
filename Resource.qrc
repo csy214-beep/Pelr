@@ -317,10 +317,9 @@
     </qresource>
     <qresource/>
     <qresource>
-        <file>assets/image/Pelr.png</file>
-    </qresource>
-    <qresource>
-        <file>CREDITS.md</file>
         <file>THANBKS.md</file>
+        <file>public/image/Pelr.png</file>
+        <file>public/image/Pelr.ico</file>
+        <file>NOTICE</file>
     </qresource>
 </RCC>

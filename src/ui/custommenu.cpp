@@ -1,25 +1,20 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "custommenu.h"
 
 CustomMenu::CustomMenu(QWidget *parent)
-    : QMenu(parent), m_style(new CustomMenuStyle()) {
+    : QMenu(parent), m_style(new CustomMenuStyle())
+{
     initStyle();
 }
 
 CustomMenu::CustomMenu(const QString &title, QWidget *parent)
-    : QMenu(title, parent), m_style(new CustomMenuStyle()) {
+    : QMenu(title, parent), m_style(new CustomMenuStyle())
+{
     initStyle();
 }
 
-void CustomMenu::initStyle() {
+void CustomMenu::initStyle()
+{
     // 设置自定义样式
     setStyle(m_style);
 
@@ -89,9 +84,11 @@ void CustomMenu::initStyle() {
     applyStyle();
 }
 
-void CustomMenu::applyStyle() {
+void CustomMenu::applyStyle()
+{
     QFile styleFile(":/public/style/menu.qss");
-    if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
         QString styleSheet = QLatin1String(styleFile.readAll());
         setStyleSheet(styleSheet);
         styleFile.close();

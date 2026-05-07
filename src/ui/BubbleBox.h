@@ -1,22 +1,15 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
-#include  <QLabel>
-#include  <QTimer>
+#include <QLabel>
+#include <QTimer>
 #include <QString>
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QThread>
 
-class BubbleBox : public QLabel {
+class BubbleBox : public QLabel
+{
     Q_OBJECT
 
 private:
@@ -57,7 +50,6 @@ public slots:
     void showTime();
 
     void resetFadeTimer();
-
 
     void textSet(const QString &text);
 

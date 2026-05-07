@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QMenu>
@@ -20,7 +12,7 @@
 #include <QVariantAnimation>
 #include "MenuWidget.h"
 #include "keyboardoverlay.h"
-#include  <QPair>
+#include <QPair>
 #include "mainWidget.h"
 #include <QtConcurrent/QtConcurrentRun>
 #include <QFutureWatcher>
@@ -28,10 +20,10 @@
 // #include "recorder.hpp"
 // https://www.bilibili.com/video/BV1kcc8emEfR
 
-class GLCore : public QOpenGLWidget {
-    Q_OBJECT // 可以用信号槽机制进行通信 信号与槽
-public:
-    QTimer *timer;
+class GLCore : public QOpenGLWidget
+{
+Q_OBJECT // 可以用信号槽机制进行通信 信号与槽
+    public : QTimer *timer;
     QTimer *inputCheckTimer;
     QMenu *contextMenu;
     QTimer *PermanentTimer;
@@ -41,7 +33,6 @@ public:
     mainWidget *main_widget;
     ChatBoxOnModel *modelChatBox;
     GlobalInputListener *listener;
-
 
     void initContextMenu();
 

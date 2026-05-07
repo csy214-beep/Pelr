@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 #include <QString>
 #include <QMutex>
@@ -18,7 +10,8 @@
 #define LOG_LEVEL_FILE "user/logLevel.dat"
 
 // 定义日志等级枚举
-enum class LogLevel {
+enum class LogLevel
+{
     Debug = 0,
     Info = 1,
     Warning = 2,
@@ -39,10 +32,12 @@ LogLevel getLogLevel();
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
-inline LogLevel read_log_level() {
+inline LogLevel read_log_level()
+{
     QFile file(LOG_LEVEL_FILE);
     LogLevel level;
-    if (!file.open(QIODevice::ReadOnly)) {
+    if (!file.open(QIODevice::ReadOnly))
+    {
         // 返回默认日志等级
         return LogLevel::Debug;
     }
@@ -53,10 +48,12 @@ inline LogLevel read_log_level() {
     return level;
 }
 
-inline void write_log_level(const LogLevel level) {
+inline void write_log_level(const LogLevel level)
+{
     setLogLevel(level);
     QFile file(LOG_LEVEL_FILE);
-    if (!file.open(QIODevice::WriteOnly)) {
+    if (!file.open(QIODevice::WriteOnly))
+    {
         // 无法打开文件进行写入
         QMessageBox::critical(nullptr, "Error", "写入数据失败！");
         qCritical() << "write data failed: can not open file" << LOG_LEVEL_FILE;

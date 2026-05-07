@@ -1,31 +1,26 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "datetimepickerdialog.h"
 #include <QShortcut>
 #include <QKeySequence>
 #include <QApplication>
 
 DateTimePickerDialog::DateTimePickerDialog(
-        QWidget *parent,
-        const QDateTime &initialDateTime,
-        const QString &title)
-        : QDialog(parent), m_selectedDateTime(initialDateTime) {
+    QWidget *parent,
+    const QDateTime &initialDateTime,
+    const QString &title)
+    : QDialog(parent), m_selectedDateTime(initialDateTime)
+{
     setWindowTitle(title);
     setupUI();
     setupShortcuts();
 }
 
-DateTimePickerDialog::~DateTimePickerDialog() {
+DateTimePickerDialog::~DateTimePickerDialog()
+{
 }
 
-void DateTimePickerDialog::setupUI() {
+void DateTimePickerDialog::setupUI()
+{
     setModal(true);
     // 大幅缩小对话框尺寸，因为使用了更紧凑的 QDateEdit
     setFixedSize(600, 450); // 从800x600缩小到400x300
@@ -87,17 +82,14 @@ void DateTimePickerDialog::setupUI() {
     afternoonBtn->setFixedSize(50, 25);
     eveningBtn->setFixedSize(50, 25);
 
-    connect(morningBtn, &QPushButton::clicked, [this]() {
-        m_timeEdit->setTime(QTime(9, 0));
-    });
+    connect(morningBtn, &QPushButton::clicked, [this]()
+            { m_timeEdit->setTime(QTime(9, 0)); });
 
-    connect(afternoonBtn, &QPushButton::clicked, [this]() {
-        m_timeEdit->setTime(QTime(14, 0));
-    });
+    connect(afternoonBtn, &QPushButton::clicked, [this]()
+            { m_timeEdit->setTime(QTime(14, 0)); });
 
-    connect(eveningBtn, &QPushButton::clicked, [this]() {
-        m_timeEdit->setTime(QTime(19, 0));
-    });
+    connect(eveningBtn, &QPushButton::clicked, [this]()
+            { m_timeEdit->setTime(QTime(19, 0)); });
 
     timeLayout->addWidget(m_timeEdit);
     timeLayout->addStretch();
@@ -107,7 +99,7 @@ void DateTimePickerDialog::setupUI() {
 
     // 按钮框
     QDialogButtonBox *buttonBox = new QDialogButtonBox(
-            QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+        QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
 
     // 添加到主布局
     mainLayout->addLayout(quickSelectLayout);
@@ -120,60 +112,67 @@ void DateTimePickerDialog::setupUI() {
 
     // 修正信号连接 - 连接 QDateEdit 的信号
     connect(m_dateEdit, &QDateEdit::dateChanged, this, &DateTimePickerDialog::onDateChanged);
-    connect(m_timeEdit, &QTimeEdit::timeChanged, [this](const QTime &time) {
-        m_selectedDateTime.setTime(time);
-    });
+    connect(m_timeEdit, &QTimeEdit::timeChanged, [this](const QTime &time)
+            { m_selectedDateTime.setTime(time); });
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
-void DateTimePickerDialog::setupShortcuts() {
+void DateTimePickerDialog::setupShortcuts()
+{
     // 快捷键支持
     new QShortcut(QKeySequence(Qt::Key_Return), this, SLOT(accept()));
     new QShortcut(QKeySequence(Qt::Key_Enter), this, SLOT(accept()));
     new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(reject()));
 }
 
-QDateTime DateTimePickerDialog::getSelectedDateTime() const {
+QDateTime DateTimePickerDialog::getSelectedDateTime() const
+{
     return m_selectedDateTime;
 }
 
 QDateTime DateTimePickerDialog::getDateTime(QWidget *parent,
                                             const QDateTime &initialDateTime,
-                                            bool *ok) {
+                                            bool *ok)
+{
     DateTimePickerDialog dialog(parent, initialDateTime);
     bool accepted = (dialog.exec() == QDialog::Accepted);
 
-    if (ok) {
+    if (ok)
+    {
         *ok = accepted;
     }
 
     return accepted ? dialog.getSelectedDateTime() : initialDateTime;
 }
 
-void DateTimePickerDialog::onDateChanged(const QDate &date) {
+void DateTimePickerDialog::onDateChanged(const QDate &date)
+{
     m_selectedDateTime.setDate(date);
 }
 
-void DateTimePickerDialog::onTodayClicked() {
+void DateTimePickerDialog::onTodayClicked()
+{
     QDate today = QDate::currentDate();
     m_dateEdit->setDate(today); // 改为设置 QDateEdit 的日期
     m_selectedDateTime.setDate(today);
 }
 
-void DateTimePickerDialog::onTomorrowClicked() {
+void DateTimePickerDialog::onTomorrowClicked()
+{
     QDate tomorrow = QDate::currentDate().addDays(1);
     m_dateEdit->setDate(tomorrow); // 改为设置 QDateEdit 的日期
     m_selectedDateTime.setDate(tomorrow);
 }
 
-void DateTimePickerDialog::onNextWeekClicked() {
+void DateTimePickerDialog::onNextWeekClicked()
+{
     QDate nextWeek = QDate::currentDate().addDays(7);
     m_dateEdit->setDate(nextWeek); // 改为设置 QDateEdit 的日期
     m_selectedDateTime.setDate(nextWeek);
 }
 
-void DateTimePickerDialog::retranslateUI() {
-
+void DateTimePickerDialog::retranslateUI()
+{
 }

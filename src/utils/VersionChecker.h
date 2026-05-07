@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #ifndef VERSIONCHECKER_H
 #define VERSIONCHECKER_H
 
@@ -23,29 +15,32 @@
 /**
  * @brief 单个检查源的结果信息
  */
-struct SourceCheckResult {
+struct SourceCheckResult
+{
     QString sourceName; // "GitHub", "Gitee", "Pelr"
-    QString url; // 实际请求的 API URL
+    QString url;        // 实际请求的 API URL
     bool success = false;
     QString errorString;
     QString latestVersion; // tag_name
-    QString body; // 发布说明 (Markdown)
-    QString downloadUrl; // 下载链接
-    QString publishedAt; // 发布时间
+    QString body;          // 发布说明 (Markdown)
+    QString downloadUrl;   // 下载链接
+    QString publishedAt;   // 发布时间
 };
 
 /**
  * @brief 版本检查汇总结果
  */
-struct VersionCheckSummary {
+struct VersionCheckSummary
+{
     QString localVersion;
     QList<SourceCheckResult> results;
     bool anySuccess = false;
     bool anyNewerVersion = false; // 是否有源版本高于本地
-    QString newestRemoteVersion; // 最高正式版版本号
+    QString newestRemoteVersion;  // 最高正式版版本号
 };
 
-class VersionChecker : public QObject {
+class VersionChecker : public QObject
+{
     Q_OBJECT
 
 public:

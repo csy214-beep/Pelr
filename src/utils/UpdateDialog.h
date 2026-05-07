@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #ifndef UPDATEDIALOG_H
 #define UPDATEDIALOG_H
 
@@ -19,7 +11,8 @@ class QComboBox;
 class QLabel;
 class QVBoxLayout;
 
-class UpdateDialog : public QDialog {
+class UpdateDialog : public QDialog
+{
     Q_OBJECT
 
 public:

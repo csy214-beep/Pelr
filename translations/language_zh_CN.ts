@@ -4,19 +4,19 @@
 <context>
     <name>BubbleBox</name>
     <message>
-        <location filename="../src/ui/BubbleBox.cpp" line="148"/>
-        <location filename="../src/ui/BubbleBox.cpp" line="152"/>
+        <location filename="../src/ui/BubbleBox.cpp" line="162"/>
+        <location filename="../src/ui/BubbleBox.cpp" line="168"/>
         <source>%1
 现在是%2哦~</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/BubbleBox.cpp" line="156"/>
+        <location filename="../src/ui/BubbleBox.cpp" line="173"/>
         <source>现在是%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/BubbleBox.cpp" line="172"/>
+        <location filename="../src/ui/BubbleBox.cpp" line="191"/>
         <source>In response...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24,12 +24,12 @@
 <context>
     <name>ChatBoxOnModel</name>
     <message>
-        <location filename="../src/ui/chatBoxOnModel.cpp" line="66"/>
+        <location filename="../src/ui/chatBoxOnModel.cpp" line="67"/>
         <source>Message can not be empty!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/chatBoxOnModel.cpp" line="88"/>
+        <location filename="../src/ui/chatBoxOnModel.cpp" line="89"/>
         <source>错误：%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -37,18 +37,18 @@
 <context>
     <name>ChatWidget</name>
     <message>
-        <location filename="../src/ui/chat.cpp" line="25"/>
-        <location filename="../src/ui/chat.cpp" line="122"/>
+        <location filename="../src/ui/chat.cpp" line="17"/>
+        <location filename="../src/ui/chat.cpp" line="114"/>
         <source>Hello, welcome to Pelr!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/chat.cpp" line="96"/>
+        <location filename="../src/ui/chat.cpp" line="88"/>
         <source>Message cannot be empty!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/chat.cpp" line="117"/>
+        <location filename="../src/ui/chat.cpp" line="109"/>
         <source>错误：%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56,59 +56,49 @@
 <context>
     <name>CheckApplication</name>
     <message>
-        <location filename="../src/utils/CheckApplication.cpp" line="80"/>
-        <source>GNU GPL v3 许可证确认</source>
+        <location filename="../src/utils/CheckApplication.cpp" line="82"/>
+        <source>MIT 许可证确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/CheckApplication.cpp" line="84"/>
-        <source>GNU 通用公共许可证 v3</source>
+        <location filename="../src/utils/CheckApplication.cpp" line="86"/>
+        <source>MIT 许可证</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/CheckApplication.cpp" line="95"/>
-        <source>GNU 通用公共许可证
-第三版，2007年6月29日
+        <location filename="../src/utils/CheckApplication.cpp" line="97"/>
+        <source>MIT 许可证
 
 版权所有 (C) 2007 自由软件基金会 &lt;https://fsf.org/&gt;
 
-本程序是自由软件：您可以根据自由软件基金会发布的 GNU 通用公共许可证的条款重新分发和/或修改它，可以是许可证的第3版，或者（根据您的选择）任何后续版本。
+特此免费授予任何获得本软件及相关文档文件（“软件”）副本的人不受限制地处理本软件的权限，
+包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，
+以及允许获得软件的人这样做，但须符合以下条件：
 
-分发本程序是希望它有用，但没有任何担保；甚至没有适销性或特定用途适用性的暗示担保。有关更多详细信息，请参阅 GNU 通用公共许可证。
+上述版权声明和本许可声明应包含在本软件的所有副本或重要部分中。
 
-您应该已经随本程序收到了 GNU 通用公共许可证的副本。如果没有，请参阅 &lt;https://www.gnu.org/licenses/&gt;。
+本软件“按原样”提供，不提供任何明示或暗示的保证，包括但不限于适销性、
+特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、
+损害或其他责任负责，无论是在合同、侵权或其他方面，由软件或软件的使用或其他交易引起或与之相关。
 
-本程序的主要条款：
-
-1. 您可以任何媒介运行本程序，无需付费
-2. 您可以学习程序如何工作，并对其进行修改
-3. 您可以重新分发副本
-4. 您可以发布修改后的版本
-
-当您重新分发本程序时，您必须：
-- 保留所有原始版权声明
-- 使用相同的 GPLv3 许可证
-- 提供源代码或获取源代码的方法
-- 保持所有通知完整无损
-
-详细信息请参阅完整的 GNU GPL v3 许可证文本。
+本程序使用 MIT 许可证。
 
 用户: %1
 版本: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/CheckApplication.cpp" line="160"/>
-        <source>我理解并接受上述 GNU GPL v3 许可证条款</source>
+        <location filename="../src/utils/CheckApplication.cpp" line="116"/>
+        <source>我理解并接受上述 MIT 许可证条款</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/CheckApplication.cpp" line="163"/>
+        <location filename="../src/utils/CheckApplication.cpp" line="119"/>
         <source>接受</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/CheckApplication.cpp" line="164"/>
+        <location filename="../src/utils/CheckApplication.cpp" line="120"/>
         <source>拒绝</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,37 +106,37 @@
 <context>
     <name>DateTimePickerDialog</name>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="39"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="34"/>
         <source>今天</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="40"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="35"/>
         <source>明天</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="41"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="36"/>
         <source>下周</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="59"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="54"/>
         <source>日期:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="72"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="67"/>
         <source>时间:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="114"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="106"/>
         <source>选择日期:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/datetimepickerdialog.cpp" line="116"/>
+        <location filename="../src/ui/datetimepickerdialog.cpp" line="108"/>
         <source>选择时间:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,18 +144,18 @@
 <context>
     <name>EditorWidget</name>
     <message>
-        <location filename="../src/ui/editor.cpp" line="43"/>
-        <location filename="../src/ui/editor.cpp" line="59"/>
+        <location filename="../src/ui/editor.cpp" line="37"/>
+        <location filename="../src/ui/editor.cpp" line="58"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/editor.cpp" line="43"/>
+        <location filename="../src/ui/editor.cpp" line="37"/>
         <source>名称和路径不能为空</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/editor.cpp" line="59"/>
+        <location filename="../src/ui/editor.cpp" line="58"/>
         <source>至少选择一个分类</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,17 +168,17 @@
 <context>
     <name>ExtraMotionManager</name>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="17"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="10"/>
         <source>额外内容</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="19"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="12"/>
         <source>动作</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="20"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="13"/>
         <source>表情</source>
         <translation type="unfinished"></translation>
     </message>
@@ -198,12 +188,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="76"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="78"/>
         <source>动作 (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="94"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="98"/>
         <source>表情 (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -211,37 +201,37 @@
 <context>
     <name>GLCore</name>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="156"/>
-        <location filename="../src/core/GLCore.cpp" line="651"/>
+        <location filename="../src/core/GLCore.cpp" line="164"/>
+        <location filename="../src/core/GLCore.cpp" line="725"/>
         <source>按键监听</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="160"/>
-        <location filename="../src/core/GLCore.cpp" line="652"/>
+        <location filename="../src/core/GLCore.cpp" line="168"/>
+        <location filename="../src/core/GLCore.cpp" line="726"/>
         <source>说点什么</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="164"/>
-        <location filename="../src/core/GLCore.cpp" line="653"/>
+        <location filename="../src/core/GLCore.cpp" line="173"/>
+        <location filename="../src/core/GLCore.cpp" line="727"/>
         <source>启动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="171"/>
-        <location filename="../src/core/GLCore.cpp" line="654"/>
+        <location filename="../src/core/GLCore.cpp" line="180"/>
+        <location filename="../src/core/GLCore.cpp" line="728"/>
         <source>天气</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="173"/>
-        <location filename="../src/core/GLCore.cpp" line="655"/>
+        <location filename="../src/core/GLCore.cpp" line="183"/>
+        <location filename="../src/core/GLCore.cpp" line="729"/>
         <source>电源状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="177"/>
+        <location filename="../src/core/GLCore.cpp" line="188"/>
         <source>主人，这是您电脑目前的电源状态：
 AC: %1
 Percentage: %2%
@@ -249,47 +239,47 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="183"/>
-        <location filename="../src/core/GLCore.cpp" line="656"/>
+        <location filename="../src/core/GLCore.cpp" line="193"/>
+        <location filename="../src/core/GLCore.cpp" line="730"/>
         <source>TODO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="186"/>
-        <location filename="../src/core/GLCore.cpp" line="657"/>
+        <location filename="../src/core/GLCore.cpp" line="197"/>
+        <location filename="../src/core/GLCore.cpp" line="731"/>
         <source>问个问题</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="190"/>
-        <location filename="../src/core/GLCore.cpp" line="658"/>
+        <location filename="../src/core/GLCore.cpp" line="201"/>
+        <location filename="../src/core/GLCore.cpp" line="732"/>
         <source>界面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="206"/>
-        <location filename="../src/core/GLCore.cpp" line="659"/>
+        <location filename="../src/core/GLCore.cpp" line="217"/>
+        <location filename="../src/core/GLCore.cpp" line="733"/>
         <source>EMO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="210"/>
-        <location filename="../src/core/GLCore.cpp" line="660"/>
+        <location filename="../src/core/GLCore.cpp" line="221"/>
+        <location filename="../src/core/GLCore.cpp" line="734"/>
         <source>媒体播放</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="431"/>
+        <location filename="../src/core/GLCore.cpp" line="465"/>
         <source>%1, %2℃, %3, humidity: %4%.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="446"/>
+        <location filename="../src/core/GLCore.cpp" line="483"/>
         <source>开机时间过长，不启动启动项</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/GLCore.cpp" line="452"/>
+        <location filename="../src/core/GLCore.cpp" line="489"/>
         <source>将在60秒后启动启动项</source>
         <translation type="unfinished"></translation>
     </message>
@@ -297,39 +287,39 @@ Battery State: %3</source>
 <context>
     <name>ManageStartWidget</name>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="96"/>
+        <location filename="../src/ui/manageStart.cpp" line="93"/>
         <source>确定要删除选中的项目吗?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="96"/>
+        <location filename="../src/ui/manageStart.cpp" line="93"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="76"/>
-        <location filename="../src/ui/manageStart.cpp" line="142"/>
+        <location filename="../src/ui/manageStart.cpp" line="71"/>
+        <location filename="../src/ui/manageStart.cpp" line="149"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="76"/>
+        <location filename="../src/ui/manageStart.cpp" line="71"/>
         <source>请先选择一个项目!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="142"/>
+        <location filename="../src/ui/manageStart.cpp" line="149"/>
         <source>项目 %1 
 的路径不存在：%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="149"/>
+        <location filename="../src/ui/manageStart.cpp" line="156"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/manageStart.cpp" line="149"/>
+        <location filename="../src/ui/manageStart.cpp" line="156"/>
         <source>保存成功！</source>
         <translation type="unfinished"></translation>
     </message>
@@ -365,24 +355,24 @@ Battery State: %3</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/core/launcher.hpp" line="63"/>
-        <location filename="../src/core/launcher.hpp" line="76"/>
+        <location filename="../src/core/launcher.hpp" line="57"/>
+        <location filename="../src/core/launcher.hpp" line="70"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/launcher.hpp" line="64"/>
+        <location filename="../src/core/launcher.hpp" line="58"/>
         <source>File or directory does not exist: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/launcher.hpp" line="77"/>
+        <location filename="../src/core/launcher.hpp" line="71"/>
         <source>Failed to open: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/launcher.hpp" line="89"/>
-        <location filename="../src/core/launcher.hpp" line="99"/>
+        <location filename="../src/core/launcher.hpp" line="83"/>
+        <location filename="../src/core/launcher.hpp" line="93"/>
         <location filename="../src/core/data.hpp" line="376"/>
         <location filename="../src/core/data.cpp" line="11"/>
         <location filename="../src/core/data.cpp" line="31"/>
@@ -391,13 +381,13 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/launcher.hpp" line="90"/>
+        <location filename="../src/core/launcher.hpp" line="84"/>
         <source>Exception occurred while launching: %1
 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/launcher.hpp" line="100"/>
+        <location filename="../src/core/launcher.hpp" line="94"/>
         <source>Unknown exception occurred while launching: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -417,107 +407,107 @@ Battery State: %3</source>
 <context>
     <name>SettingWidget</name>
     <message>
-        <location filename="../src/ui/setting.cpp" line="312"/>
+        <location filename="../src/ui/setting.cpp" line="295"/>
         <source>调试信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="313"/>
+        <location filename="../src/ui/setting.cpp" line="296"/>
         <source>普通信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="314"/>
+        <location filename="../src/ui/setting.cpp" line="297"/>
         <source>警告</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="315"/>
+        <location filename="../src/ui/setting.cpp" line="298"/>
         <source>严重错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="316"/>
+        <location filename="../src/ui/setting.cpp" line="299"/>
         <source>致命错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="467"/>
+        <location filename="../src/ui/setting.cpp" line="450"/>
         <source>选择提示词文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="469"/>
+        <location filename="../src/ui/setting.cpp" line="452"/>
         <source>文本文件 (*.txt *.md *.json);;所有文件 (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="518"/>
+        <location filename="../src/ui/setting.cpp" line="501"/>
         <source>保存成功！
 下次应用启动生效。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="477"/>
-        <location filename="../src/ui/setting.cpp" line="518"/>
-        <location filename="../src/ui/setting.cpp" line="648"/>
-        <location filename="../src/ui/setting.cpp" line="686"/>
-        <location filename="../src/ui/setting.cpp" line="697"/>
-        <location filename="../src/ui/setting.cpp" line="733"/>
-        <location filename="../src/ui/setting.cpp" line="853"/>
+        <location filename="../src/ui/setting.cpp" line="460"/>
+        <location filename="../src/ui/setting.cpp" line="501"/>
+        <location filename="../src/ui/setting.cpp" line="631"/>
+        <location filename="../src/ui/setting.cpp" line="669"/>
+        <location filename="../src/ui/setting.cpp" line="680"/>
+        <location filename="../src/ui/setting.cpp" line="716"/>
+        <location filename="../src/ui/setting.cpp" line="836"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="588"/>
-        <location filename="../src/ui/setting.cpp" line="596"/>
+        <location filename="../src/ui/setting.cpp" line="571"/>
+        <location filename="../src/ui/setting.cpp" line="579"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="686"/>
+        <location filename="../src/ui/setting.cpp" line="669"/>
         <source>快捷方式已不存在！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="417"/>
-        <location filename="../src/ui/setting.cpp" line="454"/>
-        <location filename="../src/ui/setting.cpp" line="479"/>
-        <location filename="../src/ui/setting.cpp" line="693"/>
-        <location filename="../src/ui/setting.cpp" line="728"/>
-        <location filename="../src/ui/setting.cpp" line="837"/>
-        <location filename="../src/ui/setting.cpp" line="910"/>
-        <location filename="../src/ui/setting.cpp" line="959"/>
-        <location filename="../src/ui/setting.cpp" line="971"/>
-        <location filename="../src/ui/setting.cpp" line="978"/>
-        <location filename="../src/ui/setting.cpp" line="991"/>
+        <location filename="../src/ui/setting.cpp" line="400"/>
+        <location filename="../src/ui/setting.cpp" line="437"/>
+        <location filename="../src/ui/setting.cpp" line="462"/>
+        <location filename="../src/ui/setting.cpp" line="676"/>
+        <location filename="../src/ui/setting.cpp" line="711"/>
+        <location filename="../src/ui/setting.cpp" line="820"/>
+        <location filename="../src/ui/setting.cpp" line="893"/>
+        <location filename="../src/ui/setting.cpp" line="942"/>
+        <location filename="../src/ui/setting.cpp" line="954"/>
+        <location filename="../src/ui/setting.cpp" line="961"/>
+        <location filename="../src/ui/setting.cpp" line="974"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="417"/>
-        <location filename="../src/ui/setting.cpp" line="454"/>
+        <location filename="../src/ui/setting.cpp" line="400"/>
+        <location filename="../src/ui/setting.cpp" line="437"/>
         <source>Please fill in all fields first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="477"/>
+        <location filename="../src/ui/setting.cpp" line="460"/>
         <source>Loaded prompt from [%1] successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="479"/>
+        <location filename="../src/ui/setting.cpp" line="462"/>
         <source>Failed to load prompt from [%1].</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="589"/>
+        <location filename="../src/ui/setting.cpp" line="572"/>
         <source>确定要重置设置吗？
 这将恢复所有选项为默认值。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="597"/>
+        <location filename="../src/ui/setting.cpp" line="580"/>
         <source>是否同时删除所有用户数据（包括日志、缓存、用户文件夹等）？
 
 选择“是”将彻底清理并重启程序，所有数据将永久丢失。
@@ -525,102 +515,102 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="631"/>
+        <location filename="../src/ui/setting.cpp" line="614"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="632"/>
+        <location filename="../src/ui/setting.cpp" line="615"/>
         <source>部分数据文件夹无法删除，请手动清理后重启程序。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="648"/>
+        <location filename="../src/ui/setting.cpp" line="631"/>
         <source>设置已重置！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="693"/>
+        <location filename="../src/ui/setting.cpp" line="676"/>
         <source>移除快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="697"/>
+        <location filename="../src/ui/setting.cpp" line="680"/>
         <source>快捷方式已移除！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="728"/>
+        <location filename="../src/ui/setting.cpp" line="711"/>
         <source>创建快捷方式失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="733"/>
+        <location filename="../src/ui/setting.cpp" line="716"/>
         <source>快捷方式已创建！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="808"/>
+        <location filename="../src/ui/setting.cpp" line="791"/>
         <source>选择模型文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="826"/>
+        <location filename="../src/ui/setting.cpp" line="809"/>
         <source>选择音声模型文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="828"/>
+        <location filename="../src/ui/setting.cpp" line="811"/>
         <source>VVM 文件 (*.vvm);;所有文件 (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="838"/>
+        <location filename="../src/ui/setting.cpp" line="821"/>
         <source>模型加载失败，请检查模型文件是否正确，并重新加载。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="853"/>
+        <location filename="../src/ui/setting.cpp" line="836"/>
         <source>模型加载成功，风格列表已更新。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="866"/>
+        <location filename="../src/ui/setting.cpp" line="849"/>
         <source>(无可用风格)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="910"/>
+        <location filename="../src/ui/setting.cpp" line="893"/>
         <source>辞书加载失败，请检查路径是否正确，并确保该路径下有有效的字典文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="936"/>
+        <location filename="../src/ui/setting.cpp" line="919"/>
         <source>选择辞书目录</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="960"/>
+        <location filename="../src/ui/setting.cpp" line="943"/>
         <source>应用配置失败，请检查辞书目录和模型文件是否正确。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="968"/>
+        <location filename="../src/ui/setting.cpp" line="951"/>
         <source>当前选中的风格无效（ID: %1），可用风格: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="970"/>
+        <location filename="../src/ui/setting.cpp" line="953"/>
         <source>无</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="978"/>
+        <location filename="../src/ui/setting.cpp" line="961"/>
         <source>语音合成失败，请检查日志。</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/setting.cpp" line="991"/>
+        <location filename="../src/ui/setting.cpp" line="974"/>
         <source>无法写入临时文件。</source>
         <translation type="unfinished"></translation>
     </message>
@@ -628,13 +618,13 @@ Battery State: %3</source>
 <context>
     <name>TodoNotify</name>
     <message>
-        <location filename="../src/utils/todoNotify.hpp" line="46"/>
+        <location filename="../src/utils/todoNotify.hpp" line="43"/>
         <source>您的事件：「%1」即将截止，请及时完成！
 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/todoNotify.hpp" line="53"/>
+        <location filename="../src/utils/todoNotify.hpp" line="52"/>
         <source>待办事项提醒</source>
         <translation type="unfinished"></translation>
     </message>
@@ -644,12 +634,12 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/todoNotify.hpp" line="91"/>
+        <location filename="../src/utils/todoNotify.hpp" line="95"/>
         <source>还没有最近的待办事项哦！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/todoNotify.hpp" line="94"/>
+        <location filename="../src/utils/todoNotify.hpp" line="98"/>
         <source>最近的一次待办事项是「%1」，截止时间是：%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -657,47 +647,47 @@ Battery State: %3</source>
 <context>
     <name>TranslationManager</name>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="44"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="41"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="45"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="42"/>
         <source>简体中文</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="46"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="43"/>
         <source>繁體中文</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="47"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="44"/>
         <source>日本語</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="48"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="45"/>
         <source>한국어</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="49"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="46"/>
         <source>Français</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="50"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="47"/>
         <source>Deutsch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="51"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="48"/>
         <source>Русский</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/translation/TranslationManager.cpp" line="52"/>
+        <location filename="../src/translation/TranslationManager.cpp" line="49"/>
         <source>Español</source>
         <translation type="unfinished"></translation>
     </message>
@@ -705,62 +695,62 @@ Battery State: %3</source>
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="../src/core/tray.cpp" line="64"/>
+        <location filename="../src/core/tray.cpp" line="56"/>
         <source>重置位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="65"/>
+        <location filename="../src/core/tray.cpp" line="57"/>
         <source>显示界面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="66"/>
+        <location filename="../src/core/tray.cpp" line="58"/>
         <source>静默模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="67"/>
+        <location filename="../src/core/tray.cpp" line="59"/>
         <source>锁定位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="68"/>
+        <location filename="../src/core/tray.cpp" line="60"/>
         <source>播放媒体</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="77"/>
+        <location filename="../src/core/tray.cpp" line="69"/>
         <source>打开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="79"/>
+        <location filename="../src/core/tray.cpp" line="71"/>
         <source>程序文件夹</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="80"/>
+        <location filename="../src/core/tray.cpp" line="72"/>
         <source>用户文件夹</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="81"/>
+        <location filename="../src/core/tray.cpp" line="73"/>
         <source>日志文件夹</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="82"/>
+        <location filename="../src/core/tray.cpp" line="74"/>
         <source>TTS Server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="70"/>
+        <location filename="../src/core/tray.cpp" line="62"/>
         <source>退出程序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/tray.cpp" line="71"/>
+        <location filename="../src/core/tray.cpp" line="63"/>
         <source>按键监听</source>
         <translation type="unfinished"></translation>
     </message>
@@ -768,12 +758,12 @@ Battery State: %3</source>
 <context>
     <name>UpdateDialog</name>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="25"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="18"/>
         <source>Check for Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="39"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="35"/>
         <source>Unable to retrieve update information.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -783,70 +773,70 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="69"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="70"/>
         <source>New version available!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="72"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="75"/>
         <source>You are using the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="74"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="79"/>
         <source>Check failed. Please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="81"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="86"/>
         <source>Source:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="89"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="96"/>
         <source>No successful source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="99"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="106"/>
         <source>Release Notes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="103"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="110"/>
         <source>No release notes available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="110"/>
-        <location filename="../src/utils/UpdateDialog.cpp" line="145"/>
-        <location filename="../src/utils/UpdateDialog.cpp" line="153"/>
-        <location filename="../src/utils/UpdateDialog.cpp" line="161"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="117"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="157"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="166"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="175"/>
         <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="115"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="122"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="130"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="139"/>
         <source>No release notes provided.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="145"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="157"/>
         <source>No download source available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="153"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="166"/>
         <source>No download URL provided by this source.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/UpdateDialog.cpp" line="161"/>
+        <location filename="../src/utils/UpdateDialog.cpp" line="175"/>
         <source>Failed to open download URL.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -854,7 +844,7 @@ Battery State: %3</source>
 <context>
     <name>VoiceGenerator</name>
     <message>
-        <location filename="../src/tts/voicegenerator.hpp" line="132"/>
+        <location filename="../src/tts/voicegenerator.hpp" line="125"/>
         <source>音频文件不存在: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1218,6 +1208,11 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ui/setting.ui" line="1063"/>
+        <source>llm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/ui/setting.ui" line="1172"/>
         <source>Weather API</source>
         <translation type="unfinished"></translation>
@@ -1464,11 +1459,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/setting.ui" line="1014"/>
         <source>端口</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/setting.ui" line="1063"/>
-        <source>llama</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -58,6 +58,8 @@ set(DEBUG_MODE OFF)           # ON: Debug, OFF: Release
 
 ### Python 包管理
 
+<https://github.com/csy214-beep/Pelr_tts_tr>
+
 ```shell
 pip install pip-review
 # 查看可更新的包

@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #ifndef TRANSLATIONMANAGER_H
 #define TRANSLATIONMANAGER_H
 
@@ -16,8 +8,9 @@
 #include <QMap>
 #include <QDir>
 
-class TranslationManager : public QObject {
-Q_OBJECT
+class TranslationManager : public QObject
+{
+    Q_OBJECT
 
 public:
     // 获取单例实例

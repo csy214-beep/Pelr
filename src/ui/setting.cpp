@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "setting.h"
 #include <QFileDialog>
 #include <QString>
@@ -279,26 +271,17 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
     ui->horizontalSlider_2->setRange(15, 120); // FPS
     ui->horizontalSlider_3->setRange(0, 100);  // volume
 
-    // CREDITS
-    QFile CREDITS(":/CREDITS.md");
-    QString content_CREDITS;
-    if (CREDITS.open(QIODevice::ReadOnly | QIODevice::Text))
+    // NOTICE
+    QFile NOTICE(":/NOTICE");
+    QString content_NOTICE;
+    if (NOTICE.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QTextStream in(&CREDITS);
+        QTextStream in(&NOTICE);
         in.setCodec("UTF-8"); // 设置编码为 UTF-8
-        content_CREDITS = in.readAll();
-        CREDITS.close();
+        content_NOTICE = in.readAll();
+        NOTICE.close();
     }
-    QFile THANBKS(":/THANBKS.md");
-    QString content_THANBKS;
-    if (THANBKS.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        QTextStream in(&THANBKS);
-        in.setCodec("UTF-8"); // 设置编码为 UTF-8
-        content_THANBKS = in.readAll();
-        THANBKS.close();
-    }
-    ui->textBrowser->setMarkdown(QString("%1\n%2").arg(content_CREDITS).arg(content_THANBKS));
+    ui->textBrowser->setMarkdown(QString("%1").arg(content_NOTICE));
     ui->textBrowser->setReadOnly(true);
     ui->textBrowser->setOpenExternalLinks(true);
     // 初始化日志等级选择

@@ -1,26 +1,19 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
-#pragma once
 
+#pragma once
 
 #include <QWidget>
 #include "chat.h"
 #include "manageStart.h"
 #include "setting.h"
-#include  "todoWidget.h"
+#include "todoWidget.h"
 
-namespace Ui {
+namespace Ui
+{
     class mainWidget;
 }
 
-class mainWidget : public QWidget {
+class mainWidget : public QWidget
+{
     Q_OBJECT
 
 public:

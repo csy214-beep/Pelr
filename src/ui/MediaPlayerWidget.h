@@ -1,14 +1,5 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
-#pragma once
 
+#pragma once
 
 #include <QWidget>
 #include <QMediaPlayer>
@@ -24,7 +15,8 @@
 #include <QEasingCurve>
 #include <QDebug>
 
-class ScrollLabel : public QLabel {
+class ScrollLabel : public QLabel
+{
     Q_OBJECT
     Q_PROPERTY(int scrollOffset READ scrollOffset WRITE setScrollOffset)
 
@@ -53,7 +45,8 @@ private:
     bool m_needsScrolling;
 };
 
-class MediaPlayerWidget : public QWidget {
+class MediaPlayerWidget : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -130,4 +123,3 @@ private:
     bool m_hasVideo;
     bool m_isSeeking;
 };
-

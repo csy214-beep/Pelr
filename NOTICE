@@ -1,0 +1,321 @@
+NOTICE - Third Party Dependencies and Licenses
+============================================================
+Project: Pelr
+Homepage: https://github.com/csy214-beep/Pelr
+
+1. Project License (MIT)
+----------------------------------------
+MIT License
+
+Copyright (c) 2026 SY Cheng
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+2. Third Party Libraries
+----------------------------------------
+--- Library 1: Qt ---
+Version: 5.15.2
+License Type: LGPLv3 / GPLv2
+Copyright (c) The Qt Company Ltd.
+Website: https://www.qt.io/
+
+
+Additional Notes:
+Qt is licensed under LGPLv3. This software dynamically links to Qt libraries.
+You may obtain the source code of Qt and its full license texts from https://www.qt.io/.
+
+--- Library 2: Live2D Cubism Native Framework ---
+Version: 5-r.4.1
+License Type: Live2D Open Software License
+Copyright (c) Live2D Inc.
+Website: https://www.live2d.com/
+
+---- Included License Text ----
+## Definitions
+
+### Live2D Cubism Components
+
+Cubism Native Framework is included in Live2D Cubism Components.
+
+Cubism Native Framework は Live2D Cubism Components に含まれます。
+
+Cubism Native Framework 包括在 Live2D Cubism Components 中。
+
+## Cubism SDK Release License
+
+*All business* users must obtain a Cubism SDK Release License. "Business" means an entity with the annual gross revenue more than ten million (10,000,000) JPY for the most recent fiscal year.
+
+* [Cubism SDK Release License](https://www.live2d.com/en/download/cubism-sdk/release-license/)
+
+直近会計年度の売上高が 1000 万円以上の事業者様がご利用になる場合は、Cubism SDK リリースライセンス（出版許諾契約）に同意していただく必要がございます。
+
+* [Cubism SDK リリースライセンス](https://www.live2d.com/ja/download/cubism-sdk/release-license/)
+
+如果您的企业在最近一个会计年度的销售额达到或超过1000万日元，您必须得到Cubism SDK的出版授权许可（出版许可协议）。
+
+* [Cubism SDK发行许可证](https://www.live2d.com/zh-CHS/download/cubism-sdk/release-license/)
+
+
+## Live2D Open Software License
+
+Live2D Cubism Components is available under Live2D Open Software License.
+
+* [Live2D Open Software License Agreement](https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html)
+* [Live2D Open Software 使用許諾契約書](https://www.live2d.com/eula/live2d-open-software-license-agreement_jp.html)
+* [Live2D Open Software 使用授权协议](https://www.live2d.com/eula/live2d-open-software-license-agreement_cn.html)
+
+
+## Live2D Proprietary Software License
+
+Live2D Cubism Core is available under Live2D Proprietary Software License.
+
+* [Live2D Proprietary Software License Agreement](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html)
+* [Live2D Proprietary Software 使用許諾契約書](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_jp.html)
+* [Live2D Proprietary Software 使用授权协议](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_cn.html)
+
+
+---
+
+Please contact us from [here](https://www.live2d.jp/contact/) for more license information.
+
+Additional Notes:
+If your annual revenue exceeds 10 million JPY, a separate Cubism SDK Release License is required.
+See https://www.live2d.com/en/download/cubism-sdk/release-license/
+
+--- Library 3: Live2D Cubism Core ---
+Version: Included with SDK
+License Type: Live2D Proprietary Software License
+Copyright (c) Live2D Inc.
+Website: https://www.live2d.com/
+
+
+Additional Notes:
+Cubism Core is under a proprietary license. It must not be redistributed in public repositories.
+Obtain it from the official Live2D SDK. License text:
+https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html
+
+--- Library 4: GLEW ---
+Version: 2.1.0
+License Type: Modified BSD License
+Copyright (c) Milan Ikits, Marcelo E. Magallon, Lev Povalahev
+Website: http://glew.sourceforge.net/
+
+---- Included License Text ----
+The OpenGL Extension Wrangler Library
+Copyright (C) 2002-2007, Milan Ikits <milan ikits[]ieee org>
+Copyright (C) 2002-2007, Marcelo E. Magallon <mmagallo[]debian org>
+Copyright (C) 2002, Lev Povalahev
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, 
+  this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, 
+  this list of conditions and the following disclaimer in the documentation 
+  and/or other materials provided with the distribution.
+* The name of the author may be used to endorse or promote products 
+  derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Mesa 3-D graphics library
+Version:  7.0
+
+Copyright (C) 1999-2007  Brian Paul   All Rights Reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+BRIAN PAUL BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+Copyright (c) 2007 The Khronos Group Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and/or associated documentation files (the
+"Materials"), to deal in the Materials without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Materials, and to
+permit persons to whom the Materials are furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Materials.
+
+THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+
+--- Library 5: GLFW ---
+Version: 3.4.0
+License Type: zlib/libpng License
+Copyright (c) Marcus Geelnard, Camilla Löwy
+Website: https://www.glfw.org/
+
+---- Included License Text ----
+Copyright (c) 2002-2006 Marcus Geelnard
+
+Copyright (c) 2006-2019 Camilla Löwy
+
+This software is provided 'as-is', without any express or implied
+warranty. In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would
+   be appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such, and must not
+   be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any source
+   distribution.
+
+--- Library 6: kissfft ---
+Version: Latest
+License Type: BSD-3-Clause
+Copyright (c) Mark Borgerding
+Website: https://github.com/mborgerding/kissfft
+
+---- Included License Text ----
+Copyright (c) 2003-2010 Mark Borgerding . All rights reserved.
+
+KISS FFT is provided under:
+
+  SPDX-License-Identifier: BSD-3-Clause
+
+Being under the terms of the BSD 3-clause "New" or "Revised" License,
+according with:
+
+  LICENSES/BSD-3-Clause
+
+--- Library 7: stb ---
+Version: Latest
+License Type: MIT / Public Domain
+Copyright (c) Sean Barrett
+Website: https://github.com/nothings/stb
+
+
+Additional Notes:
+stb libraries are in the public domain, and also available under the MIT License.
+See the copyright notice at the top of each header file.
+
+--- Library 8: VOICEVOX CORE ---
+Version: 0.16.4
+License Type: MIT (with additional terms)
+Copyright (c) Hiroshiba Kazuyuki
+Website: https://github.com/VOICEVOX/voicevox_core
+
+---- Included License Text ----
+Copyright (c) 2021 Hiroshiba Kazuyuki
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Additional Notes:
+YOU MUST INCLUDE THE CREDIT 'VOICEVOX: Hiroshiba Kazuyuki' when using the generated audio.
+Additional terms: thirdParty/voicevox_core/c_api/TERMS.txt
+
+--- Library 9: ONNX Runtime ---
+Version: Included with voicevox_core
+License Type: MIT
+Copyright (c) Microsoft Corporation
+Website: https://onmicrosoft.com/
+
+---- Included License Text ----
+# VOICEVOX ONNX Runtime 利用規約
+
+## 許諾内容
+
+1. 商用・非商用問わず利用することができます
+2. アプリケーションに組み込んで再配布することができます
+3. 作成された音声を利用する際は、各音声ライブラリの規約に従ってください
+4. 作成された音声の利用を他者に許諾する際は、当該他者に対し本許諾内容の 3 及び 4 の遵守を義務付けてください
+
+## 禁止事項
+
+- 逆コンパイル・リバースエンジニアリング及びこれらの方法の公開すること
+- 製作者または第三者に不利益をもたらす行為
+- 公序良俗に反する行為
+
+## 免責事項
+
+本ソフトウェアにより生じた損害・不利益について、製作者は一切の責任を負いません。
+
+## その他
+
+ご利用の際は VOICEVOX を利用したことがわかるクレジット表記が必要です。
+
+3. Additional Information
+----------------------------------------
+Full license texts for the above libraries are maintained in their respective
+subdirectories under `thirdParty/` in the source repository.
+This NOTICE file is auto-generated by `generate_notice.py`. Please update the
+script when dependencies change.

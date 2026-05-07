@@ -1,16 +1,9 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "DoubleClickableLabel.h"
 
 DoubleClickableLabel::DoubleClickableLabel(QWidget *parent)
-    : QLabel(parent) {
+    : QLabel(parent)
+{
     // 设置 QLabel 为可接受鼠标事件 (通常默认就是，但明确设置更安全)
     setAttribute(Qt::WA_TransparentForMouseEvents, false);
     // 可选：设置鼠标悬停时显示手型光标，提示用户可点击
@@ -18,14 +11,17 @@ DoubleClickableLabel::DoubleClickableLabel(QWidget *parent)
 }
 
 DoubleClickableLabel::DoubleClickableLabel(const QString &text, QWidget *parent)
-    : QLabel(text, parent) {
+    : QLabel(text, parent)
+{
     setAttribute(Qt::WA_TransparentForMouseEvents, false);
     setCursor(Qt::PointingHandCursor);
 }
 
-void DoubleClickableLabel::mouseDoubleClickEvent(QMouseEvent *event) {
+void DoubleClickableLabel::mouseDoubleClickEvent(QMouseEvent *event)
+{
     // 检查是否是左键双击 (可选，根据需求调整)
-    if (event->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton)
+    {
         emit doubleClicked(); // 发射自定义信号
     }
     // 调用父类实现，确保其他默认行为（如果有的话）仍然执行

@@ -1,17 +1,10 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 #include <QLineEdit>
 #include "llamaclient.h"
 
-class ChatBoxOnModel : public QLineEdit {
+class ChatBoxOnModel : public QLineEdit
+{
     Q_OBJECT
 
 public:

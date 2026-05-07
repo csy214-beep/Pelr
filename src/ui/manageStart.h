@@ -1,27 +1,21 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #ifndef MANAGESTART_H
 #define MANAGESTART_H
 
-#include  <QWidget>
+#include <QWidget>
 #include <QStandardItemModel>
 #include "editor.h"
 #include "data.hpp"
 #include <QList>
 #include <QCloseEvent>
 
-namespace Ui {
+namespace Ui
+{
     class manageStart;
 }
 
-class ManageStartWidget : public QWidget {
+class ManageStartWidget : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -50,7 +44,6 @@ protected slots:
 
     void showEditor();
 
-
     void onEditorAccepted();
 
     void deleteSelectedItem();
@@ -59,8 +52,8 @@ protected slots:
 
 private:
     QString currentCategory; // 当前选中项的分类
-    QString currentName; // 当前选中项的名称
-    int currentRow; // 当前选中项的行号
+    QString currentName;     // 当前选中项的名称
+    int currentRow;          // 当前选中项的行号
     Ui::manageStart *ui;
 };
 

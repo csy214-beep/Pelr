@@ -1,22 +1,14 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QLabel>
 #include <QMouseEvent>
 
-class DoubleClickableLabel : public QLabel {
-    Q_OBJECT // 必须包含 Q_OBJECT 宏才能使用信号
+class DoubleClickableLabel : public QLabel
+{
+Q_OBJECT // 必须包含 Q_OBJECT 宏才能使用信号
 
-public:
-    explicit DoubleClickableLabel(QWidget *parent = nullptr);
+    public : explicit DoubleClickableLabel(QWidget *parent = nullptr);
 
     explicit DoubleClickableLabel(const QString &text, QWidget *parent = nullptr);
 
@@ -29,4 +21,3 @@ protected:
     // void enterEvent(QEvent *event) override;
     // void leaveEvent(QEvent *event) override;
 };
-

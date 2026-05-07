@@ -48,12 +48,21 @@ thirdParty/Framework/**
 thirdParty/glew/**
 thirdParty/glfw/**
 thirdParty/stb/**
-thirdParty/kissfft/**
-thirdParty/QSS/**
-thirdParty/voicevox_core/**
+thirdParty/voicevox_core/c_api/**
+thirdParty/voicevox_core/onnxruntime/**
+thirdParty/LAppLive2D/**
 
+# LICENSE
+!thirdParty/LAppLive2D/TERMS.txt
+!thirdParty/Framework/LICENSE.md
+!thirdParty/glew/LICENSE.txt
+!thirdParty/glfw/LICENSE.md
+!thirdParty/stb/README.md
+!thirdParty/voicevox_core/c_api/LICENSE
+!thirdParty/voicevox_core/onnxruntime/TERMS.txt
+!thirdParty/Core/TERMS.txt
 
-lib/**
+lib
 
 # Executables
 *.exe
@@ -69,9 +78,9 @@ test**
 
 
 # Resources
-Resources/**
-SampleShaders/**
-FrameworkShaders/**
+Resources
+SampleShaders
+FrameworkShaders
 
 # log/cache files
 log

@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 #include <QProcess>
 #include <QDesktopServices>
@@ -19,9 +11,11 @@
 #include <QtConcurrent>
 #include "NotificationWidget.h"
 
-static QFuture<void> launchByPathAsync(const QString &path) {
+static QFuture<void> launchByPathAsync(const QString &path)
+{
     qDebug() << "launching: " << path;
-    return QtConcurrent::run([path]() -> bool {
+    return QtConcurrent::run([path]() -> bool
+                             {
         try {
             bool success = false;
             // 对于URL，使用QDesktopServices
@@ -103,11 +97,11 @@ static QFuture<void> launchByPathAsync(const QString &path) {
                 );
             }, Qt::QueuedConnection);
             return false;
-        }
-    });
+        } });
 }
 
 // 同步版本
-static void launchByPath(const QString &path) {
+static void launchByPath(const QString &path)
+{
     launchByPathAsync(path);
 }

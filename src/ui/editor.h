@@ -1,21 +1,15 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 #include <QLineEdit>
-#include  <QWidget>
+#include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
     class editor;
 }
 
-class EditorWidget : public QWidget {
+class EditorWidget : public QWidget
+{
     Q_OBJECT
 signals:
     void accepted();
@@ -27,7 +21,7 @@ public:
 
     void selectFile(QLineEdit *lineEdit);
 
-    QPair<QList<QString>, QList<QString> > getAllInfo();
+    QPair<QList<QString>, QList<QString>> getAllInfo();
 
     explicit EditorWidget(QWidget *parent = nullptr);
 

@@ -1,75 +1,83 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "ExtraFileManager.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDebug>
 
 ExtraFileManager::ExtraFileManager(QObject *parent)
-    : QObject(parent) {
+    : QObject(parent)
+{
 }
 
-ExtraFileManager::~ExtraFileManager() {
+ExtraFileManager::~ExtraFileManager()
+{
     _extraExpressions.clear();
     _extraMotions.clear();
 }
 
-void ExtraFileManager::loadExtraFiles(const QString &modelDir) {
+void ExtraFileManager::loadExtraFiles(const QString &modelDir)
+{
     _modelHomeDir = modelDir;
     _extraExpressions.clear();
     _extraMotions.clear();
 
     QDir dir(modelDir);
-    if (!dir.exists()) {
+    if (!dir.exists())
+    {
         qWarning() << "Model directory does not exist:" << modelDir;
         return;
     }
 
     scanDirectory(dir);
     qDebug() << "Loaded" << _extraExpressions.size() << "extra expressions and"
-            << _extraMotions.size() << "extra motions";
+             << _extraMotions.size() << "extra motions";
 }
 
-void ExtraFileManager::scanDirectory(const QDir &dir) {
+void ExtraFileManager::scanDirectory(const QDir &dir)
+{
     qDebug() << "=== Scanning directory:" << dir.absolutePath() << "===";
     // 获取目录下所有文件和子目录
     QFileInfoList entries = dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
     qDebug() << "Found" << entries.size() << "entries in directory";
 
-    foreach(const QFileInfo &entry, entries) {
-        if (entry.isDir()) {
+    foreach (const QFileInfo &entry, entries)
+    {
+        if (entry.isDir())
+        {
             qDebug() << "Entering subdirectory:" << entry.fileName();
             scanDirectory(QDir(entry.absoluteFilePath()));
-        } else if (entry.isFile()) {
+        }
+        else if (entry.isFile())
+        {
             QString filePath = entry.absoluteFilePath();
             QString fileName = entry.fileName().toLower(); // 转换为小写进行比较
 
             // qDebug() << "Checking file:" << fileName;
 
             // 使用文件名匹配而不是后缀匹配
-            if (fileName.endsWith(".exp3.json")) {
+            if (fileName.endsWith(".exp3.json"))
+            {
                 // qDebug() << "Loading as expression file:" << fileName;
                 loadExpressionFile(filePath);
-            } else if (fileName.endsWith(".motion3.json")) {
+            }
+            else if (fileName.endsWith(".motion3.json"))
+            {
                 // qDebug() << "Loading as motion file:" << fileName;
                 loadMotionFile(filePath);
-            } else {
+            }
+            else
+            {
                 qDebug() << "Skipping file (not .exp3.json or .motion3.json):" << fileName;
             }
         }
     }
 }
 
-void ExtraFileManager::loadExpressionFile(const QString &filePath) {
+void ExtraFileManager::loadExpressionFile(const QString &filePath)
+{
     QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly)) {
+    if (!file.open(QIODevice::ReadOnly))
+    {
         qWarning() << "Failed to open expression file:" << filePath;
         return;
     }
@@ -85,9 +93,11 @@ void ExtraFileManager::loadExpressionFile(const QString &filePath) {
     // qDebug() << "Loaded extra expression:" << expressionName;
 }
 
-void ExtraFileManager::loadMotionFile(const QString &filePath) {
+void ExtraFileManager::loadMotionFile(const QString &filePath)
+{
     QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly)) {
+    if (!file.open(QIODevice::ReadOnly))
+    {
         qWarning() << "Failed to open motion file:" << filePath;
         return;
     }
@@ -103,26 +113,32 @@ void ExtraFileManager::loadMotionFile(const QString &filePath) {
     // qDebug() << "Loaded extra motion:" << motionName;
 }
 
-QVector<QString> ExtraFileManager::getAvailableExpressions() const {
+QVector<QString> ExtraFileManager::getAvailableExpressions() const
+{
     QVector<QString> expressions;
-    for (auto it = _extraExpressions.begin(); it != _extraExpressions.end(); ++it) {
+    for (auto it = _extraExpressions.begin(); it != _extraExpressions.end(); ++it)
+    {
         expressions.append(it.key());
     }
     return expressions;
 }
 
-QVector<QString> ExtraFileManager::getAvailableMotions() const {
+QVector<QString> ExtraFileManager::getAvailableMotions() const
+{
     QVector<QString> motions;
-    for (auto it = _extraMotions.begin(); it != _extraMotions.end(); ++it) {
+    for (auto it = _extraMotions.begin(); it != _extraMotions.end(); ++it)
+    {
         motions.append(it.key());
     }
     return motions;
 }
 
-QByteArray ExtraFileManager::getExpressionData(const QString &expressionName) const {
+QByteArray ExtraFileManager::getExpressionData(const QString &expressionName) const
+{
     return _extraExpressions.value(expressionName);
 }
 
-QByteArray ExtraFileManager::getMotionData(const QString &motionName) const {
+QByteArray ExtraFileManager::getMotionData(const QString &motionName) const
+{
     return _extraMotions.value(motionName);
 }

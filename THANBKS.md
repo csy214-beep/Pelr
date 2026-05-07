@@ -1,6 +1,6 @@
 ## 致谢
 
-[CREDITS](CREDITS.md)
+[NOTICE](NOTICE)
 
 感谢开源社区，感谢我所遇到的所有善良之人，感谢你们给予的帮助。
 

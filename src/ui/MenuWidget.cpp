@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #include "MenuWidget.h"
 #include <QApplication>
 #include <QWidget>
@@ -24,20 +16,25 @@
 #include "data.hpp"
 
 MenuWidget::MenuWidget(QWidget *parent) : QWidget(
-    parent) {
+                                              parent)
+{
     setupUI();
     applyStyles();
-    //置顶
-    if (DataManager::instance().getBasicData().isTop) {
+    // 置顶
+    if (DataManager::instance().getBasicData().isTop)
+    {
         setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
-    } else {
+    }
+    else
+    {
         setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
     }
     // 设置窗口背景和圆角
     setAttribute(Qt::WA_TranslucentBackground);
 }
 
-void MenuWidget::showNearMouse() {
+void MenuWidget::showNearMouse()
+{
     // 获取鼠标当前位置
     QPoint mousePos = QCursor::pos();
 
@@ -45,7 +42,7 @@ void MenuWidget::showNearMouse() {
     QScreen *screen = QApplication::screenAt(mousePos);
     QRect screenGeometry = screen->geometry();
 
-    //距离鼠标的距离
+    // 距离鼠标的距离
     int distance = 60 * DataManager::instance().getBasicData().model_size / 150;
 
     // 获取窗口尺寸
@@ -58,23 +55,27 @@ void MenuWidget::showNearMouse() {
     int y = mousePos.y();
 
     // 检查右侧空间是否足够
-    if (x + width > screenGeometry.right()) {
+    if (x + width > screenGeometry.right())
+    {
         // 右侧空间不足，显示在左侧
         x = mousePos.x() - width - distance;
     }
 
     // 检查底部空间是否足够
-    if (y + height > screenGeometry.bottom()) {
+    if (y + height > screenGeometry.bottom())
+    {
         y = screenGeometry.bottom() - height;
     }
 
     // 确保窗口不会超出屏幕顶部
-    if (y < screenGeometry.top()) {
+    if (y < screenGeometry.top())
+    {
         y = screenGeometry.top();
     }
 
     // 确保窗口不会超出屏幕左侧
-    if (x < screenGeometry.left()) {
+    if (x < screenGeometry.left())
+    {
         x = screenGeometry.left();
     }
     qInfo() << "Menu show at: (" << x << "," << y << ")";
@@ -89,7 +90,8 @@ void MenuWidget::showNearMouse() {
     activateWindow();
 }
 
-void MenuWidget::paintEvent(QPaintEvent *event) {
+void MenuWidget::paintEvent(QPaintEvent *event)
+{
     Q_UNUSED(event);
 
     // 绘制圆角矩形背景
@@ -100,8 +102,8 @@ void MenuWidget::paintEvent(QPaintEvent *event) {
     painter.drawRoundedRect(rect(), 10, 10);
 }
 
-
-void MenuWidget::setupUI() {
+void MenuWidget::setupUI()
+{
     mainLayout = new QVBoxLayout(this);
     mainLayout->setSpacing(10);
     mainLayout->setContentsMargins(15, 15, 15, 15);
@@ -113,7 +115,8 @@ void MenuWidget::setupUI() {
     mainLayout->addWidget(titleLabel);
 }
 
-void MenuWidget::applyStyles() {
+void MenuWidget::applyStyles()
+{
     setStyleSheet(R"(
             menuWidget {
                 background: transparent;
@@ -142,27 +145,34 @@ void MenuWidget::applyStyles() {
         )");
 }
 
-void MenuWidget::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
+void MenuWidget::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         left_button_down = true;
         dragStartPos = event->globalPos() - frameGeometry().topLeft();
     }
 }
 
-void MenuWidget::mouseMoveEvent(QMouseEvent *event) {
-    if (left_button_down && (event->buttons() & Qt::LeftButton)) {
+void MenuWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    if (left_button_down && (event->buttons() & Qt::LeftButton))
+    {
         move(event->globalPos() - dragStartPos);
     }
 }
 
-void MenuWidget::mouseReleaseEvent(QMouseEvent *event) {
+void MenuWidget::mouseReleaseEvent(QMouseEvent *event)
+{
     // 按住鼠标释放时停止拖动
-    if (event->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton)
+    {
         left_button_down = false;
     }
 }
 
-void MenuWidget::closeEvent(QCloseEvent *event) {
+void MenuWidget::closeEvent(QCloseEvent *event)
+{
     hide();
     event->ignore();
 }

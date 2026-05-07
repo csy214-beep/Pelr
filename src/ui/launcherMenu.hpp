@@ -1,12 +1,4 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- */
+
 #pragma once
 
 #include <QMenu>
@@ -18,7 +10,8 @@
 #include <QPushButton>
 #include "custommenu.h"
 
-class launcherMenu : public CustomMenu {
+class launcherMenu : public CustomMenu
+{
     Q_OBJECT
 
 public:
@@ -30,13 +23,15 @@ public:
     launcherMenu &operator=(const launcherMenu &) = delete;
 
     // 获取单例实例的静态方法
-    static launcherMenu *instance(QWidget *parent = nullptr) {
+    static launcherMenu *instance(QWidget *parent = nullptr)
+    {
         static launcherMenu instance(parent);
         return &instance;
     }
 
     // 初始化菜单
-    void initMenu() {
+    void initMenu()
+    {
         clear();
         QueueTimer = new QTimer(this);
         QueueTimer->setInterval(3000);
@@ -55,39 +50,49 @@ public:
         menu_Scripts = new CustomMenu("Scripts", this);
         CustomMenu *menu_LaunchAll = new CustomMenu("Launch All", this);
         menu_LaunchAll->setIcon(QIcon(p5));
-        for (MenuData &item: menu_data) {
-            if (item.name.isEmpty() || item.category.isEmpty() || item.path.isEmpty())continue;
+        for (MenuData &item : menu_data)
+        {
+            if (item.name.isEmpty() || item.category.isEmpty() || item.path.isEmpty())
+                continue;
             QAction *action = new QAction(QString(item.name), this);
 
-            if (!item.description.isEmpty()) {
+            if (!item.description.isEmpty())
+            {
                 action->setToolTip(item.description);
             }
-            //连接信号槽
-            connect(action, &QAction::triggered, [&]() {
-                launchByPath(item.path);
-            });
-            if (item.category == menu_Star->title()) {
+            // 连接信号槽
+            connect(action, &QAction::triggered, [&]()
+                    { launchByPath(item.path); });
+            if (item.category == menu_Star->title())
+            {
                 menu_Star->addAction(action);
                 action->setIcon(QIcon(p1));
                 star_count++;
                 queue_Star.enqueue(item.path);
-            } else if (item.category == menu_App->title()) {
+            }
+            else if (item.category == menu_App->title())
+            {
                 menu_App->addAction(action);
                 action->setIcon(QIcon(p2));
                 app_count++;
                 queue_App.enqueue(item.path);
-            } else if (item.category == menu_Link->title()) {
+            }
+            else if (item.category == menu_Link->title())
+            {
                 menu_Link->addAction(action);
                 action->setIcon(QIcon(p3));
                 link_count++;
                 queue_Link.enqueue(item.path);
-            } else if (item.category == menu_Scripts->title()) {
+            }
+            else if (item.category == menu_Scripts->title())
+            {
                 menu_Scripts->addAction(action);
                 action->setIcon(QIcon(p4));
                 scripts_count++;
                 queue_Scripts.enqueue(item.path);
             }
-            if (!item.icon.isEmpty()) {
+            if (!item.icon.isEmpty())
+            {
                 action->setIcon(QIcon(item.icon));
             }
         }
@@ -109,13 +114,15 @@ public:
         action_LaunchAll_App->setIcon(QIcon(p2));
         action_LaunchAll_Link->setIcon(QIcon(p3));
         action_LaunchAll_Scripts->setIcon(QIcon(p4));
-        connect(action_LaunchAll_Star, &QAction::triggered, [this]() { launchQueue(queue_Star); });
-        connect(action_LaunchAll_App, &QAction::triggered, [this]() { launchQueue(queue_App); });
-        connect(action_LaunchAll_Link, &QAction::triggered, [this]() { launchQueue(queue_Link); });
-        connect(action_LaunchAll_Scripts, &QAction::triggered, [this]() { launchQueue(queue_Scripts); });
-        menu_LaunchAll->addActions({
-            action_LaunchAll_Star, action_LaunchAll_App, action_LaunchAll_Link, action_LaunchAll_Scripts
-        });
+        connect(action_LaunchAll_Star, &QAction::triggered, [this]()
+                { launchQueue(queue_Star); });
+        connect(action_LaunchAll_App, &QAction::triggered, [this]()
+                { launchQueue(queue_App); });
+        connect(action_LaunchAll_Link, &QAction::triggered, [this]()
+                { launchQueue(queue_Link); });
+        connect(action_LaunchAll_Scripts, &QAction::triggered, [this]()
+                { launchQueue(queue_Scripts); });
+        menu_LaunchAll->addActions({action_LaunchAll_Star, action_LaunchAll_App, action_LaunchAll_Link, action_LaunchAll_Scripts});
         //------
 
         addMenu(menu_Star);
@@ -129,40 +136,46 @@ public:
     }
 
     // 刷新菜单数据
-    void refreshMenu() {
+    void refreshMenu()
+    {
         qDebug() << "refresh menu";
         initMenu();
     }
 
 protected:
     // 将构造函数设为protected，确保只能通过instance方法创建
-    explicit launcherMenu(QWidget *parent = nullptr) : CustomMenu(parent) {
+    explicit launcherMenu(QWidget *parent = nullptr) : CustomMenu(parent)
+    {
         initMenu();
         applyStyle();
     }
 
 private slots:
-    void launchQueue(QQueue<QString> &queue) {
-        if (QueueTimer && QueueTimer->isActive()) {
+    void launchQueue(QQueue<QString> &queue)
+    {
+        if (QueueTimer && QueueTimer->isActive())
+        {
             QueueTimer->stop();
             delete QueueTimer;
             QueueTimer = nullptr;
         }
         queue_Temp.clear();
         queue_Temp = queue;
-        if (queue_Temp.isEmpty())return;
+        if (queue_Temp.isEmpty())
+            return;
         QueueTimer = new QTimer(this);
         QueueTimer->setInterval(3000);
 
         // 连接定时器信号
-        connect(QueueTimer, &QTimer::timeout, this, [this]() {
-            processNextItem();
-        });
+        connect(QueueTimer, &QTimer::timeout, this, [this]()
+                { processNextItem(); });
         QueueTimer->start();
     }
 
-    void processNextItem() {
-        if (!queue_Temp.isEmpty()) {
+    void processNextItem()
+    {
+        if (!queue_Temp.isEmpty())
+        {
             // 获取队首元素（但不移除）
             QString path = queue_Temp.head();
             launchByPath(path);
@@ -170,8 +183,10 @@ private slots:
             queue_Temp.dequeue();
 
             // 如果队列为空，停止定时器
-            if (queue_Temp.isEmpty()) {
-                if (QueueTimer && QueueTimer->isActive()) {
+            if (queue_Temp.isEmpty())
+            {
+                if (QueueTimer && QueueTimer->isActive())
+                {
                     QueueTimer->stop();
                 }
             }
