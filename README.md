@@ -181,6 +181,7 @@
 * Qt 框架使用 [LGPL/GPL 许可证](https://www.qt.io/development/download)
 * 其他第三方库详见 [NOTICE](NOTICE)
 * src 文件夹内由本项目开发者编写的部分采用 MIT 许可证
+* 项目中`thirdParty\LAppLive2D`的源码由`CubismSdkForNative-5-r.4.1\Samples\OpenGL\Demo\proj.win.cmake\src`改写而来，是基于官方 Samples 的衍生品，遵循`Live2D Open Software License`。
 
 > [!CAUTION]
 >
@@ -193,6 +194,8 @@
 > 3. 确保自己的使用行为（尤其是商业及可扩展性应用）符合Live2D许可协议。
 >
 > **Pelr** 的性质属于 **“可扩展性应用程序”** ，若由您自行编译后分发，**您**需自行承担获取Live2D出版许可的全部责任。
+>
+> 本项目亦不会提供任何构建产物，用户若要使用，请自行构建。
 >
 > 本项目提供的 Live2D 相关代码遵循其 **开放软件许可协议**。
 > src目录下的代码遵循 MIT 许可。

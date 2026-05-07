@@ -15,13 +15,14 @@ Resources
 SampleShaders
 voice_files
 thirdParty/CubismSdkForNative-5-r.4.1/**
-thirdParty/LAppLive2D
 thirdParty/voicevox_core/onnxruntime/**
 thirdParty/voicevox_core/c_api/**
-# need contain
+lib.arc
+
+
+# need contain LICENCE/TERMS...
 !thirdParty/CubismSdkForNative-5-r.4.1/LICENSE.md
 !thirdParty/CubismSdkForNative-5-r.4.1/README.md
-!thirdParty/LAppLive2D/TERMS.txt
 !thirdParty/voicevox_core/c_api/LICENSE
 !thirdParty/voicevox_core/onnxruntime/TERMS.txt
 

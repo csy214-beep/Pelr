@@ -54,7 +54,7 @@ set(TRANSLATION_FILES
 # 设置 Live2D 框架渲染方式（必须）
 set(FRAMEWORK_SOURCE OpenGL)
 
-# Live2D SDK 源文件
+# Live2D SDK 源文件（你自己的 LApp 封装层）
 file(GLOB LAPP_2D_SRC "thirdParty/LAppLive2D/src/*.cpp")
 
 # 各功能模块源文件
@@ -101,16 +101,78 @@ qt5_create_translation(QM_FILES
         ${TRANSLATION_FILES}
 )
 
-# kissfft 库
+# ============================================================================
+# 第三方库：kissfft
+# ============================================================================
 add_library(kissfft STATIC
     thirdParty/kissfft/kiss_fft.c
     thirdParty/kissfft/kiss_fftr.c
 )
 target_include_directories(kissfft PUBLIC thirdParty/kissfft)
-# 库搜索路径（添加 voicevox_core.lib 所在文件夹）
-link_directories("${CMAKE_SOURCE_DIR}/thirdParty/voicevox_core/c_api/lib")
+
 # ============================================================================
-# 头文件包含路径
+# 第三方库：GLEW (从源码编译)
+# ============================================================================
+add_library(glew STATIC
+    thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glew/src/glew.c
+)
+target_include_directories(glew PUBLIC
+    thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glew/include
+)
+target_compile_definitions(glew PRIVATE GLEW_STATIC)
+
+# ============================================================================
+# 第三方库：GLFW (从源码编译)
+# ============================================================================
+file(GLOB GLFW_SRC
+    "thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glfw/src/*.c"
+)
+# 排除非 Windows 的源文件，避免额外依赖
+list(FILTER GLFW_SRC EXCLUDE REGEX ".*wayland.*|.*x11.*|.*wl_.*")
+
+add_library(glfw STATIC ${GLFW_SRC})
+target_include_directories(glfw PUBLIC
+    thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glfw/include
+)
+target_compile_definitions(glfw PRIVATE _GLFW_WIN32)
+
+# 收集 Framework 源码，只保留 OpenGL 和公共代码
+file(GLOB_RECURSE CUBISM_FRAMEWORK_SRC_TEMP
+    "thirdParty/CubismSdkForNative-5-r.4.1/Framework/src/*.cpp"
+)
+# 排除 Direct3D 后端
+list(FILTER CUBISM_FRAMEWORK_SRC_TEMP EXCLUDE REGEX ".*D3D[0-9]+.*\\.cpp")
+# 排除 Vulkan 后端
+list(FILTER CUBISM_FRAMEWORK_SRC_TEMP EXCLUDE REGEX ".*Vulkan.*\\.cpp")
+
+# 将 Framework 编译为静态库
+add_library(Framework STATIC ${CUBISM_FRAMEWORK_SRC_TEMP})
+
+# 头文件路径
+target_include_directories(Framework PUBLIC
+    thirdParty/CubismSdkForNative-5-r.4.1/Core/include
+    thirdParty/CubismSdkForNative-5-r.4.1/Framework/src
+    thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glew/include
+    thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glfw/include
+)
+
+# 使每个编译单元自动包含 glew.h，解决 GL 类型未定义
+target_compile_options(Framework PRIVATE -include GL/glew.h)
+
+# 定义 GLEW 静态链接（因为我们编译的是静态 GLEW）
+target_compile_definitions(Framework PRIVATE GLEW_STATIC)
+
+# 链接依赖
+target_link_libraries(Framework PUBLIC
+    glew
+    glfw
+    opengl32
+    glu32
+    Live2DCubismCore_d
+)
+
+# ============================================================================
+# 头文件包含路径（全局）
 # ============================================================================
 include_directories(
         ./
@@ -141,7 +203,10 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/src/ui")
 # ============================================================================
 # 链接库路径
 # ============================================================================
-link_directories("${CMAKE_SOURCE_DIR}/lib")
+link_directories(
+    "${CMAKE_SOURCE_DIR}/lib"
+    "${CMAKE_SOURCE_DIR}/thirdParty/voicevox_core/c_api/lib"
+)
 
 # ============================================================================
 # 可执行文件
@@ -152,7 +217,7 @@ if(DEBUG_MODE)
 else()
     set(EXE_WIN32 WIN32)
 endif()
-
+add_compile_definitions(GLEW_STATIC)
 add_executable(${PROJECT_NAME}
         ${EXE_WIN32}                    # WIN32 或空
         ${ALL_CPP_SOURCES}         # 所有 .cpp 源文件
@@ -166,14 +231,8 @@ add_executable(${PROJECT_NAME}
 # 链接库
 # ============================================================================
 target_link_libraries(${PROJECT_NAME}
-        Framework
-        libglew32d
-        glfw3
-        Live2DCubismCore_d
-        opengl32
-        glu32
+        Framework          # Cubism Framework 静态库
         kissfft
-        ksuser
         voicevox_core
         Qt5::Core
         Qt5::Gui
@@ -187,6 +246,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Multimedia
         Qt5::Concurrent
         Qt5::MultimediaWidgets
+        ksuser
 )
 
 # ============================================================================
