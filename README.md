@@ -182,10 +182,6 @@
 
 ## 许可证
 
-> [!NOTE]
->
-> 本项目基于 MIT 许可证发布。
-
 **注意**: 部分组件使用不同许可证：
 
 - Live2D Cubism SDK 使用[专有许可证](https://www.live2d.com/zh-CHS/sdk/download/native/)
