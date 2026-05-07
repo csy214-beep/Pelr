@@ -281,7 +281,7 @@ SettingWidget::SettingWidget(QWidget *parent) : QWidget(parent), ui(new Ui::sett
         content_NOTICE = in.readAll();
         NOTICE.close();
     }
-    ui->textBrowser->setMarkdown(QString("%1").arg(content_NOTICE));
+    ui->textBrowser->setPlainText(QString("%1").arg(content_NOTICE));
     ui->textBrowser->setReadOnly(true);
     ui->textBrowser->setOpenExternalLinks(true);
     // 初始化日志等级选择
