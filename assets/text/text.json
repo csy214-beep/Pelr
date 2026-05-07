@@ -1,0 +1,58 @@
+{
+  "dawn": [
+    "Good morning！",
+    "Greetings！"
+  ],
+  "morning": [
+    "Good morning！",
+    "morning"
+  ],
+  "noon": [
+    "Hi, it's noon now.",
+    "hello"
+  ],
+  "afternoon": [
+    "Good afternoon！",
+    "Hi, good afternoon!"
+  ],
+  "dusk": [
+    "Hi, it's dusk now.",
+    "hello"
+  ],
+  "night": [
+    "best wishes!",
+    "Good night！"
+  ],
+  "daily": [
+    "Hello, World!",
+    "你好，世界！",
+    "Bonjour le monde!",
+    "こんにちは、世界！",
+    "Hallo Welt!",
+    "Γεια σου κόσμε!",
+    "전 세계 여러분 안녕하세요!",
+    "Всем привет!",
+    "¡Hola, mundo!",
+    "Ciao mondo!",
+    "Olá, mundo!",
+    "नमस्ते दुनिया!",
+    "হ্যালো, বিশ্ব!",
+    "สวัสดีชาวโลก!",
+    "Xin chào thế giới!",
+    "مرحبا بالعالم!",
+    "שלום עולם!",
+    "سلام دنیا!",
+    "Merhaba Dünya!",
+    "Hej världen!",
+    "Hei maailma!",
+    "Hallo verden!",
+    "Pozdravljen, svet!",
+    "Ahoj světe!",
+    "Witaj świecie!",
+    "Helo, byd!",
+    "Salamu, Dunia!",
+    "Sawubona Mhlaba!",
+    "გამარჯობა მსოფლიო!",
+    "Բարեւ աշխարհ!"
+  ]
+}

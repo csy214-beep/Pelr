@@ -1,0 +1,325 @@
+<RCC>
+    <qresource>
+        <file>public/IconaMoon/eCommerce/Ticket - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Shopping Card Add - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Shopping Card - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Store - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Shopping Card Remove - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Invoice - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Discount - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Shopping Bag - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Delivery Free - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Delivery - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Delivery Fast - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Badge - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Certificate Badge - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Box - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Credit Card - 24x24.png</file>
+        <file>public/IconaMoon/eCommerce/Cheque - 24x24.png</file>
+        <file>public/IconaMoon/Media/Playlist - 24x24.png</file>
+        <file>public/IconaMoon/Media/Volume Down - 24x24.png</file>
+        <file>public/IconaMoon/Media/Volume Off - 24x24.png</file>
+        <file>public/IconaMoon/Media/Volume Up - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  Start - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  Stop - 24x24.png</file>
+        <file>public/IconaMoon/Media/Playlist -  Repeat Song - 24x24.png</file>
+        <file>public/IconaMoon/Media/Playlist -  Repeat List - 24x24.png</file>
+        <file>public/IconaMoon/Media/Playlist -  Shuffle - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  End - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  Pause - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  Next - 24x24.png</file>
+        <file>public/IconaMoon/Media/Music 1 - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  Play - 24x24.png</file>
+        <file>public/IconaMoon/Media/Player -  Previous - 24x24.png</file>
+        <file>public/IconaMoon/Media/Play Circle - 24x24.png</file>
+        <file>public/IconaMoon/Media/Music Album - 24x24.png</file>
+        <file>public/IconaMoon/Media/Microphone - 24x24.png</file>
+        <file>public/IconaMoon/Media/Headphone - 24x24.png</file>
+        <file>public/IconaMoon/Media/Microphone Off - 24x24.png</file>
+        <file>public/IconaMoon/Media/Camera Image - 24x24.png</file>
+        <file>public/IconaMoon/Media/Camera Video - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  x - 24x24.png</file>
+        <file>public/IconaMoon/Media/Music Artist - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  y - 24x24.png</file>
+        <file>public/IconaMoon/Math/Trend Down - 24x24.png</file>
+        <file>public/IconaMoon/Media/Music 2 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  f - 24x24.png</file>
+        <file>public/IconaMoon/Math/Trend Up - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Times - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Radical - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Times Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Times Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Plus Minus - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Plus Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Plus Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Percent - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Pi - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Minus Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Minus Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Plus - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Division Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Equal - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Factorial - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Lemniscate - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 9 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Minus - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Division Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 8 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Division Slash - 24x24.png</file>
+        <file>public/IconaMoon/Math/Sign -  Division - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 9 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 9 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 7 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 8 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 8 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 6 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 7 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 7 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 5 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 5 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 6 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 3 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 3 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 4 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 4 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 1 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 2 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 2 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 2 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 0 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 0 Square - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 1 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 1 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Math/Number 0 - 24x24.png</file>
+        <file>public/IconaMoon/Math/Calculator - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Type - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Unavailable - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Swap - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Synchronize - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Screen Full - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Screen Normal - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Sorting Center - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Sorting Left - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Sorting Right - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Move - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Question Mark Circle - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Pen - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Question Mark Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Restart - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Kebab Horizontal Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Kebab Vertical - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Kebab Vertical Circle - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Kebab Vertical Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Kebab Horizontal - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Kebab Horizontal Circle - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Information Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Link - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Link External - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Burger Horizontal - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Menu Burger Vertical - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Frame - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Funnel - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Exit - 24x24.png</file>
+        <file>public/IconaMoon/Interface/History - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Information Circle - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Do -  Redo - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Do -  Undo - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Enter - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Close Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Compare - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Cursor - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Close - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Component - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Close Circle 1 - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Check Circle 1 - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Check Circle 2 - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Close Circle 2 - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Check Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Bluetooth - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Check - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Attention Circle - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Attention Square - 24x24.png</file>
+        <file>public/IconaMoon/Interface/Backspace - 24x24.png</file>
+        <file>public/IconaMoon/General/Zoom Out - 24x24.png</file>
+        <file>public/IconaMoon/General/Star - 24x24.png</file>
+        <file>public/IconaMoon/General/Star Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Trash - 24x24.png</file>
+        <file>public/IconaMoon/General/Trash Simple - 24x24.png</file>
+        <file>public/IconaMoon/General/Settings - 24x24.png</file>
+        <file>public/IconaMoon/General/Zoom In - 24x24.png</file>
+        <file>public/IconaMoon/General/Shield - 24x24.png</file>
+        <file>public/IconaMoon/General/Shield No - 24x24.png</file>
+        <file>public/IconaMoon/General/Shield Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Shield Yes - 24x24.png</file>
+        <file>public/IconaMoon/General/Notification Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Options - 24x24.png</file>
+        <file>public/IconaMoon/General/Printer - 24x24.png</file>
+        <file>public/IconaMoon/General/Scanner - 24x24.png</file>
+        <file>public/IconaMoon/General/Search - 24x24.png</file>
+        <file>public/IconaMoon/General/Mouse - 24x24.png</file>
+        <file>public/IconaMoon/General/News - 24x24.png</file>
+        <file>public/IconaMoon/General/Notification - 24x24.png</file>
+        <file>public/IconaMoon/General/Lock - 24x24.png</file>
+        <file>public/IconaMoon/General/Lock Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Location Pin Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Mode -  Dark - 24x24.png</file>
+        <file>public/IconaMoon/General/Lightning 1 - 24x24.png</file>
+        <file>public/IconaMoon/General/Lightning 2 - 24x24.png</file>
+        <file>public/IconaMoon/General/Location - 24x24.png</file>
+        <file>public/IconaMoon/General/Mode -  Light - 24x24.png</file>
+        <file>public/IconaMoon/General/Location Pin - 24x24.png</file>
+        <file>public/IconaMoon/General/Gift - 24x24.png</file>
+        <file>public/IconaMoon/General/Heart - 24x24.png</file>
+        <file>public/IconaMoon/General/Flag - 24x24.png</file>
+        <file>public/IconaMoon/General/Heart Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Home - 24x24.png</file>
+        <file>public/IconaMoon/General/Edit - 24x24.png</file>
+        <file>public/IconaMoon/General/Eye - 24x24.png</file>
+        <file>public/IconaMoon/General/Eye Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Clock - 24x24.png</file>
+        <file>public/IconaMoon/General/Calendar Remove - 24x24.png</file>
+        <file>public/IconaMoon/General/Discover - 24x24.png</file>
+        <file>public/IconaMoon/General/Category - 24x24.png</file>
+        <file>public/IconaMoon/General/Calendar 2 - 24x24.png</file>
+        <file>public/IconaMoon/General/Calendar Add - 24x24.png</file>
+        <file>public/IconaMoon/General/Briefcase - 24x24.png</file>
+        <file>public/IconaMoon/General/Bookmark Off - 24x24.png</file>
+        <file>public/IconaMoon/General/Calendar 1 - 24x24.png</file>
+        <file>public/IconaMoon/General/3D - 24x24.png</file>
+        <file>public/IconaMoon/General/Bookmark - 24x24.png</file>
+        <file>public/IconaMoon/General/Apps - 24x24.png</file>
+        <file>public/IconaMoon/Files/Upload - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Video - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Remove - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Close - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Check - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Document - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Image - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Music - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Remove - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Video - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder - 24x24.png</file>
+        <file>public/IconaMoon/Files/Folder Add - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Add - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Close - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Audio - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Check - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Document - 24x24.png</file>
+        <file>public/IconaMoon/Files/File Image - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Yes - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Upload - 24x24.png</file>
+        <file>public/IconaMoon/Files/Copy - 24x24.png</file>
+        <file>public/IconaMoon/Files/Download - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud No - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Off - 24x24.png</file>
+        <file>public/IconaMoon/Files/File - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Remove - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Clock - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Add - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Download - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud Error - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Upside-Down Face - 24x24.png</file>
+        <file>public/IconaMoon/Files/Cloud - 24x24.png</file>
+        <file>public/IconaMoon/Files/Attachment - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Winking Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Relieved Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Pensive Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Slightly Smiling Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Smiling Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Frowning Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Kissing Face with Smiling Eyes - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Kissing Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Squinting Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Neutral Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Disappointed Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Face with Open Mouth - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Expressionless Face - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Face Without Mouth - 24x24.png</file>
+        <file>public/IconaMoon/Emojis/Confused Face - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Share 1 - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Share 2 - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Phone Off - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Profile - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Profile Circle - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Send - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Like - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Email - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Phone - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Comment Dots - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Comment Remove - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Comment - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Dislike - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Up 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Comment Add - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Up 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Right 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Up 1 - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Comment Close - 24x24.png</file>
+        <file>public/IconaMoon/Communication/Comment Check - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Up 2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Up 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Up 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Right 2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Right 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Right 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Left 2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Left 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Right 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Left 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Left 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Left 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right 2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Top Left 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Left 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Left 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Left 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right  2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Right 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Left 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Left 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Down 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Down 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Left 2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Down 2 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Down 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Down 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Down 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Right 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Right 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Right 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Left 6 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Up 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Right 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Right 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Left 3 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Left 4 Square - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Left 5 Circle - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Left 1 - 24x24.png</file>
+        <file>public/IconaMoon/Arrow/Arrow Bottom Left 2 - 24x24.png</file>
+    </qresource>
+    <qresource>
+        <file>translations/language_en_US.ts</file>
+        <file>translations/language_zh_CN.ts</file>
+    </qresource>
+    <qresource>
+        <file>public/font/MapleMono-NF-CN-Medium.ttf</file>
+    </qresource>
+    <qresource>
+        <file>public/style/menu.qss</file>
+    </qresource>
+    <qresource/>
+    <qresource>
+        <file>THANBKS.md</file>
+        <file>public/image/Pelr.png</file>
+        <file>public/image/Pelr.ico</file>
+        <file>NOTICE</file>
+    </qresource>
+</RCC>

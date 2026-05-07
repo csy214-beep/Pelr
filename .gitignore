@@ -1,0 +1,88 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# IDE Settings
+.vscode
+.idea
+.venv
+
+# Build output
+cmake-build-debug
+cmake-build-release
+release/
+build/
+dist/
+*.spec
+*.pyc
+
+# Documentation
+test_docs
+
+# Third-party Libraries
+thirdParty/Core/**
+thirdParty/Framework/**
+thirdParty/glew/**
+thirdParty/glfw/**
+thirdParty/stb/**
+thirdParty/voicevox_core/c_api/**
+thirdParty/voicevox_core/onnxruntime/**
+thirdParty/LAppLive2D/**
+
+# LICENSE
+!thirdParty/LAppLive2D/TERMS.txt
+!thirdParty/Framework/LICENSE.md
+!thirdParty/glew/LICENSE.txt
+!thirdParty/glfw/LICENSE.md
+!thirdParty/stb/README.md
+!thirdParty/voicevox_core/c_api/LICENSE
+!thirdParty/voicevox_core/onnxruntime/TERMS.txt
+!thirdParty/Core/TERMS.txt
+
+lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.7z
+*.zip
+*.tmp
+
+# test
+test**
+
+
+
+# Resources
+Resources
+SampleShaders
+FrameworkShaders
+
+# log/cache files
+log
+voice_files
+user

@@ -1,0 +1,18 @@
+version: 2
+updates:
+  # Python 依赖更新（使用 requirements.txt）
+  - package-ecosystem: "pip"
+    directory: "/"                     # requirements.txt 位于仓库根目录
+    schedule:
+      interval: "weekly"               # 每周检查一次更新
+    target-branch: "dev"               # 🔁 PR 目标分支改为 dev
+    groups:                            # 分组更新（修正缩进）
+      pyside6:
+        patterns:
+          - "PySide6*"
+          - "shiboken6"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
