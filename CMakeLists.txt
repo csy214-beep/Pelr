@@ -122,16 +122,16 @@ include_directories(
         src/tts
         src/ui
         src/utils
-        thirdParty/LAppLive2D/inc
-        thirdParty/Core/include
-        thirdParty/Framework/src
-        thirdParty/glew/include
-        thirdParty/glew/include/GL
-        thirdParty/glfw/include
-        thirdParty/glfw/include/GLFW
-        thirdParty/stb
-        thirdParty/kissfft
-        thirdParty/voicevox_core/c_api/include
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Framework/src
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Core/include
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glew/include
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glew/include/GL
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glfw/include
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/glfw/include/GLFW
+        ${PROJECT_SOURCE_DIR}/thirdParty/CubismSdkForNative-5-r.4.1/Samples/OpenGL/thirdParty/stb
+        ${PROJECT_SOURCE_DIR}/thirdParty/LAppLive2D/inc
+        ${PROJECT_SOURCE_DIR}/thirdParty/kissfft
+        ${PROJECT_SOURCE_DIR}/thirdParty/voicevox_core/c_api/include
         ${CMAKE_CURRENT_BINARY_DIR}      # 存放生成的 ui_*.h 文件
 )
 
@@ -141,7 +141,7 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/src/ui")
 # ============================================================================
 # 链接库路径
 # ============================================================================
-link_directories("${CMAKE_SOURCE_DIR}/lib/Debug")
+link_directories("${CMAKE_SOURCE_DIR}/lib")
 
 # ============================================================================
 # 可执行文件
@@ -268,7 +268,7 @@ if (WIN32)
         endforeach ()
 
         # 复制自定义 DLL（项目依赖）
-        set(CUSTOM_DLL_PATH "${CMAKE_SOURCE_DIR}/lib/Debug")
+        set(CUSTOM_DLL_PATH "${CMAKE_SOURCE_DIR}/lib")
         if (EXISTS ${CUSTOM_DLL_PATH})
             file(GLOB CUSTOM_DLLS "${CUSTOM_DLL_PATH}/*.dll")
             foreach (CUSTOM_DLL ${CUSTOM_DLLS})
@@ -282,7 +282,7 @@ if (WIN32)
         endif ()
     endif ()
 
-    # 单独复制 voicevox_core.dll（如果没有放入 lib/Debug）
+    # 单独复制 voicevox_core.dll（如果没有放入 lib）
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${CMAKE_SOURCE_DIR}/thirdParty/voicevox_core/c_api/lib/voicevox_core.dll"
