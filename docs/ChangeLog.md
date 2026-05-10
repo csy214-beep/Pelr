@@ -9,6 +9,8 @@
 
 ## v20260503.14-dev
 
+1. chore: rm old ver lapp code
+1. docs: docs/dev-init.md
 1. refactor: 2 submodule added & rm origin bad structure of thirdpart
 1. chore: notice optimize
 1. docs: simple outline 【TODO】
