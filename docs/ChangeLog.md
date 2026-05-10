@@ -1,19 +1,20 @@
-> [!NOTE]
+<!-- > [!NOTE]
 > GitHub: <https://github.com/csy214-beep/Pelr>
 >
 > Gitee: <https://gitee.com/Pfolg/Pelr>
 >
-> SourceForge: <https://sourceforge.net/projects/pfolg-plauncher>
+> SourceForge: <https://sourceforge.net/projects/pfolg-plauncher> -->
 
 [//]: # "[![Release History](https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white)](https://github.com/csy214-beep/Pelr/blob/master/docs/ChangeLog.md)"
 
 ## v20260503.14-dev
 
+1. docs: optimize docs
 1. chore: rm old ver lapp code
 1. docs: docs/dev-init.md
 1. refactor: 2 submodule added & rm origin bad structure of thirdpart
 1. chore: notice optimize
-1. docs: simple outline 【TODO】
+1. docs: simple outline
 1. build: cmakeList.txt optimize
 1. fix: voicevox test
 1. docs: CREDITS.md

@@ -53,16 +53,18 @@ git clone --recursive https://github.com/csy214-beep/Pelr.git
 
 ### voicevox_core
 
+可参考：[voicevox 配置指引](app-voicevox.md)
+
 前往：<https://github.com/VOICEVOX/voicevox_core/releases/tag/0.16.4>
 
 下载：`download-windows-x64.exe` 该文件运行结束后，会产生一个文件夹`voicevox_core`
 
 如果图方便的话，可以直接把这个文件放到 `thirdParty`和`Resources`；如果储存空间比较紧张的话，建议这样：
 
-`thirdParty/voicevox_core/c_api`
-`thirdParty/voicevox_core/onnxruntime`
-`Resources/voicevox_core/dict`
-`Resources/voicevox_core/models`
+- `thirdParty/voicevox_core/c_api`
+- `thirdParty/voicevox_core/onnxruntime`
+- `Resources/voicevox_core/dict`
+- `Resources/voicevox_core/models`
 
 ---
 
@@ -88,6 +90,7 @@ git clone --recursive https://github.com/csy214-beep/Pelr.git
 
 voicevox 辞书目录
 `Resources/voicevox_core/dict`
+
 voicevox 模型目录
 `Resources/voicevox_core/models`
 
@@ -95,9 +98,9 @@ voicevox 模型目录
 
 获取 Live2D 资源
 
-`Resources/FrameworkShaders`
-`Resources/Resources`
-`Resources/SampleShaders`
+- `Resources/FrameworkShaders`
+- `Resources/Resources`
+- `Resources/SampleShaders`
 
 进入`CubismSdkForNative-5-r.5\Samples\OpenGL`
 

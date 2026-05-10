@@ -1,9 +1,5 @@
 ## 项目结构
 
-### 项目结构图
-
-![structure](assets/pelr.png)
-
 ### 文件结构
 
 在本地查看：[Pelr.html](Pelr.html)

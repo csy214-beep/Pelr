@@ -19,9 +19,9 @@
 
 ## 开发者
 
-[项目结构](dev-structure.md)
-[Dependence](../NOTICE)
-[build&release](dev-dev.md)
+- [项目结构](dev-structure.md)
+- [Dependence](../NOTICE)
+- [build&release](dev-dev.md)
 
 ## 问题修复
 
@@ -29,4 +29,4 @@
 
 ---
 
-变更记录：[CHANGELOG.md](CHANGELOG.md)
+变更记录：[ChangeLog.md](ChangeLog.md)

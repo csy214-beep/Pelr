@@ -4,30 +4,9 @@
 
 ### Python
 
-使用Python 3.10 创建虚拟环境，并安装依赖，在根目录执行：
+<https://github.com/csy214-beep/Pelr_tts_tr>
 
-```bash
-python -m venv .venv
-call .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-运行程序：
-
-```bash
-python tts_server\tts_server.py
-```
-
-打包：
-
-```bash
-pyinstaller -w tts_server\tts_server.py
-
-```
-
-在 `dist` 目录可以找到构建产物，我们需要的是`tts_server`文件夹里面的所有内容。
-
-此时可以新建一个 `release` 目录或者 `a` 目录，把`tts_server`文件夹里面的所有内容移动/复制到`release`目录或者 `a` 目录。
+自`20260503.14`起，python tts server已独立出当前项目，可以选择性配置。
 
 ### C++
 
