@@ -32,17 +32,16 @@ SOFTWARE.
 ----------------------------------------
 --- Library 1: Qt ---
 Version: 5.15.2
-License Type: LGPLv3 / GPLv2
+License Type: LGPLv3 (with GPLv2 as an alternative)
 Copyright (c) The Qt Company Ltd.
 Website: https://www.qt.io/
 
-
 Additional Notes:
-Qt is licensed under LGPLv3. This software dynamically links to Qt libraries.
+This software dynamically links to Qt libraries.
 You may obtain the source code of Qt and its full license texts from https://www.qt.io/.
 
 --- Library 2: Live2D Cubism Native Framework ---
-Version: 5-r.4.1
+Version: 5-r.5
 License Type: Live2D Open Software License
 Copyright (c) Live2D Inc.
 Website: https://www.live2d.com/
@@ -104,7 +103,6 @@ Version: Included with SDK
 License Type: Live2D Proprietary Software License
 Copyright (c) Live2D Inc.
 Website: https://www.live2d.com/
-
 
 Additional Notes:
 Cubism Core is under a proprietary license. It must not be redistributed in public repositories.
@@ -246,10 +244,9 @@ License Type: MIT / Public Domain
 Copyright (c) Sean Barrett
 Website: https://github.com/nothings/stb
 
-
 Additional Notes:
-stb libraries are in the public domain, and also available under the MIT License.
-See the copyright notice at the top of each header file.
+Each stb header file contains its own license notice at the top, typically public domain
+or the MIT License. Refer to the individual file for exact terms.
 
 --- Library 8: VOICEVOX CORE ---
 Version: 0.16.4
@@ -281,15 +278,38 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Additional Notes:
 YOU MUST INCLUDE THE CREDIT 'VOICEVOX: Hiroshiba Kazuyuki' when using the generated audio.
-Additional terms: thirdParty/voicevox_core/c_api/TERMS.txt
+Additional terms: see thirdParty/voicevox_core/c_api/TERMS.txt
 
 --- Library 9: ONNX Runtime ---
 Version: Included with voicevox_core
-License Type: MIT
+License Type: MIT (with VOICEVOX additional terms)
 Copyright (c) Microsoft Corporation
-Website: https://onmicrosoft.com/
+Website: https://onnxruntime.ai/
 
----- Included License Text ----
+---- ONNX Runtime MIT License ----
+MIT License
+
+Copyright (c) Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---- Additional Terms Applicable to this Build (from VOICEVOX) ----
 # VOICEVOX ONNX Runtime 利用規約
 
 ## 許諾内容

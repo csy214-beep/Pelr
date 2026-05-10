@@ -1,7 +1,8 @@
 
 #include "ExtraMotionManager.h"
 #include <QDebug>
-
+#include "LAppDefine.hpp"
+using namespace LAppDefine;
 ExtraMotionManager *ExtraMotionManager::instance = nullptr;
 
 ExtraMotionManager::ExtraMotionManager()

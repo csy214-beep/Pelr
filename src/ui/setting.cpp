@@ -807,7 +807,7 @@ void SettingWidget::onChooseVoicevoxModel()
     QString filePath = QFileDialog::getOpenFileName(
         this,
         tr("选择音声模型文件"),
-        "Resources/voicevox_core",
+        "voicevox_core",
         tr("VVM 文件 (*.vvm);;所有文件 (*)"));
     if (filePath.isEmpty())
         return;
@@ -917,7 +917,7 @@ void SettingWidget::onChooseVoicevoxDict()
     QString dir = QFileDialog::getExistingDirectory(
         this,
         tr("选择辞书目录"),
-        "Resources/voicevox_core",
+        "voicevox_core",
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if (!dir.isEmpty())

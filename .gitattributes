@@ -1,4 +1,6 @@
-# Sources
+# ===== 文本文件换行符与 diff 驱动 =====
+* text=auto
+
 *.c     text diff=cpp
 *.cc    text diff=cpp
 *.cxx   text diff=cpp
@@ -9,8 +11,13 @@
 *.h     text diff=cpp
 *.h++   text diff=cpp
 *.hh    text diff=cpp
+*.ui    text diff=cpp
+*.qrc   text diff=cpp
+*.qss   text diff=cpp
+*.pro   text diff=cpp
+*.pri   text diff=cpp
 
-
+# ===== 编译产物与二进制文件 =====
 # Compiled Object files
 *.slo   binary
 *.lo    binary
@@ -37,43 +44,47 @@
 *.out   binary
 *.app   binary
 
-# 明确指定 C++ 文件为主要语言，并确保它们被统计
-*.cpp linguist-language=C++
-*.h linguist-language=C++
-*.hpp linguist-language=C++
-*.ui linguist-language=C++
-*.qrc linguist-language=C++
-*.qss linguist-language=C++
-# 如果有的话，也可以加上 Qt 的 pro 或 pri 文件
-*.pro linguist-language=C++
-*.pri linguist-language=C++
+# Qt moc 生成文件
+*.moc   binary
 
-# *.txt linguist-language=C++
-# *.py linguist-language=C++
-# *.pyw linguist-language=C++
-# *.pyi linguist-language=C++
+# 常见二进制资源
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+# 其他 Live2D/资源文件如有需要可继续添加
 
-# 如果项目中有 Python 脚本（例如一些工具脚本），但不希望它们影响主语言统计，可以将其标记为“vendored”或“documentation”
-# 假设你的 tools/ 目录下有一些 Python 脚本
-# *.py linguist-vendored   # 标记为“vendored”代码，Linguist 将忽略其统计
-# 或者直接忽略整个工具目录的语言统计
-assets
+# ===== Linguist 语言统计配置 =====
+# 将所有 C/C++ 相关扩展名强制归为 C++ (避免被拆分为 C 和 C++)
+*.c     linguist-language=C++
+*.cc    linguist-language=C++
+*.cxx   linguist-language=C++
+*.cpp   linguist-language=C++
+*.cpi   linguist-language=C++
+*.c++   linguist-language=C++
+*.h     linguist-language=C++
+*.hpp   linguist-language=C++
+*.h++   linguist-language=C++
+*.hh    linguist-language=C++
+*.ui    linguist-language=C++
+*.qrc   linguist-language=C++
+*.qss   linguist-language=C++
+*.pro   linguist-language=C++
+*.pri   linguist-language=C++
 
-# 对于确实需要被识别为 Python 的文件（虽然不是主语言），可以明确指定，但通常不需要为主项目设置
-*.py linguist-language=Python
+# Python 文件标记为 Python（可根据需要调整）
+# 如果你希望 Python 参与统计但只是次要语言，保留下面这一行
+# *.py    linguist-language=Python
 
-# 标记常见的二进制文件，防止它们被误判或计入统计
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.ico binary
-# Live2D 相关的资源文件，如果知道扩展名，也最好标记为 binary
-# *.moc binary  # 如果有 Qt 的 moc 生成的文件
+# 如果你希望工具脚本不影响主语言比例，可将工具目录标记为 vendored
+# scripts/** linguist-vendored
 
-# 确保 Git 对文本文件进行正确的行尾符转换（可选但推荐）
-* text=auto
-
-docs/** linguist-vendored=true
+# 排除文档、资源等无关目录
+docs/**   linguist-vendored
+assets/** linguist-vendored
 scripts/** linguist-vendored=true
+
+# 若仍有其他自动生成的代码目录，也按同样方式排除
+# generated/** linguist-vendored
 

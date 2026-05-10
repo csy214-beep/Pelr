@@ -168,32 +168,32 @@
 <context>
     <name>ExtraMotionManager</name>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="10"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="11"/>
         <source>额外内容</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="12"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="13"/>
         <source>动作</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="13"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="14"/>
         <source>表情</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="53"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="54"/>
         <source>没有加载模型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="78"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="79"/>
         <source>动作 (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/ExtraMotionManager.cpp" line="98"/>
+        <location filename="../src/model/ExtraMotionManager.cpp" line="99"/>
         <source>表情 (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,7 +373,7 @@ Battery State: %3</source>
     <message>
         <location filename="../src/core/launcher.hpp" line="83"/>
         <location filename="../src/core/launcher.hpp" line="93"/>
-        <location filename="../src/core/data.hpp" line="376"/>
+        <location filename="../src/core/data.hpp" line="363"/>
         <location filename="../src/core/data.cpp" line="11"/>
         <location filename="../src/core/data.cpp" line="31"/>
         <location filename="../src/core/data.cpp" line="75"/>
@@ -398,7 +398,7 @@ Battery State: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/data.hpp" line="376"/>
+        <location filename="../src/core/data.hpp" line="363"/>
         <location filename="../src/core/data.cpp" line="75"/>
         <source>写入数据失败: %1</source>
         <translation type="unfinished"></translation>
