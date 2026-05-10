@@ -9,6 +9,10 @@
 
 ## v20260503.14-dev
 
+1. refactor: 2 submodule added & rm origin bad structure of thirdpart
+1. chore: notice optimize
+1. docs: simple outline 【TODO】
+1. build: cmakeList.txt optimize
 1. fix: voicevox test
 1. docs: CREDITS.md
 

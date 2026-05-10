@@ -8,7 +8,7 @@ void initFileSys()
         "log",
         "voice_files",
         "Resources",
-        "Resources/voicevox_core",
+        "voicevox_core",
     };
     for (auto &path : paths)
     {

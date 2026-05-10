@@ -10,8 +10,7 @@
 #include <CubismFramework.hpp>
 #include <ICubismModelSetting.hpp>
 #include <Type/csmRectF.hpp>
-#include <Rendering/OpenGL/CubismOffscreenSurface_OpenGLES2.hpp>
-
+#include <Rendering/OpenGL/CubismOffscreenRenderTarget_OpenGLES2.hpp>
 #include "LAppWavFileHandler_Common.hpp"
 #include "LAppModel_Common.hpp"
 #include "ExtraFileManager.h"

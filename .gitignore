@@ -14,22 +14,19 @@ release
 Resources
 SampleShaders
 voice_files
-thirdParty/CubismSdkForNative-5-r.4.1/**
 thirdParty/voicevox_core/onnxruntime/**
 thirdParty/voicevox_core/c_api/**
 thirdParty/core/**
 thirdParty/Framework
 thirdParty/glew
 thirdParty/glfw
-thirdParty/stb
 lib.arc
 
 
 # need contain LICENCE/TERMS...
-!thirdParty/CubismSdkForNative-5-r.4.1/LICENSE.md
-!thirdParty/CubismSdkForNative-5-r.4.1/README.md
 !thirdParty/voicevox_core/c_api/LICENSE
 !thirdParty/voicevox_core/onnxruntime/TERMS.txt
 !thirdParty/Core/LICENSE.md
+!thirdParty/Core/README.md
 # test
 **test**
