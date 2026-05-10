@@ -83,6 +83,8 @@
 # 排除文档、资源等无关目录
 docs/**   linguist-vendored
 assets/** linguist-vendored
+scripts/** linguist-vendored=true
 
 # 若仍有其他自动生成的代码目录，也按同样方式排除
 # generated/** linguist-vendored
+
