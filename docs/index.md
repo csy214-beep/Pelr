@@ -20,7 +20,7 @@
 ## 开发者
 
 [项目结构](dev-structure.md)
-[Dependence](../CREDITS.md)
+[Dependence](../NOTICE)
 [build&release](dev-dev.md)
 
 ## 问题修复

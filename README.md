@@ -3,7 +3,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr?style=social)
-[![Sync to Gitee](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml/badge.svg?branch=master)](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml)
+<!-- [![Sync to Gitee](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml/badge.svg?branch=master)](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml) -->
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
@@ -22,6 +22,10 @@
 > 本项目为非盈利性开源项目，作者出于个人兴趣开发，任何人均可免费使用。
 >
 > This is a non-profit, open-source project, developed out of personal interest by the author. It is free for anyone to use.
+>
+> GitHub为唯一发布源，SourceForge、Gitee已废弃。
+>
+> GitHub is the only release source, SourceForge and Gitee have been discontinued.
 
 ## 主要特性
 
@@ -82,7 +86,7 @@
 
 ### 下载安装
 
-重构中，现在、未来不会提供下载。见
+如何使用见[docs](docs\index.md)
 
 ### TTS Server
 
@@ -119,7 +123,69 @@
 
 [项目结构文档](docs/dev-structure.md)
 
-![structure](docs/assets/pelr.png)
+<details>
+<summary>架构</summary>
+
+```txt
++---------------------------------------------------------------+
+|                        Pelr 桌面应用                           |
++---------------------------------------------------------------+
+|                                                                 |
+|  main.cpp (入口)                                               |
+|    |                                                            |
+|    +-- core          (系统托盘、启动管理、窗口控制)             |
+|    +-- ui            (Qt 界面：设置、聊天、TODO、编辑……)        |
+|    +-- ai            (OpenAI 兼容 API 对话)                     |
+|    +-- tts           (语音合成调度：voicevox/讯飞/Edge TTS)     |
+|    +-- translation   (翻译管理，使用 Qt Network)                |
+|    |       └── 腾讯翻译 (通过 Qt 调用腾讯云 API)               |
+|    |       └── LibreTranslate 等 (同上)                        |
+|    +-- keyboard      (键盘状态监听与提示)                       |
+|    +-- model         (Live2D 模型扩展、额外动作/文件)           |
+|    +-- utils         (日志、天气、网络、频谱分析……)             |
+|    |       └── kissfft 用于 AudioSpectrumDetector，            |
+|    |            实时分析系统音频 → 驱动托盘图标旋转             |
+|    +-- compatLApp    (Live2D 渲染封装层)                        |
+|                                                                 |
++---------------------------------------------------------------+
+                              |
+                              | 依赖
+                              v
++---------------------------------------------------------------+
+|                        第三方库                                |
++---------------------------------------------------------------+
+|                                                                 |
+|  Qt 5.15          (GUI、网络、多媒体、串口……)                  |
+|  Live2D Cubism Native Framework                               |
+|  Live2D Cubism Core (DLL)      (禁止分发，需自行获取)         |
+|  GLEW / GLFW       (OpenGL 环境)                               |
+|  kissfft           (轻量 FFT：音频频谱分析 → 音乐托盘)        |
+|  voicevox_core     (C API，本地 TTS 引擎)                     |
+|  ONNX Runtime      (随 voicevox_core 提供，推理)              |
+|  stb               (图像加载)                                  |
+|                                                                 |
++---------------------------------------------------------------+
+                              |
+                              | 部分模块网络调用
+                              v
++---------------------------------------------------------------+
+|                    外部服务 / 辅助进程                         |
++---------------------------------------------------------------+
+|                                                                 |
+|   OpenAI 兼容 API    (AI 对话)                                |
+|   讯飞云 TTS API     (备选 TTS 后端)                          |
+|   OpenWeather API    (天气数据)                                |
+|   腾讯云翻译 API     (通过 Qt Network 直接访问)               |
+|   LibreTranslate 等   (同上)                                   |
+|                                                                 |
+|   Python TTS 服务 (独立进程，仅用于 Edge TTS 和部分翻译)      |
+|      ├── Edge TTS (OpenAI 兼容音频接口)                       |
+|      └── 讯飞 TTS 的 HTTP 封装 (部分场景)                     |
+|                                                                 |
++---------------------------------------------------------------+
+```
+
+</details>
 
 项目文件结构：<https://pg25-lsae.eu.org/demos/SnapshotOfPelr/demo>
 
@@ -181,7 +247,8 @@
 * Qt 框架使用 [LGPL/GPL 许可证](https://www.qt.io/development/download)
 * 其他第三方库详见 [NOTICE](NOTICE)
 * src 文件夹内由本项目开发者编写的部分采用 MIT 许可证
-* 项目中`thirdParty\LAppLive2D`的源码由`CubismSdkForNative-5-r.4.1\Samples\OpenGL\Demo\proj.win.cmake\src`改写而来，是基于官方 Samples 的衍生品，遵循`Live2D Open Software License`。
+* 项目中`thirdParty\LAppLive2D`, `src\compatLApp` 的源码由`CubismNativeSamples\Samples\OpenGL\Demo\proj.win.cmake\src`改写而来，是基于官方 Samples 的衍生品，遵循`Live2D Open Software License`。
+* 本项目受以上所有许可证约束。
 
 > [!CAUTION]
 >
@@ -190,7 +257,7 @@
 > **本项目不含Live2D Cubism Core**。根据Live2D专有软件许可协议，`Cubism Core` 禁止公开分发。使用者**必须**：
 >
 > 1. 从 [Live2D官网](https://www.live2d.com/zh-CHS/sdk/download/native/) 自行下载SDK。
-> 2. 提取对应平台的 `Core` 目录，放置到项目指定位置。【TODO】
+> 2. 提取对应平台的 `Core` 目录，放置到项目指定位置。
 > 3. 确保自己的使用行为（尤其是商业及可扩展性应用）符合Live2D许可协议。
 >
 > **Pelr** 的性质属于 **“可扩展性应用程序”** ，若由您自行编译后分发，**您**需自行承担获取Live2D出版许可的全部责任。
@@ -198,6 +265,7 @@
 > 本项目亦不会提供任何构建产物，用户若要使用，请自行构建。
 >
 > 本项目提供的 Live2D 相关代码遵循其 **开放软件许可协议**。
+>
 > src目录下的代码遵循 MIT 许可。
 
 ## 致谢

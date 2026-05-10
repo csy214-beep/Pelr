@@ -7,12 +7,10 @@
 
 # folder
 build
-FrameworkShaders
 lib
 log
 release
-Resources
-SampleShaders
+Resources/**
 voice_files
 thirdParty/voicevox_core/onnxruntime/**
 thirdParty/voicevox_core/c_api/**
@@ -20,8 +18,7 @@ thirdParty/core/**
 thirdParty/Framework
 thirdParty/glew
 thirdParty/glfw
-lib.arc
-
+lib
 
 # need contain LICENCE/TERMS...
 !thirdParty/voicevox_core/c_api/LICENSE
@@ -30,3 +27,4 @@ lib.arc
 !thirdParty/Core/README.md
 # test
 **test**
+!Resources/.Resources
