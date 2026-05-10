@@ -1,16 +1,3 @@
-/*
- * Pelr - Live2D Virtual Desktop Partner
- * https://github.com/csy214-beep/Pelr
- * https://sourceforge.net/projects/pfolg-plauncher/
- * Copyright (c) 2025 SY Cheng
- *
- * GPL v3 License
- * https://gnu.ac.cn/licenses/gpl-3.0.html
- *
- * CORE:
- * this file is used to manage data, including menu data and basic data
- * this file is very important, no data no program!
- */
 #pragma once
 
 #include <qdatastream.h>
@@ -136,9 +123,9 @@ struct constConfigData
     const QString team_link = "https://github.com/csy214-beep/Pelr/graphs/contributors";
     const QString website_link = "https://github.com/csy214-beep/Pelr";
     const QString feedback_link = "https://github.com/csy214-beep/Pelr/issues";
-    const QString VoiceFolder = "voice_files";  // local path
-    const QString userFolder = "user";          // local path
-    const QString logFolder = "log";            // local path
+    const QString VoiceFolder = "voice_files"; // local path
+    const QString userFolder = "user";         // local path
+    const QString logFolder = "log";           // local path
 };
 
 struct LlamaData

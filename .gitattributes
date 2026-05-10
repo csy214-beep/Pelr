@@ -75,7 +75,7 @@
 
 # Python 文件标记为 Python（可根据需要调整）
 # 如果你希望 Python 参与统计但只是次要语言，保留下面这一行
-*.py    linguist-language=Python
+# *.py    linguist-language=Python
 
 # 如果你希望工具脚本不影响主语言比例，可将工具目录标记为 vendored
 # scripts/** linguist-vendored

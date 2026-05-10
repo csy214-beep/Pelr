@@ -17,6 +17,11 @@ voice_files
 thirdParty/CubismSdkForNative-5-r.4.1/**
 thirdParty/voicevox_core/onnxruntime/**
 thirdParty/voicevox_core/c_api/**
+thirdParty/core
+thirdParty/Framework
+thirdParty/glew
+thirdParty/glfw
+thirdParty/stb
 lib.arc
 
 
