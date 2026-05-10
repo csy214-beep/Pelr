@@ -1,3 +1,9 @@
 [submodule "thirdParty/kissfft"]
 	path = thirdParty/kissfft
 	url = https://github.com/mborgerding/kissfft.git
+[submodule "thirdParty/CubismNativeFramework"]
+	path = thirdParty/CubismNativeFramework
+	url = https://github.com/Live2D/CubismNativeFramework
+[submodule "thirdParty/CubismNativeSamples"]
+	path = thirdParty/CubismNativeSamples
+	url = https://github.com/Live2D/CubismNativeSamples
