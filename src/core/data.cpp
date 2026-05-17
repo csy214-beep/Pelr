@@ -25,7 +25,7 @@ void DataManager::writeLlamaData(const LlamaData &llm)
     json_object.insert("baseUrl", llm.baseUrl);
     json_object.insert("apiKey", llm.apiKey);
     json_object.insert("promptFilePath", llm.promptFilePath);
-    QFile file(FilePaths.llamaConfigFile);
+    QFile file(FilePaths.llmConfigFile);
     if (!file.open(QIODevice::WriteOnly))
     {
         QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("写入数据失败：%1").arg(FilePaths.openWeatherFile));
@@ -94,7 +94,7 @@ QJsonObject DataManager::readJsonFile(const QString &filePath)
 
     if (fileData.isEmpty())
     {
-        qWarning() << "file is empty:" << FilePaths.llamaConfigFile;
+        qWarning() << "file is empty:" << FilePaths.llmConfigFile;
         return {}; // 空文件
     }
 
@@ -118,7 +118,7 @@ QJsonObject DataManager::readJsonFile(const QString &filePath)
 }
 void DataManager::readLlamaData()
 {
-    QJsonObject json_obj = readJsonFile(FilePaths.llamaConfigFile);
+    QJsonObject json_obj = readJsonFile(FilePaths.llmConfigFile);
 
     // 逐个读取
     llama_data.maxContextMessages = json_obj.value("maxContextMessages").toInt(10);

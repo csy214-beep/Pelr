@@ -21,7 +21,7 @@ struct filePaths
     QString todoNotifyFile = "user/todoNotify.dat";
     QString ttsConfigFile = "user/ttsConfig.json";
     QString openWeatherFile = "user/openWeather.json";
-    QString llamaConfigFile = "user/llamaConfig.json";
+    QString llmConfigFile = "user/llmConfig.json";
     QString defaultTextFile = "assets/text/text.json";
     QString userTextFile = "user/text.json";
 };
