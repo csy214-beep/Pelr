@@ -1,9 +1,9 @@
 # Pelr - 工具向桌宠
 
-![GitHub Repo stars](https://img.shields.io/github/stars/csy214-beep/pelr?style=social)
-![GitHub forks](https://img.shields.io/github/forks/csy214-beep/pelr?style=social)
-![GitHub issues](https://img.shields.io/github/issues/csy214-beep/pelr?style=social)
-<!-- [![Sync to Gitee](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml/badge.svg?branch=master)](https://github.com/csy214-beep/pelr/actions/workflows/sync-to-gitee.yml) -->
+![GitHub Repo stars](https://img.shields.io/github/stars/igugyj/pelr?style=social)
+![GitHub forks](https://img.shields.io/github/forks/igugyj/pelr?style=social)
+![GitHub issues](https://img.shields.io/github/issues/igugyj/pelr?style=social)
+<!-- [![Sync to Gitee](https://github.com/igugyj/pelr/actions/workflows/sync-to-gitee.yml/badge.svg?branch=master)](https://github.com/igugyj/pelr/actions/workflows/sync-to-gitee.yml) -->
 
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg)
 ![](https://ziadoua.github.io/m3-Markdown-Badges/badges/Qt/qt1.svg)
@@ -90,7 +90,7 @@
 
 ### TTS Server
 
-<https://github.com/csy214-beep/Pelr_tts_tr>
+<https://github.com/igugyj/Pelr_tts_tr>
 
 根据开源许可规范，不提供该程序的打包版本，请参考该仓库的使用方法。
 
@@ -114,7 +114,7 @@
 
    * 申请[讯飞开放平台](https://www.xfyun.cn/)账号
    * 在设置 → TTS配置中填写 API 凭证
-   * 根据需要自行启动 TTS 服务（Python <https://github.com/csy214-beep/Pelr_tts_tr>）
+   * 根据需要自行启动 TTS 服务（Python <https://github.com/igugyj/Pelr_tts_tr>）
 
 3. **设置 AI 服务** (可选)
    * 选择 OpenAI 兼容的 AI 服务
@@ -204,7 +204,7 @@
 
 ### Python 工具链
 
-<https://github.com/csy214-beep/Pelr_tts_tr/blob/main/requirements.txt>
+<https://github.com/igugyj/Pelr_tts_tr/blob/main/requirements.txt>
 
 ## 开发构建
 
@@ -232,10 +232,10 @@
 
 我们欢迎各种形式的贡献！
 
-* [报告 Bug & 提出新特性](https://github.com/csy214-beep/Pelr/issues)
-* [编写代码](https://github.com/csy214-beep/Pelr/pulls)
-* [提供反馈](https://github.com/csy214-beep/Pelr/issues)
-* [问题反馈](https://github.com/csy214-beep/Pelr/issues)
+* [报告 Bug & 提出新特性](https://github.com/igugyj/Pelr/issues)
+* [编写代码](https://github.com/igugyj/Pelr/pulls)
+* [提供反馈](https://github.com/igugyj/Pelr/issues)
+* [问题反馈](https://github.com/igugyj/Pelr/issues)
 * [项目文档](docs)
 * [帮助中心](https://support.github.com)
 
@@ -293,7 +293,7 @@
 
 ## 技术支持
 
-* [问题反馈](https://github.com/csy214-beep/Pelr/issues)
+* [问题反馈](https://github.com/igugyj/Pelr/issues)
 * [文档](docs)
 * [SUPPORT](SUPPORT.md)
 * [Security Policy](SECURITY.md)

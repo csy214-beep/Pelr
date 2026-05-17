@@ -25,13 +25,13 @@
 您可以采用任意方式下载本项目的源代码，包括但不限于下载仓库压缩包或者用 Git 克隆仓库。
 
 ```shell
-git clone https://github.com/csy214-beep/Pelr.git
+git clone https://github.com/igugyj/Pelr.git
 ```
 
 或
 
 ```shell
-git clone git@github.com:csy214-beep/Pelr.git
+git clone git@github.com:igugyj/Pelr.git
 ```
 
 然后进入项目目录：
@@ -46,7 +46,7 @@ git submodule update --init --recursive
 如果您想在下载项目的时候就一步到位，可以这样：
 
 ```shell
-git clone --recursive https://github.com/csy214-beep/Pelr.git
+git clone --recursive https://github.com/igugyj/Pelr.git
 ```
 
 ## 第三方库配置

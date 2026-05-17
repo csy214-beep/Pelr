@@ -1,11 +1,11 @@
 <!-- > [!NOTE]
-> GitHub: <https://github.com/csy214-beep/Pelr>
+> GitHub: <https://github.com/igugyj/Pelr>
 >
 > Gitee: <https://gitee.com/Pfolg/Pelr>
 >
 > SourceForge: <https://sourceforge.net/projects/pfolg-plauncher> -->
 
-[//]: # "[![Release History](https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white)](https://github.com/csy214-beep/Pelr/blob/master/docs/ChangeLog.md)"
+[//]: # "[![Release History](https://img.shields.io/badge/-Release_History-blue?logo=readthedocs&logoColor=white)](https://github.com/igugyj/Pelr/blob/master/docs/ChangeLog.md)"
 
 ## v20260503.14-dev
 
@@ -30,7 +30,7 @@
 - **翻译功能**：libretranslate 简单支持
 
 ---
-**Full Changelog**: <https://github.com/csy214-beep/Pelr/compare/20260405.12.18...20260503.13.5>
+**Full Changelog**: <https://github.com/igugyj/Pelr/compare/20260405.12.18...20260503.13.5>
 
 ## v20260405.12.18 - 2026-05-02
 
@@ -79,7 +79,7 @@
 
 ---
 
-**Full Changelog**: <https://github.com/csy214-beep/Pelr/compare/20260219.11.17...20260405.12.18>
+**Full Changelog**: <https://github.com/igugyj/Pelr/compare/20260219.11.17...20260405.12.18>
 
 ## v20260219.11.17 - 2026-04-01
 

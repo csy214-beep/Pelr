@@ -8,7 +8,7 @@ Pelr 项目的维护者和社区非常重视所有安全问题。我们感谢安
 
 ## 支持的版本
 
-我们通常仅对最新发布的主要版本提供安全更新。请确保您使用的是 [最新版本](https://github.com/csy214-beep/Pelr/releases)。
+我们通常仅对最新发布的主要版本提供安全更新。请确保您使用的是 [最新版本](https://github.com/igugyj/Pelr/releases)。
 
 ## 报告漏洞
 

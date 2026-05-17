@@ -11,7 +11,7 @@
 #include <QJsonObject>
 #include <QJsonParseError>
 
-#define VERSION "20260503.14-dev" // 开发日期(内容变更起始日).release数量/顺序号(第几个版本).修订号(bug/feat次数)
+#define VERSION "0.1.1"
 
 struct filePaths
 {
@@ -113,16 +113,16 @@ struct constConfigData
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
     const QString tts_server = "tts_server.exe"; // local path
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
-    const QString docs_link = "https://github.com/csy214-beep/Pelr/tree/master/docs";
+    const QString docs_link = "https://github.com/igugyj/Pelr/tree/master/docs";
     // about
     const QString version = VERSION;
     const QString Gitee_repo_owner = "Pfolg";
     const QString Gitee_repo_name = "Pelr";
-    const QString Github_repo_owner = "csy214-beep";
+    const QString Github_repo_owner = "igugyj";
     const QString Github_repo_name = "Pelr";
-    const QString team_link = "https://github.com/csy214-beep/Pelr/graphs/contributors";
-    const QString website_link = "https://github.com/csy214-beep/Pelr";
-    const QString feedback_link = "https://github.com/csy214-beep/Pelr/issues";
+    const QString team_link = "https://github.com/igugyj/Pelr/graphs/contributors";
+    const QString website_link = "https://github.com/igugyj/Pelr";
+    const QString feedback_link = "https://github.com/igugyj/Pelr/issues";
     const QString VoiceFolder = "voice_files"; // local path
     const QString userFolder = "user";         // local path
     const QString logFolder = "log";           // local path

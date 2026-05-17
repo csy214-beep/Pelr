@@ -4,7 +4,7 @@
 
 ### Python
 
-<https://github.com/csy214-beep/Pelr_tts_tr>
+<https://github.com/igugyj/Pelr_tts_tr>
 
 自`20260503.14`起，python tts server已独立出当前项目，可以选择性配置。
 
@@ -37,7 +37,7 @@ set(DEBUG_MODE OFF)           # ON: Debug, OFF: Release
 
 ### Python 包管理
 
-<https://github.com/csy214-beep/Pelr_tts_tr>
+<https://github.com/igugyj/Pelr_tts_tr>
 
 ```shell
 pip install pip-review
