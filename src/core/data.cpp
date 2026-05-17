@@ -43,7 +43,6 @@ void DataManager::writeTTSConfig(const TTSConfig &ttsc)
     obj["iFlytek_APISecret"] = ttsc.iFlytek_APISecret;
     obj["iFlytek_APIKey"] = ttsc.iFlytek_APIKey;
     obj["iFlytek_speaker"] = ttsc.iFlytek_speaker;
-    obj["isRunTTSServerOnStartUp"] = ttsc.isRunTTSServerOnStartUp;
     obj["voicevox_dict_dir"] = ttsc.voicevox_dict_dir;
     obj["voicevox_model"] = ttsc.voicevox_model;
     obj["voicevox_style_id"] = ttsc.voicevox_style_id;
@@ -309,7 +308,6 @@ void DataManager::readTTSConfig()
         qDebug() << "iFlytek credentials missing, fallback to OpenAI TTS";
         tts_config.provider = 0;
     }
-    tts_config.isRunTTSServerOnStartUp = obj["isRunTTSServerOnStartUp"].toBool(false);
     tts_config.voicevox_dict_dir = obj["voicevox_dict_dir"].toString();
     tts_config.voicevox_model = obj["voicevox_model"].toString();
     tts_config.voicevox_style_id = obj["voicevox_style_id"].toInt(0);

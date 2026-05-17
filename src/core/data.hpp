@@ -66,7 +66,6 @@ struct constConfigData
 {
     const QString openai_edge_tts_Voice_Samples = "https://tts.travisvn.com/";
     const QString iFlytek_tts_url = "https://console.xfyun.cn/services/tts";
-    const QString tts_server = "tts_server.exe";
     const QString openWeather_url = "https://home.openweathermap.org/api_keys";
     const QString docs_link = "https://github.com/igugyj/Pelr/tree/master/docs";
     const QString version = VERSION;
@@ -135,7 +134,6 @@ struct TTSConfig
     QString voicevox_model;
     int voicevox_style_id;
     double voicevox_speed = 1.0;
-    bool isRunTTSServerOnStartUp = false;
     int tr_point;
     QString tr_provider;
     QString tr_lang_translators;

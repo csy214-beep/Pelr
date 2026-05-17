@@ -286,10 +286,7 @@ private:
 
     void onConnectionRefused()
     {
-        if (!DataManager::instance().getTTSConfig().isRunTTSServerOnStartUp)
-            return;
-        qDebug() << "TTS server refused connection, trying to launch it...";
-        launchByPath(DataManager::instance().const_config_data.tts_server);
+        qDebug() << "TTS server connection refused";
     }
 
     QNetworkAccessManager *m_manager;

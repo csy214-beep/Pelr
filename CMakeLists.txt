@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.3)
 project(Pelr)
 
 # ====================== 全局配置开关 ======================
-set(DEBUG_MODE ON)           # ON: Debug, OFF: Release
+set(DEBUG_MODE OFF)           # ON: Debug, OFF: Release
 
 # 根据 DEBUG_MODE 设置构建类型和子系统
 if(DEBUG_MODE)

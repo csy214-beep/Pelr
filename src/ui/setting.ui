@@ -519,7 +519,7 @@
             <x>0</x>
             <y>0</y>
             <width>907</width>
-            <height>1356</height>
+            <height>1361</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1033,27 +1033,6 @@
            </item>
           </layout>
          </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_14">
-         <property name="text">
-          <string>启动 TTS 服务端</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../Resource.qrc">
-           <normaloff>:/public/IconaMoon/Interface/Link - 24x24.png</normaloff>:/public/IconaMoon/Interface/Link - 24x24.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_13">
-         <property name="layoutDirection">
-          <enum>Qt::RightToLeft</enum>
-         </property>
-         <property name="text">
-          <string>连接失败尝试启动TTS服务端</string>
-         </property>
         </widget>
        </item>
       </layout>

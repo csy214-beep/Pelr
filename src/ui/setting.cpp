@@ -108,8 +108,6 @@ TTSConfig SettingWidget::getTTSConfigValue() const
     data.tr_tx_source_lang = ui->lineEdit_22->text();
     data.tr_tx_target_lang = ui->lineEdit_23->text();
 
-    data.isRunTTSServerOnStartUp = ui->checkBox_13->isChecked();
-
     return data;
 }
 
@@ -152,7 +150,6 @@ void SettingWidget::setTTSConfig(const TTSConfig &data) const
     ui->lineEdit_3->setText(data.iFlytek_APISecret);
     ui->lineEdit_4->setText(data.iFlytek_APPID);
     ui->lineEdit_5->setText(data.iFlytek_speaker);
-    ui->checkBox_13->setChecked(data.isRunTTSServerOnStartUp);
     // voicevox
     ui->lineEdit_15->setText(data.voicevox_dict_dir);
     ui->lineEdit_16->setText(data.voicevox_model);
@@ -465,8 +462,6 @@ void SettingWidget::connectSignals()
             { launchByPath(DataManager::instance().const_config_data.openai_edge_tts_Voice_Samples); });
     connect(ui->pushButton_3, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.iFlytek_tts_url); });
-    connect(ui->pushButton_14, &QPushButton::clicked, [&]()
-            { launchByPath(DataManager::instance().const_config_data.tts_server); });
     connect(ui->pushButton_4, &QPushButton::clicked, [&]()
             { launchByPath(DataManager::instance().const_config_data.openWeather_url); });
     // git-repo
