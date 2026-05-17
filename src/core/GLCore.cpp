@@ -474,6 +474,10 @@ void GLCore::onAskWeather()
 
 void GLCore::startRunStarIfPoweredInThread()
 {
+    if (m_watcher.isRunning()) {
+        qWarning() << "Background task already running, skipping";
+        return;
+    }
     QString title = DataManager::instance().Project_Name + " " + QTime::currentTime().toString("hh:mm:ss");
     // 如果开机时长大于20分钟，则return
     if (isSystemUptimeExceeds(20))
@@ -512,7 +516,15 @@ void GLCore::onRunStarIfPoweredFinished()
 void GLCore::runStarIfPowered()
 {
     qDebug() << "run star if powered，wt 60s";
-    QThread::sleep(60); // 等待60s
+    // 提前拷贝 future，避免访问 m_watcher 时对象已析构
+    QFuture<void> future = m_watcher.future();
+    for (int i = 0; i < 60; ++i) {
+        if (future.isCanceled()) {
+            qDebug() << "runStarIfPowered cancelled";
+            return;
+        }
+        QThread::sleep(1);
+    }
     QList<MenuData> menu_data = DataManager::instance().getMenuData();
     std::vector<QString> powerStatus = getPowerStatus();
     if (powerStatus[0] != "Online (AC)")
@@ -739,6 +751,11 @@ void GLCore::closeEvent(QCloseEvent *event)
 {
     // 保存窗口位置
     saveWindowLocation();
+    // 取消并等待后台任务结束，防止空悬指针
+    if (m_watcher.isRunning()) {
+        m_watcher.cancel();
+        m_watcher.waitForFinished();
+    }
     event->accept();
 }
 
