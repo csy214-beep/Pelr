@@ -195,6 +195,24 @@ THIRD_PARTY_LIBS = [
         "license_path": "thirdParty/voicevox_core/onnxruntime/TERMS.txt",
         "extra_notes": "",
     },
+    {
+        "name": "Maple Mono (Maple Font)",
+        "version": "V7",
+        "license_type": "SIL Open Font License 1.1",
+        "copyright": "The Maple Mono Project Authors",
+        "homepage": "https://github.com/subframe7536/maple-font",
+        "license_path": "public/font/OFL.txt",
+        "extra_notes": "",
+    },
+    {
+        "name": "IconaMoon",
+        "version": "1.1",
+        "license_type": "Free for any use",
+        "copyright": "Dariush HPG",
+        "homepage": "https://github.com/dariushhpg1/IconaMoon",
+        "license_path": "",
+        "extra_notes": "The README states: 'IconaMoon is totally free and you can do whatever you want with it. Take a copy and make it your own.'",
+    },
 ]
 
 
