@@ -296,69 +296,17 @@ if (WIN32)
                 COMMENT "Copying translation file: ${qm_file}")
     endforeach ()
 
-    # 复制 Qt 运行时依赖（DLL 和插件）
+    # 使用 windeployqt 自动部署 Qt 运行时（DLL、插件、翻译）
     if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-        set(DEBUG_SUFFIX "")          # 使用 Release 后缀，如需 Debug 可改为 "d"
-        set(QT_BIN_PATH "${CMAKE_PREFIX_PATH}/bin")
-        set(QT_PLUGIN_PATH "${CMAKE_PREFIX_PATH}/plugins")
-
-        if (NOT EXISTS ${QT_BIN_PATH})
-            message(FATAL_ERROR "Qt bin directory does not exist: ${QT_BIN_PATH}")
-        endif ()
-        if (NOT EXISTS ${QT_PLUGIN_PATH})
-            message(FATAL_ERROR "Qt plugins directory does not exist: ${QT_PLUGIN_PATH}")
-        endif ()
-
-        # 复制平台插件
-        set(QT_WINDOWS_PLUGIN "${QT_PLUGIN_PATH}/platforms/qwindows${DEBUG_SUFFIX}.dll")
-        if (EXISTS ${QT_WINDOWS_PLUGIN})
+        find_program(WINDEPLOYQT windeployqt PATHS ${CMAKE_PREFIX_PATH}/bin NO_DEFAULT_PATH)
+        if(WINDEPLOYQT)
             add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/"
-                    COMMAND ${CMAKE_COMMAND} -E copy "${QT_WINDOWS_PLUGIN}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/"
-                    COMMENT "Copying Qt platform plugin: qwindows${DEBUG_SUFFIX}.dll")
-        else ()
-            message(FATAL_ERROR "Qt platform plugin missing: ${QT_WINDOWS_PLUGIN}")
-        endif ()
-
-        # 复制 mediaservice 插件（多媒体）
-        set(QT_MEDIASERVICE_PLUGIN_PATH "${QT_PLUGIN_PATH}/mediaservice")
-        if (EXISTS ${QT_MEDIASERVICE_PLUGIN_PATH})
-            add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/mediaservice/"
-                    COMMAND ${CMAKE_COMMAND} -E copy_directory "${QT_MEDIASERVICE_PLUGIN_PATH}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/mediaservice/"
-                    COMMENT "Copying Qt mediaservice plugins")
-        else ()
-            message(WARNING "Qt mediaservice plugins directory does not exist: ${QT_MEDIASERVICE_PLUGIN_PATH}")
-        endif ()
-
-        # 复制所需 Qt DLL
-        set(QT_REQUIRED_LIBS
-                Core Gui Widgets Network OpenGL SerialPort Sql Svg
-                WebChannel WebSockets Multimedia Concurrent MultimediaWidgets)
-        foreach (QT_LIB ${QT_REQUIRED_LIBS})
-            set(QT_DLL_PATH "${QT_BIN_PATH}/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll")
-            if (EXISTS ${QT_DLL_PATH})
-                add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                        COMMAND ${CMAKE_COMMAND} -E copy "${QT_DLL_PATH}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-                        COMMENT "Copying Qt DLL: Qt5${QT_LIB}${DEBUG_SUFFIX}.dll")
-            else ()
-                message(FATAL_ERROR "Qt DLL missing: ${QT_DLL_PATH}")
-            endif ()
-        endforeach ()
-
-        # 复制自定义 DLL（项目依赖）
-        set(CUSTOM_DLL_PATH "${CMAKE_SOURCE_DIR}/lib")
-        if (EXISTS ${CUSTOM_DLL_PATH})
-            file(GLOB CUSTOM_DLLS "${CUSTOM_DLL_PATH}/*.dll")
-            foreach (CUSTOM_DLL ${CUSTOM_DLLS})
-                get_filename_component(DLL_NAME "${CUSTOM_DLL}" NAME)
-                add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                        COMMAND ${CMAKE_COMMAND} -E copy "${CUSTOM_DLL}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-                        COMMENT "Copying custom DLL: ${DLL_NAME}")
-            endforeach ()
-        else ()
-            message(WARNING "Custom DLL path does not exist: ${CUSTOM_DLL_PATH}")
-        endif ()
+                COMMAND ${WINDEPLOYQT} --no-translations $<TARGET_FILE:${PROJECT_NAME}>
+                COMMENT "Deploying Qt runtime libraries via windeployqt..."
+            )
+        else()
+            message(WARNING "windeployqt not found, skipping Qt auto-deployment")
+        endif()
     endif ()
 
     # 单独复制 voicevox_core.dll（如果没有放入 lib）

@@ -466,10 +466,6 @@ Battery State: %3</translation>
     <message>
         <location filename="../src/core/launcher.hpp" line="83"/>
         <location filename="../src/core/launcher.hpp" line="93"/>
-        <location filename="../src/core/data.hpp" line="363"/>
-        <location filename="../src/core/data.cpp" line="11"/>
-        <location filename="../src/core/data.cpp" line="31"/>
-        <location filename="../src/core/data.cpp" line="75"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -484,18 +480,6 @@ Battery State: %3</translation>
         <location filename="../src/core/launcher.hpp" line="94"/>
         <source>Unknown exception occurred while launching: %1</source>
         <translation>Unknown exception occurred while launching: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/core/data.cpp" line="11"/>
-        <location filename="../src/core/data.cpp" line="31"/>
-        <source>写入数据失败：%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/data.hpp" line="363"/>
-        <location filename="../src/core/data.cpp" line="75"/>
-        <source>写入数据失败: %1</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

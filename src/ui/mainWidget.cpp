@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QIcon>
 #include <QDebug>
+#include <QMessageBox>
 
 mainWidget::mainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::mainWidget)
 {
